@@ -1,8 +1,8 @@
-// File: server/src/controllers/trackerController.ts
+// File: server/src/controllers/innerOrbit/trackerController.ts
 
-import MoodEntry, { IMoodEntry, MoodInput } from '../models/Tracker.js';
-import User from '../models/User.js';
-import { formatMoodEntry } from '../utils/formatEntry.js'; // make sure this file exists
+import MoodEntry, { IMoodEntry, MoodInput } from '../models/innerOrbit/Tracker.js';
+import User from '../models/innerOrbit/User.js';
+import { formatMoodEntry } from '../utils/innerOrbit/formatEntry.js'; 
 
 // CREATE mood entry
 export const addMoodEntry = async (input: MoodInput): Promise<{
