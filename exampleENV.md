@@ -6,7 +6,6 @@ I noticed on server side some files called "MONGODB_URI" and other called "MONGO
 # MongoDB connection
 MONGODB_URI=
 
-
 # JWT Secret for authentication
 JWT_SECRET_KEY=
 
@@ -17,3 +16,6 @@ CLOUDINARY_API_SECRET=
 
 # Server port
 PORT=
+
+# Frontend GraphQL API URL
+VITE_API_URL=

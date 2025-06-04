@@ -23,7 +23,6 @@ import UserProfile from './pages/UserProfile';
 
 
 // Components
-import SquidDev from './components/dashboard/pet/dev/SquidDev';
 import DevelopConstellations from './components/journal/dev/DevelopConstellations'; 
 import DevStars from './components/journal/dev/DevStars'; 
 import Journal from './pages/Journal';
@@ -69,14 +68,6 @@ const App: React.FC = () => {
             element={
               <ProtectedRoute>
                 <Library />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/dev/squid"
-            element={
-              <ProtectedRoute>
-                <SquidDev />
               </ProtectedRoute>
             }
           />

@@ -32,7 +32,6 @@ InnerOrbit/
 │   │   │       │   ├── Dashboard.module.css  
 │   │   │       │   ├── MoodBubble.module.css  
 │   │   │       │   ├── PomodoroTimer.module.css    
-│   │   │       │   ├── SquidPet.module.css  
 │   │   │       │   └── *Dedicated styles for elements on the Dashboard.* 
 │   │   │       │   
 │   │   │       ├── journal/ 
@@ -65,13 +64,6 @@ InnerOrbit/
 │   │   │   │   │   ├──  FocusTaskList.tsx
 │   │   │   │   │   ├──  PomodoroTimer.tsx
 │   │   │   │   │   └──  TimerSettings.tsx
-│   │   │   │   │  
-│   │   │   │   ├── pet/
-│   │   │   │   │   ├──  dev/
-│   │   │   │   │   │    └── SquidPetDev.tsx
-│   │   │   │   │   ├──  MoodBubble.tsx
-│   │   │   │   │   ├──  SpriteAnimator.tsx
-│   │   │   │   │   └──  SquidPet.tsx
 │   │   │   │   │  
 │   │   │   │   ├──  weekly/
 │   │   │   │   │   ├──  MoodNotes.tsx
