@@ -1,0 +1,273 @@
+/* client/src/assets/css/tracker/Tracker.module.css */
+
+/* === Page Layout === */
+.trackerHeader {
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.trackerFlexContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding: 0 2rem;
+  flex-wrap: wrap; 
+}
+
+.calendarWrapper {
+  flex: 2;
+  min-width: 300px;
+  width: 100%;
+  max-width: 100%;
+  padding: 1rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.modalWrapper {
+  flex: 1;
+  max-width: 400px;
+  min-width: 300px;
+  position: relative;
+  top: 0;
+  left: 0;
+  transform: none;
+  z-index: 2;
+}
+
+@media (max-width: 1024px) {
+  .calendarWrapper,
+  .modalWrapper, .trackerFlexContainer, .calendarGrid {
+    width: 100%;
+    align-items: center;
+    padding: 0.1rem 1rem 0.1rem .1rem;      
+    box-sizing: border-box;
+  }
+
+  .trackerFlexContainer {
+    flex-direction: column;
+  }
+
+  .calendarGrid {
+    overflow-x: auto;
+  }
+}
+
+/* === Calendar Navigation === */
+.navRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;    
+  margin-bottom: 0.5rem; 
+  flex-wrap: wrap;
+  width: 100%; 
+}
+
+.monthLabel {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: bold;
+  color: white;
+}
+
+/* === Calendar Grid and Weekday Labels === */
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.25vw;
+  width: 90vw;
+  max-width: 1200px;
+  border: 2px solid pink;
+  padding: 0.25rem; 
+  margin-top: 0;
+  background-color: rgba(30, 27, 75, 0.3);
+  background: rgba(255, 255, 255, 0.01); 
+  backdrop-filter: blur(12px);           
+  -webkit-backdrop-filter: blur(12px); 
+}
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.calendar-header div {
+  padding: 5px 0;
+}
+
+.dayLabel {
+  text-align: center;
+  font-weight: bold;
+  color: #faf2f2;
+  font-size: clamp(1.1rem, 1.75vw, 1.2rem);
+}
+
+/* === Day Cells & Dates === */
+.dayCell {
+  aspect-ratio: 1 / 1;
+  color: white;
+  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  min-width: 0;
+  background-color: c;
+}
+
+.otherMonth {
+  background-color: transparent;
+}
+
+.dayNumber {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  font-weight: 400;
+  color: white;
+  z-index: 2;
+}
+
+/* === Mood Cell Visuals === */
+.dayContent {
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.moodList {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.moodItem {
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  font-size: clamp(1.1rem, 1.75vw, 1.2rem);
+  font-weight: 400;
+  max-width: calc(100% - 8px);
+  color: white;
+  background: rgba(0, 0, 0, 0);
+  padding: 1px 4px;
+  border-radius: 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hideMoodText {
+  font-size: 0 !important;
+  color: transparent !important;
+}
+
+
+/* Hide mood text on narrow screens */
+@media (max-width: 640px) {
+  .moodItem {
+    font-size: 0;         
+    color: transparent;   
+  }
+
+  .moodItem::after {
+    content: '';
+    display: block;
+    height: 100%;
+  }
+}
+
+/* === Status Message & Empty State === */
+.statusMessage {
+  color: white;
+  text-align: center;
+  font-size: clamp(0.95rem, 2.5vw, 1.125rem);
+  margin-bottom: 1rem;
+}
+
+.emptyStateContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 3rem;
+}
+
+/* === Mood Modal Text Styles === */
+.modalMoodText {
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  color: white;
+  margin-bottom: 0.25rem;
+}
+
+.modalIntensityText {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: bold;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.modalNoteText {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 300;
+  color: white;
+  margin-bottom: 0.75rem;
+}
+
+.moodNotesModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.moodNotesContent {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 400px;
+  width: 90vw;
+  color: white;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+  font-family: 'Barlow Condensed', sans-serif;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.barlowText {
+  font-family: 'Barlow Condensed', sans-serif;
+}
+

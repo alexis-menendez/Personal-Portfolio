@@ -1,0 +1,76 @@
+// file: client/src/utils/moodQuotes.ts
+
+export const moodQuotes: Record<string, string[]> = {
+  happy: [
+     "Treasure these bright moments — they matter more than you know.",
+    "Holding onto joy is an act of resistance.",
+"Light lives in the little moments — let yourself feel them.",
+"Your smile brightens more than just your mood.",
+"You deserve to feel this warmth inside.",     ],
+  tired: [
+    "Rest is not a luxury, it's a necessity.",
+     "You’re not lazy — you’re human. Rest is brave too.",
+"Your worth isn't measured by your productivity.",
+"Even galaxies pause. You can too.",
+"Rest is not weakness — it’s the seed of tomorrow’s strength.",
+"You are allowed to stop and breathe.",
+  ],
+  focused: [
+    "One step at a time — you’re doing better than you think.",
+    "Focus isn’t about force — it’s about flow.",
+"Keep going. Your progress is real, even if it’s quiet.",
+"The stars didn’t form overnight — and neither will your masterpiece.",
+"Your effort matters, even when no one sees it.",
+  ],
+  playful: [
+    "Laughter is a survival skill too.",
+    "Let joy find you like a comet in the dark.",
+"Play is how we remember we're alive.",
+"A little silliness can brighten even the coldest void.",
+  ],
+  sad: [
+     "It’s okay to feel sad. Don’t rush the light — it finds its way.",
+    "Let yourself feel — even tears carry healing stardust.",
+    "I’m still here with you, even when it’s quiet.",
+    "Some nights feel endless — but the sun still rises.",
+"You don’t need to hide your heartache here.",
+"Grief and joy are twin stars — they orbit each other.",
+"You are loved, even when you feel forgotten.",
+  ],
+  idle: [
+"Stillness isn’t empty. It’s full of possibility.",
+"You don’t have to *do* to be worthy.",
+"Quiet is sacred too — let it cradle you.",
+"This pause holds more than you know.",
+  ],
+  anxious: [
+  "It's okay to feel a little lost in the vast ocean of thoughts.",
+    "Remember, even the strongest currents eventually calm down.",
+    "Take a deep breath, you're not alone in this sea of emotions.",
+    "Anxiety lies — you are not your fear. You are starlight in motion.",
+    "You don’t have to have all the answers to keep going.",
+"Fear is loud, but it isn’t the truth.",
+"The storm in your mind will pass — it always does.",
+"You’re safe in this moment. Breathe with me.",
+  ],
+  inspired: [
+    "The cosmos is your canvas, paint it with your dreams.",
+     "What you imagine today can shape your universe tomorrow.",
+    "Let your imagination soar among the galaxies.",
+    "You have a story that matters — don’t be afraid to share it.",
+"Your ideas can make a difference, one step at a time.",
+"You never know who needs the light you bring.",
+"Speak up — what you have to say is important.",
+
+  ],
+  angry: [
+    "Even the fiercest storms eventually pass.",
+    "You’re allowed to be upset. You just don’t have to unpack there.",
+    "Channel that energy into something creative.",
+    "Anger is just passion in disguise.",
+    "It’s okay to burn — just don’t scorch yourself.",
+"Anger is a map — follow it to what matters.",
+"Let your fire illuminate, not destroy.",
+"You’re not too much — you’re just unfiltered power.",
+  ],
+};
