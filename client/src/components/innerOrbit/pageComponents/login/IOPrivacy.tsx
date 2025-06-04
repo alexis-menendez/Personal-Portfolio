@@ -1,4 +1,4 @@
-// File: client/src/components/innerOrbit/home/Privacy.tsx
+// File: client/src/components/innerOrbit/pageComponents/login/IOPrivacy.tsx
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
