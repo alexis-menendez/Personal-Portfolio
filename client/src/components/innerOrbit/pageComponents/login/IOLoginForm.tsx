@@ -1,4 +1,4 @@
-// File: client/src/components/innerOrbit/home/LoginForm.tsx
+// File: client/src/components/innerOrbit/pageComponents/login/IOLoginForm.tsx
 
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
