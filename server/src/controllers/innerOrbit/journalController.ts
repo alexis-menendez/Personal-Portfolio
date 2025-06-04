@@ -1,6 +1,6 @@
-// File: server/src/controllers/journalController.ts
+// File: server/src/controllers/innerOrbit/journalController.ts
 
-import JournalEntry, { IJournalEntry, JournalInput } from "../models/Journal.js";
+import JournalEntry, { IJournalEntry, JournalInput } from "../models/innerOrbit/Journal.js";
 
 
 export const createJournalEntry = async (input: JournalInput) => {
