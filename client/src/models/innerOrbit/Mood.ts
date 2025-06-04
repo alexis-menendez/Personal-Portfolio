@@ -1,4 +1,4 @@
-// File: client/src/models/Mood.ts
+// File: client/src/models/innerOrbit/Mood.ts
 
 export interface MoodEntry {
   _id: string;
