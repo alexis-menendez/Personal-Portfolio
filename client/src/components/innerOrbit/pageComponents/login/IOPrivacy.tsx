@@ -8,9 +8,9 @@ import TransparentStars from '../common/TransparentStars';
 import ShootingStar from '../common/ShootingStar';
 
 // Styles
-import styles from '../../../../../assets/css/innerOrbit/service/PrivacyPolicy.module.css';
-import buttonStyles from '../../../../../assets/css/innerOrbit/common/Button.module.css';
-import logoStyles from '../../../../../assets/css/innerOrbit/common/Logo.module.css';
+import styles from '../../../../../assets/css/innerOrbit/pageStyles/login/IOPrivacyPolicy.module.css';
+import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
+import logoStyles from '../../../../../assets/css/innerOrbit/common/IOLogo.module.css';
 
 const Privacy = () => {
   const navigate = useNavigate();
