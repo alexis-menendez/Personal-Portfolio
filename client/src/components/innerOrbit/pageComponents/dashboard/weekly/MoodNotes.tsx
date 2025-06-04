@@ -1,4 +1,4 @@
-// File: client/src/components/innerOrbit/dashboard/weekly/MoodNotes.tsx
+// File: client/src/components/innerOrbit/pageComponents/dashboard/weekly/MoodNotes.tsx
 
 import React, { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
