@@ -1,9 +1,9 @@
 // File: client/src/components/innerOrbit/pageComponents/dashboard/pomodoro/TimerSettings.tsx
 
 import React from 'react';
-import formStyles from '../../../../../assets/css/innerOrbit/common/IOForm.module.css';
-import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
-import styles from '../../../../../assets/css/innerOrbit/pageStyles/dashboard/PomodoroTimer.module.css';
+import formStyles from '../../../../../../assets/css/innerOrbit/common/IOForm.module.css';
+import buttonStyles from '../../../../../../assets/css/innerOrbit/common/IOButton.module.css';
+import styles from '../../../../../../assets/css/innerOrbit/pageStyles/dashboard/PomodoroTimer.module.css';
 
 interface TimerSettingsProps {
   currentVolume: number;
