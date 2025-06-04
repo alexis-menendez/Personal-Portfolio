@@ -1,4 +1,4 @@
-// File: server/src/utils/cloudinary.ts
+// File: server/src/utils/innerOrbit/cloudinary.ts
 
 import { v2 as cloudinary } from 'cloudinary';
 
