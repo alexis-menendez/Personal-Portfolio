@@ -2,11 +2,15 @@
 
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+
+// Components
 import StarBackground from '../common/StarBackground';
 import IOMainLayoutBackground from '../../../components/innerOrbit/common/IOMainLayoutBackground';
 import NavBar from '../nav/IONavBar';
 import Footer from '../nav/IOFooter';
-import styles from '../../../../assets/css/innerOrbit/common/IOMainLayoutBackground.module.css'; 
+
+// Styles
+import styles from '../../../../../assets/css/innerOrbit/common/IOMainLayoutBackground.module.css'; 
 
 const IOMainLayout: React.FC = () => {
   return (
