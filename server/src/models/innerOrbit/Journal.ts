@@ -1,4 +1,4 @@
-// File: server/src/models/Journal.ts
+// File: server/src/models/innerOrbit/Journal.ts
 
 import mongoose, { Schema, Document } from "mongoose";
 
