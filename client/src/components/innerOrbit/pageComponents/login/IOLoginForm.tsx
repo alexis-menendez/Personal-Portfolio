@@ -12,9 +12,9 @@ import { LOGIN_USER } from '../../../graphql/mutations';
 
 // Styles
 import { motion } from 'framer-motion';
-import formStyles from '../../../../../assets/css/innerOrbit/common/Form.module.css';
-import buttonStyles from '../../../../../assets/css/innerOrbit/common/Button.module.css';
-import logoStyles from '../../../../../assets/css/innerOrbit/common/Logo.module.css';
+import formStyles from '../../../../../assets/css/innerOrbit/common/IOForm.module.css';
+import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
+import logoStyles from '../../../../../assets/css/innerOrbit/common/IOLogo.module.css';
 
 
 const Login = () => {
