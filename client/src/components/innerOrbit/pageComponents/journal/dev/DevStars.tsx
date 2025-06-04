@@ -1,4 +1,4 @@
-// File: client/src/components/innerOrbit/journal/dev/DevStars.tsx
+// File: client/src/components/innerOrbit/pageComponents/journal/dev/DevStars.tsx
 
 import React from 'react';
 import ShootingStar from '../../common/ShootingStar';
