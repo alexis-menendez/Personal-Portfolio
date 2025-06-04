@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import styles from '../../../../assets/css/innerOrbit/common/CosmicBackground.module.css';
+import styles from '../../../../../assets/css/innerOrbit/common/CosmicBackground.module.css';
 import StarBackground from '../common/StarBackground';
 
 const IOLoginLayout: React.FC = () => {
