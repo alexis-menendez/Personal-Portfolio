@@ -1,4 +1,4 @@
-// File: server/src/utils/trackerColors.ts
+// File: server/src/utils/innerOrbit/trackerColors.ts
 
 export const getMoodColor = (mood: string): string => {
   const colors: Record<string, string> = {
