@@ -178,21 +178,6 @@
   margin-top: 0.5rem;
 }
 
-.weeklySquidRow {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-@media (min-width: 1024px) {
-  .weeklySquidRow {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    column-gap: 0.5rem;
-  }
-}
-
 .weeklyReviewRow {
   display: flex;
   flex-direction: row;
@@ -233,17 +218,6 @@
 .weeklyReviewHorizontal::-webkit-scrollbar {
   display: none;
 }
-
-.squidWrapper {
-  flex: 0 0 auto;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  max-width: 280px;
-  margin: 0 auto;
-  padding: 1rem 0;
-}
-
 
 .weeklyReviewWrapper {
   flex: 0 0 auto;
