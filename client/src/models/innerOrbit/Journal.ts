@@ -1,4 +1,4 @@
-// File: client/src/models/Journal.ts
+// File: client/src/models/innerOrbit/Journal.ts
 
 export interface JournalEntry {
   _id: string;
