@@ -1,4 +1,4 @@
-// File: server/src/models/Tracker.ts
+// File: server/src/models/innerOrbit/Tracker.ts
 
 import mongoose, { Schema, Document } from "mongoose";
 
