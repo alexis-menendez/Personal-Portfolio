@@ -1,4 +1,4 @@
-// File: client/src/components/tracker/MoodModal.tsx
+// File: client/src/components/innerOrbit/pageComponents/tracker/MoodModal.tsx
 
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
@@ -8,7 +8,7 @@ import { useAuth } from '../../../context/authContext';
 
 // GraphQL
 import { ADD_MOOD_ENTRY, UPDATE_MOOD_ENTRY, DELETE_MOOD_ENTRY } from '../../../graphql/mutations';
-import { moodList } from '../../../models/Mood';
+import { moodList } from '../../../models/innerOrbit/Mood';
 
 // Components
 import MoodComboBox from './MoodComboBox';
