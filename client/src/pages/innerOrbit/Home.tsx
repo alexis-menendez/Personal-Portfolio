@@ -1,9 +1,11 @@
-// file path: client/src/pages/Home.tsx
+// file path: client/src/pages/innerOrbit/Home.tsx
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import buttonStyles from '../assets/css/common/Button.module.css';
-import styles from '../assets/css/common/Logo.module.css'; 
+
+// Styles
+import buttonStyles from '../../assets/css/innerOrbit/common/Button.module.css';
+import styles from '../../assets/css/innerOrbit/common/Logo.module.css'; 
 
 const Home = () => {
   return (

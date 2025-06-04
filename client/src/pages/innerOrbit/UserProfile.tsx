@@ -1,11 +1,19 @@
+// File: client/src/pages/innerOrbit/UserProfile.tsx
+
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { useAuth } from '../context/authContext';
-import { UPDATE_USER } from '../graphql/mutations';
-import formStyles from '../assets/css/common/Form.module.css';
-import buttonStyles from '../assets/css/common/Button.module.css';
-import pageStyles from '../assets/css/dashboard/Dashboard.module.css';
-import userStyles from '../assets/css/user/User.module.css'; 
+
+// Auth
+import { useAuth } from '../../context/authContext';
+
+// GraphQL
+import { UPDATE_USER } from '../../graphql/mutations';
+
+// Styles
+import formStyles from '../../assets/css/innerOrbit/common/Form.module.css';
+import buttonStyles from '../../assets/css/innerOrbit/common/Button.module.css';
+import pageStyles from '../../assets/css/innerOrbit/dashboard/Dashboard.module.css';
+import userStyles from '../../assets/css/innerOrbit/user/User.module.css'; 
 
 const UserProfile: React.FC = () => {
   const { user, token, login } = useAuth();

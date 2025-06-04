@@ -5,29 +5,30 @@ import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/authContext';
 
 // Layout
-import LoginLayout from './components/layout/LoginLayout';
-import MainLayout from './components/layout/MainLayout';
-import JournalLayout from './components/layout/JournalLayout';
-import ProtectedRoute from './components/layout/ProtectedRoute';
+import LoginLayout from './components/innerOrbit/layout/LoginLayout';
+import MainLayout from './components/innerOrbit/layout/MainLayout';
+import JournalLayout from './components/innerOrbit/layout/JournalLayout';
+import ProtectedRoute from './components/innerOrbit/layout/ProtectedRoute';
 
 // Pages
-import Home from './pages/Home';
-import Login from './components/home/LoginForm';
-import Register from './components/home/RegisterForm';
-import Terms from './components/home/Terms';
-import Privacy from './components/home/Privacy';
-import Dashboard from './pages/Dashboard';
-import Tracker from './pages/Tracker';
-import Library from './pages/Library';
-import UserProfile from './pages/UserProfile';
-
+import Home from './pages/innerOrbit/Home';
+import Dashboard from './pages/innerOrbit/Dashboard';
+import Journal from './pages/innerOrbit/Journal';
+import Tracker from './pages/innerOrbit/Tracker';
+import Library from './pages/innerOrbit/Library';
+import UserProfile from './pages/innerOrbit/UserProfile';
 
 // Components
-import DevelopConstellations from './components/journal/dev/DevelopConstellations'; 
-import DevStars from './components/journal/dev/DevStars'; 
-import Journal from './pages/Journal';
-import Constellation from './components/journal/Constellation';
-import ViewJournal from './components/journal/ViewJournal'; 
+import Login from './components/innerOrbit/home/LoginForm';
+import Register from './components/innerOrbit/home/RegisterForm';
+import Terms from './components/innerOrbit/home/Terms';
+import Privacy from './components/innerOrbit/home/Privacy';
+import Constellation from './components/innerOrbit/journal/Constellation';
+import ViewJournal from './components/innerOrbit/journal/ViewJournal'; 
+
+// Development components (for internal use)
+import DevelopConstellations from './components/innerOrbit/journal/dev/DevelopConstellations'; 
+import DevStars from './components/innerOrbit/journal/dev/DevStars'; 
 
 // TODO pages (not yet created):                 
 // import NotFound from './pages/NotFound';                --->  not yet created

@@ -1,10 +1,14 @@
-// File: client/src/pages/Dashboard.tsx
+// File: client/src/pages/innerOrbit/Dashboard.tsx
 
 import React, { useState } from "react";
-import WeeklyMoodReview from "../components/dashboard/weekly/WeeklyMoodCalendar";
-import PomodoroTimer from "../components/dashboard/pomodoro/PomodoroTimer";
-import FocusTaskList from "../components/dashboard/pomodoro/FocusTaskList";
-import pageStyles from "../assets/css/dashboard/Dashboard.module.css";
+
+// Components
+import WeeklyMoodReview from "../../components/innerOrbit/dashboard/weekly/WeeklyMoodCalendar";
+import PomodoroTimer from "../../components/innerOrbit/dashboard/pomodoro/PomodoroTimer";
+import FocusTaskList from "../../components/innerOrbit/dashboard/pomodoro/FocusTaskList";
+
+// Styles
+import pageStyles from "../../assets/css/innerOrbit/dashboard/Dashboard.module.css";
 
 type MoodEntry = {
   id: string;

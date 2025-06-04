@@ -1,21 +1,29 @@
-// File: client/src/pages/Journal.tsx
+// File: client/src/pages/innerOrbit/Journal.tsx
 
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-import StarBackground from '../components/common/StarBackground';
+
+// Auth
+import { useAuth } from '../../context/authContext';
+
+// GraphQL
+import { useQuery, useMutation } from '@apollo/client';
+import { GET_JOURNAL_ENTRIES } from '../../graphql/queries';
+import { CREATE_JOURNAL } from '../../graphql/mutations';
 import {
   getConstellationForEntryCount,
   CONSTELLATIONS,
   StarPoint,
   Constellation,
-} from '../components/journal/ConstellationLogic';
-import styles from '../assets/css/journal/Stars.module.css';
-import { useQuery, useMutation } from '@apollo/client';
-import { GET_JOURNAL_ENTRIES } from '../graphql/queries';
-import { CREATE_JOURNAL } from '../graphql/mutations';
-import { useAuth } from '../context/authContext';
-import CreateJournal from '../components/journal/CreateJournal';
-import buttonStyles from '../assets/css/common/Button.module.css';
+} from '../../components/innerOrbit/journal/ConstellationLogic';
+
+// Components
+import StarBackground from '../../components/innerOrbit/common/StarBackground';
+import CreateJournal from '../../components/innerOrbit/journal/CreateJournal';
+
+// Styles
+import styles from '../../assets/css/innerOrbit/journal/Stars.module.css';
+import buttonStyles from '../../assets/css/innerOrbit/common/Button.module.css';
 
 const Journal: React.FC = () => {
   const { user } = useAuth();

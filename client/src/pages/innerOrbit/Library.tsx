@@ -1,8 +1,10 @@
-// File: File: client/src/pages/Library.tsx
+// File: File: client/src/pages/innerOrbit/Library.tsx
 
 import React, { useEffect, useState } from 'react';
-import pageStyles from '../assets/css/dashboard/Dashboard.module.css';
-import styles from '../assets/css/library/Library.module.css';
+
+// Styles
+import pageStyles from '../../assets/css/innerOrbit/dashboard/Dashboard.module.css';
+import styles from '../../assets/css/innerOrbit/library/Library.module.css';
 
 type Video = {
   url: string;

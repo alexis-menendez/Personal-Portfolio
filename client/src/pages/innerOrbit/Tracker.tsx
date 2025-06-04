@@ -1,15 +1,23 @@
-// File: client/src/pages/Tracker.tsx
+// File: client/src/pages/innerOrbit/Tracker.tsx
 
 import React, { useState, useMemo } from 'react';
 import { useQuery } from '@apollo/client';
-import { useAuth } from '../context/authContext';
-import { GET_MOOD_ENTRIES } from '../graphql/queries';
-import MoodCalendar from '../components/tracker/MoodCalendar';
-import MoodModal from '../components/tracker/MoodModal';
-import CreateMood from '../components/tracker/CreateMood';
-import styles from '../assets/css/tracker/Tracker.module.css';
-import buttonStyles from '../assets/css/common/Button.module.css';
-import { MoodEntry } from '../models/Mood';
+
+// Auth
+import { useAuth } from '../../context/authContext';
+
+// GraphQL
+import { GET_MOOD_ENTRIES } from '../../graphql/queries';
+import { MoodEntry } from '../../models/Mood';
+
+// Components
+import MoodCalendar from '../../components/innerOrbit/tracker/MoodCalendar';
+import MoodModal from '../../components/innerOrbit/tracker/MoodModal';
+import CreateMood from '../../components/innerOrbit/tracker/CreateMood';
+
+// Styles
+import styles from '../../assets/css/innerOrbit/tracker/Tracker.module.css';
+import buttonStyles from '../../assets/css/innerOrbit/common/Button.module.css';
 
 const Tracker: React.FC = () => {
   const { user } = useAuth();
