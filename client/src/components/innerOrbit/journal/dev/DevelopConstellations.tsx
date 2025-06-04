@@ -1,4 +1,4 @@
-// File: client/src/components/innerOrbit/journal/dev/DevelopConstellations.tsx
+// File: client/src/components/innerOrbit/pageComponents/journal/dev/DevelopConstellations.tsx
 
 import React, { useState } from 'react';
 
@@ -7,7 +7,7 @@ import { CONSTELLATIONS, StarPoint, Constellation } from '../ConstellationLogic'
 import ShootingStar from '../../common/ShootingStar';
 
 // Styles
-import styles from '../../../../../assets/css/innerOrbit/journal/Stars.module.css';
+import styles from '../../../../../assets/css/innerOrbit/common/Stars.module.css';
 
 const DevelopConstellations: React.FC = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
