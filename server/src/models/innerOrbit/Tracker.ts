@@ -25,7 +25,7 @@ export interface IMoodEntry extends Document {
 const MoodEntrySchema: Schema = new Schema(
   {
     userId: {
-      type: String, // Changed from Schema.Types.ObjectId
+      type: String,
       required: true,
     },
     date: {
