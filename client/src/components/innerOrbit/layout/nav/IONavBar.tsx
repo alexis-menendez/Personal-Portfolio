@@ -1,4 +1,4 @@
-// File: client/src/components/innerOrbit/nav/IONavBar.tsx
+// File: client/src/components/innerOrbit/layout/nav/IONavBar.tsx
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
