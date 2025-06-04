@@ -1,4 +1,4 @@
-// File: client/src/components/innerOrbit/journal/Constellation.tsx
+// File: client/src/components/innerOrbit/pageComponents/journal/Constellation.tsx
 
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -15,8 +15,8 @@ import { CONSTELLATIONS } from './ConstellationLogic';
 import StarBackground from '../common/StarBackground';
 
 // Styles
-import styles from '../../../../assets/css/innerOrbit/journal/Stars.module.css';
-import buttonStyles from '../../../../assets/css/innerOrbit/common/Button.module.css';
+import styles from '../../../../assets/css/innerOrbit/common/Stars.module.css';
+import buttonStyles from '../../../../assets/css/innerOrbit/common/IOButton.module.css';
 
 
 const Constellation: React.FC = () => {
