@@ -59,7 +59,7 @@ Personal-Portfolio/
 │   │   │       │   ├── common/  
 │   │   │       │   ├── components/  
 │   │   │       │   ├── layout/      
-│   │   │       │   └── pages/  
+│   │   │       │   └── pageStyles/  
 │   │   │       │  
 │   │   │       ├── innerOrbit/  
 │   │   │       │   ├── common/  
@@ -71,55 +71,55 @@ Personal-Portfolio/
 │   │   │       │   │   └── TransparentStarsmodule.css  
 │   │   │       │   │  
 │   │   │       │   ├── layout/  
-│   │   │       │   │   ├── IOMainLayoutBackground.module.css  
 │   │   │       │   │   ├── IOCosmicBackground.module.css  
+│   │   │       │   │   ├── IOMainLayoutBackground.module.css  
 │   │   │       │   │   └── IONavBar.module.css  
 │   │   │       │   │  
-│   │   │       │   └── pages/  
+│   │   │       │   └── pageStyles/  
 │   │   │       │       ├── dashboard/  
 │   │   │       │       │   ├── IODashboard.module.css  
 │   │   │       │       │   └── PomodoroTimer.module.css  
 │   │   │       │       │  
-│   │   │       │       ├── home/  
-│   │   │       │       │   └── login/  
-│   │   │       │       │       ├── IOPrivacyPolicy.module.css  
-│   │   │       │       │       └── IOTerms.module.css  
+│   │   │       │       ├── login/  
+│   │   │       │       │   ├── IOPrivacyPolicy.module.css  
+│   │   │       │       │   └── IOTerms.module.css  
 │   │   │       │       │  
 │   │   │       │       ├── journal/  
 │   │   │       │       │   └── Notebook.module.css  
 │   │   │       │       │  
-│   │   │       │       └── tracker/  
-│   │   │       │           └── Tracker.module.css  
+│   │   │       │       ├── library/  
+│   │   │       │       │   └── Library.module.css  
+│   │   │       │       │  
+│   │   │       │       ├── tracker/  
+│   │   │       │       │   └── Tracker.module.css  
+│   │   │       │       │  
+│   │   │       │       └── userProfile/  
+│   │   │       │           └── IOUser.module.css  
 │   │   │       │  
 │   │   │       ├── latttice/  
 │   │   │       │   ├── common/  
-│   │   │       │   ├── components/  
 │   │   │       │   ├── layout/  
-│   │   │       │   └── pages/  
+│   │   │       │   └── pageStyles/  
 │   │   │       │  
 │   │   │       ├── portfolio/  
 │   │   │       │   ├── common/  
-│   │   │       │   ├── components/  
 │   │   │       │   ├── layout/  
-│   │   │       │   └── pages/  
+│   │   │       │   └── pageStyles/  
 │   │   │       │  
 │   │   │       ├── runestone/  
 │   │   │       │   ├── common/  
-│   │   │       │   ├── components/  
 │   │   │       │   ├── layout/  
-│   │   │       │   └── pages/  
+│   │   │       │   └── pageStyles/  
 │   │   │       │  
 │   │   │       ├── solarium/  
 │   │   │       │   ├── common/  
-│   │   │       │   ├── components/  
 │   │   │       │   ├── layout/  
-│   │   │       │   └── pages/  
+│   │   │       │   └── pageStyles/  
 │   │   │       │  
 │   │   │       └── taskadelic/  
 │   │   │           ├── common/  
-│   │   │           ├── components/  
 │   │   │           ├── layout/  
-│   │   │           └── pages/  
+│   │   │           └── pageStyles/  
 │   │   │  
 │   │   ├── components/  
 │   │   │       ├── dontDie/  
@@ -134,7 +134,7 @@ Personal-Portfolio/
 │   │   │       │   │   └── TransparentStars.tsx  
 │   │   │       │   │  
 │   │   │       │   ├── layout/  
-│   │   │       │   │    ├── IOMainLayout/  
+│   │   │       │   │    ├── IOmainLayout/  
 │   │   │       │   │    │   ├──  IOMainLayoutBackground.tsx  
 │   │   │       │   │    │   └──  IOMainLayout.tsx  
 │   │   │       │   │    │  
@@ -156,14 +156,9 @@ Personal-Portfolio/
 │   │   │       │       │        ├──  MoodNotes.tsx  
 │   │   │       │       │        └──  WeeklyMoodCalendar.tsx  
 │   │   │       │       │  
-│   │   │       │       ├── home/  
-│   │   │       │       │   ├──  IOLoginForm.tsx  
-│   │   │       │       │   ├──  IOPrivacy.tsx  
-│   │   │       │       │   ├──  IORegisterForm.tsx  
-│   │   │       │       │   └──  IOTerms.tsx  
-│   │   │       │       │  
 │   │   │       │       ├── journal/  
 │   │   │       │       │   ├── dev/  
+│   │   │       │       │   │   ├── DevStars.tsx  
 │   │   │       │       │   │   └── DevelopConstellations.tsx  
 │   │   │       │       │   │  
 │   │   │       │       │   ├──  Constellation.tsx  
@@ -173,6 +168,12 @@ Personal-Portfolio/
 │   │   │       │       │  
 │   │   │       │       ├── library/  
 │   │   │       │       │   └──  CloudinaryWidget.tsx  
+│   │   │       │       │  
+│   │   │       │       ├── login/  
+│   │   │       │       │   ├──  IOLoginForm.tsx  
+│   │   │       │       │   ├──  IOPrivacy.tsx  
+│   │   │       │       │   ├──  IORegisterForm.tsx  
+│   │   │       │       │   └──  IOTerms.tsx  
 │   │   │       │       │  
 │   │   │       │       └── tracker/  
 │   │   │       │           ├──  CreateMood.tsx  
@@ -241,12 +242,12 @@ Personal-Portfolio/
 │   │   │   ├── dontDie/  
 │   │   │   │  
 │   │   │   ├── innerOrbit/  
-│   │   │   │   ├── Dashboard.tsx  
-│   │   │   │   ├── Home.tsx  
+│   │   │   │   ├── IODashboard.tsx  
+│   │   │   │   ├── IOHome.tsx  
 │   │   │   │   ├── Journal.tsx  
 │   │   │   │   ├── Library.tsx  
 │   │   │   │   ├── Tracker.tsx  
-│   │   │   │   └── UserProfile.tsx  
+│   │   │   │   └── IOUserProfile.tsx  
 │   │   │   │  
 │   │   │   ├── lattice/  
 │   │   │   ├── portfolio/  
@@ -256,8 +257,7 @@ Personal-Portfolio/
 │   │   │  
 │   │   ├── utils/  
 │   │   │   ├── API.ts  
-│   │   │   ├── auth.ts  
-│   │   │   └── loadFrames.ts  
+│   │   │   └── auth.ts  
 │   │   │  
 │   │   ├── appolloClient.ts  
 │   │   ├── App.tsx  
@@ -336,6 +336,7 @@ Personal-Portfolio/
 │   │   ├── utils/  
 │   │   │   ├── innerOrbit/  
 │   │   │   │   ├── cloudinary.ts  
+│   │   │   │   ├── formatEntry.ts  
 │   │   │   │   └── trackerColors.ts  
 │   │   │   │  
 │   │   │   ├── auth.ts  
