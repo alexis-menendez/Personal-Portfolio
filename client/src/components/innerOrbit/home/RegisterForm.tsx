@@ -1,4 +1,4 @@
-// File: client/src/components/innerOrbit/home/RegisterForm.tsx
+// File: client/src/components/innerOrbit/pageComponents/login/IORegisterForm.tsx
 
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
@@ -11,9 +11,9 @@ import { AuthContext } from '../../../context/authContext';
 import { REGISTER_USER } from '../../../graphql/mutations';
 
 // Styles
-import formStyles from '../../../../../assets/css/innerOrbit/common/Form.module.css';
-import buttonStyles from '../../../../../assets/css/innerOrbit/common/Button.module.css';
-import logoStyles from '../../../../../assets/css/innerOrbit/common/Logo.module.css';
+import formStyles from '../../../../../assets/css/innerOrbit/common/IOForm.module.css';
+import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
+import logoStyles from '../../../../../assets/css/innerOrbit/common/IOLogo.module.css';
 import { motion } from 'framer-motion';
 
 const Register = () => {
