@@ -1,4 +1,4 @@
-// File: client/src/components/innerOrbit/journal/ViewJournal.tsx
+// File: client/src/components/innerOrbit/pageComponents/journal/ViewJournal.tsx
 
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -16,10 +16,10 @@ import StarBackground from '../common/StarBackground';
 import { CONSTELLATIONS } from './ConstellationLogic';
 
 // Styles
-import styles from '../../../../assets/css/innerOrbit/journal/Stars.module.css';
-import buttonStyles from '../../../../assets/css/innerOrbit/common/Button.module.css';
-import notebookStyles from '../../../../assets/innerOrbit/css/journal/Notebook.module.css';
-import formStyles from '../../../../assets/css/innerOrbit/common/Form.module.css';
+import styles from '../../../../assets/css/innerOrbit/common/Stars.module.css';
+import buttonStyles from '../../../../assets/css/innerOrbit/common/IOButton.module.css';
+import formStyles from '../../../../assets/css/innerOrbit/common/IOForm.module.css';
+import notebookStyles from '../../../../assets/css/innerOrbit/pageStyles/journal/Notebook.module.css';
 
 const ViewJournal: React.FC = () => {
   const { entryId } = useParams<{ entryId: string }>();
