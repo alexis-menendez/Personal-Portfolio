@@ -1,14 +1,16 @@
-// File: client/src/components/innerOrbit/tracker/CreateMood.tsx
+// File: client/src/components/innerOrbit/pageComponents/tracker/CreateMood.tsx
 
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_MOOD_ENTRY } from '../../../graphql/mutations';
-import { moodList } from '../../../models/Mood';
+import { moodList } from '../../../models/innerOrbit/Mood';
+
+// Components
+import MoodComboBox from './MoodComboBox'; 
 
 // Styles
-import MoodComboBox from './MoodComboBox'; 
-import formStyles from '../../../../assets/css/innerOrbit/common/Form.module.css';
-import buttonStyles from '../../../../assets/css/innerOrbit/common/Button.module.css';
+import formStyles from '../../../../assets/css/innerOrbit/common/IOForm.module.css';
+import buttonStyles from '../../../../assets/css/innerOrbit/common/IOButton.module.css';
 
 interface CreateMoodProps {
   userId: string;
