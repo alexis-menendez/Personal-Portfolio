@@ -1,4 +1,4 @@
-// File: client/src/pages/innerOrbit/UserProfile.tsx
+// File: client/src/pages/innerOrbit/IOUserProfile.tsx
 
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
