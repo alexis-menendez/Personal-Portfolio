@@ -1,4 +1,4 @@
-// File: client/src/components/innerOrbit/dashboard/weekly/WeeklyMoodCalendar.tsx
+// File: client/src/components/innerOrbit/pageComponents/dashboard/weekly/WeeklyMoodCalendar.tsx
 
 import React, { useMemo, useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
