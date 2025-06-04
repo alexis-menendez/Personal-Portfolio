@@ -1,4 +1,4 @@
-// File: client/src/components/journal/ConstellationLogic.tsx
+// File: client/src/components/innerOrbit/journal/ConstellationLogic.tsx
 
 export interface StarPoint {
   x: number;

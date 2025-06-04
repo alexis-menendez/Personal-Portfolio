@@ -1,11 +1,11 @@
-// File: client/src/components/layout/JournalLayout.tsx
+// File: client/src/components/innerOrbitlayout/JournalLayout.tsx
 
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import StarBackground from '../common/StarBackground';
-import NavBar from '../nav/NavBar';
+import NavBar from '../nav/IONavBar';
 
-const JournalLayout: React.FC = () => {
+const IOJournalLayout: React.FC = () => {
   return (
     <>
       <div
@@ -28,4 +28,4 @@ const JournalLayout: React.FC = () => {
   );
 };
 
-export default JournalLayout;
+export default IOJournalLayout;

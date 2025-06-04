@@ -1,14 +1,21 @@
-// File: client/src/components/home/LoginForm.tsx
+// File: client/src/components/innerOrbit/home/LoginForm.tsx
 
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../../graphql/mutations';
-import { AuthContext } from '../../context/authContext';
-import formStyles from '../../assets/css/common/Form.module.css';
-import buttonStyles from '../../assets/css/common/Button.module.css';
-import logoStyles from '../../assets/css/common/Logo.module.css';
+
+// Auth
+import { AuthContext } from '../../../../../context/authContext';
+
+// GraphQL
+import { LOGIN_USER } from '../../../../../graphql/mutations';
+
+// Styles
 import { motion } from 'framer-motion';
+import formStyles from '../../../../../assets/css/innerOrbit/common/Form.module.css';
+import buttonStyles from '../../../../../assets/css/innerOrbit/common/Button.module.css';
+import logoStyles from '../../../../../assets/css/innerOrbit/common/Logo.module.css';
+
 
 const Login = () => {
   const authContext = useContext(AuthContext);

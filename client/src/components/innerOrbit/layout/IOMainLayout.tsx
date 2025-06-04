@@ -1,19 +1,19 @@
-// file: c;ient/src/components/layout/MainLayout.tsx
+// file: c;ient/src/components/layout/IOMainLayout.tsx
 
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import StarBackground from '../common/StarBackground';
-import MainLayoutBackground from '../common/MainLayoutBackground';
-import NavBar from '../nav/NavBar';
-import Footer from '../nav/Footer';
-import styles from '../../assets/css/common/MainLayoutBackground.module.css'; 
+import IOMainLayoutBackground from '../../../components/innerOrbit/common/IOMainLayoutBackground';
+import NavBar from '../nav/IONavBar';
+import Footer from '../nav/IOFooter';
+import styles from '../../../assets/css/common/IOMainLayoutBackground.module.css'; 
 
-const MainLayout: React.FC = () => {
+const IOMainLayout: React.FC = () => {
   return (
     <div className="w-full min-h-screen text-white relative overflow-hidden" style={{ backgroundColor: 'transparent' }}>
 
       <StarBackground />
-      <MainLayoutBackground />
+      <IOMainLayoutBackground />
 
       <div className="relative z-10 flex flex-col items-center min-h-screen">
         <div className={styles['gradient-overlay']}>
@@ -28,4 +28,4 @@ const MainLayout: React.FC = () => {
   );
 };
 
-export default MainLayout;
+export default IOMainLayout;

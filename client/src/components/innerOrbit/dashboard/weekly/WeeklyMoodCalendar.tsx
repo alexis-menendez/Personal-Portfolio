@@ -1,15 +1,24 @@
-// File: client/src/components/dashboard/weekly/WeeklyMoodCalendar.tsx
+// File: client/src/components/innerOrbit/dashboard/weekly/WeeklyMoodCalendar.tsx
 
 import React, { useMemo, useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { UPDATE_MOOD_NOTE } from '../../../graphql/mutations';
-import { useAuth } from '../../../context/authContext';
-import { GET_MOOD_ENTRIES } from '../../../graphql/queries';
+
+// Auth
+import { useAuth } from '../../../../../context/authContext';
+
+// GraphQL
+import { UPDATE_MOOD_NOTE } from '../../../../../graphql/mutations';
+import { GET_MOOD_ENTRIES } from '../../../../../graphql/queries';
+
+// Components
 import MoodNotes from './MoodNotes';
-import trackerStyles from '../../../assets/css/tracker/Tracker.module.css';
-import dashboardStyles from '../../../assets/css/dashboard/Dashboard.module.css';
-import formStyles from '../../../assets/css/common/Form.module.css';
-import buttonStyles from '../../../assets/css/common/Button.module.css';
+
+// Styles
+import trackerStyles from '../../../../../assets/css/innerOrbit/tracker/Tracker.module.css';
+import dashboardStyles from '../../../../../assets/css/innerOrbit/dashboard/Dashboard.module.css';
+import formStyles from '../../../../../assets/css/innerOrbit/common/Form.module.css';
+import buttonStyles from '../../../../../assets/css/innerOrbit/common/Button.module.css';
+
 
 interface MoodEntry {
   _id: string;

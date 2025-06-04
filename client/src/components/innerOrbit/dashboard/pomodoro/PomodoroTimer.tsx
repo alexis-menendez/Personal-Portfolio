@@ -1,8 +1,10 @@
+// File: client/src/components/innerOrbit/dashboard/pomodoro/PomodoroTimer.tsx
+
 import React, { useState, useEffect, useRef } from 'react';
-import { Task, useTaskStore } from '../../../hooks/useTaskStore';
+import { Task, useTaskStore } from '../../../../../hooks/innerOrbit/useTaskStore';
 import TimerSettings from './TimerSettings';
-import styles from '../../../assets/css/dashboard/PomodoroTimer.module.css';
-import buttonStyles from '../../../assets/css/common/Button.module.css';
+import styles from '../../../../../assets/css/innerOrbit/dashboard/PomodoroTimer.module.css';
+import buttonStyles from '../../../../../assets/css/innerOrbit/common/Button.module.css';
 
 interface PomodoroTimerProps {
   onPomodoroStart?: () => void;

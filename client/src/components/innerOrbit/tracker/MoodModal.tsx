@@ -2,13 +2,21 @@
 
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { ADD_MOOD_ENTRY, UPDATE_MOOD_ENTRY, DELETE_MOOD_ENTRY } from '../../graphql/mutations';
-import { moodList } from '../../models/Mood';
-import { useAuth } from '../../context/authContext';
+
+// Auth
+import { useAuth } from '../../../context/authContext';
+
+// GraphQL
+import { ADD_MOOD_ENTRY, UPDATE_MOOD_ENTRY, DELETE_MOOD_ENTRY } from '../../../graphql/mutations';
+import { moodList } from '../../../models/Mood';
+
+// Components
 import MoodComboBox from './MoodComboBox';
-import formStyles from '../../assets/css/common/Form.module.css';
-import buttonStyles from '../../assets/css/common/Button.module.css';
-import trackerStyles from '../../assets/css/tracker/Tracker.module.css';
+
+// Styles
+import formStyles from '../../../../assets/css/innerOrbit/common/Form.module.css';
+import buttonStyles from '../../../../assets/css/innerOrbit/common/Button.module.css';
+import trackerStyles from '../../../../assets/css/innerOrbit/tracker/Tracker.module.css';
 
 interface MoodModalProps {
   userId: string;

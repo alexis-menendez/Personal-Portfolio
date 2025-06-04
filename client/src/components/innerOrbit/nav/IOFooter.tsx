@@ -1,8 +1,8 @@
-// File: client/src/components/nav/Footer.tsx
+// File: client/src/components/innerOrbit/nav/IOFooter.tsx
 
 import React from 'react';
-import { useAuth } from '../../context/authContext';
-import styles from '../../assets/css/layout/NavBar.module.css';
+import { useAuth } from '../../../context/authContext';
+import styles from '../../../../assets/css/innerOrbit/layout/NavBar.module.css';
 
 const Footer: React.FC = () => {
   const { logout } = useAuth();

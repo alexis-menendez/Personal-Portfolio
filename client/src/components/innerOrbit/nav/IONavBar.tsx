@@ -1,7 +1,9 @@
+// File: client/src/components/innerOrbit/nav/IONavBar.tsx
+
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useAuth } from '../../context/authContext';
-import styles from '../../assets/css/layout/NavBar.module.css'; 
+import { useAuth } from '../../../context/authContext';
+import styles from '../../../../assets/css/innerOrbit/layout/NavBar.module.css'; 
 
 const NavBar: React.FC = () => {
   const { logout } = useAuth();

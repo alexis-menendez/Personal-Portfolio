@@ -1,7 +1,7 @@
-// File: client/src/components/tracker/MoodCalendar.tsx
+// File: client/src/components/innerOrbit/tracker/MoodCalendar.tsx
 
 import React from 'react';
-import styles from '../../assets/css/tracker/Tracker.module.css';
+import styles from '../../../../assets/css/inneOrbit/tracker/Tracker.module.css';
 
 type CalendarMoodEntry = {
   moods: { mood: string; moodColor: string }[];

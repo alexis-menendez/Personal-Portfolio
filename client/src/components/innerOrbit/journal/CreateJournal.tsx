@@ -1,8 +1,10 @@
-// File: client/src/components/journal/CreateJournal.tsx
+// File: client/src/components/innerOrbit/journal/CreateJournal.tsx
 
 import React, { useState } from 'react';
-import styles from '../../assets/css/common/Form.module.css';
-import buttonStyles from '../../assets/css/common/Button.module.css';
+
+// Styles
+import styles from '../../../../assets/css/innerOrbit/common/Form.module.css';
+import buttonStyles from '../../../../assets/css/innerOrbit/common/Button.module.css';
 
 interface CreateJournalProps {
   onSave: (entry: { title: string; content: string }) => void;

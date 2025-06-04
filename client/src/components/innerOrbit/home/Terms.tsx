@@ -1,12 +1,17 @@
-// File: client/src/components/home/Terms.tsx
+// File: client/src/components/innerOrbit/home/Terms.tsx
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "../../assets/css/service/Terms.module.css";
-import buttonStyles from "../../assets/css/common/Button.module.css";
-import logoStyles from '../../assets/css/common/Logo.module.css';
+
+// Components
 import TransparentStars from '../common/TransparentStars';
 import ShootingStar from '../common/ShootingStar';
+
+// Styles
+import styles from '../../../../../assets/css/innerOrbit/service/Terms.module.css';
+import buttonStyles from '../../../../../assets/css/innerOrbit/common/Button.module.css';
+import logoStyles from '../../../../../assets/css/innerOrbit/common/Logo.module.css';
+
 
 const Terms = () => {
   const navigate = useNavigate();

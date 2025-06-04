@@ -1,14 +1,23 @@
-// File: client/src/components/journal/Constellation.tsx
+// File: client/src/components/innerOrbit/journal/Constellation.tsx
 
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { CONSTELLATIONS } from './ConstellationLogic';
-import styles from '../../assets/css/journal/Stars.module.css';
-import buttonStyles from '../../assets/css/common/Button.module.css';
-import StarBackground from '../common/StarBackground';
 import { useQuery } from '@apollo/client';
-import { GET_JOURNAL_ENTRIES } from '../../graphql/queries';
-import { useAuth } from '../../context/authContext';
+
+// Auth
+import { useAuth } from '../../../context/authContext';
+
+// GraphQL
+import { GET_JOURNAL_ENTRIES } from '../../../graphql/queries';
+
+// Components
+import { CONSTELLATIONS } from './ConstellationLogic';
+import StarBackground from '../common/StarBackground';
+
+// Styles
+import styles from '../../../../assets/css/innerOrbit/journal/Stars.module.css';
+import buttonStyles from '../../../../assets/css/innerOrbit/common/Button.module.css';
+
 
 const Constellation: React.FC = () => {
   const { index } = useParams<{ index: string }>();

@@ -1,9 +1,9 @@
-// File: client/src/components/dashboard/pomodoro/FocusTaskList.tsx
+// File: client/src/components/innerOrbit/dashboard/pomodoro/FocusTaskList.tsx
 
 import React, { useState } from 'react';
-import { Task, useTaskStore } from '../../../hooks/useTaskStore';
-import styles from '../../../assets/css/dashboard/PomodoroTimer.module.css';
-import buttonStyles from '../../../assets/css/common/Button.module.css';
+import { Task, useTaskStore } from '../../../../../hooks/innerOrbit/useTaskStore';
+import styles from '../../../../../assets/css/innerOrbit/dashboard/PomodoroTimer.module.css';
+import buttonStyles from '../../../../../assets/css/innerOrbit/common/Button.module.css';
 
 interface FocusTaskListProps {
   onTaskAdd?: () => void; 

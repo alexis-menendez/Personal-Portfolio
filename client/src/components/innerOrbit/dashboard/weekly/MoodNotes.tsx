@@ -1,10 +1,10 @@
-// File: client/src/components/dashboard/weekly/MoodNotes.tsx
+// File: client/src/components/innerOrbit/dashboard/weekly/MoodNotes.tsx
 
 import React, { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
-import styles from '../../../assets/css/tracker/Tracker.module.css';
-import buttonStyles from '../../../assets/css/common/Button.module.css';
-import formStyles from '../../../assets/css/common/Form.module.css';
+import styles from '../../../../../assets/css/innerOrbit/tracker/Tracker.module.css';
+import buttonStyles from '../../../../../assets/css/innerOrbit/common/Button.module.css';
+import formStyles from '../../../../../assets/css/innerOrbit/common/Form.module.css';
 
 export const UPDATE_MOOD_NOTE = gql`
   mutation UpdateMoodNote($_id: ID!, $note: String!) {
