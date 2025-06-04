@@ -1,9 +1,9 @@
-// File: client/src/components/innerOrbitlayout/JournalLayout.tsx
+// File: client/src/components/innerOrbit/layout/JournalLayout.tsx
 
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import StarBackground from '../common/StarBackground';
-import NavBar from '../nav/IONavBar';
+import NavBar from './nav/IONavBar';
 
 const IOJournalLayout: React.FC = () => {
   return (
