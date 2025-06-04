@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Task, useTaskStore } from '../../../../../hooks/innerOrbit/useTaskStore';
 import styles from '../../../../../assets/css/innerOrbit/pageStyles/dashboard/PomodoroTimer.module.css';
-import buttonStyles from '../../../../../assets/css/innerOrbit/common/Button.module.css';
+import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
 
 interface FocusTaskListProps {
   onTaskAdd?: () => void; 
