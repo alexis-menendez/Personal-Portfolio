@@ -8,16 +8,16 @@ import { useAuth } from '../../context/authContext';
 
 // GraphQL
 import { GET_MOOD_ENTRIES } from '../../graphql/queries';
-import { MoodEntry } from '../../models/Mood';
+import { MoodEntry } from '../../models/innerOrbit/Mood';
 
 // Components
-import MoodCalendar from '../../components/innerOrbit/tracker/MoodCalendar';
-import MoodModal from '../../components/innerOrbit/tracker/MoodModal';
-import CreateMood from '../../components/innerOrbit/tracker/CreateMood';
+import MoodCalendar from '../../components/innerOrbit/pageComponents/tracker/MoodCalendar';
+import MoodModal from '../../components/innerOrbit/pageComponents/tracker/MoodModal';
+import CreateMood from '../../components/innerOrbit/pageComponents/tracker/CreateMood';
 
 // Styles
-import styles from '../../assets/css/innerOrbit/tracker/Tracker.module.css';
-import buttonStyles from '../../assets/css/innerOrbit/common/Button.module.css';
+import styles from '../../assets/css/innerOrbit/pageStyles/tracker/Tracker.module.css';
+import buttonStyles from '../../assets/css/innerOrbit/common/IOButton.module.css';
 
 const Tracker: React.FC = () => {
   const { user } = useAuth();
