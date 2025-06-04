@@ -1,12 +1,12 @@
 Personal-Portfolio/  
-│   
-├── Assets/                         
+│  
+├── Assets/  
 │   └── *Screenshots for README, design references*  
 │  
-├── Guides/                  
-│   └── *instructions, guides, etc...*   
+├── Guides/  
+│   └── *instructions, guides, etc...*  
 │  
-├── client/                       
+├── client/  
 │   ├── public/  
 │   │   └── assets/  
 │   │       ├── dontDie/  
@@ -14,37 +14,37 @@ Personal-Portfolio/
 │   │       │   ├── audio/  
 │   │       │   ├── images/  
 │   │       │   └── video/  
-│   │       │   
+│   │       │  
 │   │       ├── innerOrbit/  
 │   │       │   ├── animations/  
 │   │       │   ├── audio/  
 │   │       │   ├── images/  
 │   │       │   └── video/  
-│   │       │   
+│   │       │  
 │   │       ├── lattice/  
 │   │       │   ├── animations/  
 │   │       │   ├── audio/  
 │   │       │   ├── images/  
 │   │       │   └── video/  
-│   │       │   
+│   │       │  
 │   │       ├── portfolio/  
 │   │       │   ├── animations/  
 │   │       │   ├── audio/  
 │   │       │   ├── images/  
 │   │       │   └── video/  
-│   │       │   
+│   │       │  
 │   │       ├── runestone/  
 │   │       │   ├── animations/  
 │   │       │   ├── audio/  
 │   │       │   ├── images/  
 │   │       │   └── video/  
-│   │       │   
+│   │       │  
 │   │       ├── solarium/  
 │   │       │   ├── animations/  
 │   │       │   ├── audio/  
 │   │       │   ├── images/  
 │   │       │   └── video/  
-│   │       │   
+│   │       │  
 │   │       └── taskadelic/  
 │   │           ├── animations/  
 │   │           ├── audio/  
@@ -53,101 +53,100 @@ Personal-Portfolio/
 │   │   
 │   ├── src/  
 │   │   │  
-│   │   ├── assets/   
+│   │   ├── assets/  
 │   │   │   └── css/  
-│   │   │       ├── dontDie/     
-│   │   │       │   ├── common/   
+│   │   │       ├── dontDie/  
+│   │   │       │   ├── common/  
 │   │   │       │   ├── components/  
-│   │   │       │   ├── layout/         
+│   │   │       │   ├── layout/      
 │   │   │       │   └── pages/  
-│   │   │       │       
-│   │   │       ├── innerOrbit/     
-│   │   │       │   ├── common/   
-│   │   │       │   │   ├── Button.module.css      
-│   │   │       │   │   ├── Form.module.css   
-│   │   │       │   │   ├── Logo.module.css     
-│   │   │       │   │   ├── ShootingStar.module.css 
-│   │   │       │   │   ├── Stars.module.css   
-│   │   │       │   │   └── TransparentStarsmodule.css     
+│   │   │       │  
+│   │   │       ├── innerOrbit/  
+│   │   │       │   ├── common/  
+│   │   │       │   │   ├── IOButton.module.css  
+│   │   │       │   │   ├── IOForm.module.css  
+│   │   │       │   │   ├── IOLogo.module.css  
+│   │   │       │   │   ├── ShootingStar.module.css  
+│   │   │       │   │   ├── Stars.module.css  
+│   │   │       │   │   └── TransparentStarsmodule.css  
 │   │   │       │   │  
-│   │   │       │   ├── layout/   
-│   │   │       │   │   ├── MainLayoutBackground.module.css  
-│   │   │       │   │   ├── CosmicBackground.module.css  
-│   │   │       │   │   └── NavBar.module.css            
+│   │   │       │   ├── layout/  
+│   │   │       │   │   ├── IOMainLayoutBackground.module.css  
+│   │   │       │   │   ├── IOCosmicBackground.module.css  
+│   │   │       │   │   └── IONavBar.module.css  
 │   │   │       │   │  
-│   │   │       │   └── pages/   
-│   │   │       │       ├── dashboard/   
-│   │   │       │       │   ├── Dashboard.module.css    
-│   │   │       │       │   └── PomodoroTimer.module.css    
-│   │   │       │       │     
-│   │   │       │       ├── home/   
-│   │   │       │       │   └── login/     
-│   │   │       │       │       ├── PrivacyPolicy.module.css              
-│   │   │       │       │       └── Terms.module.css   
-│   │   │       │       │     
-│   │   │       │       ├── journal/   
-│   │   │       │       │   └── Notebook.module.css     
+│   │   │       │   └── pages/  
+│   │   │       │       ├── dashboard/  
+│   │   │       │       │   ├── IODashboard.module.css  
+│   │   │       │       │   └── PomodoroTimer.module.css  
 │   │   │       │       │  
-│   │   │       │       └── tracker/    
+│   │   │       │       ├── home/  
+│   │   │       │       │   └── login/  
+│   │   │       │       │       ├── IOPrivacyPolicy.module.css  
+│   │   │       │       │       └── IOTerms.module.css  
+│   │   │       │       │  
+│   │   │       │       ├── journal/  
+│   │   │       │       │   └── Notebook.module.css  
+│   │   │       │       │  
+│   │   │       │       └── tracker/  
 │   │   │       │           └── Tracker.module.css  
-│   │   │       │      
-│   │   │       ├── latttice/      
-│   │   │       │   ├── common/   
+│   │   │       │  
+│   │   │       ├── latttice/  
+│   │   │       │   ├── common/  
 │   │   │       │   ├── components/  
-│   │   │       │   ├── layout/         
+│   │   │       │   ├── layout/  
 │   │   │       │   └── pages/  
-│   │   │       │      
-│   │   │       ├── portfolio/     
-│   │   │       │   ├── common/   
+│   │   │       │  
+│   │   │       ├── portfolio/  
+│   │   │       │   ├── common/  
 │   │   │       │   ├── components/  
-│   │   │       │   ├── layout/         
+│   │   │       │   ├── layout/  
 │   │   │       │   └── pages/  
-│   │   │       │     
-│   │   │       ├── runestone/     
-│   │   │       │   ├── common/   
+│   │   │       │  
+│   │   │       ├── runestone/  
+│   │   │       │   ├── common/  
 │   │   │       │   ├── components/  
-│   │   │       │   ├── layout/         
+│   │   │       │   ├── layout/  
 │   │   │       │   └── pages/  
-│   │   │       │     
-│   │   │       ├── solarium/     
-│   │   │       │   ├── common/   
+│   │   │       │  
+│   │   │       ├── solarium/  
+│   │   │       │   ├── common/  
 │   │   │       │   ├── components/  
-│   │   │       │   ├── layout/         
+│   │   │       │   ├── layout/  
 │   │   │       │   └── pages/  
-│   │   │       │       
-│   │   │       └── taskadelic/     
-│   │   │           ├── common/   
+│   │   │       │  
+│   │   │       └── taskadelic/  
+│   │   │           ├── common/  
 │   │   │           ├── components/  
-│   │   │           ├── layout/         
-│   │   │           └── pages/              
+│   │   │           ├── layout/  
+│   │   │           └── pages/  
 │   │   │  
 │   │   ├── components/  
-│   │   │       ├── dontDie/     
-│   │   │       │   ├── common/   
-│   │   │       │   ├── layout/         
-│   │   │       │   └── pageComponents/  
-│   │   │       │       
-│   │   │       ├── innerOrbit/    
-│   │   │       │   ├── common/    
-│   │   │       │   │   ├── MainLayoutBackground.tsx    
-│   │   │       │   │   ├── ShootingStar.tsx    
-│   │   │       │   │   ├── StarBackground.tsx    
-│   │   │       │   │   └── TransparentStars.tsx    
-│   │   │       │   │     
+│   │   │       ├── dontDie/  
+│   │   │       │   ├── common/  
 │   │   │       │   ├── layout/  
-│   │   │       │   │    ├── MainLayout/  
-│   │   │       │   │    │   ├──  MainLayoutBackground.tsx 
-│   │   │       │   │    │   └──  MainLayout.tsx   
+│   │   │       │   └── pageComponents/  
+│   │   │       │  
+│   │   │       ├── innerOrbit/  
+│   │   │       │   ├── common/  
+│   │   │       │   │   ├── ShootingStar.tsx  
+│   │   │       │   │   ├── StarBackground.tsx  
+│   │   │       │   │   └── TransparentStars.tsx  
+│   │   │       │   │  
+│   │   │       │   ├── layout/  
+│   │   │       │   │    ├── IOMainLayout/  
+│   │   │       │   │    │   ├──  IOMainLayoutBackground.tsx  
+│   │   │       │   │    │   └──  IOMainLayout.tsx  
 │   │   │       │   │    │  
 │   │   │       │   │    ├── nav/  
-│   │   │       │   │    │   ├──  Footer.tsx  
-│   │   │       │   │    │   └──  NavBar.tsx  
+│   │   │       │   │    │   ├──  IOFooter.tsx  
+│   │   │       │   │    │   └──  IONavBar.tsx  
 │   │   │       │   │    │  
 │   │   │       │   │    ├──  JournalLayout.tsx  
-│   │   │       │   │    └──  LoginLayout.tsx  
-│   │   │       │   │    
-│   │   │       │   └── pageComponents/    
-│   │   │       │       ├── dashboard/     
+│   │   │       │   │    └──  IOLoginLayout.tsx  
+│   │   │       │   │  
+│   │   │       │   └── pageComponents/  
+│   │   │       │       ├── dashboard/  
 │   │   │       │       │   ├── pomodoro/  
 │   │   │       │       │   │   ├──  FocusTaskList.tsx  
 │   │   │       │       │   │   ├──  PomodoroTimer.tsx  
@@ -156,214 +155,217 @@ Personal-Portfolio/
 │   │   │       │       │   └──  weekly/  
 │   │   │       │       │        ├──  MoodNotes.tsx  
 │   │   │       │       │        └──  WeeklyMoodCalendar.tsx  
-│   │   │       │       │        
+│   │   │       │       │  
 │   │   │       │       ├── home/  
-│   │   │       │       │   ├──  LoginForm.tsx  
-│   │   │       │       │   ├──  Privacy.tsx   
-│   │   │       │       │   ├──  RegisterForm.tsx  
-│   │   │       │       │   └──  Terms.tsx  
+│   │   │       │       │   ├──  IOLoginForm.tsx  
+│   │   │       │       │   ├──  IOPrivacy.tsx  
+│   │   │       │       │   ├──  IORegisterForm.tsx  
+│   │   │       │       │   └──  IOTerms.tsx  
 │   │   │       │       │  
 │   │   │       │       ├── journal/  
 │   │   │       │       │   ├── dev/  
 │   │   │       │       │   │   └── DevelopConstellations.tsx  
-│   │   │       │       │   │   
+│   │   │       │       │   │  
 │   │   │       │       │   ├──  Constellation.tsx  
 │   │   │       │       │   ├──  ConstellationLogic.tsx  
 │   │   │       │       │   ├──  CreateJournal.tsx  
 │   │   │       │       │   └──  ViewJournal.tsx  
 │   │   │       │       │  
-│   │   │       │       ├── library/   
+│   │   │       │       ├── library/  
 │   │   │       │       │   └──  CloudinaryWidget.tsx  
-│   │   │       │       │   
+│   │   │       │       │  
 │   │   │       │       └── tracker/  
-│   │   │       │           ├──  CreateMood.tsx   
-│   │   │       │           ├──  MoodCalendar.tsx   
+│   │   │       │           ├──  CreateMood.tsx  
+│   │   │       │           ├──  MoodCalendar.tsx  
 │   │   │       │           ├──  MoodComboBoxtsx  
 │   │   │       │           └──  MoodModal.tsx  
-│   │   │       │       
-│   │   │       ├── lattice/     
-│   │   │       │   ├── common/   
-│   │   │       │   ├── layout/         
+│   │   │       │  
+│   │   │       ├── lattice/  
+│   │   │       │   ├── common/  
+│   │   │       │   ├── layout/  
 │   │   │       │   └── pageComponents/  
 │   │   │       │  
-│   │   │       ├── portfolio/     
-│   │   │       │   ├── common/   
-│   │   │       │   ├── layout/         
+│   │   │       ├── portfolio/  
+│   │   │       │   ├── common/  
+│   │   │       │   ├── layout/  
 │   │   │       │   └── pageComponents/  
 │   │   │       │  
-│   │   │       ├── runestone/     
-│   │   │       │   ├── common/   
-│   │   │       │   ├── layout/         
+│   │   │       ├── runestone/  
+│   │   │       │   ├── common/  
+│   │   │       │   ├── layout/  
 │   │   │       │   └── pageComponents/  
 │   │   │       │  
-│   │   │       ├── solarium/     
-│   │   │       │   ├── common/   
-│   │   │       │   ├── layout/         
+│   │   │       ├── solarium/  
+│   │   │       │   ├── common/  
+│   │   │       │   ├── layout/  
 │   │   │       │   └── pageComponents/  
 │   │   │       │  
-│   │   │       ├── taskadelic/     
-│   │   │       │   ├── common/   
-│   │   │       │   ├── layout/         
+│   │   │       ├── taskadelic/  
+│   │   │       │   ├── common/  
+│   │   │       │   ├── layout/  
 │   │   │       │   └── pageComponents/  
-│   │   │       │       
+│   │   │       │  
 │   │   │       └──  ProtectedRoute.tsx  
-│   │   │
+│   │   │  
 │   │   ├── context/  
-│   │   │   └── authContext.tsx 
-│   │   │
+│   │   │   └── authContext.tsx  
+│   │   │  
 │   │   ├── graphql/  
-│   │   │   ├── mutations.ts 
-│   │   │   └── queries.ts 
-│   │   │
-│   │   ├── hooks/   
-│   │   │   ├── dontDie/ 
-│   │   │   │   
-│   │   │   ├── innerOrbit/   
+│   │   │   ├── mutations.ts  
+│   │   │   └── queries.ts  
+│   │   │  
+│   │   ├── hooks/  
+│   │   │   ├── dontDie/  
+│   │   │   │  
+│   │   │   ├── innerOrbit/  
 │   │   │   │   └── useTaskStore.ts  
-│   │   │   │   
+│   │   │   │  
 │   │   │   ├── lattice/  
-│   │   │   ├── portfolio/   
-│   │   │   ├── runestone/                                                       
-│   │   │   ├── solarium/   
-│   │   │   └── taskadelic/   
+│   │   │   ├── portfolio/  
+│   │   │   ├── runestone/  
+│   │   │   ├── solarium/  
+│   │   │   └── taskadelic/  
 │   │   │  
 │   │   ├── models/  
-│   │   │   ├── index.ts 
+│   │   │   ├── index.ts  
 │   │   │   │  
-│   │   │   ├── innerOrbit/ 
-│   │   │   │   ├── Journal.ts 
-│   │   │   │   └── Mood.ts 
+│   │   │   ├── innerOrbit/  
+│   │   │   │   ├── Journal.ts  
+│   │   │   │   └── Mood.ts  
 │   │   │   │  
-│   │   │   ├── Auth.ts 
-│   │   │   ├── GraphQL.ts                                                     
-│   │   │   └── User.ts       
-│   │   │
+│   │   │   ├── Auth.ts  
+│   │   │   ├── GraphQL.ts  
+│   │   │   └── User.ts  
+│   │   │  
 │   │   ├── pages/  
-│   │   │   ├── dontDie/ 
-│   │   │   │   
-│   │   │   ├── innerOrbit/   
-│   │   │   │   ├── Dashboard.tsx 
+│   │   │   ├── dontDie/  
+│   │   │   │  
+│   │   │   ├── innerOrbit/  
+│   │   │   │   ├── Dashboard.tsx  
 │   │   │   │   ├── Home.tsx  
-│   │   │   │   ├── Journal.tsx           
-│   │   │   │   ├── Library.tsx         
-│   │   │   │   ├── Tracker.tsx         
+│   │   │   │   ├── Journal.tsx  
+│   │   │   │   ├── Library.tsx  
+│   │   │   │   ├── Tracker.tsx  
 │   │   │   │   └── UserProfile.tsx  
-│   │   │   │   
+│   │   │   │  
 │   │   │   ├── lattice/  
-│   │   │   ├── portfolio/   
-│   │   │   ├── runestone/                                                       
-│   │   │   ├── solarium/   
-│   │   │   └── taskadelic/       
-│   │   │
-│   │   ├── utils/
-│   │   │   ├── API.ts 
-│   │   │   ├── auth.ts 
-│   │   │   └── loadFrames.ts 
-│   │   │
-│   │   ├── appolloClient.ts
-│   │   ├── App.tsx 
-│   │   ├── custom.d.ts   
-│   │   ├── index.css   
+│   │   │   ├── portfolio/  
+│   │   │   ├── runestone/  
+│   │   │   ├── solarium/  
+│   │   │   └── taskadelic/  
+│   │   │  
+│   │   ├── utils/  
+│   │   │   ├── API.ts  
+│   │   │   ├── auth.ts  
+│   │   │   └── loadFrames.ts  
+│   │   │  
+│   │   ├── appolloClient.ts  
+│   │   ├── App.tsx  
+│   │   ├── custom.d.ts  
+│   │   ├── index.css  
 │   │   ├── main.tsx  
-│   │   └── vite-env.d.ts 
-│   │
-│   ├── node_modules/   
-│   │    └── ...    
-│   │   
-│   ├── dist/   
-│   │    └── ...    
-│   │   
-│   ├── .eslintrc.cjs   
+│   │   └── vite-env.d.ts  
+│   │  
+│   ├── node_modules/  
+│   │    └── ...  
+│   │  
+│   ├── dist/  
+│   │    └── ...  
+│   │  
+│   ├── .eslintrc.cjs  
 │   ├── .gitignore  
-│   ├── index.html    
-│   ├── package.json    
-│   ├── postcss.config.cjs   
-│   ├── tailwind.config.ts    
-│   ├── tsconfig.json    
-│   ├── tsconfig.node.json    
-│   ├── vite.config.ts   
-│   └── vitest.config.ts   
-│
-├── server/                                                  
+│   ├── index.html  
+│   ├── package.json  
+│   ├── postcss.config.cjs  
+│   ├── tailwind.config.ts  
+│   ├── tsconfig.json  
+│   ├── tsconfig.node.json  
+│   ├── vite.config.ts  
+│   └── vitest.config.ts  
+│  
+├── server/  
 │   ├── src/  
 │   │   ├── config/  
 │   │   │   └── connections.ts  
-│   │   │   
+│   │   │  
 │   │   ├── controllers/  
 │   │   │   ├── index.ts  
 │   │   │   │  
-│   │   │   ├── innerOrbit/   
+│   │   │   ├── innerOrbit/  
 │   │   │   │   ├── journalController.ts  
-│   │   │   │   ├── libraryController.ts     
+│   │   │   │   ├── libraryController.ts  
 │   │   │   │   └── trackerController.ts  
 │   │   │   │  
-│   │   │   ├── authController.ts       
-│   │   │   └── userController.ts                
+│   │   │   ├── authController.ts  
+│   │   │   └── userController.ts  
 │   │   │  
-│   │   ├── middleware/   
-│   │   │   └── auth.ts          
+│   │   ├── middleware/  
+│   │   │   └── auth.ts  
 │   │   │  
-│   │   ├── models/   
+│   │   ├── models/  
 │   │   │   ├── index.ts  
 │   │   │   │  
-│   │   │   ├── innerOrbit/   
+│   │   │   ├── innerOrbit/  
 │   │   │   │   ├── Journal.ts  
 │   │   │   │   └── Tracker.ts  
 │   │   │   │  
-│   │   │   └── User.ts                                              
-│   │   |    
-│   │   ├── routes/            
-│   │   │   └── innerOrbit/   
-│   │   │       └── libraryRoutes.ts    
-│   │   |    
+│   │   │   └── User.ts  
+│   │   |  
+│   │   ├── routes/  
+│   │   │   └── innerOrbit/  
+│   │   │       └── libraryRoutes.ts  
+│   │   |  
 │   │   ├── schemas/  
-│   │   │   ├── index.ts
-│   │   │   │
-│   │   │   ├── scalars/
-│   │   │   │   └── DateScalar.ts
-│   │   │   │
-│   │   │   ├── resolvers.ts         
-│   │   │   └── typeDefs.ts                    
-│   │   │   
+│   │   │   ├── index.ts  
+│   │   │   │  
+│   │   │   ├── scalars/  
+│   │   │   │   └── DateScalar.ts  
+│   │   │   │  
+│   │   │   ├── resolvers.ts  
+│   │   │   └── typeDefs.ts  
+│   │   │  
 │   │   ├── seeds/  
-│   │   │   ├── index.ts             
-│   │   │   ├── user-seeds.ts        
-│   │   │   └── user.json                     
-│   │   │      
-│   │   ├── types/   
+│   │   │   ├── index.ts  
+│   │   │   ├── user-seeds.ts  
+│   │   │   └── user.json  
+│   │   │  
+│   │   ├── types/  
 │   │   │   └── express/  
-│   │   │       └── index.d.ts 
-│   │   │    
-│   │   ├── utils/     
-│   │   │   ├── innerOrbit/   
+│   │   │       └── index.d.ts  
+│   │   │  
+│   │   ├── utils/  
+│   │   │   ├── innerOrbit/  
 │   │   │   │   ├── cloudinary.ts  
 │   │   │   │   └── trackerColors.ts  
-│   │   │   │     
+│   │   │   │  
 │   │   │   ├── auth.ts  
-│   │   │   └── formatDate.ts   
-│   │   │     
-│   │   └── server.ts    
-│   │    
-│   ├── node_modules/     
-│   │    └── ...      
-│   │        
-│   ├── dist/    
-│   │   └── ...    
-│   │     
-│   ├── .env   
-│   ├── .gitignore    
+│   │   │   └── formatDate.ts  
+│   │   │  
+│   │   └── server.ts  
+│   │  
+│   ├── node_modules/  
+│   │    └── ...  
+│   │  
+│   ├── dist/  
+│   │   └── ...  
+│   │  
+│   ├── .env  
+│   ├── .gitignore  
 │   ├── jest.config.js  
-│   ├── package.json    
-│   └── tsconfig.json     
+│   ├── package.json  
+│   └── tsconfig.json  
 │  
-├── node_modules/     
-│    └── ...      
-│        
-├── .env   
-├── .gitattributes   
-├── .gitignore    
-├── exampleENV.md   
-├── File-Tree.md   
-├── package.json                  # Root-level for install-all, build-all, etc.    
-├── tsconfig.json                 # Shared config    
-└── README.md   
+├── node_modules/  
+│    └── ...  
+│  
+├── dist/  
+│    └── ...  
+│  
+├── .env  
+├── .gitattributes  
+├── .gitignore  
+├── exampleENV.md  
+├── File-Tree.md  
+├── package.json                  # Root-level for install-all, build-all, etc.  
+├── tsconfig.json                 # Shared config  
+└── README.md  
