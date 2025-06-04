@@ -1,3 +1,5 @@
+// File: server/src/utils/innerOrbit/formatEntry.ts
+
 import { IMoodEntry } from '../models/Tracker.js';
 
 export const formatMoodEntry = (entry: any): IMoodEntry => {
