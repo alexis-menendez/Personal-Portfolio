@@ -9,7 +9,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 
     // innerOrbit Layouts
     import IOLoginLayout from './components/innerOrbit/layout/IOLoginLayout';
-    import IOMainLayout from './components/innerOrbit/layout/IOMainLayout';
+    import IOMainLayout from './components/innerOrbit/layout/IOmainLayout/IOMainLayout';
     import IOJournalLayout from './components/innerOrbit/layout/IOJournalLayout';
 
 // Pages
@@ -20,28 +20,28 @@ import ProtectedRoute from './components/ProtectedRoute';
 // TODO: import Resume from './pages/portfolio/Resume';
 
     // innerOrbit Pages
-    import Home from './pages/innerOrbit/Home';
-    import Dashboard from './pages/innerOrbit/Dashboard';
+    import Home from './pages/innerOrbit/IOHome';
+    import Dashboard from './pages/innerOrbit/IODashboard';
     import Journal from './pages/innerOrbit/Journal';
     import Tracker from './pages/innerOrbit/Tracker';
     import Library from './pages/innerOrbit/Library';
-    import UserProfile from './pages/innerOrbit/UserProfile';
+    import UserProfile from './pages/innerOrbit/IOUserProfile';
 
 // Components
 // TODO: import Navigation from './components/portfolio/NavBar';
 // TODO: import Footer from './components/portfolio/Footer';
 
     // innerOrbit Components
-    import Login from './components/innerOrbit/home/LoginForm';
-    import Register from './components/innerOrbit/home/RegisterForm';
-    import Terms from './components/innerOrbit/home/Terms';
-    import Privacy from './components/innerOrbit/home/Privacy';
-    import Constellation from './components/innerOrbit/journal/Constellation';
-    import ViewJournal from './components/innerOrbit/journal/ViewJournal'; 
+    import Login from './components/innerOrbit/pageComponents/login/IOLoginForm';
+    import Register from './components/innerOrbit/pageComponents/login/IORegisterForm';
+    import Terms from './components/innerOrbit/pageComponents/login/IOTerms';
+    import Privacy from './components/innerOrbit/pageComponents/login/IOPrivacy';
+    import Constellation from './components/innerOrbit/pageComponents/journal/Constellation';
+    import ViewJournal from './components/innerOrbit/pageComponents/journal/ViewJournal'; 
 
 // Development components (for internal use)
-import DevelopConstellations from './components/innerOrbit/journal/dev/DevelopConstellations'; 
-import DevStars from './components/innerOrbit/journal/dev/DevStars'; 
+import DevelopConstellations from './components/innerOrbit/pageComponents/journal/dev/DevelopConstellations'; 
+import DevStars from './components/innerOrbit/pageComponents/journal/dev/DevStars'; 
 
 const App: React.FC = () => {
   return (
@@ -50,20 +50,20 @@ const App: React.FC = () => {
         {/* Routes using IOLoginLayout */}
         <Route element={<IOLoginLayout />}>
           <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-              <Route path="/terms" element={<Terms />} />
-              <Route path="/privacy" element={<Privacy />} />
+            <Route path="/io-login" element={<IOLogin />} />
+            <Route path="/io-register" element={<IORegister />} />
+              <Route path="/io-terms" element={<IOTerms />} />
+              <Route path="/io-privacy" element={<IOPrivacy />} />
         </Route>
 
         {/* Routes using IOMainLayout */}
         <Route element={<IOMainLayout />}>
-          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}/>
+          <Route path="/io-dashboard" element={<ProtectedRoute><IODashboard /></ProtectedRoute>}/>
           <Route path="/tracker" element={<ProtectedRoute><Tracker /></ProtectedRoute>}/>
           <Route path="/library"element={<ProtectedRoute><Library /></ProtectedRoute>}/>
-          <Route path="/account" element={<ProtectedRoute><UserProfile /></ProtectedRoute>}/>
-          <Route path="/dev/constellations" element={<DevelopConstellations />} /></Route>
-          <Route path="/dev/stars" element={<DevStars />} />
+          <Route path="/io-account" element={<ProtectedRoute><IOUserProfile /></ProtectedRoute>}/>
+          <Route path="/dev-constellations" element={<DevelopConstellations />} /></Route>
+          <Route path="/dev-stars" element={<DevStars />} />
 
         {/* Journal routes using IOJournalLayout */}
         <Route path="/journal" element={<ProtectedRoute><IOJournalLayout /></ProtectedRoute>}><Route index element={<Journal />} />
