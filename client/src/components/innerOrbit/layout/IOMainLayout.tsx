@@ -1,4 +1,4 @@
-// file: c;ient/src/components/layout/IOMainLayout.tsx
+// file: c;ient/src/components/innerOrbit/layout/IOMainLayout.tsx
 
 import React from 'react';
 import { Outlet } from 'react-router-dom';
@@ -6,7 +6,7 @@ import StarBackground from '../common/StarBackground';
 import IOMainLayoutBackground from '../../../components/innerOrbit/common/IOMainLayoutBackground';
 import NavBar from '../nav/IONavBar';
 import Footer from '../nav/IOFooter';
-import styles from '../../../assets/css/common/IOMainLayoutBackground.module.css'; 
+import styles from '../../../../assets/css/innerOrbit/common/IOMainLayoutBackground.module.css'; 
 
 const IOMainLayout: React.FC = () => {
   return (
