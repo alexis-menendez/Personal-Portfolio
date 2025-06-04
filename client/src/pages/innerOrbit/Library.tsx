@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from 'react';
 
 // Styles
-import pageStyles from '../../assets/css/innerOrbit/dashboard/Dashboard.module.css';
-import styles from '../../assets/css/innerOrbit/library/Library.module.css';
+import pageStyles from '../../assets/css/innerOrbit/dashboard/IODashboard.module.css';
+import styles from '../../assets/css/innerOrbit/pageStyles/library/Library.module.css';
 
 type Video = {
   url: string;
