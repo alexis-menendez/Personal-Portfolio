@@ -15,15 +15,15 @@ import {
   CONSTELLATIONS,
   StarPoint,
   Constellation,
-} from '../../components/innerOrbit/journal/ConstellationLogic';
+} from '../../components/innerOrbit/pageComponents/journal/ConstellationLogic';
 
 // Components
 import StarBackground from '../../components/innerOrbit/common/StarBackground';
-import CreateJournal from '../../components/innerOrbit/journal/CreateJournal';
+import CreateJournal from '../../components/innerOrbit/pageComponents/journal/CreateJournal';
 
 // Styles
-import styles from '../../assets/css/innerOrbit/journal/Stars.module.css';
-import buttonStyles from '../../assets/css/innerOrbit/common/Button.module.css';
+import styles from '../../assets/css/innerOrbit/common/Stars.module.css';
+import buttonStyles from '../../assets/css/innerOrbit/common/IOButton.module.css';
 
 const Journal: React.FC = () => {
   const { user } = useAuth();
