@@ -5,10 +5,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
 // Auth
-import { AuthContext } from '../../../../../context/authContext';
+import { AuthContext } from '../../../../context/authContext';
 
 // GraphQL
-import { REGISTER_USER } from '../../../../../graphql/mutations';
+import { REGISTER_USER } from '../../../../graphql/mutations';
 
 // Styles
 import formStyles from '../../../../../assets/css/innerOrbit/common/IOForm.module.css';
