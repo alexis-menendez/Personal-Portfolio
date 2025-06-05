@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 
 // Components
 import { CONSTELLATIONS, StarPoint, Constellation } from '../ConstellationLogic';
-import ShootingStar from '../../common/ShootingStar';
+import ShootingStar from '../../../../common/ShootingStar';
 
 // Styles
-import styles from '../../../../../assets/css/innerOrbit/common/Stars.module.css';
+import styles from '../../../../../../assets/css/innerOrbit/common/Stars.module.css';
 
 const DevelopConstellations: React.FC = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
