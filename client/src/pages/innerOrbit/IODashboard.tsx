@@ -1,8 +1,9 @@
 // File: client/src/pages/innerOrbit/IODashboard.tsx
 
+// React
 import React, { useState } from "react";
 
-// Components
+// Subcomponents
 import WeeklyMoodReview from "../../components/innerOrbit/pageComponents/dashboard/weekly/WeeklyMoodCalendar";
 import PomodoroTimer from "../../components/innerOrbit/pageComponents/dashboard/pomodoro/PomodoroTimer";
 import FocusTaskList from "../../components/innerOrbit/pageComponents/dashboard/pomodoro/FocusTaskList";
