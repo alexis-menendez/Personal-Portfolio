@@ -1,5 +1,6 @@
 // File: client/src/components/innerOrbit/layout/nav/IOFooter.tsx
 
+// React
 import React from 'react';
 
 // Auth
