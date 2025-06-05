@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 
 // Auth
-import { useAuth } from '../../../../../context/authContext';
+import { useAuth } from '../../../../context/authContext';
 
 // GraphQL
-import { ADD_MOOD_ENTRY, UPDATE_MOOD_ENTRY, DELETE_MOOD_ENTRY } from '../../../../../graphql/mutations';
-import { moodList } from '../../../../../models/innerOrbit/Mood';
+import { ADD_MOOD_ENTRY, UPDATE_MOOD_ENTRY, DELETE_MOOD_ENTRY } from '../../../../graphql/mutations';
+import { moodList } from '../../../../models/innerOrbit/Mood';
 
 // Components
 import MoodComboBox from './MoodComboBox';
