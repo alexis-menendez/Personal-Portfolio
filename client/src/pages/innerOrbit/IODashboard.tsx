@@ -3,12 +3,13 @@
 import React, { useState } from "react";
 
 // Components
-import WeeklyMoodReview from "../../components/innerOrbit/pageComponents/dashboard/weekly/WeeklyMoodCalendar";
-import PomodoroTimer from "../../components/innerOrbit/pageComponents/dashboard/pomodoro/PomodoroTimer";
-import FocusTaskList from "../../components/innerOrbit/pageComponents/dashboard/pomodoro/FocusTaskList";
+import WeeklyMoodReview from "../components/innerOrbit/pageComponents/dashboard/weekly/WeeklyMoodCalendar";
+import PomodoroTimer from "../components/innerOrbit/pageComponents/dashboard/pomodoro/PomodoroTimer";
+import FocusTaskList from "../components/innerOrbit/pageComponents/dashboard/pomodoro/FocusTaskList";
 
 // Styles
-import pageStyles from "../../assets/css/innerOrbit/pageStyles/dashboard/IODashboard.module.css";
+import pageStyles from "../assets/css/innerOrbit/pageStyles/dashboard/IODashboard.module.css";
+
 
 type MoodEntry = {
   id: string;
