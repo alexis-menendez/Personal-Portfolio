@@ -25,6 +25,7 @@ import CreateJournal from '../../components/innerOrbit/pageComponents/journal/Cr
 import styles from '../../assets/css/innerOrbit/common/Stars.module.css';
 import buttonStyles from '../../assets/css/innerOrbit/common/IOButton.module.css';
 
+
 const Journal: React.FC = () => {
   const { user } = useAuth();
   const navigate = useNavigate(); 
