@@ -1,11 +1,16 @@
 // File: client/src/components/innerOrbit/pageComponents/tracker/CreateMood.tsx
 
+// React
 import React, { useState } from 'react';
+
+// Apollo
 import { useMutation } from '@apollo/client';
+
+// GraphQL
 import { ADD_MOOD_ENTRY } from '../../../../graphql/mutations';
 import { moodList } from '../../../../models/innerOrbit/Mood';
 
-// Components
+// Subcomponents
 import MoodComboBox from './MoodComboBox';
 
 // Styles
