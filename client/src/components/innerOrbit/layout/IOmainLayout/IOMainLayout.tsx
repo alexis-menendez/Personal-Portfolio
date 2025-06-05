@@ -10,7 +10,7 @@ import NavBar from '../nav/IONavBar';
 import Footer from '../nav/IOFooter';
 
 // Styles
-import styles from '../../../../../assets/css/innerOrbit/layout/IOMainLayoutBackground.module.css';
+import styles from '../../../../assets/css/innerOrbit/layout/IOMainLayoutBackground.module.css';
 
 const IOMainLayout: React.FC = () => {
   return (
