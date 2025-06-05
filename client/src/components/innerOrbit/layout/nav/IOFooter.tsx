@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useAuth } from '../../../../context/authContext';
-import styles from '../../../../../assets/css/innerOrbit/layout/IONavBar.module.css';
+import styles from '../../../../assets/css/innerOrbit/layout/IONavBar.module.css';
 
 const Footer: React.FC = () => {
   const { logout } = useAuth();
