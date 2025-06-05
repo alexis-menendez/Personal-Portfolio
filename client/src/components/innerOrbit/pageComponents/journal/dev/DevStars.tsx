@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-// Suncomponents
+// Subcomponents
 import ShootingStar from '../../../common/ShootingStar';
 
 const DevelopStars: React.FC = () => {
