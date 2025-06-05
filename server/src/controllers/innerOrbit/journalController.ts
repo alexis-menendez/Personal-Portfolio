@@ -1,6 +1,7 @@
 // File: server/src/controllers/innerOrbit/journalController.ts
 
-import JournalEntry, { IJournalEntry, JournalInput } from "../../models/innerOrbit/Journal";
+import JournalEntry, { IJournalEntry, JournalInput } from "../../models/innerOrbit/Journal.js";
+
 
 
 
