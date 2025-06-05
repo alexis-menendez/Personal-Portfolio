@@ -1,7 +1,7 @@
 // File: client/src/components/innerOrbit/pageComponents/tracker/MoodCalendar.tsx
 
 import React from 'react';
-import styles from '../../../../../assets/css/innerOrbit/pageStyles/tracker/Tracker.module.css';
+import styles from '../../../../assets/css/innerOrbit/pageStyles/tracker/Tracker.module.css';
 
 
 type CalendarMoodEntry = {
