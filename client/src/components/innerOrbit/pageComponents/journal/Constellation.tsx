@@ -5,19 +5,18 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 // Auth
-import { useAuth } from '../../../context/authContext';
+import { useAuth } from '../../../../../context/authContext';
 
 // GraphQL
-import { GET_JOURNAL_ENTRIES } from '../../../graphql/queries';
+import { GET_JOURNAL_ENTRIES } from '../../../../../graphql/queries';
 
 // Components
 import { CONSTELLATIONS } from './ConstellationLogic';
-import StarBackground from '../common/StarBackground';
+import StarBackground from '../../common/StarBackground';
 
 // Styles
-import styles from '../../../../assets/css/innerOrbit/common/Stars.module.css';
-import buttonStyles from '../../../../assets/css/innerOrbit/common/IOButton.module.css';
-
+import styles from '../../../../../assets/css/innerOrbit/common/Stars.module.css';
+import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
 
 const Constellation: React.FC = () => {
   const { index } = useParams<{ index: string }>();
