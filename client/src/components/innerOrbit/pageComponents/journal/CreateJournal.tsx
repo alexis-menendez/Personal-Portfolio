@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 
 // Styles
-import styles from '../../../../../assets/css/innerOrbit/common/IOForm.module.css';
-import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
+import styles from '../../../../assets/css/innerOrbit/common/IOForm.module.css';
+import buttonStyles from '../../../../assets/css/innerOrbit/common/IOButton.module.css';
 
 
 interface CreateJournalProps {
