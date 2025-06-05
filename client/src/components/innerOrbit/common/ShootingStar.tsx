@@ -1,5 +1,6 @@
 // File: cliient/src/components/innerOrbit/common/ShootingStar.tsx
 
+// React
 import React, { useEffect, useState, ReactElement } from 'react';
 
 // Styles
