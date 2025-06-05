@@ -10,7 +10,7 @@ import ProtectedRoute from './components/ProtectedRoute';
     // innerOrbit Layouts
     import IOLoginLayout from './components/innerOrbit/layout/IOLoginLayout';
     import IOMainLayout from './components/innerOrbit/layout/IOmainLayout/IOMainLayout';
-    import IOJournalLayout from './components/innerOrbit/layout/JournalLayout';
+    import IOJournalLayout from './components/innerOrbit/layout/IOJournalLayout';
 
 // Pages
 // TODO: import Home from './pages/portfolio/Home';
@@ -32,10 +32,10 @@ import ProtectedRoute from './components/ProtectedRoute';
 // TODO: import Footer from './components/portfolio/Footer';
 
     // innerOrbit Components
-    import Login from './components/innerOrbit/pageComponents/login/IOLoginForm';
-    import Register from './components/innerOrbit/pageComponents/login/IORegisterForm';
-    import Terms from './components/innerOrbit/pageComponents/login/IOTerms';
-    import Privacy from './components/innerOrbit/pageComponents/login/IOPrivacy';
+    import IOLogin from './components/innerOrbit/pageComponents/login/IOLoginForm';
+    import IORegister from './components/innerOrbit/pageComponents/login/IORegisterForm';
+    import IOTerms from './components/innerOrbit/pageComponents/login/IOTerms';
+    import IOPrivacy from './components/innerOrbit/pageComponents/login/IOPrivacy';
     import Constellation from './components/innerOrbit/pageComponents/journal/Constellation';
     import ViewJournal from './components/innerOrbit/pageComponents/journal/ViewJournal'; 
 
@@ -61,10 +61,10 @@ const App: React.FC = () => {
 
         {/* Routes using IOMainLayout */}
         <Route element={<IOMainLayout />}>
-          <Route path="/io-dashboard" element={<ProtectedRoute><IODashboard /></ProtectedRoute>}/>
+          <Route path="/io-dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}/>
           <Route path="/tracker" element={<ProtectedRoute><Tracker /></ProtectedRoute>}/>
           <Route path="/library"element={<ProtectedRoute><Library /></ProtectedRoute>}/>
-          <Route path="/io-account" element={<ProtectedRoute><IOUserProfile /></ProtectedRoute>}/>
+          <Route path="/io-account" element={<ProtectedRoute><UserProfile /></ProtectedRoute>}/>
           <Route path="/dev-constellations" element={<DevelopConstellations />} /></Route>
           <Route path="/dev-stars" element={<DevStars />} />
 
