@@ -2,15 +2,16 @@
 
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { ADD_MOOD_ENTRY } from '../../../graphql/mutations';
-import { moodList } from '../../../models/innerOrbit/Mood';
+import { ADD_MOOD_ENTRY } from '../../../../../graphql/mutations';
+import { moodList } from '../../../../../models/innerOrbit/Mood';
 
 // Components
-import MoodComboBox from './MoodComboBox'; 
+import MoodComboBox from './MoodComboBox';
 
 // Styles
-import formStyles from '../../../../assets/css/innerOrbit/common/IOForm.module.css';
-import buttonStyles from '../../../../assets/css/innerOrbit/common/IOButton.module.css';
+import formStyles from '../../../../../assets/css/innerOrbit/common/IOForm.module.css';
+import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
+
 
 interface CreateMoodProps {
   userId: string;
