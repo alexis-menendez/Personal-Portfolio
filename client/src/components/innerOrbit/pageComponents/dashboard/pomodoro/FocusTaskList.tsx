@@ -1,7 +1,7 @@
 // File: client/src/components/innerOrbit/pageComponents/dashboard/pomodoro/FocusTaskList.tsx
 
 import React, { useState } from 'react';
-import { Task, useTaskStore } from '../../../../../../hooks/innerOrbit/useTaskStore';
+import { Task, useTaskStore } from '../../../../../hooks/innerOrbit/useTaskStore';
 import styles from '../../../../../../assets/css/innerOrbit/pageStyles/dashboard/PomodoroTimer.module.css';
 import buttonStyles from '../../../../../../assets/css/innerOrbit/common/IOButton.module.css';
 
