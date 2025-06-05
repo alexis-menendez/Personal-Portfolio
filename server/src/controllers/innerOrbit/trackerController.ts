@@ -1,7 +1,7 @@
 // File: server/src/controllers/innerOrbit/trackerController.ts
 
 import MoodEntry, { IMoodEntry, MoodInput } from '../../models/innerOrbit/Tracker.js';
-import User from '../../models/innerOrbit/User.js';
+import User from '../../models/User.js';
 import { formatMoodEntry } from '../../utils/innerOrbit/formatEntry.js';
 
 
