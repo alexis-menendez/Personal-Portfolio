@@ -1,5 +1,6 @@
 // File: client/src/components/innerOrbit/pageComponents/journal/dev/DevStars.tsx
 
+// React
 import React from 'react';
 
 // Subcomponents
