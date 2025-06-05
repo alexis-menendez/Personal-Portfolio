@@ -2,7 +2,11 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+
+// Auth
 import { useAuth } from '../../../../context/authContext';
+
+// Styles
 import styles from '../../../../assets/css/innerOrbit/layout/IONavBar.module.css';
 
 const NavBar: React.FC = () => {
