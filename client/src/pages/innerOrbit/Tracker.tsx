@@ -1,5 +1,6 @@
 // File: client/src/pages/innerOrbit/Tracker.tsx
 
+// React
 import React, { useState, useMemo } from 'react';
 import { useQuery } from '@apollo/client';
 
@@ -10,7 +11,7 @@ import { useAuth } from '../../context/authContext';
 import { GET_MOOD_ENTRIES } from '../../graphql/queries';
 import { MoodEntry } from '../../models/innerOrbit/Mood';
 
-// Components
+// Subcomponents
 import MoodCalendar from '../../components/innerOrbit/pageComponents/tracker/MoodCalendar';
 import MoodModal from '../../components/innerOrbit/pageComponents/tracker/MoodModal';
 import CreateMood from '../../components/innerOrbit/pageComponents/tracker/CreateMood';
