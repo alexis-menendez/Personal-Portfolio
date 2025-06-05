@@ -1,7 +1,10 @@
 // File: client/src/App.tsx
 
+// React
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+
+// Auth
 import { AuthProvider } from './context/authContext';
 
 // Layout
