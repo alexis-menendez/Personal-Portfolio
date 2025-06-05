@@ -1,6 +1,8 @@
 // File: client/src/components/innerOrbit/common/TransparentStars.tsx
 
 import React, { useEffect, useState } from 'react';
+
+// Styles
 import styles from '../../../assets/css/innerOrbit/common/TransparentStars.module.css';
 
 interface Star {
