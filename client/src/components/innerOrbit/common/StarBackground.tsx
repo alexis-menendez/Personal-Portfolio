@@ -1,5 +1,6 @@
 // File: client/src/components/innerOrbit/common/StarBackground.tsx
 
+// React
 import React, { useEffect, useState, ReactElement } from 'react';
 
 // Styles
