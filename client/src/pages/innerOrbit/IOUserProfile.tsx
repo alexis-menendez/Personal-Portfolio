@@ -1,6 +1,9 @@
 // File: client/src/pages/innerOrbit/IOUserProfile.tsx
 
+// React
 import React, { useState } from 'react';
+
+// Apollo
 import { useMutation } from '@apollo/client';
 
 // Auth
