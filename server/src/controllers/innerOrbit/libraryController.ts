@@ -1,7 +1,8 @@
 // File: server/src/controllers/innerOrbit/libraryController.ts
 
 import { Request, Response } from 'express';
-import cloudinary from '../../utils/innerOrbit/cloudinary';
+import cloudinary from '../../utils/innerOrbit/cloudinary.js';
+
 
 
 export const getAllVideos = async (_req: Request, res: Response): Promise<void> => {
