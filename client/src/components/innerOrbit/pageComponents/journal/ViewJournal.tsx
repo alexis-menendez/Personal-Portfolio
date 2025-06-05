@@ -1,5 +1,6 @@
 // File: client/src/components/innerOrbit/pageComponents/journal/ViewJournal.tsx
 
+// React
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
