@@ -1,11 +1,12 @@
-// file path: client/src/pages/innerOrbit/IOHome.tsx
+// File: client/src/pages/innerOrbit/IOHome.tsx
 
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 // Styles
 import buttonStyles from '../../assets/css/innerOrbit/common/IOButton.module.css';
-import styles from '../../assets/css/innerOrbit/common/IOLogo.module.css'; 
+import styles from '../../assets/css/innerOrbit/common/IOLogo.module.css';
+
 
 const Home = () => {
   return (
