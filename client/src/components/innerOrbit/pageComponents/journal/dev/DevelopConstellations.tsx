@@ -1,5 +1,6 @@
 // File: client/src/components/innerOrbit/pageComponents/journal/dev/DevelopConstellations.tsx
 
+// React
 import React, { useState } from 'react';
 
 // Subcomponents
