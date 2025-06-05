@@ -1,5 +1,6 @@
 // File: client/src/components/innerOrbit/pageComponents/dashboard/pomodoro/PomodoroTimer.tsx
 
+//React
 import React, { useState, useEffect, useRef } from 'react';
 
 //Hooks
