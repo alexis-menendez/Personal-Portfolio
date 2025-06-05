@@ -1,6 +1,8 @@
 // File: client/src/components/innerOrbit/layout/IOmainLayout/IOMainLayoutBackground.tsx
 
 import React from 'react';
+
+// Styles
 import styles from '../../../../assets/css/innerOrbit/layout/IOMainLayoutBackground.module.css';
 
 const IOMainLayoutBackground: React.FC = () => {
