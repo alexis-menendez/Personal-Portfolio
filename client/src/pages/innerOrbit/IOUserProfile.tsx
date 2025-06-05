@@ -12,8 +12,8 @@ import { UPDATE_USER } from '../../graphql/mutations';
 // Styles
 import formStyles from '../../assets/css/innerOrbit/common/IOForm.module.css';
 import buttonStyles from '../../assets/css/innerOrbit/common/IOButton.module.css';
-import pageStyles from '../../../assets/css/innerOrbit/pageStyles/dashboard/IODashboard.module.css';
-import userStyles from '../../../assets/css/innerOrbit/pageStyles/userProfile/IOUser.module.css';
+import pageStyles from '../../../../assets/css/innerOrbit/pageStyles/dashboard/IODashboard.module.css';
+import userStyles from '../../../../assets/css/innerOrbit/pageStyles/userProfile/IOUser.module.css';
 
 
 const UserProfile: React.FC = () => {
