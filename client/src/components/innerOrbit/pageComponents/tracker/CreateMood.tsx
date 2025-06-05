@@ -9,8 +9,8 @@ import { moodList } from '../../../../models/innerOrbit/Mood';
 import MoodComboBox from './MoodComboBox';
 
 // Styles
-import formStyles from '../../../../../assets/css/innerOrbit/common/IOForm.module.css';
-import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
+import formStyles from '../../../../assets/css/innerOrbit/common/IOForm.module.css';
+import buttonStyles from '../../../../assets/css/innerOrbit/common/IOButton.module.css';
 
 
 interface CreateMoodProps {
