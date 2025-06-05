@@ -1,5 +1,6 @@
 // File: client/src/components/innerOrbit/pageComponents/dashboard/weekly/MoodNotes.tsx
 
+// React
 import React, { useState } from 'react';
 
 // GraphQL
