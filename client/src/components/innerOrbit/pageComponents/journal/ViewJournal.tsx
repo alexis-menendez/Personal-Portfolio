@@ -5,11 +5,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 
 // Auth
-import { useAuth } from '../../../../../context/authContext';
+import { useAuth } from '../../../../context/authContext';
 
 // GraphQL
-import { GET_JOURNAL_ENTRIES } from '../../../../../graphql/queries';
-import { UPDATE_JOURNAL_ENTRY } from '../../../../../graphql/mutations';
+import { GET_JOURNAL_ENTRIES } from '../../../../graphql/queries';
+import { UPDATE_JOURNAL_ENTRY } from '../../../../graphql/mutations';
 
 // Components
 import StarBackground from '../../common/StarBackground';
