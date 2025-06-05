@@ -1,7 +1,8 @@
 // File: client/src/components/innerOrbit/pageComponents/library/CloudinaryWidget.tsx
 
 import React, { useEffect } from 'react';
-import buttonStyles from '../../../../assets/css/innerOrbit/common/IOButton.module.css';
+import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
+
 
 declare global {
   interface Window {
