@@ -14,10 +14,10 @@ import { GET_MOOD_ENTRIES } from '../../../../../graphql/queries';
 import MoodNotes from './MoodNotes';
 
 // Styles
-import trackerStyles from '../../../../../../assets/css/innerOrbit/pageStyles/tracker/Tracker.module.css';
-import dashboardStyles from '../../../../../../assets/css/innerOrbit/pageStyles/dashboard/IODashboard.module.css';
-import formStyles from '../../../../../../assets/css/innerOrbit/common/IOForm.module.css';
-import buttonStyles from '../../../../../../assets/css/innerOrbit/common/IOButton.module.css';
+import trackerStyles from '../../../../../assets/css/innerOrbit/pageStyles/tracker/Tracker.module.css';
+import dashboardStyles from '../../../../../assets/css/innerOrbit/pageStyles/dashboard/IODashboard.module.css';
+import formStyles from '../../../../../assets/css/innerOrbit/common/IOForm.module.css';
+import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
 
 interface MoodEntry {
   _id: string;
