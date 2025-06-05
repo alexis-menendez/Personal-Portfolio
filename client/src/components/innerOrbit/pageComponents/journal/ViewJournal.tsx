@@ -16,10 +16,10 @@ import StarBackground from '../../common/StarBackground';
 import { CONSTELLATIONS } from './ConstellationLogic';
 
 // Styles
-import styles from '../../../../../assets/css/innerOrbit/common/Stars.module.css';
-import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
-import formStyles from '../../../../../assets/css/innerOrbit/common/IOForm.module.css';
-import notebookStyles from '../../../../../assets/css/innerOrbit/pageStyles/journal/Notebook.module.css';
+import styles from '../../../../assets/css/innerOrbit/common/Stars.module.css';
+import buttonStyles from '../../../../assets/css/innerOrbit/common/IOButton.module.css';
+import formStyles from '../../../../assets/css/innerOrbit/common/IOForm.module.css';
+import notebookStyles from '../../../../assets/css/innerOrbit/pageStyles/journal/Notebook.module.css';
 
 
 const ViewJournal: React.FC = () => {
