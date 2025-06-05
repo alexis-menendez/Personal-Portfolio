@@ -5,16 +5,17 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
 // Auth
-import { AuthContext } from '../../../context/authContext';
+import { AuthContext } from '../../../../../context/authContext';
 
 // GraphQL
-import { LOGIN_USER } from '../../../graphql/mutations';
+import { LOGIN_USER } from '../../../../../graphql/mutations';
 
 // Styles
 import { motion } from 'framer-motion';
 import formStyles from '../../../../../assets/css/innerOrbit/common/IOForm.module.css';
 import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
 import logoStyles from '../../../../../assets/css/innerOrbit/common/IOLogo.module.css';
+
 
 
 const Login = () => {
