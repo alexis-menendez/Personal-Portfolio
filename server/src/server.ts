@@ -1,19 +1,25 @@
-// FILE: server/src/server.ts
+// File: server/src/server.ts
 
+// Core
 import express, { Request } from "express";
-import { ApolloServer } from "@apollo/server";
-import { expressMiddleware } from "@apollo/server/express4";
 import cors from "cors";
-import jwt from "jsonwebtoken";
-import typeDefs from "./schema/typeDefs.js";
-import resolvers from "./schema/resolvers.js";
-import { connectDB } from "./config/connections.js";
-
 import dotenv from "dotenv";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import jwt from "jsonwebtoken";
 
-import libraryRoutes from './routes/libraryRoutes.js';
+// GraphQL
+import { ApolloServer } from "@apollo/server";
+import { expressMiddleware } from "@apollo/server/express4";
+import typeDefs from "./schema/typeDefs.js";
+import resolvers from "./schema/resolvers.js";
+
+// Database
+import { connectDB } from "./config/connections.js";
+
+// Routes
+import libraryRoutes from "./routes/innerOrbit/libraryRoutes.js";
+
 
 dotenv.config();
 
