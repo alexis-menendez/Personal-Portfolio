@@ -15,8 +15,8 @@ import { CONSTELLATIONS } from './ConstellationLogic';
 import StarBackground from '../../common/StarBackground';
 
 // Styles
-import styles from '../../../../../assets/css/innerOrbit/common/Stars.module.css';
-import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
+import styles from '../../../../assets/css/innerOrbit/common/Stars.module.css';
+import buttonStyles from '../../../../assets/css/innerOrbit/common/IOButton.module.css';
 
 const Constellation: React.FC = () => {
   const { index } = useParams<{ index: string }>();
