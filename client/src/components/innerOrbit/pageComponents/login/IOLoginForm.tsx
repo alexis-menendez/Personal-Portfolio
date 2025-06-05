@@ -5,10 +5,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
 // Auth
-import { AuthContext } from '../../../../../context/authContext';
+import { AuthContext } from '../../../../context/authContext';
 
 // GraphQL
-import { LOGIN_USER } from '../../../../../graphql/mutations';
+import { LOGIN_USER } from '../../../../graphql/mutations';
 
 // Styles
 import { motion } from 'framer-motion';
