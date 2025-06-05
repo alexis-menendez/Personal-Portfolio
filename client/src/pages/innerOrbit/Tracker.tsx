@@ -19,6 +19,7 @@ import CreateMood from '../../components/innerOrbit/pageComponents/tracker/Creat
 import styles from '../../assets/css/innerOrbit/pageStyles/tracker/Tracker.module.css';
 import buttonStyles from '../../assets/css/innerOrbit/common/IOButton.module.css';
 
+
 const Tracker: React.FC = () => {
   const { user } = useAuth();
   const [showCreate, setShowCreate] = useState(false);
