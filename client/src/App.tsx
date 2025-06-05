@@ -10,7 +10,7 @@ import ProtectedRoute from './components/ProtectedRoute';
     // innerOrbit Layouts
     import IOLoginLayout from './components/innerOrbit/layout/IOLoginLayout';
     import IOMainLayout from './components/innerOrbit/layout/IOmainLayout/IOMainLayout';
-    import IOJournalLayout from './components/innerOrbit/layout/IOJournalLayout';
+    import IOJournalLayout from './components/innerOrbit/layout/JournalLayout';
 
 // Pages
 // TODO: import Home from './pages/portfolio/Home';
@@ -40,8 +40,11 @@ import ProtectedRoute from './components/ProtectedRoute';
     import ViewJournal from './components/innerOrbit/pageComponents/journal/ViewJournal'; 
 
 // Development components (for internal use)
-import DevelopConstellations from './components/innerOrbit/pageComponents/journal/dev/DevelopConstellations'; 
-import DevStars from './components/innerOrbit/pageComponents/journal/dev/DevStars'; 
+
+    // innerOrbit Development Components (for internal use)
+    import DevelopConstellations from './components/innerOrbit/pageComponents/journal/dev/DevelopConstellations'; 
+    import DevStars from './components/innerOrbit/pageComponents/journal/dev/DevStars'; 
+
 
 const App: React.FC = () => {
   return (
