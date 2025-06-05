@@ -1,5 +1,6 @@
 // File: client/src/components/innerOrbit/layout/JournalLayout.tsx
 
+// React
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
