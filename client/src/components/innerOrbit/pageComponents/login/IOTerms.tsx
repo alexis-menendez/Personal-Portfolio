@@ -1,5 +1,6 @@
 // File: client/src/components/innerOrbit/pageComponents/login/IOTerms.tsx
 
+// React
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
