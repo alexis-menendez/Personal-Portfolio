@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+
+// Subcomponents
 import StarBackground from '../common/StarBackground';
 import NavBar from './nav/IONavBar';
 
