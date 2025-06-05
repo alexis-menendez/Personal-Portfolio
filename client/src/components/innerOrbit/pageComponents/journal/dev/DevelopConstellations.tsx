@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-// Components
+// Subcomponents
 import { CONSTELLATIONS, StarPoint, Constellation } from '../ConstellationLogic';
 import ShootingStar from '../../../common/ShootingStar';
 
