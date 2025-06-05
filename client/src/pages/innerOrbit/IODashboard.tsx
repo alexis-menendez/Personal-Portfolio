@@ -8,7 +8,7 @@ import PomodoroTimer from "../../components/innerOrbit/pageComponents/dashboard/
 import FocusTaskList from "../../components/innerOrbit/pageComponents/dashboard/pomodoro/FocusTaskList";
 
 // Styles
-import pageStyles from "../assets/css/innerOrbit/pageStyles/dashboard/IODashboard.module.css";
+import pageStyles from "../../assets/css/innerOrbit/pageStyles/dashboard/IODashboard.module.css";
 
 
 type MoodEntry = {
