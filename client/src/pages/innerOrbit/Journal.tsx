@@ -1,5 +1,6 @@
 // File: client/src/pages/innerOrbit/Journal.tsx
 
+// React
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 
