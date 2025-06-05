@@ -1,7 +1,10 @@
 // File: client/src/components/innerOrbit/pageComponents/login/IORegisterForm.tsx
 
+// React
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+
+// Apollo
 import { useMutation } from '@apollo/client';
 
 // Auth
