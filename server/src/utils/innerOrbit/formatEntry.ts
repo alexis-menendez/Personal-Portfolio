@@ -1,6 +1,6 @@
 // File: server/src/utils/innerOrbit/formatEntry.ts
 
-import { IMoodEntry } from '../models/Tracker.js';
+import { IMoodEntry } from '../../models/innerOrbit/Tracker.js';
 
 export const formatMoodEntry = (entry: any): IMoodEntry => {
   const obj = entry.toObject();
