@@ -1,14 +1,14 @@
 // File: server/src/schema/resolvers.ts
 
-
 import { IResolvers } from "@graphql-tools/utils";
 import bcrypt from "bcrypt";
 import User from "../models/User.js";
 import { signToken } from "../utils/auth.js";
 import { JournalEntry, MoodEntry } from "../models/index.js";
-import { createJournalEntry } from "../controllers/journalController.js";
-import DateScalar from './scalars/DateScalar.js';
-import { addMoodEntry as addMoodEntryController } from '../controllers/trackerController.js';
+import { createJournalEntry } from "../controllers/innerOrbit/journalController.js";
+import DateScalar from "./scalars/DateScalar.js";
+import { addMoodEntry as addMoodEntryController } from "../controllers/innerOrbit/trackerController.js";
+
 
 const resolvers: IResolvers = {
     Date: DateScalar,
