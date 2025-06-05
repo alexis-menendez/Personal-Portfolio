@@ -4,11 +4,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 
+// Apollo
+import { useQuery, useMutation } from '@apollo/client';
+
 // Auth
 import { useAuth } from '../../context/authContext';
 
 // GraphQL
-import { useQuery, useMutation } from '@apollo/client';
 import { GET_JOURNAL_ENTRIES } from '../../graphql/queries';
 import { CREATE_JOURNAL } from '../../graphql/mutations';
 import {
@@ -18,7 +20,7 @@ import {
   Constellation,
 } from '../../components/innerOrbit/pageComponents/journal/ConstellationLogic';
 
-// Components
+// Subomponents
 import StarBackground from '../../components/innerOrbit/common/StarBackground';
 import CreateJournal from '../../components/innerOrbit/pageComponents/journal/CreateJournal';
 
