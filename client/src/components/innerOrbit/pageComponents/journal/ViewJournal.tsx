@@ -5,21 +5,22 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 
 // Auth
-import { useAuth } from '../../../context/authContext';
+import { useAuth } from '../../../../../context/authContext';
 
 // GraphQL
-import { GET_JOURNAL_ENTRIES } from '../../../graphql/queries';
-import { UPDATE_JOURNAL_ENTRY } from '../../../graphql/mutations';
+import { GET_JOURNAL_ENTRIES } from '../../../../../graphql/queries';
+import { UPDATE_JOURNAL_ENTRY } from '../../../../../graphql/mutations';
 
 // Components
-import StarBackground from '../common/StarBackground';
+import StarBackground from '../../common/StarBackground';
 import { CONSTELLATIONS } from './ConstellationLogic';
 
 // Styles
-import styles from '../../../../assets/css/innerOrbit/common/Stars.module.css';
-import buttonStyles from '../../../../assets/css/innerOrbit/common/IOButton.module.css';
-import formStyles from '../../../../assets/css/innerOrbit/common/IOForm.module.css';
-import notebookStyles from '../../../../assets/css/innerOrbit/pageStyles/journal/Notebook.module.css';
+import styles from '../../../../../assets/css/innerOrbit/common/Stars.module.css';
+import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
+import formStyles from '../../../../../assets/css/innerOrbit/common/IOForm.module.css';
+import notebookStyles from '../../../../../assets/css/innerOrbit/pageStyles/journal/Notebook.module.css';
+
 
 const ViewJournal: React.FC = () => {
   const { entryId } = useParams<{ entryId: string }>();
