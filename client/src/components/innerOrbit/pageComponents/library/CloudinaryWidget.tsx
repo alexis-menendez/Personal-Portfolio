@@ -1,5 +1,6 @@
 // File: client/src/components/innerOrbit/pageComponents/library/CloudinaryWidget.tsx
 
+// React
 import React, { useEffect } from 'react';
 
 // Styles
