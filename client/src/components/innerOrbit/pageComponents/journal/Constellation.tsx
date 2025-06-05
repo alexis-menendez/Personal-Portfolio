@@ -1,7 +1,10 @@
 // File: client/src/components/innerOrbit/pageComponents/journal/Constellation.tsx
 
+// React
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+
+// Apollo
 import { useQuery } from '@apollo/client';
 
 // Auth
@@ -10,7 +13,7 @@ import { useAuth } from '../../../../context/authContext';
 // GraphQL
 import { GET_JOURNAL_ENTRIES } from '../../../../graphql/queries';
 
-// Components
+// Subcomponents
 import { CONSTELLATIONS } from './ConstellationLogic';
 import StarBackground from '../../common/StarBackground';
 

@@ -1,5 +1,6 @@
 // File: client/src/components/innerOrbit/pageComponents/dashboard/pomodoro/TimerSettings.tsx
 
+// React
 import React from 'react';
 
 // Styles

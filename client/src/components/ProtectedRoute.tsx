@@ -1,7 +1,10 @@
 // File: client/src/components/ProtectedRoute.tsx
 
+// React
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+
+// Auth
 import { useAuth } from '../context/authContext';
 
 interface Props {

@@ -1,7 +1,10 @@
 // File: client/src/components/innerOrbit/pageComponents/journal/ViewJournal.tsx
 
+// React
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+
+// Apollo
 import { useQuery, useMutation } from '@apollo/client';
 
 // Auth
@@ -11,7 +14,7 @@ import { useAuth } from '../../../../context/authContext';
 import { GET_JOURNAL_ENTRIES } from '../../../../graphql/queries';
 import { UPDATE_JOURNAL_ENTRY } from '../../../../graphql/mutations';
 
-// Components
+// Subcomponents
 import StarBackground from '../../common/StarBackground';
 import { CONSTELLATIONS } from './ConstellationLogic';
 

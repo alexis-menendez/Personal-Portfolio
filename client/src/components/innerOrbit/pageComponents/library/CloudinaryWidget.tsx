@@ -1,6 +1,9 @@
 // File: client/src/components/innerOrbit/pageComponents/library/CloudinaryWidget.tsx
 
+// React
 import React, { useEffect } from 'react';
+
+// Styles
 import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
 
 

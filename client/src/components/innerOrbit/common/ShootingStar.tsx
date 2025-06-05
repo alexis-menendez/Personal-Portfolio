@@ -1,8 +1,12 @@
 // File: cliient/src/components/innerOrbit/common/ShootingStar.tsx
 
+// React
 import React, { useEffect, useState, ReactElement } from 'react';
+
+// Styles
 import styles from '../../../assets/css/innerOrbit/common/ShootingStar.module.css';
 
+// Subcomponents
 interface ShootingStarProps {
   frequency?: number;
   maxStars?: number;

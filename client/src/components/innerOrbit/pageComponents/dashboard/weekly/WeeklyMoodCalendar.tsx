@@ -1,6 +1,9 @@
 // File: client/src/components/innerOrbit/pageComponents/dashboard/weekly/WeeklyMoodCalendar.tsx
 
+// React
 import React, { useMemo, useState } from 'react';
+
+// GraphQL
 import { useQuery, useMutation } from '@apollo/client';
 
 // Auth

@@ -1,6 +1,9 @@
 // File: client/src/components/innerOrbit/pageComponents/tracker/MoodComboBox.tsx
 
+// React
 import React, { useState, useRef, useEffect } from 'react';
+
+// Styles
 import formStyles from '../../../../assets/css/innerOrbit/common/IOForm.module.css';
 
 

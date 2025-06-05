@@ -1,8 +1,9 @@
 // File: client/src/components/innerOrbit/pageComponents/journal/dev/DevelopConstellations.tsx
 
+// React
 import React, { useState } from 'react';
 
-// Components
+// Subcomponents
 import { CONSTELLATIONS, StarPoint, Constellation } from '../ConstellationLogic';
 import ShootingStar from '../../../common/ShootingStar';
 

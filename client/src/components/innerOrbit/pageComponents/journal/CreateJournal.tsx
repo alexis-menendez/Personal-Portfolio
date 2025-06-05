@@ -1,5 +1,6 @@
 // File: client/src/components/innerOrbit/pageComponents/journal/CreateJournal.tsx
 
+// React
 import React, { useState } from 'react';
 
 // Styles

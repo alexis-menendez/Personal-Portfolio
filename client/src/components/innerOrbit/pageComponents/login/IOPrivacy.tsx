@@ -1,9 +1,10 @@
 // File: client/src/components/innerOrbit/pageComponents/login/IOPrivacy.tsx
 
+// React
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Components
+// Subcomponents
 import TransparentStars from '../../common/TransparentStars';
 import ShootingStar from '../../common/ShootingStar';
 

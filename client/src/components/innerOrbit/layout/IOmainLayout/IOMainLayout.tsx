@@ -1,9 +1,10 @@
 // File: client/src/components/innerOrbit/layout/IOmainLayout/IOMainLayout.tsx
 
+// React
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-// Components
+// Subcomponents
 import StarBackground from '../../common/StarBackground';
 import IOMainLayoutBackground from './IOMainLayoutBackground';
 import NavBar from '../nav/IONavBar';

@@ -1,7 +1,12 @@
 // File: client/src/components/innerOrbit/layout/nav/IOFooter.tsx
 
+// React
 import React from 'react';
+
+// Auth
 import { useAuth } from '../../../../context/authContext';
+
+// Styles
 import styles from '../../../../assets/css/innerOrbit/layout/IONavBar.module.css';
 
 const Footer: React.FC = () => {
