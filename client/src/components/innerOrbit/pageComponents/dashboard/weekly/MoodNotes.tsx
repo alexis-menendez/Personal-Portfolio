@@ -2,9 +2,11 @@
 
 import React, { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
-import styles from '../../../../../../assets/css/innerOrbit/pageStyles/tracker/Tracker.module.css';
-import buttonStyles from '../../../../../../assets/css/innerOrbit/common/IOButton.module.css';
-import formStyles from '../../../../../../assets/css/innerOrbit/common/IOForm.module.css';
+
+// Styles
+import styles from '../../../../../assets/css/innerOrbit/pageStyles/tracker/Tracker.module.css';
+import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
+import formStyles from '../../../../../assets/css/innerOrbit/common/IOForm.module.css';
 
 export const UPDATE_MOOD_NOTE = gql`
   mutation UpdateMoodNote($_id: ID!, $note: String!) {
