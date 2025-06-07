@@ -56,7 +56,7 @@ const App: React.FC = () => {
       <Routes>
         {/* Routes using PortfolioLayout */}
         <Route element={<PortfolioLayout />}>
-          <Route path="/" element={<Home />} />
+          <Route index element={<Home />} />
           {/* TODO:
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/about" element={<About />} />
@@ -67,25 +67,26 @@ const App: React.FC = () => {
         {/* Routes using IOLoginLayout */}
         <Route element={<IOLoginLayout />}>
           <Route path="/io-home" element={<IOHome />} />
-            <Route path="/io-login" element={<IOLogin />} />
-            <Route path="/io-register" element={<IORegister />} />
-              <Route path="/io-terms" element={<IOTerms />} />
-              <Route path="/io-privacy" element={<IOPrivacy />} />
+          <Route path="/io-login" element={<IOLogin />} />
+          <Route path="/io-register" element={<IORegister />} />
+          <Route path="/io-terms" element={<IOTerms />} />
+          <Route path="/io-privacy" element={<IOPrivacy />} />
         </Route>
 
         {/* Routes using IOMainLayout */}
         <Route element={<IOMainLayout />}>
-          <Route path="/io-dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}/>
-            <Route path="/tracker" element={<ProtectedRoute><Tracker /></ProtectedRoute>}/>
-            <Route path="/library"element={<ProtectedRoute><Library /></ProtectedRoute>}/>
-            <Route path="/io-account" element={<ProtectedRoute><UserProfile /></ProtectedRoute>}/>
-              <Route path="/dev-constellations" element={<DevelopConstellations />} /></Route>
-              <Route path="/dev-stars" element={<DevStars />} />
+          <Route path="/io-dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/tracker" element={<ProtectedRoute><Tracker /></ProtectedRoute>} />
+          <Route path="/library" element={<ProtectedRoute><Library /></ProtectedRoute>} />
+          <Route path="/io-account" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
+          <Route path="/dev-constellations" element={<DevelopConstellations />} />
+          <Route path="/dev-stars" element={<DevStars />} />
+        </Route>
 
         {/* Journal routes using IOJournalLayout */}
         <Route path="/journal" element={<ProtectedRoute><IOJournalLayout /></ProtectedRoute>}><Route index element={<Journal />} />
           <Route path="constellation/:index" element={<Constellation />} />
-            <Route path="entry/:entryId" element={<ViewJournal />} />
+          <Route path="entry/:entryId" element={<ViewJournal />} />
         </Route>
       </Routes>
     </AuthProvider>
