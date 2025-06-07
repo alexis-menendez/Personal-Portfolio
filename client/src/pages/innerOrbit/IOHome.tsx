@@ -9,7 +9,7 @@ import buttonStyles from '../../assets/css/innerOrbit/common/IOButton.module.css
 import styles from '../../assets/css/innerOrbit/common/IOLogo.module.css';
 
 
-const Home = () => {
+const IOHome = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen w-full text-center gap-6 text-white">
       <h1 className={styles.title}>
@@ -29,6 +29,6 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default IOHome;
 
 

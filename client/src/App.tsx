@@ -9,6 +9,7 @@ import { AuthProvider } from './context/authContext';
 
 // Layout
 import ProtectedRoute from './components/ProtectedRoute';
+import PortfolioLayout from './components/portfolio/layout/PortfolioLayout';
 
     // innerOrbit Layouts
     import IOLoginLayout from './components/innerOrbit/layout/IOLoginLayout';
@@ -16,14 +17,14 @@ import ProtectedRoute from './components/ProtectedRoute';
     import IOJournalLayout from './components/innerOrbit/layout/IOJournalLayout';
 
 // Pages
-// TODO: import Home from './pages/portfolio/Home';
+import Home from './pages/portfolio/Home';
 // TODO: import About from './pages/portfolio/About';
 // TODO: import Contact from './pages/portfolio/Contact';
 // TODO: import Portfolio from './pages/portfolio/Portfolio';
 // TODO: import Resume from './pages/portfolio/Resume';
 
     // innerOrbit Pages
-    import Home from './pages/innerOrbit/IOHome';
+    import IOHome from './pages/innerOrbit/IOHome';
     import Dashboard from './pages/innerOrbit/IODashboard';
     import Journal from './pages/innerOrbit/Journal';
     import Tracker from './pages/innerOrbit/Tracker';
@@ -53,9 +54,19 @@ const App: React.FC = () => {
   return (
     <AuthProvider>
       <Routes>
+        {/* Routes using PortfolioLayout */}
+        <Route element={<PortfolioLayout />}>
+          <Route path="/" element={<Home />} />
+          {/* TODO:
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/resume" element={<Resume />} /> */}
+        </Route>
+
         {/* Routes using IOLoginLayout */}
         <Route element={<IOLoginLayout />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/io-home" element={<IOHome />} />
             <Route path="/io-login" element={<IOLogin />} />
             <Route path="/io-register" element={<IORegister />} />
               <Route path="/io-terms" element={<IOTerms />} />
