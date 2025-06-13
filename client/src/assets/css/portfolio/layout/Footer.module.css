@@ -1,0 +1,22 @@
+/* File: client/src/assets/css/portfolio/layout/Footer.module.css */
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
+  background-color: #fdf6ec;
+  font-size: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.footerIcon {
+  font-size: 1.5rem;
+  color: #222;
+  text-decoration: none;
+}
+
+.footerIcon:hover {
+  color: #2e5902;
+}

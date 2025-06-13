@@ -1,0 +1,34 @@
+/* File: client/src/assets/css/portfolio/layout/ShortPortfolioLayout.module.css */
+ 
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Georgia', serif;
+  color: #222;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.container::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url('/assets/portfolio/images/backgrounds/HomeBackground.svg') no-repeat center;
+  background-size: cover;
+  z-index: -1; /* Above stars, below content */
+}
+
+.starLayer {
+  position: fixed;
+  inset: 0;
+  z-index: -2; /* Behind the background image */
+  pointer-events: none;
+}
+
+.main {
+  flex-grow: 1;
+  padding: 2rem 4rem;
+  padding-bottom: 8rem; /* add extra space to push footer below background image */
+}

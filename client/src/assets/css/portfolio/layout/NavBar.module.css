@@ -1,0 +1,33 @@
+/* File: client/src/assets/css/portfolio/layout/NavBar.module.css */
+
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+  padding: 1.5rem 2rem;
+  font-weight: bold;
+}
+
+.navbar a {
+  color: #fdf6ec;
+  text-decoration: none;
+  position: relative;
+}
+
+.navbar a::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #fdf6ec;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: left;
+}
+
+.navbar a:hover::after,
+.navbar a:focus::after {
+  transform: scaleX(1);
+}

@@ -1,0 +1,63 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Georgia', serif;
+  color: #222;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.container::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url('/assets/portfolio/images/backgrounds/HomeBackground.svg') no-repeat center;
+  background-size: cover;
+  z-index: -1; /* Above stars, below content */
+}
+
+.starLayer {
+  position: fixed;
+  inset: 0;
+  z-index: -2; /* Behind the background image */
+  pointer-events: none;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+  padding: 2rem 4rem;
+}
+
+.textSection {
+  max-width: 40%;
+}
+
+.heading {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.paragraph {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.resumeButton {
+  background-color: #191970;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.resumeButton:hover {
+  background-color: #0f135e;
+}
