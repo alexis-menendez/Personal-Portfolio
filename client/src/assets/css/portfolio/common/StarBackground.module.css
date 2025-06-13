@@ -1,0 +1,40 @@
+/* File: client/src/assets/css/portfolio/common/StarBackground.module.css */
+
+.star-wrapper {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: -2;
+}
+
+.background-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, #0a0029, #030124, black);
+  z-index: -3;
+}
+
+.star-background {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  box-shadow: 0 0 6px white, 0 0 12px white;
+  animation: twinkle 2s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+}

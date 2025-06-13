@@ -18,10 +18,8 @@ import PortfolioLayout from './components/portfolio/layout/PortfolioLayout';
 
 // Pages
 import Home from './pages/portfolio/Home';
-// TODO: import About from './pages/portfolio/About';
 // TODO: import Contact from './pages/portfolio/Contact';
-// TODO: import Portfolio from './pages/portfolio/Portfolio';
-// TODO: import Resume from './pages/portfolio/Resume';
+// TODO: import Portfolio from './pages/portfolio/Projects';
 
     // innerOrbit Pages
     import IOHome from './pages/innerOrbit/IOHome';
@@ -32,8 +30,8 @@ import Home from './pages/portfolio/Home';
     import UserProfile from './pages/innerOrbit/IOUserProfile';
 
 // Components
-// TODO: import Navigation from './components/portfolio/NavBar';
-// TODO: import Footer from './components/portfolio/Footer';
+// TODO: import Navigation from './components/portfolio/layout/NavBar';
+// TODO: import Footer from './components/portfolio/layout/Footer';
 
     // innerOrbit Components
     import IOLogin from './components/innerOrbit/pageComponents/login/IOLoginForm';
@@ -44,7 +42,6 @@ import Home from './pages/portfolio/Home';
     import ViewJournal from './components/innerOrbit/pageComponents/journal/ViewJournal'; 
 
 // Development components (for internal use)
-
     // innerOrbit Development Components (for internal use)
     import DevelopConstellations from './components/innerOrbit/pageComponents/journal/dev/DevelopConstellations'; 
     import DevStars from './components/innerOrbit/pageComponents/journal/dev/DevStars'; 
@@ -56,36 +53,35 @@ const App: React.FC = () => {
       <Routes>
         {/* Routes using PortfolioLayout */}
         <Route element={<PortfolioLayout />}>
-          <Route path="/" element={<Home />} />
+          <Route index element={<Home />} />
           {/* TODO:
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/resume" element={<Resume />} /> */}
+            <Route path="/resume" element={<Projects />} /> */}
         </Route>
 
         {/* Routes using IOLoginLayout */}
         <Route element={<IOLoginLayout />}>
           <Route path="/io-home" element={<IOHome />} />
-            <Route path="/io-login" element={<IOLogin />} />
-            <Route path="/io-register" element={<IORegister />} />
-              <Route path="/io-terms" element={<IOTerms />} />
-              <Route path="/io-privacy" element={<IOPrivacy />} />
+          <Route path="/io-login" element={<IOLogin />} />
+          <Route path="/io-register" element={<IORegister />} />
+          <Route path="/io-terms" element={<IOTerms />} />
+          <Route path="/io-privacy" element={<IOPrivacy />} />
         </Route>
 
         {/* Routes using IOMainLayout */}
         <Route element={<IOMainLayout />}>
-          <Route path="/io-dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}/>
-            <Route path="/tracker" element={<ProtectedRoute><Tracker /></ProtectedRoute>}/>
-            <Route path="/library"element={<ProtectedRoute><Library /></ProtectedRoute>}/>
-            <Route path="/io-account" element={<ProtectedRoute><UserProfile /></ProtectedRoute>}/>
-              <Route path="/dev-constellations" element={<DevelopConstellations />} /></Route>
-              <Route path="/dev-stars" element={<DevStars />} />
+          <Route path="/io-dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/tracker" element={<ProtectedRoute><Tracker /></ProtectedRoute>} />
+          <Route path="/library" element={<ProtectedRoute><Library /></ProtectedRoute>} />
+          <Route path="/io-account" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
+          <Route path="/dev-constellations" element={<DevelopConstellations />} />
+          <Route path="/dev-stars" element={<DevStars />} />
+        </Route>
 
         {/* Journal routes using IOJournalLayout */}
         <Route path="/journal" element={<ProtectedRoute><IOJournalLayout /></ProtectedRoute>}><Route index element={<Journal />} />
           <Route path="constellation/:index" element={<Constellation />} />
-            <Route path="entry/:entryId" element={<ViewJournal />} />
+          <Route path="entry/:entryId" element={<ViewJournal />} />
         </Route>
       </Routes>
     </AuthProvider>
