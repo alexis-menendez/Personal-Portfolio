@@ -13,7 +13,7 @@
   content: '';
   position: fixed;
   inset: 0;
-  background: url('/assets/portfolio/images/backgrounds/ShortBackgroundWithLogoV2.svg') no-repeat center;
+  background: url('/assets/portfolio/images/backgrounds/LongBackgroundWithLogoV1.svg') no-repeat center;
   background-size: cover;
   z-index: -1; /* Above stars, below content */
 }

@@ -19,8 +19,8 @@
   width: 100%;
   height: auto;
   aspect-ratio: 1 / 1.5; /* adjust based on actual SVG aspect ratio */
-  background: url('/assets/portfolio/images/backgrounds/ShortBackgroundWithLogoV2.svg') no-repeat top center;
-  background-size: contain;
+  background: url('/assets/portfolio/images/backgrounds/LongBackgroundWithLogoV1.svg') no-repeat top center;
+  background-size: cover;
   background-repeat: no-repeat;
   z-index: -1;
 }
