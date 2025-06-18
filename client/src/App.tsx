@@ -9,7 +9,6 @@ import { AuthProvider } from './context/authContext';
 
 // Layout
 import ProtectedRoute from './components/ProtectedRoute';
-import PortfolioLayout from './components/portfolio/layout/PortfolioLayout';
 import ShortPortfolioLayout from './components/portfolio/layout/ShortPortfolioLayout';
 import LongPortfolioLayout from './components/portfolio/layout/LongPortfolioLayout';
 
@@ -58,19 +57,21 @@ const App: React.FC = () => {
   return (
     <AuthProvider>
       <Routes>
-        {/* Routes using PortfolioLayout */}
-        <Route element={<PortfolioLayout />}>
+        {/* Routes using ShortPortfolioLayout */}
+        <Route element={<ShortPortfolioLayout />}>
           <Route index element={<Home />} />
-          <Route path="/projects" element={<Projects />} /> 
           <Route path="/innerOrbit" element={<InnerOrbit />} />
-          {/* TODO: <Route path="/dont-die" element={<dont-die />} /> */}
           <Route path="/lattice" element={<Lattice />} />
           <Route path="/solarium" element={<Solarium />} />
           <Route path="/runestone" element={<Runestone />} />
-          {/* TODO: <Route path="/taskadelic" element={<taskadelic />} /> */}
           <Route path="/contact" element={<Contact />} />
         </Route>
 
+        {/* Routes using LongPortfolioLayout */}
+        <Route element={<LongPortfolioLayout />}>
+          <Route path="/projects" element={<Projects />} />
+        </Route>
+        
         {/* Routes using IOLoginLayout */}
         <Route element={<IOLoginLayout />}>
           <Route path="/io-home" element={<IOHome />} />
@@ -90,8 +91,9 @@ const App: React.FC = () => {
           <Route path="/dev-stars" element={<DevStars />} />
         </Route>
 
-        {/* Journal routes using IOJournalLayout */}
-        <Route path="/journal" element={<ProtectedRoute><IOJournalLayout /></ProtectedRoute>}><Route index element={<Journal />} />
+        {/* Routes using IOJournalLayout */}
+        <Route path="/journal" element={<ProtectedRoute><IOJournalLayout /></ProtectedRoute>}>
+          <Route index element={<Journal />} />
           <Route path="constellation/:index" element={<Constellation />} />
           <Route path="entry/:entryId" element={<ViewJournal />} />
         </Route>

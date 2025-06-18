@@ -1,5 +1,7 @@
+// File: Client/src/components/portfolio/layout/ShortPortfolioLayout.tsx
+
 import React, { ReactNode } from 'react';
-import styles from '../../../assets/css/portfolio/layout/ShortPortfolioLayout.module.css'; 
+import styles from '../../../assets/css/portfolio/layout/PortfolioLayout.module.css'; 
 import StarBackground from '../common/StarBackground';
 import ShootingStar from '../common/ShootingStar';
 import NavBar from './NavBar';
