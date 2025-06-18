@@ -19,6 +19,7 @@ import PortfolioLayout from './components/portfolio/layout/PortfolioLayout';
 // Pages
 import Home from './pages/portfolio/Home';
 import Projects from './pages/portfolio/Projects';
+import InnerOrbit from './pages/portfolio/InnerOrbit';
 // TODO: import Contact from './pages/portfolio/Contact';
 
     // innerOrbit Pages
@@ -55,6 +56,7 @@ const App: React.FC = () => {
         <Route element={<PortfolioLayout />}>
           <Route index element={<Home />} />
           <Route path="/projects" element={<Projects />} /> 
+          <Route path="/innerOrbit" element={<InnerOrbit />} />
           {/* TODO:
             <Route path="/contact" element={<Contact />} />*/}
         </Route>
