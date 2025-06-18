@@ -2,6 +2,7 @@
 
 .footer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 2rem;
@@ -21,4 +22,36 @@
 
 .footerIcon:hover {
   color: #2e5902;
+}
+
+.iconImage {
+  width: 2rem;
+  height: 2rem;
+  transition: transform 0.2s ease;
+}
+
+.iconImage:hover {
+  transform: scale(1.1);
+}
+
+.iconRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.footerLine {
+  width: 100%;
+  max-width: 300px;
+  height: 2px;
+  background-color: #992800;
+  margin: 0.15rem auto 0.15rem auto;
+}
+
+.footerText {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 100;
+  font-size: 0.85rem;
+  color: #222;
 }

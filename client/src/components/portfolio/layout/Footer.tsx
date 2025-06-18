@@ -8,21 +8,27 @@ const Footer: React.FC = () => {
   const navigate = useNavigate();
 
   const handleEmailClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // Try to open the default mail client
     window.location.href = 'mailto:menendez.alex.d@gmail.com';
-
-    // Set a fallback in case mail client fails to open
     setTimeout(() => {
       navigate('/contact');
-    }, 1500); // Wait 1.5 seconds before fallback
+    }, 1500);
   };
 
   return (
     <footer className={styles.footer}>
-      <a href="https://github.com/alexis-menendez" className={styles.footerIcon}>🐱</a>
-      <a href="https://www.linkedin.com/in/alex-d-menendez/" className={styles.footerIcon}>in</a>
-      <a href="#" onClick={handleEmailClick} className={styles.footerIcon}>✉️</a>
-      <span>Alex Menendez 2025</span>
+      <div className={styles.iconRow}>
+        <a href="#" onClick={handleEmailClick} className={styles.footerIcon}>
+          <img src="/assets/portfolio/icons/footer/EmailFooter.png" alt="Email" className={styles.iconImage} />
+        </a>
+        <a href="https://github.com/alexis-menendez" className={styles.footerIcon} target="_blank" rel="noopener noreferrer">
+          <img src="/assets/portfolio/icons/footer/GitFooter.png" alt="GitHub" className={styles.iconImage} />
+        </a>
+        <a href="https://www.linkedin.com/in/alex-d-menendez/" className={styles.footerIcon} target="_blank" rel="noopener noreferrer">
+          <img src="/assets/portfolio/icons/footer/LinkedinFooter.png" alt="LinkedIn" className={styles.iconImage} />
+        </a>
+      </div>
+      <div className={styles.footerLine}></div>
+      <span className={styles.footerText}>Alex Menendez 2025</span>
     </footer>
   );
 };
