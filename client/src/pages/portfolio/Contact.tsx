@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import ShortPortfolioLayout from '../../components/portfolio/layout/ShortPortfolioLayout';
 import styles from '../../assets/css/portfolio/pageStyles/Home.module.css';
-import formStyles from '../../assets/css/portfolio/pageStyles/ContactForm.module.css';
+import formStyles from '../../assets/css/portfolio/common/Form.module.css';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
