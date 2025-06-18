@@ -10,6 +10,8 @@ import { AuthProvider } from './context/authContext';
 // Layout
 import ProtectedRoute from './components/ProtectedRoute';
 import PortfolioLayout from './components/portfolio/layout/PortfolioLayout';
+import ShortPortfolioLayout from './components/portfolio/layout/ShortPortfolioLayout';
+import LongPortfolioLayout from './components/portfolio/layout/LongPortfolioLayout';
 
     // innerOrbit Layouts
     import IOLoginLayout from './components/innerOrbit/layout/IOLoginLayout';
@@ -34,8 +36,9 @@ import Contact from './pages/portfolio/Contact';
     import UserProfile from './pages/innerOrbit/IOUserProfile';
 
 // Components
-// TODO: import Navigation from './components/portfolio/layout/NavBar';
-// TODO: import Footer from './components/portfolio/layout/Footer';
+import NavBar from './components/portfolio/layout/NavBar';
+import Footer from './components/portfolio/layout/Footer';
+import FooterWhite from './components/portfolio/layout/FooterWhite';
 
     // innerOrbit Components
     import IOLogin from './components/innerOrbit/pageComponents/login/IOLoginForm';
