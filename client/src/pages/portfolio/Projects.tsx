@@ -34,33 +34,39 @@ const projects = [
 const Projects: React.FC = () => {
   return (
     <ShortPortfolioLayout>
-      <h1 className={styles.heading}>Projects</h1>
-      <div className={styles.projectGrid}>
-        {projects.map((project, index) => {
-          const isImageLeft = project.name === "InnerOrbit" || project.name === "The Solarium";
-          return (
-            <a key={index} href={project.link} className={styles.card}>
-              {isImageLeft && (
-                <div className={styles.imageBox}>
-                  <img src={project.image} alt={`${project.name} icon`} />
-                </div>
-              )}
+    <div className={styles.textSection}>
+        <h1 className={styles.heading}>Projects</h1>
+        <p className={styles.paragraph}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+    </div>
 
-              <div className={isImageLeft ? styles.rightText : styles.leftText}>
+    <div className={styles.projectGrid}>
+        {projects.map((project, index) => {
+        const isImageLeft = project.name === "InnerOrbit" || project.name === "The Solarium";
+        return (
+            <a key={index} href={project.link} className={styles.card}>
+            {isImageLeft && (
+                <div className={styles.imageBox}>
+                <img src={project.image} alt={`${project.name} icon`} />
+                </div>
+            )}
+
+            <div className={isImageLeft ? styles.rightText : styles.leftText}>
                 <h2>{project.name}</h2>
                 <p>{project.description}</p>
                 <button className={styles.button}>View Project</button>
-              </div>
+            </div>
 
-              {!isImageLeft && (
+            {!isImageLeft && (
                 <div className={styles.imageBox}>
-                  <img src={project.image} alt={`${project.name} icon`} />
+                <img src={project.image} alt={`${project.name} icon`} />
                 </div>
-              )}
+            )}
             </a>
-          );
+        );
         })}
-      </div>
+    </div>
     </ShortPortfolioLayout>
   );
 };
