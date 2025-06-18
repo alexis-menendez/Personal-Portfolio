@@ -7,11 +7,11 @@ import ShootingStar from '../common/ShootingStar';
 import NavBar from './NavBar';
 import FooterWhite from './FooterWhite';
 
-interface ShortPortfolioLayoutProps {
+interface LongPortfolioLayoutProps {
   children: ReactNode;
 }
 
-const ShortPortfolioLayout: React.FC<ShortPortfolioLayoutProps> = ({ children }) => {
+const LongPortfolioLayout: React.FC<LongPortfolioLayoutProps> = ({ children }) => {
   return (
     <div className={styles.container}>
       <div className={styles.starLayer}>
@@ -28,4 +28,4 @@ const ShortPortfolioLayout: React.FC<ShortPortfolioLayoutProps> = ({ children })
   );
 };
 
-export default ShortPortfolioLayout;
+export default LongPortfolioLayout;

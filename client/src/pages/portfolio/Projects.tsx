@@ -1,7 +1,7 @@
 // File: client/src/pages/portfolio/Projects.tsx
 
 import React from 'react';
-import ShortPortfolioLayout from '../../components/portfolio/layout/LongPortfolioLayout';
+import LongPortfolioLayout from '../../components/portfolio/layout/LongPortfolioLayout';
 import styles from '../../assets/css/portfolio/pageStyles/Projects.module.css';
 
 const projects = [
