@@ -1,7 +1,6 @@
 // File: client/src/pages/portfolio/Contact.tsx
 
 import React, { useState } from 'react';
-import ShortPortfolioLayout from '../../components/portfolio/layout/ShortPortfolioLayout';
 import styles from '../../assets/css/portfolio/pageStyles/Home.module.css';
 import formStyles from '../../assets/css/portfolio/common/Form.module.css';
 
@@ -34,7 +33,6 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <ShortPortfolioLayout>
       <div className={styles.textSection}>
         <h1 className={styles.heading}>Contact Me</h1>
         <form onSubmit={handleSubmit} className={formStyles.form}>
@@ -67,7 +65,6 @@ const Contact: React.FC = () => {
           </button>
         </form>
       </div>
-    </ShortPortfolioLayout>
   );
 };
 

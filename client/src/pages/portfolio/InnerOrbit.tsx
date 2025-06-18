@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ShortPortfolioLayout from '../../components/portfolio/layout/ShortPortfolioLayout';
 import styles from '../../assets/css/portfolio/pageStyles/Projects.module.css';
 
 const innerOrbitLinks = [
@@ -34,7 +33,7 @@ const innerOrbitLinks = [
 
 const InnerOrbit: React.FC = () => {
   return (
-    <ShortPortfolioLayout>
+    <>
       <div className={styles.textSection}>
         <h1 className={styles.heading}>InnerOrbit</h1>
         <p className={styles.paragraph}>
@@ -78,7 +77,7 @@ const InnerOrbit: React.FC = () => {
           );
         })}
       </div>
-    </ShortPortfolioLayout>
+    </>
   );
 };
 

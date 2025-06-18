@@ -9,16 +9,18 @@
   color: #222;
   overflow-x: hidden;
   z-index: 0;
+  max-width: 100vw;
 }
 
 .container::before {
   content: '';
   position: absolute;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
   height: auto;
-  aspect-ratio: 1 / 1.5; /* adjust based on actual SVG aspect ratio */
   background: url('/assets/portfolio/images/backgrounds/LongBackgroundWithLogoV1.svg') no-repeat top center;
   background-size: cover;
   background-repeat: no-repeat;

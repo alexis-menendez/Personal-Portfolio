@@ -1,6 +1,7 @@
 // File: Client/src/components/portfolio/layout/ShortPortfolioLayout.tsx
 
 import React, { ReactNode } from 'react';
+import { Outlet } from 'react-router-dom';
 import styles from '../../../assets/css/portfolio/layout/PortfolioLayout.module.css'; 
 import StarBackground from '../common/StarBackground';
 import ShootingStar from '../common/ShootingStar';
@@ -8,7 +9,7 @@ import NavBar from './NavBar';
 import Footer from './Footer';
 
 interface ShortPortfolioLayoutProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 const ShortPortfolioLayout: React.FC<ShortPortfolioLayoutProps> = ({ children }) => {
@@ -21,7 +22,10 @@ const ShortPortfolioLayout: React.FC<ShortPortfolioLayoutProps> = ({ children })
 
       <NavBar />
 
-      <main className={styles.main}>{children}</main>
+      <main className={styles.main}>
+        {children}
+        <Outlet />
+      </main>
 
       <Footer />
     </div>

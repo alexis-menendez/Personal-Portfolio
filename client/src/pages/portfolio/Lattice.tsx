@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ShortPortfolioLayout from '../../components/portfolio/layout/ShortPortfolioLayout';
 import styles from '../../assets/css/portfolio/pageStyles/Projects.module.css';
 
 const LatticeLinks = [
@@ -34,7 +33,7 @@ const LatticeLinks = [
 
 const Lattice: React.FC = () => {
   return (
-    <ShortPortfolioLayout>
+    <>
       <div className={styles.textSection}>
         <h1 className={styles.heading}>Lattice</h1>
         <p className={styles.paragraph}>
@@ -79,7 +78,7 @@ const Lattice: React.FC = () => {
           );
         })}
       </div>
-    </ShortPortfolioLayout>
+    </>
   );
 };
 

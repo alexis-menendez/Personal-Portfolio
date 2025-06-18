@@ -1,7 +1,6 @@
 // File: client/src/pages/portfolio/Projects.tsx
 
 import React from 'react';
-import LongPortfolioLayout from '../../components/portfolio/layout/LongPortfolioLayout';
 import styles from '../../assets/css/portfolio/pageStyles/Projects.module.css';
 
 const projects = [
@@ -33,41 +32,41 @@ const projects = [
 
 const Projects: React.FC = () => {
   return (
-    <LongPortfolioLayout>
-    <div className={styles.textSection}>
+    <>
+      <div className={styles.textSection}>
         <h1 className={styles.heading}>Projects</h1>
         <p className={styles.paragraph}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
-    </div>
+      </div>
 
-    <div className={styles.projectGrid}>
+      <div className={styles.projectGrid}>
         {projects.map((project, index) => {
-        const isImageLeft = project.name === "InnerOrbit" || project.name === "The Solarium";
-        return (
+          const isImageLeft = project.name === "InnerOrbit" || project.name === "The Solarium";
+          return (
             <a key={index} href={project.link} className={styles.card}>
-            {isImageLeft && (
+              {isImageLeft && (
                 <div className={styles.imageBox}>
-                <img src={project.image} alt={`${project.name} icon`} />
+                  <img src={project.image} alt={`${project.name} icon`} />
                 </div>
-            )}
+              )}
 
-            <div className={isImageLeft ? styles.rightText : styles.leftText}>
+              <div className={isImageLeft ? styles.rightText : styles.leftText}>
                 <h2>{project.name}</h2>
                 <p>{project.description}</p>
                 <button className={styles.button}>View Project</button>
-            </div>
+              </div>
 
-            {!isImageLeft && (
+              {!isImageLeft && (
                 <div className={styles.imageBox}>
-                <img src={project.image} alt={`${project.name} icon`} />
+                  <img src={project.image} alt={`${project.name} icon`} />
                 </div>
-            )}
+              )}
             </a>
-        );
+          );
         })}
-    </div>
-    </LongPortfolioLayout>
+      </div>
+    </>
   );
 };
 
