@@ -9,6 +9,8 @@
 }
 
 .navbar a {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 100;
   color: #fdf6ec;
   text-decoration: none;
   position: relative;
