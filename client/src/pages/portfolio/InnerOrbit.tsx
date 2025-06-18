@@ -1,0 +1,86 @@
+// File: client/src/pages/portfolio/InnerOrbit.tsx
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+import ShortPortfolioLayout from '../../components/portfolio/layout/ShortPortfolioLayout';
+import styles from '../../assets/css/portfolio/pageStyles/Projects.module.css';
+
+const innerOrbitLinks = [
+  {
+    name: "Deployed App",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/assets/portfolio/icons/deployed/DeployedBlue.png",
+    link: "/io-home", // internal route
+    isInternal: true,
+    imageLeft: false,
+  },
+  {
+    name: "GitHub",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/assets/portfolio/icons/git/GitBlue.png",
+    link: "https://github.com/alexis-menendez/Personal-Portfolio",
+    isInternal: false,
+    imageLeft: true,
+  },
+  {
+    name: "Documentation",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/assets/portfolio/icons/documentation/DocumentationBlue.png",
+    link: "https://docs.google.com/document/d/1K9LzRR68QS5rKAFtXKpg2JLLScKgCeq1-FQufrgHPsQ/edit?tab=t.m171kj9l8bu",
+    isInternal: false,
+    imageLeft: false,
+  },
+];
+
+const InnerOrbit: React.FC = () => {
+  return (
+    <ShortPortfolioLayout>
+      <div className={styles.textSection}>
+        <h1 className={styles.heading}>InnerOrbit</h1>
+        <p className={styles.paragraph}>
+          InnerOrbit is a space-themed mental health journaling tool built with the MERN stack. 
+          It allows users to track moods, write entries, and explore constellations — all within a calm, immersive interface.
+        </p>
+      </div>
+
+      <div className={styles.projectGrid}>
+        {innerOrbitLinks.map((section, index) => {
+          const cardContent = (
+            <>
+              {section.imageLeft && (
+                <div className={styles.imageBox}>
+                  <img src={section.image} alt={`${section.name} icon`} />
+                </div>
+              )}
+
+              <div className={section.imageLeft ? styles.rightText : styles.leftText}>
+                <h2>{section.name}</h2>
+                <p>{section.description}</p>
+                <button className={styles.button}>View Project</button>
+              </div>
+
+              {!section.imageLeft && (
+                <div className={styles.imageBox}>
+                  <img src={section.image} alt={`${section.name} icon`} />
+                </div>
+              )}
+            </>
+          );
+
+          return section.isInternal ? (
+            <Link key={index} to={section.link} className={styles.card}>
+              {cardContent}
+            </Link>
+          ) : (
+            <a key={index} href={section.link} target="_blank" rel="noopener noreferrer" className={styles.card}>
+              {cardContent}
+            </a>
+          );
+        })}
+      </div>
+    </ShortPortfolioLayout>
+  );
+};
+
+export default InnerOrbit;
+

@@ -1,17 +1,30 @@
 /* File: client/src/assets/css/portfolio/pageStyles/Projects.module.css */
 
+.textSection {
+  max-width: 40%;
+  text-align: left;
+  margin-top: 6rem;
+  margin-left: 6rem;
+}
+
 .heading {
   font-family: 'Inter Tight', sans-serif;
   font-weight: 100;
   font-size: 2.5rem;
-  margin-bottom: 3rem;
-  margin-left: 6rem;
   margin-top: 7rem;
+}
+
+.paragraph {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1rem;
+  margin-bottom: 4rem;
+  line-height: 1.6;
 }
 
 .projectGrid {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 3rem;
   padding: 0 6rem 4rem 6rem;
 }
@@ -29,7 +42,7 @@
   transition: transform 0.2s ease;
   transition: transform 0.2s ease;
   max-height: 350px;
-  width: 100%;
+  width: 80%;
 }
 
 .card:hover {
@@ -47,15 +60,15 @@
 .imageBox {
   flex: 1;
   display: flex;
-  align-items: center;
-  justify-content: center;
   background-color: transparent;
-  padding: clamp(0.5rem, 2vw, 2rem);
+  padding: 0;
 }
 
 .imageBox img {
-  max-width: 80%;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .button {
