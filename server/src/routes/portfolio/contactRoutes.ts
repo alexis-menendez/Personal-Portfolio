@@ -1,6 +1,6 @@
-// File: server/src/routes/portfolio/contactRoutes.js
+// File: server/src/routes/portfolio/contactRoutes.ts
 
-import express from 'express';
+import express, { Request, Response } from 'express';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 
@@ -8,11 +8,12 @@ dotenv.config();
 
 const router = express.Router();
 
-router.post('/', async (req, res) => {
+router.post('/', async (req: Request, res: Response): Promise<void> => {
   const { name, subject, message } = req.body;
 
   if (!name || !subject || !message) {
-    return res.status(400).json({ error: 'All fields are required.' });
+    res.status(400).json({ error: 'All fields are required.' });
+    return;
   }
 
   try {
