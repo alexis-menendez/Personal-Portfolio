@@ -1,7 +1,7 @@
 // File: client/src/pages/portfolio/Projects.tsx
 
 import React from 'react';
-import ShortPortfolioLayout from '../../components/portfolio/layout/ShortPortfolioLayout';
+import ShortPortfolioLayout from '../../components/portfolio/layout/LongPortfolioLayout';
 import styles from '../../assets/css/portfolio/pageStyles/Projects.module.css';
 
 const projects = [
@@ -33,7 +33,7 @@ const projects = [
 
 const Projects: React.FC = () => {
   return (
-    <ShortPortfolioLayout>
+    <LongPortfolioLayout>
     <div className={styles.textSection}>
         <h1 className={styles.heading}>Projects</h1>
         <p className={styles.paragraph}>
@@ -67,7 +67,7 @@ const Projects: React.FC = () => {
         );
         })}
     </div>
-    </ShortPortfolioLayout>
+    </LongPortfolioLayout>
   );
 };
 
