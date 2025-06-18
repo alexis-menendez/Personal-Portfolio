@@ -9,7 +9,7 @@ const NavBar: React.FC = () => {
     <nav className={styles.navbar}>
       <Link to="/">About</Link>
       <Link to="/projects">Projects</Link>
-      {/*<Link to="/contact">Contact</Link>  Add this route when implemented */}
+      <Link to="/contact">Contact</Link>
     </nav>
   );
 };

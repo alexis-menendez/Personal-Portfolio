@@ -23,7 +23,7 @@ import InnerOrbit from './pages/portfolio/InnerOrbit';
 import Lattice from './pages/portfolio/Lattice';
 import Solarium from './pages/portfolio/Solarium';
 import Runestone from './pages/portfolio/Runestone';
-// TODO: import Contact from './pages/portfolio/Contact';
+import Contact from './pages/portfolio/Contact';
 
     // innerOrbit Pages
     import IOHome from './pages/innerOrbit/IOHome';
@@ -65,8 +65,7 @@ const App: React.FC = () => {
           <Route path="/solarium" element={<Solarium />} />
           <Route path="/runestone" element={<Runestone />} />
           {/* TODO: <Route path="/taskadelic" element={<taskadelic />} /> */}
-          {/* TODO:
-            <Route path="/contact" element={<Contact />} />*/}
+          <Route path="/contact" element={<Contact />} />
         </Route>
 
         {/* Routes using IOLoginLayout */}
