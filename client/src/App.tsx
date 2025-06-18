@@ -18,8 +18,8 @@ import PortfolioLayout from './components/portfolio/layout/PortfolioLayout';
 
 // Pages
 import Home from './pages/portfolio/Home';
+import Projects from './pages/portfolio/Projects';
 // TODO: import Contact from './pages/portfolio/Contact';
-// TODO: import Portfolio from './pages/portfolio/Projects';
 
     // innerOrbit Pages
     import IOHome from './pages/innerOrbit/IOHome';
@@ -54,9 +54,9 @@ const App: React.FC = () => {
         {/* Routes using PortfolioLayout */}
         <Route element={<PortfolioLayout />}>
           <Route index element={<Home />} />
+          <Route path="/projects" element={<Projects />} /> 
           {/* TODO:
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/resume" element={<Projects />} /> */}
+            <Route path="/contact" element={<Contact />} />*/}
         </Route>
 
         {/* Routes using IOLoginLayout */}

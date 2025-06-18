@@ -1,0 +1,75 @@
+/* File: client/src/assets/css/portfolio/pageStyles/Projects.module.css */
+
+.heading {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 100;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  margin-left: 6rem;
+  margin-top: 7rem;
+}
+
+.projectGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 0 6rem 4rem 6rem;
+}
+
+.card {
+  display: flex;
+  font-family: 'Inter Tight', sans-serif;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.40);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  transition: transform 0.2s ease;
+  max-height: 350px;
+  width: 100%;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.leftText,
+.rightText {
+  padding: clamp(1rem, 2vw, 2rem);
+  flex: 1;
+  text-align: left;
+  color: black;
+}
+
+.imageBox {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  padding: clamp(0.5rem, 2vw, 2rem);
+}
+
+.imageBox img {
+  max-width: 80%;
+  height: auto;
+}
+
+.button {
+  font-family: 'Inter Tight', sans-serif;
+  background-color: #3c7f72;
+  color: white;
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.button:hover {
+  background-color: #0f135e;
+}
