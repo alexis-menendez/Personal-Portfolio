@@ -1,10 +1,10 @@
-// File: client/src/components/portfolio/common/Footer.tsx
+// File: client/src/components/portfolio/common/FooterWhite.tsx
 
 import React from 'react';
 import styles from '../../../assets/css/portfolio/layout/Footer.module.css';
 import { useNavigate } from 'react-router-dom';
 
-const Footer: React.FC = () => {
+const FooterWhite: React.FC = () => {
   const navigate = useNavigate();
 
   const handleEmailClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -28,10 +28,10 @@ const Footer: React.FC = () => {
         </a>
       </div>
       <div className={styles.footerLine}></div>
-      <span className={styles.footerText}>Alex Menendez 2025</span>
+      <span className={styles.footerTextWhite}>Alex Menendez 2025</span>
     </footer>
   );
 };
 
-export default Footer;
+export default FooterWhite;
 

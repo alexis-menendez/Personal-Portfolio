@@ -14,6 +14,7 @@
   color: #fdf6ec;
   text-decoration: none;
   position: relative;
+  font-size: 1.25rem;
 }
 
 .navbar a::after {
@@ -33,3 +34,20 @@
 .navbar a:focus::after {
   transform: scaleX(1);
 }
+
+.navItem {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-bottom: 3px solid transparent;
+  transition: border-color 0.3s ease;
+  color: #333;
+}
+
+.navItem:hover {
+  border-color: #aaa;
+}
+
+.active {
+  border-bottom: 3px solid #3c7f72;
+}
+

@@ -1,0 +1,20 @@
+/* File: client/src/assets/css/portfolio/common/Form.module.css */
+
+/* Contact Form */
+.Form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+input,
+textarea {
+  font-family: 'Inter Tight', sans-serif;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  width: 100%;
+  resize: vertical;
+}

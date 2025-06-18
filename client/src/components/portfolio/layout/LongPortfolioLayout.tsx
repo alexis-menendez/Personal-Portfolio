@@ -1,4 +1,4 @@
-// File: Client/src/components/portfolio/layout/ShortPortfolioLayout.tsx
+// File: client/src/components/portfolio/layout/LongPortfolioLayout.tsx
 
 import React, { ReactNode } from 'react';
 import { Outlet } from 'react-router-dom';
@@ -6,13 +6,13 @@ import styles from '../../../assets/css/portfolio/layout/PortfolioLayout.module.
 import StarBackground from '../common/StarBackground';
 import ShootingStar from '../common/ShootingStar';
 import NavBar from './NavBar';
-import Footer from './Footer';
+import FooterWhite from './FooterWhite';
 
-interface ShortPortfolioLayoutProps {
+interface LongPortfolioLayoutProps {
   children?: ReactNode;
 }
 
-const ShortPortfolioLayout: React.FC<ShortPortfolioLayoutProps> = ({ children }) => {
+const LongPortfolioLayout: React.FC<LongPortfolioLayoutProps> = ({ children }) => {
   return (
     <div className={styles.container}>
       <div className={styles.starLayer}>
@@ -27,9 +27,9 @@ const ShortPortfolioLayout: React.FC<ShortPortfolioLayoutProps> = ({ children })
         <Outlet />
       </main>
 
-      <Footer />
+      <FooterWhite />
     </div>
   );
 };
 
-export default ShortPortfolioLayout;
+export default LongPortfolioLayout;
