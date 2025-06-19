@@ -1,7 +1,7 @@
 // File: client/src/pages/portfolio/Projects.tsx
 
 import React from 'react';
-import styles from '../../assets/css/portfolio/pageStyles/Projects.module.css';
+import styles from '../../assets/css/portfolio/pageStyles/Home.module.css';
 
 const projects = [
   {
