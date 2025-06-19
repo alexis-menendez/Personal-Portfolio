@@ -13,7 +13,7 @@ const projects = [
   {
     name: "How Not To Die",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    image: "/assets/portfolio/icons/dontDie/RetroDontDie.svg",
+    image: "/assets/portfolio/icons/dontDie/RetroDontDie.png",
     link: "/dontDie"
   },
   {
@@ -37,7 +37,7 @@ const projects = [
   {
     name: "Taskadelic",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    image: "/assets/portfolio/icons/taskadelic/RetroTaskadelic.svg",
+    image: "/assets/portfolio/icons/taskadelic/RetroTaskadelic.png",
     link: "/taskadelic"
   },
 ];

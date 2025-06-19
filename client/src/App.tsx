@@ -11,6 +11,7 @@ import { AuthProvider } from './context/authContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import ShortPortfolioLayout from './components/portfolio/layout/ShortPortfolioLayout';
 import LongPortfolioLayout from './components/portfolio/layout/LongPortfolioLayout';
+import PsychedelicLayout from './components/portfolio/layout/PsychedelicLayout';
 
     // innerOrbit Layouts
     import IOLoginLayout from './components/innerOrbit/layout/IOLoginLayout';
@@ -67,13 +68,17 @@ const App: React.FC = () => {
           <Route path="/lattice" element={<Lattice />} />
           <Route path="/solarium" element={<Solarium />} />
           <Route path="/runestone" element={<Runestone />} />
-          <Route path="/taskadelic" element={<Taskadelic />} />
           <Route path="/contact" element={<Contact />} />
         </Route>
 
         {/* Routes using LongPortfolioLayout */}
         <Route element={<LongPortfolioLayout />}>
           <Route path="/projects" element={<Projects />} />
+        </Route>
+
+        {/* Routes using PsychedelicLayout */}
+        <Route element={<PsychedelicLayout />}>
+          <Route path="/taskadelic" element={<Taskadelic />} />
         </Route>
         
         {/* Routes using IOLoginLayout */}
