@@ -20,10 +20,12 @@ import LongPortfolioLayout from './components/portfolio/layout/LongPortfolioLayo
 // Pages
 import Home from './pages/portfolio/Home';
 import Projects from './pages/portfolio/Projects';
+import DontDie from './pages/portfolio/DontDie';
 import InnerOrbit from './pages/portfolio/InnerOrbit';
 import Lattice from './pages/portfolio/Lattice';
 import Solarium from './pages/portfolio/Solarium';
 import Runestone from './pages/portfolio/Runestone';
+import Taskadelic from './pages/portfolio/Taskadelic';
 import Contact from './pages/portfolio/Contact';
 
     // innerOrbit Pages
@@ -61,9 +63,11 @@ const App: React.FC = () => {
         <Route element={<ShortPortfolioLayout />}>
           <Route index element={<Home />} />
           <Route path="/innerOrbit" element={<InnerOrbit />} />
+          <Route path="/dontDie" element={<DontDie />} />
           <Route path="/lattice" element={<Lattice />} />
           <Route path="/solarium" element={<Solarium />} />
           <Route path="/runestone" element={<Runestone />} />
+          <Route path="/taskadelic" element={<Taskadelic />} />
           <Route path="/contact" element={<Contact />} />
         </Route>
 
