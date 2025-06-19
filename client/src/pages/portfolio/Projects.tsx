@@ -11,6 +11,12 @@ const projects = [
     link: "/innerOrbit"
   },
   {
+    name: "How Not To Die",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/assets/portfolio/icons/dontDie/RetroDontDie.svg",
+    link: "/dontDie"
+  },
+  {
     name: "Lattice",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     image: "/assets/portfolio/icons/lattice/RetroLattice.svg",
@@ -28,6 +34,12 @@ const projects = [
     image: "/assets/portfolio/icons/runestone/RetroRunestone.svg",
     link: "/runestone"
   },
+  {
+    name: "Taskadelic",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/assets/portfolio/icons/taskadelic/RetroTaskadelic.svg",
+    link: "/taskadelic"
+  },
 ];
 
 const Projects: React.FC = () => {
@@ -42,7 +54,7 @@ const Projects: React.FC = () => {
 
       <div className={styles.projectGrid}>
         {projects.map((project, index) => {
-          const isImageLeft = project.name === "InnerOrbit" || project.name === "The Solarium";
+          const isImageLeft = project.name === "How Not To Die" || project.name === "The Solarium" || project.name === "Taskadelic";
           return (
             <a key={index} href={project.link} className={styles.card}>
               {isImageLeft && (
