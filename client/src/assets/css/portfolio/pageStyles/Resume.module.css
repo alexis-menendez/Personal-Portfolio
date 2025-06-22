@@ -1,0 +1,361 @@
+/* File: client/src/assets/css/portfolio/pageStyles/Resume.module.css */
+
+/* ----------------------------- */
+/* Typography & Font Styling     */
+/* ----------------------------- */
+
+.heading {
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.largeHeading {
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.paragraph,
+.contentArea p,
+.contentArea li {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.6;
+
+}
+
+strong {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+}
+
+/* ----------------------------- */
+/* Header                        */
+/* ----------------------------- */
+
+.resumeHeader {
+  text-align: center;
+  margin: 0rem auto 2rem auto;
+  padding: 0 2rem;
+  max-width: 800px;
+}
+
+.resumeHeader a:not(.downloadButton) {
+  color: #80d0ff;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+/* ----------------------------- */
+/* Header Contact Icons          */
+/* ----------------------------- */
+
+.iconRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.headerIcon {
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.iconImage {
+  width: 2rem;
+  height: 2rem;
+  transition: transform 0.2s ease;
+}
+
+.iconImage:hover {
+  transform: scale(1.1);
+}
+
+/* ----------------------------- */
+/* Header Download PDF Button    */
+/* ----------------------------- */
+
+.downloadButton {
+  position: relative;
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  overflow: hidden;
+  z-index: 0;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.downloadButton::before {
+  content: '';
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #80d0ff;
+  z-index: -1;
+  transition: left 0.3s ease;
+}
+
+.downloadButton:hover::before {
+  left: 0;
+}
+
+.downloadButton:hover {
+  color: #000;
+  transform: scale(1.05);
+}
+
+
+.contentArea .downloadButton {
+  text-decoration: none;
+  background-color: #fff;
+  color: #000;  
+}
+
+/* ----------------------------- */
+/* Layout                        */
+/* ----------------------------- */
+
+.resumeLayout {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
+
+/* ----------------------------- */
+/* Sidebar Navigation            */
+/* ----------------------------- */
+
+.sidebar {
+  width: 18rem;
+  background: rgba(255, 255, 255, 0.20);
+  backdrop-filter: blur(4px);         
+  -webkit-backdrop-filter: blur(4px);  
+  padding: 2rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.sidebarTitle {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+
+.tabList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tabItem {
+  margin-bottom: 1rem;
+  cursor: pointer;
+  font-size: 1.75rem;
+  transition: color 0.3s;
+}
+
+.tabItem:hover {
+  color: #80d0ff;
+}
+
+.active {
+  color: #80d0ff;
+  font-weight: bold;
+}
+
+/* ----------------------------- */
+/* Resume Content Sections       */
+/* ----------------------------- */
+
+/* ----------------------------- */
+/* Education Section             */
+/* ----------------------------- */
+
+.contentArea {
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 0;              
+  min-width: 0; 
+  padding: 3rem;
+  max-width: 100%;
+  color: #eee;
+  background: rgba(255, 255, 255, 0.10); 
+  backdrop-filter: blur(6px);         
+  -webkit-backdrop-filter: blur(6px);  
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.contentArea h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.contentArea ul {
+  list-style: disc;
+  padding-left: 3rem;
+}
+
+.contentArea a {
+  color: #80d0ff;
+  text-decoration: underline;
+}
+
+.institution {
+  color: #80d0ff;
+  font-weight: 600;
+}
+
+.emph {
+  color: #66c4ff;
+}
+
+.dividingLine {
+  width: 100%;
+  height: 2px;
+  background-color: #80d0ff;
+  margin: 0.15rem auto 0.15rem auto;
+}
+
+.thinDividingLine {
+  width: 100%;
+  height: 1px;
+  background-color: #80d0ff;
+  margin: 0.15rem auto 0.15rem auto;
+}
+
+/* ----------------------------- */
+/* Skills Table                  */
+/* ----------------------------- */
+
+.skillsSection {
+  margin-top: 1rem;
+}
+
+.skillsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(2px);         
+  -webkit-backdrop-filter: blur(2px); 
+}
+
+.skillsTable td {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  vertical-align: top;
+  font-family: 'Inter Tight', sans-serif;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.skillsTable td:not(.category) {
+  color: #eee;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.category {
+  color: #80d0ff;
+  font-weight: 600;
+  font-size: 1.10rem;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(2px);         
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* ----------------------------- */
+/* Projects Section              */
+/* ----------------------------- */
+
+.projectsSection {
+  margin-top: 1rem;
+}
+
+.projectGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.projectCard {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  color: #eee;
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.projectCard:hover {
+  transform: translateY(-4px);
+  border-color: #80d0ff;
+}
+
+.contentArea .projectCard {
+  text-decoration: none;
+}
+
+.projectImage {
+  width: 100%;
+  max-height: 150px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.projectInfo h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #80d0ff;
+}
+
+.projectInfo p {
+  font-size: 1rem;
+  color: #ddd;
+  line-height: 1.4;
+}
+
+/* ----------------------------- */
+/* Jobs Section                  */
+/* ----------------------------- */
+
+.jobEntry {
+  margin-bottom: 2rem;
+}
+
+.jobEntry ul {
+  margin-top: 0.5rem;
+  padding-left: 3rem;
+  list-style-type: disc;
+}
+
+.job {
+  color: #80d0ff;
+}
+
+.contentArea .job {
+  font-weight: 500;
+  font-size: 1.25rem
+}

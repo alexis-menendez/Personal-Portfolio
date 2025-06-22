@@ -49,6 +49,14 @@
   margin: 0.15rem auto 0.15rem auto;
 }
 
+.footerLineBlue {
+  width: 100%;
+  max-width: 300px;
+  height: 2px;
+  background-color: #80d0ff;
+  margin: 0.15rem auto 0.15rem auto;
+}
+
 .footerText {
   font-family: 'Inter Tight', sans-serif;
   font-weight: 100;
