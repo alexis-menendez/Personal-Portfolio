@@ -11,6 +11,7 @@ const innerOrbitLinks = [
     image: "/assets/portfolio/icons/deployed/DeployedBlue.png",
     link: "/io-home", // internal route
     isInternal: true,
+    newTab: true, // added to indicate open in new tab
     imageLeft: false,
   },
   {
@@ -28,6 +29,14 @@ const innerOrbitLinks = [
     link: "https://docs.google.com/document/d/1K9LzRR68QS5rKAFtXKpg2JLLScKgCeq1-FQufrgHPsQ/edit?tab=t.m171kj9l8bu",
     isInternal: false,
     imageLeft: false,
+  },
+  {
+    name: "Gallery",
+    description: "Coming Soon!",
+    image: "/assets/portfolio/icons/innerOrbit/InnerOrbitBlue.png",
+    link: "#",  // Internal route placeholder
+    isInternal: false, // default to false until implemented
+    imageLeft: true,
   },
 ];
 
@@ -66,12 +75,39 @@ const InnerOrbit: React.FC = () => {
             </>
           );
 
-          return section.isInternal ? (
-            <Link key={index} to={section.link} className={styles.card}>
-              {cardContent}
-            </Link>
-          ) : (
-            <a key={index} href={section.link} target="_blank" rel="noopener noreferrer" className={styles.card}>
+          // Open in new tab if specified (even if internal)
+          if (section.newTab) {
+            return (
+              <a
+                key={index}
+                href={section.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.card}
+              >
+                {cardContent}
+              </a>
+            );
+          }
+
+          // Internal links (same tab)
+          if (section.isInternal) {
+            return (
+              <Link key={index} to={section.link} className={styles.card}>
+                {cardContent}
+              </Link>
+            );
+          }
+
+          // External links (new tab)
+          return (
+            <a
+              key={index}
+              href={section.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.card}
+            >
               {cardContent}
             </a>
           );

@@ -18,10 +18,10 @@ const IOHome = () => {
       </h1>
 
       <div className="flex flex-col sm:flex-row items-center justify-center w-full max-w-md mt-6 gap-4">
-        <Link to="/login" className={`${buttonStyles.button} ${buttonStyles.primary} ${buttonStyles.spaced}`}>
+        <Link to="/io-login" className={`${buttonStyles.button} ${buttonStyles.primary} ${buttonStyles.spaced}`}>
           Login
         </Link>
-        <Link to="/register" className={`${buttonStyles.button} ${buttonStyles.secondary}`}>
+        <Link to="/io-register" className={`${buttonStyles.button} ${buttonStyles.secondary}`}>
           Register
         </Link>
       </div>

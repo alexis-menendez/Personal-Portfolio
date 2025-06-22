@@ -2,7 +2,7 @@
 
 .textSection {
   max-width: 40%;
-  text-align: left;
+  text-align: left; 
   margin-top: 6rem;
   margin-left: 6rem;
 }
@@ -11,13 +11,13 @@
   font-family: 'Inter Tight', sans-serif;
   font-weight: 100;
   font-size: 2.5rem;
-  margin-top: 7rem;
+  margin-bottom: 1rem;
 }
 
 .paragraph {
   font-family: 'Inter Tight', sans-serif;
   font-size: 1rem;
-  margin-bottom: 4rem;
+  margin-bottom: 1.5rem;
   line-height: 1.6;
 }
 
