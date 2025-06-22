@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 import StarBackground from '../common/StarBackground';
 import ShootingStar from '../common/ShootingStar';
 import NavBar from './NavBar';
-import Footer from './Footer';
+import FooterWhite from './FooterWhite';
 import styles from '../../../assets/css/portfolio/layout/ResumeLayout.module.css';
 
 interface ResumeLayoutProps {
@@ -27,7 +27,7 @@ const ResumeLayout: React.FC<ResumeLayoutProps> = ({ children }) => {
         <Outlet />
       </main>
 
-      <Footer />
+      <FooterWhite />
     </div>
   );
 };
