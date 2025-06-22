@@ -1,46 +1,8 @@
-/* File: Clinet/src/assets/css/portfolio/pageStyles/Resume.module.css */
+/* File: client/src/assets/css/portfolio/pageStyles/Resume.module.css */
 
-/* Original Styles */
-.container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  font-family: 'Georgia', serif;
-  color: #222;
-  overflow: hidden;
-  z-index: 0;
-}
-
-.container::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-size: cover;
-  z-index: -1; /* Above stars, below content */
-}
-
-.starLayer {
-  position: fixed;
-  inset: 0;
-  z-index: -2; /* Behind the background image */
-  pointer-events: none;
-}
-
-.main {
-  display: flex;
-  justify-content: flex-end; 
-  align-items: center;
-  flex-grow: 1;
-  padding: 2rem 4rem;
-}
-
-.textSection {
-  max-width: 40%;
-  text-align: left; 
-  margin-top: 6rem;
-  margin-left: 6rem;
-}
+/* ----------------------------- */
+/* Typography & Font Styling     */
+/* ----------------------------- */
 
 .heading {
   font-family: 'Jost', sans-serif;
@@ -49,15 +11,24 @@
   margin-bottom: 1rem;
 }
 
-.paragraph {
+.paragraph,
+.contentArea p,
+.contentArea li {
   font-family: 'Inter Tight', sans-serif;
+  font-weight: 400;
   font-size: 1rem;
-  margin-bottom: 1.5rem;
   line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
+strong {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+}
 
-/* Resume Styles */
+/* ----------------------------- */
+/* Header                        */
+/* ----------------------------- */
 
 .resumeHeader {
   text-align: center;
@@ -73,6 +44,37 @@
   font-weight: 500;
 }
 
+/* ----------------------------- */
+/* Header Contact Icons          */
+/* ----------------------------- */
+
+.iconRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.headerIcon {
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.iconImage {
+  width: 2rem;
+  height: 2rem;
+  transition: transform 0.2s ease;
+}
+
+.iconImage:hover {
+  transform: scale(1.1);
+}
+
+/* ----------------------------- */
+/* Layout                        */
+/* ----------------------------- */
+
 .resumeLayout {
   display: flex;
   flex-direction: row;
@@ -80,16 +82,22 @@
   width: 100%;
 }
 
+/* ----------------------------- */
+/* Sidebar Navigation            */
+/* ----------------------------- */
+
 .sidebar {
   width: 18rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.20);
+  backdrop-filter: blur(4px);         
+  -webkit-backdrop-filter: blur(4px);  
   padding: 2rem;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   color: #fff;
 }
 
 .sidebarTitle {
-  font-size: 1.5rem;
+  font-size: 2rem;
   margin-bottom: 2rem;
   font-weight: bold;
 }
@@ -103,7 +111,7 @@
 .tabItem {
   margin-bottom: 1rem;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.75rem;
   transition: color 0.3s;
 }
 
@@ -116,12 +124,19 @@
   font-weight: bold;
 }
 
-/* Resume Sections */
+/* ----------------------------- */
+/* Resume Content Sections       */
+/* ----------------------------- */
+
 .contentArea {
   flex-grow: 1;
   padding: 3rem;
   max-width: 100%;
   color: #eee;
+  background: rgba(255, 255, 255, 0.10); 
+  backdrop-filter: blur(6px);         
+  -webkit-backdrop-filter: blur(6px);  
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .contentArea h2 {
@@ -131,14 +146,7 @@
 
 .contentArea ul {
   list-style: disc;
-  padding-left: 1.5rem;
-}
-
-.contentArea p,
-.contentArea li {
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 0.75rem;
+  padding-left: 3rem;
 }
 
 .contentArea a {
@@ -146,14 +154,18 @@
   text-decoration: underline;
 }
 
-.paragraph,
-.contentArea p,
-.contentArea li {
-  font-family: 'Inter Tight', sans-serif;
-  font-weight: 400;
+.institution {
+  color: #80d0ff;
+  font-weight: 600;
 }
 
-strong {
-  font-family: 'Inter Tight', sans-serif;
-  font-weight: 500;
+.emph {
+  color: #66c4ff;
+}
+
+.dividingLine {
+  width: 100%;
+  height: 2px;
+  background-color: #80d0ff;
+  margin: 0.15rem auto 0.15rem auto;
 }

@@ -20,14 +20,50 @@ const Resume: React.FC = () => {
       <div className={styles.resumeHeader}>
         <h1 className={styles.heading}>Alex Menendez</h1>
         <p className={styles.paragraph}>
-          <em>
-            Full-stack developer specializing in TypeScript, React, and the MERN stack with a background in psychology and welding.
-          </em>
-          <br />
-          Portland, OR | (737) 217-9087 | menendez.alex.d@gmail.com |
-          <a href="https://github.com/alexis-menendez" target="_blank" rel="noreferrer"> github.com/alexis-menendez</a> |
-          <a href="https://www.linkedin.com/in/alex-d-menendez" target="_blank" rel="noreferrer"> linkedin.com/in/alex-d-menendez</a>
+          <em>Full-stack developer specializing in TypeScript, React, and the MERN stack.</em><br />
+          Portland, OR | (737) 217-9087
         </p>
+
+        <div className={styles.iconRow}>
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = 'mailto:menendez.alex.d@gmail.com';
+            }}
+            className={styles.headerIcon}
+          >
+            <img
+              src="/assets/portfolio/icons/header/EmailHeader.png"
+              alt="Email"
+              className={styles.iconImage}
+            />
+          </a>
+          <a
+            href="https://github.com/alexis-menendez"
+            className={styles.headerIcon}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="/assets/portfolio/icons/header/GitHeader.png"
+              alt="GitHub"
+              className={styles.iconImage}
+            />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/alex-d-menendez/"
+            className={styles.headerIcon}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="/assets/portfolio/icons/header/LinkedinHeader.png"
+              alt="LinkedIn"
+              className={styles.iconImage}
+            />
+          </a>
+        </div>
       </div>
 
       {/* Resume Layout */}
@@ -50,14 +86,40 @@ const Resume: React.FC = () => {
 
         {/* Tab Content */}
         <section className={styles.contentArea}>
-          {activeTab === 'education' && (
-            <div>
-              <h2>Education</h2>
-              <p><strong>Rice University</strong> — Certificate in Full-Stack Web Development, 4.0 GPA (June 2025)</p>
-              <p><strong>Austin Community College</strong> — Associate of Arts in Psychology, 4.0 GPA (Spring 2025)</p>
-            </div>
+          {/* Education */}
+        {activeTab === 'education' && (
+        <div>
+            <h2>Education</h2>
+            
+            <div className={styles.dividingLine}></div>
+
+            <p>
+            <span className={styles.institution}>Rice University</span>. Houston, TX. June, 2025.<br />
+            <em>Certificate of Completion.</em> 4.0 GPA.
+            </p>
+            <p>Completed an intensive Web Development course, covering full-stack development, software engineering practices, and advanced programming techniques such as:</p>
+            <ul>
+            <li>Built and deployed <span className={styles.emph}>full-stack</span> applications (<span className={styles.emph}>MERN stack</span>)</li>
+            <li>Practiced <span className={styles.emph}>version control</span>, <span className={styles.emph}>Git workflows</span>, and <span className={styles.emph}>CI/CD pipelines</span> using GitHub and GitHub Actions</li>
+            <li>Integrated <span className={styles.emph}>REST</span> and <span className={styles.emph}>GraphQL APIs</span>, implemented <span className={styles.emph}>JWT-based authentication</span>, and designed protected routes</li>
+            <li>Created responsive, accessible UIs using <span className={styles.emph}>Tailwind CSS</span>, <span className={styles.emph}>CSS Modules</span>, and <span className={styles.emph}>custom animation</span> techniques</li>
+            <li>Collaborated using <span className={styles.emph}>Agile methodologies</span>, managing projects through GitHub Projects, Discord, and Slack</li>
+            <li>Gained hands-on experience with technologies such as <span className={styles.emph}>WebSockets</span>, <span className={styles.emph}>HTML</span>, <span className={styles.emph}>CSS</span>, <span className={styles.emph}>JavaScript</span>, <span className={styles.emph}>TypeScript</span>, <span className={styles.emph}>Git</span>, <span className={styles.emph}>Node.js</span>, <span className={styles.emph}>Express</span>, <span className={styles.emph}>MongoDB</span>, <span className={styles.emph}>React</span>, and <span className={styles.emph}>Python</span></li>
+            <li>Exposure to <span className={styles.emph}>AI & Machine Learning</span> tech such as <span className={styles.emph}>ML models</span>, <span className={styles.emph}>OpenAI API integration</span>, <span className={styles.emph}>prompt engineering</span>, and deploying <span className={styles.emph}>AI-enhanced</span> features</li>
+            </ul>
+
+            <div className={styles.dividingLine}></div>
+
+            <p>
+            <span className={styles.institution}>Austin Community College</span>. Austin, TX. Spring 2025.<br />
+            <em>Associate of Arts in Psychology.</em> 4.0 GPA.
+            </p>
+
+            <div className={styles.dividingLine}></div>
+        </div>
           )}
 
+          {/* Skills */}
           {activeTab === 'skills' && (
             <div>
               <h2>Skills</h2>
@@ -71,6 +133,7 @@ const Resume: React.FC = () => {
             </div>
           )}
 
+          {/* Projects */}
           {activeTab === 'projects' && (
             <div>
               <h2>Projects</h2>
@@ -81,6 +144,7 @@ const Resume: React.FC = () => {
             </div>
           )}
 
+          {/* Experience */}
           {activeTab === 'experience' && (
             <div>
               <h2>Experience</h2>
@@ -93,6 +157,7 @@ const Resume: React.FC = () => {
             </div>
           )}
 
+          {/* Volunteer Work */}
           {activeTab === 'volunteer' && (
             <div>
               <h2>Volunteer Work</h2>

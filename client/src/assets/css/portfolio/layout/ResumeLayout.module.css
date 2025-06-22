@@ -1,30 +1,22 @@
 /* File: client/src/assets/css/portfolio/layout/ResumeLayout.module.css */
 
+/* ----------------------------- */
+/* Layout Container              */
+/* ----------------------------- */
+
 .container {
   position: relative;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  font-family: 'Georgia', serif;
-  color: #222;
   overflow-x: hidden;
-  z-index: 0;
   max-width: 100vw;
+  z-index: 0;
 }
 
-.container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: -1;
-}
+/* ----------------------------- */
+/* Star Background Layer         */
+/* ----------------------------- */
 
 .starLayer {
   position: fixed;
@@ -33,7 +25,11 @@
   pointer-events: none;
 }
 
+/* ----------------------------- */
+/* Page Content Wrapper          */
+/* ----------------------------- */
+
 .main {
   padding: 2rem 4rem;
-  padding-top:7vh;
+  padding-top: 7vh; /* Controls spacing beneath navbar */
 }
