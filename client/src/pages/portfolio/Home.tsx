@@ -8,7 +8,9 @@ const Home: React.FC = () => {
       <div className={styles.textSection}>
         <h1 className={styles.heading}>About me</h1>
         <p className={styles.paragraph}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          I’m a full-stack developer with a soft spot for beautiful design, playful interfaces, and creative problem solving. 
+          When I’m not coding, you’ll probably find me dancing, painting, or scultping something weird and wonderful. 
+          I believe in human-centered design, late-night brainstorms, and making the web a little more magical.
         </p>
         <button className={styles.resumeButton}>Resume</button>
       </div>
