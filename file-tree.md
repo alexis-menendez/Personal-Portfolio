@@ -28,10 +28,43 @@ Personal-Portfolio/
 │   │       │   └── video/  
 │   │       │  
 │   │       ├── portfolio/  
-│   │       │   ├── animations/  
-│   │       │   ├── audio/  
-│   │       │   ├── images/  
-│   │       │   └── video/  
+│   │       │   ├── icons/   
+│   │       │   │   ├── deployed/   
+│   │       │   │   │   └── *deployed icons in various colors and styles*  
+│   │       │   │   │   
+│   │       │   │   ├── documentation/  
+│   │       │   │   │   └── *documentation icons in various colors and styles*  
+│   │       │   │   │   
+│   │       │   │   ├── dontDie/  
+│   │       │   │   │   └── *How Not To Die icons in various colors and styles*  
+│   │       │   │   │   
+│   │       │   │   ├── footer/  
+│   │       │   │   │   └── *LinkedIn, Git, and Email icons for footer*  
+│   │       │   │   │   
+│   │       │   │   ├── git/  
+│   │       │   │   │   └── *git icons in various colors and styles*  
+│   │       │   │   │   
+│   │       │   │   ├── innerOrbit/  
+│   │       │   │   │   └── *InnerOrbit icons in various colors and styles*  
+│   │       │   │   │   
+│   │       │   │   ├── lattice/  
+│   │       │   │   │   └── *Lattice icons in various colors and styles*  
+│   │       │   │   │   
+│   │       │   │   ├── runestone/ 
+│   │       │   │   │   └── *Runestone icons in various colors and styles*  
+│   │       │   │   │    
+│   │       │   │   ├── solarium/  
+│   │       │   │   │   └── *Solarium icons in various colors and styles*  
+│   │       │   │   │   
+│   │       │   │   └── taskadelic/  
+│   │       │   │       └── *Taskadelic icons in various colors and styles*   
+│   │       │   │   
+│   │       │   └── images/  
+│   │       │       ├── backgrounds/   
+│   │       │       │   └── *background images for the portfolio*  
+│   │       │       │   
+│   │       │       └── borders/  
+│   │       │           └── *borders used in the portfolio*  
 │   │       │  
 │   │       ├── runestone/  
 │   │       │   ├── animations/  
@@ -68,7 +101,7 @@ Personal-Portfolio/
 │   │   │       │   │   ├── IOLogo.module.css  
 │   │   │       │   │   ├── ShootingStar.module.css  
 │   │   │       │   │   ├── Stars.module.css  
-│   │   │       │   │   └── TransparentStarsmodule.css  
+│   │   │       │   │   └── TransparentStars.module.css  
 │   │   │       │   │  
 │   │   │       │   ├── layout/  
 │   │   │       │   │   ├── IOCosmicBackground.module.css  
@@ -102,9 +135,19 @@ Personal-Portfolio/
 │   │   │       │   └── pageStyles/  
 │   │   │       │  
 │   │   │       ├── portfolio/  
-│   │   │       │   ├── common/  
+│   │   │       │   ├── common/
+│   │   │       │   │   ├── Form.module.css  
+│   │   │       │   │   ├── ShootingStar.module.css  
+│   │   │       │   │   └── StarBackground.module.css    
+│   │   │       │   │    
 │   │   │       │   ├── layout/  
+│   │   │       │   │   ├── Footer.module.css  
+│   │   │       │   │   ├── NavBar.module.css  
+│   │   │       │   │   └── PortfolioLayout.module.css    
+│   │   │       │   │    
 │   │   │       │   └── pageStyles/  
+│   │   │       │       ├── Home.module.css  
+│   │   │       │       └── Projects.module.css    
 │   │   │       │  
 │   │   │       ├── runestone/  
 │   │   │       │   ├── common/  
@@ -188,7 +231,16 @@ Personal-Portfolio/
 │   │   │       │  
 │   │   │       ├── portfolio/  
 │   │   │       │   ├── common/  
+│   │   │       │   │    ├── ShootingStar.tsx 
+│   │   │       │   │    └── StarBackground.tsx  
+│   │   │       │   │    
 │   │   │       │   ├── layout/  
+│   │   │       │   │    ├── Footer.tsx  
+│   │   │       │   │    ├── FooterWhite.tsx  
+│   │   │       │   │    ├── NavBar.tsx
+│   │   │       │   │    ├── PortfolioLayout.tsx
+│   │   │       │   │    └── PsychedelicLayout.tsx  
+│   │   │       │   │
 │   │   │       │   └── pageComponents/  
 │   │   │       │  
 │   │   │       ├── runestone/  
@@ -249,8 +301,20 @@ Personal-Portfolio/
 │   │   │   │   ├── Tracker.tsx  
 │   │   │   │   └── IOUserProfile.tsx  
 │   │   │   │  
-│   │   │   ├── lattice/  
+│   │   │   ├── lattice/ 
+│   │   │   │   
 │   │   │   ├── portfolio/  
+│   │   │   │   ├── Contact.tsx  
+│   │   │   │   ├── DontDie.tsx  
+│   │   │   │   ├── Home.tsx  
+│   │   │   │   ├── InnerOrbit.tsx  
+│   │   │   │   ├── Lattice.tsx  
+│   │   │   │   ├── Projects.tsx  
+│   │   │   │   ├── Resume.tsx  
+│   │   │   │   ├── Runestone.tsx  
+│   │   │   │   ├── Solarium.tsx
+│   │   │   │   └── Taskadelic.tsx  
+│   │   │   │  
 │   │   │   ├── runestone/  
 │   │   │   ├── solarium/  
 │   │   │   └── taskadelic/  
