@@ -59,53 +59,68 @@ const Resume: React.FC = () => {
     <>
       {/* Resume Header */}
       <div className={styles.resumeHeader}>
-        <h1 className={styles.heading}>Alex Menendez</h1>
-        <p className={styles.paragraph}>
-          <em>Full-stack developer specializing in TypeScript, React, and the MERN stack.</em><br />
-          Portland, OR | (737) 217-9087
-        </p>
+        <h1 className={styles.largeHeading}>Alex Menendez</h1>
 
+      <div style={{ marginTop: '1rem' }}>
+        <button
+        className={styles.downloadButton}
+        onClick={() => {
+            // Open in a new tab
+            window.open('/assets/portfolio/documents/Alex_Menendez_Resume.pdf', '_blank');
 
-        <div className={styles.iconRow}>
-          <a
+            // Trigger download
+            const link = document.createElement('a');
+            link.href = '/assets/portfolio/documents/Alex_Menendez_Resume.pdf';
+            link.download = 'Alex_Menendez_Resume.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }}
+        >
+        Download Resume (PDF)
+        </button>
+      </div>
+
+      <div style={{ marginTop: '0.75rem' }} className={styles.iconRow}>
+        <a
             href="#"
             onClick={(e) => {
-              e.preventDefault();
-              window.location.href = 'mailto:menendez.alex.d@gmail.com';
+            e.preventDefault();
+            window.location.href = 'mailto:menendez.alex.d@gmail.com';
             }}
             className={styles.headerIcon}
-          >
+        >
             <img
-              src="/assets/portfolio/icons/header/EmailHeader.png"
-              alt="Email"
-              className={styles.iconImage}
+            src="/assets/portfolio/icons/header/EmailHeader.png"
+            alt="Email"
+            className={styles.iconImage}
             />
-          </a>
-          <a
+        </a>
+        <a
             href="https://github.com/alexis-menendez"
             className={styles.headerIcon}
             target="_blank"
             rel="noopener noreferrer"
-          >
+        >
             <img
-              src="/assets/portfolio/icons/header/GitHeader.png"
-              alt="GitHub"
-              className={styles.iconImage}
+            src="/assets/portfolio/icons/header/GitHeader.png"
+            alt="GitHub"
+            className={styles.iconImage}
             />
-          </a>
-          <a
+        </a>
+        <a
             href="https://www.linkedin.com/in/alex-d-menendez/"
             className={styles.headerIcon}
             target="_blank"
             rel="noopener noreferrer"
-          >
+        >
             <img
-              src="/assets/portfolio/icons/header/LinkedinHeader.png"
-              alt="LinkedIn"
-              className={styles.iconImage}
+            src="/assets/portfolio/icons/header/LinkedinHeader.png"
+            alt="LinkedIn"
+            className={styles.iconImage}
             />
-          </a>
-        </div>
+        </a>
+      </div>
       </div>
 
       {/* Resume Layout */}
