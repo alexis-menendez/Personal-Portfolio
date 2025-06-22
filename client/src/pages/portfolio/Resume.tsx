@@ -90,7 +90,7 @@ const Resume: React.FC = () => {
         {activeTab === 'education' && (
         <div>
             <h2>Education</h2>
-            
+
             <div className={styles.dividingLine}></div>
 
             <p>
@@ -120,17 +120,69 @@ const Resume: React.FC = () => {
           )}
 
           {/* Skills */}
-          {activeTab === 'skills' && (
-            <div>
-              <h2>Skills</h2>
-              <ul>
-                <li><strong>Languages:</strong> JavaScript, TypeScript, Python, HTML, CSS</li>
-                <li><strong>Frontend:</strong> React, Tailwind CSS, CSS Modules, Responsive Design</li>
-                <li><strong>Backend:</strong> Node.js, Express, MongoDB, GraphQL, JWT</li>
-                <li><strong>Tools:</strong> Git, GitHub Actions, Postman, Vite, Render, Netlify</li>
-                <li><strong>Other:</strong> Agile, OpenAI APIs, Research, Leadership</li>
-              </ul>
-            </div>
+        {activeTab === 'skills' && (
+        <div className={styles.skillsSection}>
+            <h2>Skills</h2>
+
+            <div className={styles.dividingLine}></div>
+
+            <table className={styles.skillsTable}>
+            <tbody>
+                <tr>
+                <td className={styles.category}>Languages</td>
+                <td>JavaScript (ES6+), TypeScript, Python</td>
+                </tr>
+                <tr>
+                <td className={styles.category}>Markup & Styling</td>
+                <td>HTML, CSS, JSX/TSX</td>
+                </tr>
+                <tr>
+                <td className={styles.category}>Frontend</td>
+                <td>React (Hooks, Component Architecture), Tailwind CSS, CSS Modules, Responsive Design, UI/UX Principles</td>
+                </tr>
+                <tr>
+                <td className={styles.category}>Backend</td>
+                <td>Node.js, Express, REST APIs, WebSockets</td>
+                </tr>
+                <tr>
+                <td className={styles.category}>Databases</td>
+                <td>MongoDB (Mongoose), SQL, GraphQL</td>
+                </tr>
+                <tr>
+                <td className={styles.category}>Authentication & Security</td>
+                <td>JWT, bcrypt, OAuth (conceptual), Protected Routes, Role-based Access Control</td>
+                </tr>
+                <tr>
+                <td className={styles.category}>Testing & Debugging</td>
+                <td>Jest, React Testing Library, Chrome DevTools, Insomnia, Postman, console debugging</td>
+                </tr>
+                <tr>
+                <td className={styles.category}>DevOps & CI/CD</td>
+                <td>Git & GitHub, GitHub Actions, CircleCI, Environment Variables, Process Improvement</td>
+                </tr>
+                <tr>
+                <td className={styles.category}>Tools</td>
+                <td>VS Code, npm, Vite, Postman</td>
+                </tr>
+                <tr>
+                <td className={styles.category}>Hosting & Deployment</td>
+                <td>Amazon Web Services (AWS), Render, Netlify, Cloudinary</td>
+                </tr>
+                <tr>
+                <td className={styles.category}>Machine Learning</td>
+                <td>OpenAI API integration, prompt engineering, deploying AI features</td>
+                </tr>
+                <tr>
+                <td className={styles.category}>Project Management</td>
+                <td>Agile Methodologies, GitHub Projects, Figma, Slack, Discord, Team Supervision & Collaboration</td>
+                </tr>
+                <tr>
+                <td className={styles.category}>Administrative & Analytical</td>
+                <td>Research & Analysis, Document Management</td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
           )}
 
           {/* Projects */}

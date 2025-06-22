@@ -169,3 +169,45 @@ strong {
   background-color: #80d0ff;
   margin: 0.15rem auto 0.15rem auto;
 }
+
+/* ----------------------------- */
+/* Skills Table                  */
+/* ----------------------------- */
+
+.skillsSection {
+  margin-top: 1rem;
+}
+
+.skillsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(2px);         
+  -webkit-backdrop-filter: blur(2px); 
+}
+
+.skillsTable td {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  vertical-align: top;
+  font-family: 'Inter Tight', sans-serif;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.skillsTable td:not(.category) {
+  color: #eee;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.category {
+  color: #80d0ff;
+  font-weight: 600;
+  font-size: 1.10rem;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(2px);         
+  -webkit-backdrop-filter: blur(2px);
+}
