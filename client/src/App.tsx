@@ -9,8 +9,7 @@ import { AuthProvider } from './context/authContext';
 
 // Layout
 import ProtectedRoute from './components/ProtectedRoute';
-import ShortPortfolioLayout from './components/portfolio/layout/ShortPortfolioLayout';
-import LongPortfolioLayout from './components/portfolio/layout/LongPortfolioLayout';
+import PortfolioLayout from './components/portfolio/layout/PortfolioLayout';
 import PsychedelicLayout from './components/portfolio/layout/PsychedelicLayout';
 
     // innerOrbit Layouts
@@ -60,9 +59,10 @@ const App: React.FC = () => {
   return (
     <AuthProvider>
       <Routes>
-        {/* Routes using ShortPortfolioLayout */}
-        <Route element={<ShortPortfolioLayout />}>
+        {/* Routes using PortfolioLayout */}
+        <Route element={<PortfolioLayout />}>
           <Route index element={<Home />} />
+          <Route path="/projects" element={<Projects />} />
           <Route path="/innerOrbit" element={<InnerOrbit />} />
           <Route path="/dontDie" element={<DontDie />} />
           <Route path="/lattice" element={<Lattice />} />
@@ -71,17 +71,12 @@ const App: React.FC = () => {
           <Route path="/contact" element={<Contact />} />
         </Route>
 
-        {/* Routes using LongPortfolioLayout */}
-        <Route element={<LongPortfolioLayout />}>
-          <Route path="/projects" element={<Projects />} />
-        </Route>
-
         {/* Routes using PsychedelicLayout */}
         <Route element={<PsychedelicLayout />}>
           <Route path="/taskadelic" element={<Taskadelic />} />
         </Route>
         
-        {/* Routes using IOLoginLayout */}
+        {/* Routes using IOLoginLayout */} 
         <Route element={<IOLoginLayout />}>
           <Route path="/io-home" element={<IOHome />} />
           <Route path="/io-login" element={<IOLogin />} />
@@ -93,15 +88,15 @@ const App: React.FC = () => {
         {/* Routes using IOMainLayout */}
         <Route element={<IOMainLayout />}>
           <Route path="/io-dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-          <Route path="/tracker" element={<ProtectedRoute><Tracker /></ProtectedRoute>} />
-          <Route path="/library" element={<ProtectedRoute><Library /></ProtectedRoute>} />
+          <Route path="/io-tracker" element={<ProtectedRoute><Tracker /></ProtectedRoute>} />
+          <Route path="/io-library" element={<ProtectedRoute><Library /></ProtectedRoute>} />
           <Route path="/io-account" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
-          <Route path="/dev-constellations" element={<DevelopConstellations />} />
-          <Route path="/dev-stars" element={<DevStars />} />
+          <Route path="/io-dev-constellations" element={<DevelopConstellations />} />
+          <Route path="/io-dev-stars" element={<DevStars />} />
         </Route>
 
         {/* Routes using IOJournalLayout */}
-        <Route path="/journal" element={<ProtectedRoute><IOJournalLayout /></ProtectedRoute>}>
+        <Route path="/io-journal" element={<ProtectedRoute><IOJournalLayout /></ProtectedRoute>}>
           <Route index element={<Journal />} />
           <Route path="constellation/:index" element={<Constellation />} />
           <Route path="entry/:entryId" element={<ViewJournal />} />
