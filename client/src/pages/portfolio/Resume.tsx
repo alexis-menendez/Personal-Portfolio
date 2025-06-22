@@ -127,7 +127,8 @@ const Resume: React.FC = () => {
 
         {/* Tab Content */}
         <section className={styles.contentArea}>
-          {/* Education */}
+        
+        {/* Education */}
         {activeTab === 'education' && (
         <div>
             <h2>Education</h2>
@@ -149,18 +150,16 @@ const Resume: React.FC = () => {
             <li>Exposure to <span className={styles.emph}>AI & Machine Learning</span> tech such as <span className={styles.emph}>ML models</span>, <span className={styles.emph}>OpenAI API integration</span>, <span className={styles.emph}>prompt engineering</span>, and deploying <span className={styles.emph}>AI-enhanced</span> features</li>
             </ul>
 
-            <div className={styles.dividingLine}></div>
+            <div className={styles.thinDividingLine}></div>
 
             <p>
             <span className={styles.institution}>Austin Community College</span>. Austin, TX. Spring 2025.<br />
             <em>Associate of Arts in Psychology.</em> 4.0 GPA.
             </p>
-
-            <div className={styles.dividingLine}></div>
         </div>
           )}
 
-          {/* Skills */}
+        {/* Skills */}
         {activeTab === 'skills' && (
         <div className={styles.skillsSection}>
             <h2>Skills</h2>
@@ -226,8 +225,8 @@ const Resume: React.FC = () => {
         </div>
           )}
 
-          {/* Projects */}
-          {activeTab === 'projects' && (
+        {/* Projects */}
+        {activeTab === 'projects' && (
             <div className={styles.projectsSection}>
               <h2>Projects</h2>
               <div className={styles.dividingLine}></div>
@@ -253,25 +252,116 @@ const Resume: React.FC = () => {
             </div>
           )}
 
+        {/* Experience */}
+        {activeTab === 'experience' && (
+        <div className={styles.experienceSection}>
+            <h2>Experience</h2>
 
-          {/* Experience */}
-          {activeTab === 'experience' && (
-            <div>
-              <h2>Experience</h2>
-              <ul>
-                <li><strong>ACC | Tutoring Lab Assistant</strong> — Jan 2024–Present</li>
-                <li><strong>George P. Johnson | Customer Service Rep</strong> — 2022–2023</li>
-                <li><strong>Dovetail | Welder / Fabricator</strong> — 2020–2021</li>
-                <li><strong>Others:</strong> Austin Fab & Forge, World Market, Inner Space Caverns, etc.</li>
-              </ul>
+            <div className={styles.dividingLine}></div>
+
+            <div className={styles.jobEntry}>
+            <p className={styles.job}>Austin Community College</p>
+            <p><em>Tutoring Lab Assistant | Austin, TX. | January 2024 – Present</em></p>
+            <ul>
+                <li>Troubleshoot technical issues and support students in accessing digital resources.</li>
+                <li>Guide students to appropriate student services based on their needs</li>
+            </ul>
             </div>
-          )}
+           
+            <div className={styles.thinDividingLine}></div>
 
+            <div className={styles.jobEntry}>
+            <p className={styles.job}>George P. Johnson Marketing</p>
+            <p><em>Customer Service Representative | Austin, TX. | May 2022 – October 2023</em></p>
+            <ul>
+                <li>Delivered customer service via Salesforce CRM software, assist clients & customers through email/text/phone</li>
+                <li>Provide tech support and troubleshooting</li>
+            </ul>
+            </div>
+           
+            <div className={styles.thinDividingLine}></div>
 
-          {/* Volunteer Work */}
-          {activeTab === 'volunteer' && (
-            <div>
-              <h2>Volunteer Work</h2>
+            <div className={styles.jobEntry}>
+            <p className={styles.job}>Guiding Lives</p>
+            <p><em>Data Entry & Organizational Assistant | Austin, TX. | January 2020 – July 2022</em></p>
+            <ul>
+                <li>Managed data entry, correspondence, and scheduling, maintaining compliance with agency protocols.</li>
+                <li>Performed office duties in support of faculty, including word processing, maintaining files, and processing mail</li>
+            </ul>
+            </div>
+           
+            <div className={styles.thinDividingLine}></div>
+
+            <div className={styles.jobEntry}>
+            <p className={styles.job}>Austin Fab & Forge and Neiri Design</p>
+            <p><em>Artistic Metalworker Internship | Austin, TX. | April 2021 – June 2021</em></p>
+            <ul>
+                <li>Collaborated with local fabricators to design and install custom metalwork pieces</li>
+                <li>Mastered advanced fabrication techniques and metalworking tools</li>
+            </ul>
+            </div>
+           
+            <div className={styles.thinDividingLine}></div>
+
+            <div className={styles.jobEntry}>
+            <p className={styles.job}>Dovetail Custom Wood & Metal</p>
+            <p><em>Welder / Fabricator | Del Valle, TX. | April 2020 – May 2021</em></p>
+            <ul>
+                <li>Read and followed blueprints to weld, drill, grind, cut, shape, bend, and forge metal</li>
+                <li>Worked independently and collaboratively on fabrication projects</li>
+            </ul>
+            </div>
+           
+            <div className={styles.thinDividingLine}></div>
+
+            <div className={styles.jobEntry}>
+            <p className={styles.job}>Austin Community College</p>
+            <p><em>Lab Technician Assistant | Round Rock & Austin, TX. | September 2019 – June 2020</em></p>
+            <ul>
+                <li>Assisted students and professors with lab tools and machine operation</li>
+                <li>Maintained and cleaned tools and welding equipment</li>
+            </ul>
+            </div>
+           
+            <div className={styles.thinDividingLine}></div>
+
+            <div className={styles.jobEntry}>
+            <p className={styles.job}>S&S Trails</p>
+            <p><em>Organizational Assistant | Austin, TX. | January 2017 – September 2019</em></p>
+            <ul>
+                <li>Analyzed quarterly spending and compiled reports for internal use</li>
+                <li>Provided administrative support through data entry and documentation</li>
+            </ul>
+            </div>
+           
+            <div className={styles.thinDividingLine}></div>
+
+            <div className={styles.jobEntry}>
+            <p className={styles.job}>World Market</p>
+            <p><em>Customer Service Representative | College Station, TX. | January 2015 – January 2017</em></p>
+            <ul>
+                <li>Handled transactions with accuracy and provided front-line customer support</li>
+                <li>Maintained a high level of service and communication with customers</li>
+            </ul>
+            </div>
+           
+            <div className={styles.thinDividingLine}></div>
+
+            <div className={styles.jobEntry}>
+            <p className={styles.job}>Inner Space Caverns</p>
+            <p><em>Tour Guide | Georgetown, TX. | November 2013 – January 2015</em></p>
+            <ul>
+                <li>Led guided tours and delivered public speaking to diverse groups</li>
+                <li>Cared for exotic animals in the petting zoo, supporting educational visitor experiences</li>
+            </ul>
+            </div>
+        </div>
+        )}
+
+        {/* Volunteer Work */}
+        {activeTab === 'volunteer' && (
+          <div>
+            <h2>Volunteer Work</h2>
               <ul>
                 <li><strong>The Lavender Society</strong> — Founder & President</li>
                 <li><strong>Austin Creative Reuse</strong> — Events Assistant</li>
