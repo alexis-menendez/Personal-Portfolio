@@ -1,5 +1,6 @@
 /* File: Clinet/src/assets/css/portfolio/pageStyles/Resume.module.css */
 
+/* Original Styles */
 .container {
   position: relative;
   display: flex;
@@ -42,8 +43,8 @@
 }
 
 .heading {
-  font-family: 'Inter Tight', sans-serif;
-  font-weight: 100;
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
   font-size: 2.5rem;
   margin-bottom: 1rem;
 }
@@ -53,4 +54,106 @@
   font-size: 1rem;
   margin-bottom: 1.5rem;
   line-height: 1.6;
+}
+
+
+/* Resume Styles */
+
+.resumeHeader {
+  text-align: center;
+  margin: 0.5rem auto 2rem auto;
+  padding: 0 2rem;
+  max-width: 800px;
+}
+
+.resumeHeader a {
+  color: #80d0ff;
+  margin: 0 0.25rem;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.resumeLayout {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
+
+.sidebar {
+  width: 18rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.sidebarTitle {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+
+.tabList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tabItem {
+  margin-bottom: 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.tabItem:hover {
+  color: #80d0ff;
+}
+
+.active {
+  color: #80d0ff;
+  font-weight: bold;
+}
+
+/* Resume Sections */
+.contentArea {
+  flex-grow: 1;
+  padding: 3rem;
+  max-width: 100%;
+  color: #eee;
+}
+
+.contentArea h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.contentArea ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.contentArea p,
+.contentArea li {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.contentArea a {
+  color: #80d0ff;
+  text-decoration: underline;
+}
+
+.paragraph,
+.contentArea p,
+.contentArea li {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 400;
+}
+
+strong {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
 }

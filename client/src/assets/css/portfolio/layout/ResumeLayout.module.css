@@ -35,12 +35,5 @@
 
 .main {
   padding: 2rem 4rem;
-  padding-top: 20vh; /* adjusts spacing under navbar */
-  padding-bottom: 4rem;
-}
-
-/* new addition to force layout height to match image */
-.imageSpacer {
-  height: calc(100vw * 1.5); /* same as your aspect ratio: width * height ratio */
-  width: 100%;
+  padding-top:7vh;
 }
