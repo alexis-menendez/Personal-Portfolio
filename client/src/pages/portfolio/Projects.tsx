@@ -6,37 +6,37 @@ import styles from '../../assets/css/portfolio/pageStyles/Home.module.css';
 const projects = [
   {
     name: "InnerOrbit",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "A cosmic wellness app where users log moods and create journal entires within a soothing visual galaxy.",
     image: "/assets/portfolio/icons/innerOrbit/RetroInnerOrbit.svg",
     link: "/innerOrbit"
   },
   {
     name: "How Not To Die",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "A narrative survival game disguised as a space console—write explorer logs, survive alien planets, and uncover deep mysteries.",
     image: "/assets/portfolio/icons/dontDie/RetroDontDie.png",
     link: "/dontDie"
   },
   {
     name: "Lattice",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "A social platform for mycologists to share thoughts, reactions, and discoveries in a vibrant network of fungal minds.",
     image: "/assets/portfolio/icons/lattice/RetroLattice.svg",
     link: "/lattice"
   },
   {
     name: "The Solarium",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "A whimsical digital library where users search, save, and annotate books in a sun-drenched, plant-filled sanctuary.",
     image: "/assets/portfolio/icons/solarium/RetroSolarium.svg",
     link: "/solarium"
   },
   {
     name: "Runestone Evaluation",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "A magical quiz app that transforms personality tests into mystical spellcasting rituals for aspiring mages.",
     image: "/assets/portfolio/icons/runestone/RetroRunestone.svg",
     link: "/runestone"
   },
   {
     name: "Taskadelic",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "A psychedelic Kanban board blending bullet journaling with hypnotic visuals to keep tasks flowing and focus high.",
     image: "/assets/portfolio/icons/taskadelic/RetroTaskadelic.png",
     link: "/taskadelic"
   },

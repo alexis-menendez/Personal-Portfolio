@@ -1,7 +1,9 @@
 // File: client/src/pages/portfolio/Resume.tsx
 
+
 import React, { useState } from 'react';
 import styles from '../../assets/css/portfolio/pageStyles/Resume.module.css';
+
 
 const Resume: React.FC = () => {
   const [activeTab, setActiveTab] = useState('education');
@@ -14,6 +16,45 @@ const Resume: React.FC = () => {
     { id: 'volunteer', label: 'Volunteer Work' },
   ];
 
+  const projects = [
+    {
+      name: "InnerOrbit",
+      description: "A cosmic wellness app where users log moods and create journal entires within a soothing visual galaxy.",
+      image: "/assets/portfolio/icons/innerOrbit/InnerOrbitIceBlue.png",
+      link: "/innerOrbit"
+    },
+    {
+      name: "How Not To Die",
+      description: "A narrative survival game disguised as a space console—write explorer logs, survive alien planets, and uncover deep mysteries.",
+      image: "/assets/portfolio/icons/dontDie/DontDieIceBlue.png",
+      link: "/dontDie"
+    },
+    {
+      name: "Lattice",
+      description: "A social platform for mycologists to share thoughts, reactions, and discoveries in a vibrant network of fungal minds.",
+      image: "/assets/portfolio/icons/lattice/LatticeIceBlue.png",
+      link: "/lattice"
+    },
+    {
+      name: "The Solarium",
+      description: "A whimsical digital library where users search, save, and annotate books in a sun-drenched, plant-filled sanctuary.",
+      image: "/assets/portfolio/icons/solarium/SolariumIceBlue.png",
+      link: "/solarium"
+    },
+    {
+      name: "Runestone Evaluation",
+      description: "A magical quiz app that transforms personality tests into mystical spellcasting rituals for aspiring mages.",
+      image: "/assets/portfolio/icons/runestone/RunestoneIceBlue.png",
+      link: "/runestone"
+    },
+    {
+      name: "Taskadelic",
+      description: "A psychedelic Kanban board blending bullet journaling with hypnotic visuals to keep tasks flowing and focus high.",
+      image: "/assets/portfolio/icons/taskadelic/TaskadelicIceBlue.png",
+      link: "/taskadelic"
+    }
+  ];
+
   return (
     <>
       {/* Resume Header */}
@@ -23,6 +64,7 @@ const Resume: React.FC = () => {
           <em>Full-stack developer specializing in TypeScript, React, and the MERN stack.</em><br />
           Portland, OR | (737) 217-9087
         </p>
+
 
         <div className={styles.iconRow}>
           <a
@@ -68,7 +110,6 @@ const Resume: React.FC = () => {
 
       {/* Resume Layout */}
       <div className={styles.resumeLayout}>
-        {/* Sidebar Navigation */}
         <aside className={styles.sidebar}>
           <h2 className={styles.sidebarTitle}>Curriculum Vitae</h2>
           <ul className={styles.tabList}>
@@ -187,14 +228,31 @@ const Resume: React.FC = () => {
 
           {/* Projects */}
           {activeTab === 'projects' && (
-            <div>
+            <div className={styles.projectsSection}>
               <h2>Projects</h2>
-              <p><strong>Personal Developer Portfolio:</strong> <a href="https://alex-menendez.onrender.com" target="_blank" rel="noreferrer">Live Site</a></p>
-              <p><strong>Lattice:</strong> <a href="https://github.com/alexis-menendez/Module-17-Lattice" target="_blank" rel="noreferrer">GitHub</a></p>
-              <p><strong>How Not To Die:</strong> <a href="https://github.com/alexis-menendez/HowNotToDieDemo" target="_blank" rel="noreferrer">GitHub</a></p>
-              <p><strong>InnerOrbit:</strong> <a href="https://github.com/alexis-menendez/Inner-Orbit" target="_blank" rel="noreferrer">GitHub</a></p>
+              <div className={styles.dividingLine}></div>
+              <div className={styles.projectGrid}>
+                {projects.map((project) => (
+                  <a
+                    key={project.name}
+                    href={project.link}
+                    className={styles.projectCard}
+                  >
+                    <img
+                      src={project.image}
+                      alt={project.name}
+                      className={styles.projectImage}
+                    />
+                    <div className={styles.projectInfo}>
+                      <h3>{project.name}</h3>
+                      <p>{project.description}</p>
+                    </div>
+                  </a>
+                ))}
+              </div>
             </div>
           )}
+
 
           {/* Experience */}
           {activeTab === 'experience' && (
@@ -208,6 +266,7 @@ const Resume: React.FC = () => {
               </ul>
             </div>
           )}
+
 
           {/* Volunteer Work */}
           {activeTab === 'volunteer' && (
@@ -227,4 +286,6 @@ const Resume: React.FC = () => {
   );
 };
 
+
 export default Resume;
+
