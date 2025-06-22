@@ -11,6 +11,7 @@ import { AuthProvider } from './context/authContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import PortfolioLayout from './components/portfolio/layout/PortfolioLayout';
 import PsychedelicLayout from './components/portfolio/layout/PsychedelicLayout';
+import ResumeLayout from './components/portfolio/layout/ResumeLayout';
 
     // innerOrbit Layouts
     import IOLoginLayout from './components/innerOrbit/layout/IOLoginLayout';
@@ -23,6 +24,7 @@ import Projects from './pages/portfolio/Projects';
 import DontDie from './pages/portfolio/DontDie';
 import InnerOrbit from './pages/portfolio/InnerOrbit';
 import Lattice from './pages/portfolio/Lattice';
+import Resume from './pages/portfolio/Resume';
 import Solarium from './pages/portfolio/Solarium';
 import Runestone from './pages/portfolio/Runestone';
 import Taskadelic from './pages/portfolio/Taskadelic';
@@ -74,6 +76,11 @@ const App: React.FC = () => {
         {/* Routes using PsychedelicLayout */}
         <Route element={<PsychedelicLayout />}>
           <Route path="/taskadelic" element={<Taskadelic />} />
+        </Route>
+
+        {/* Routes using ResumeLayout */}
+        <Route element={<ResumeLayout />}>
+          <Route path="/resume" element={<Resume />} />
         </Route>
         
         {/* Routes using IOLoginLayout */} 

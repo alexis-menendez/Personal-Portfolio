@@ -1,0 +1,56 @@
+/* File: Clinet/src/assets/css/portfolio/pageStyles/Resume.module.css */
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Georgia', serif;
+  color: #222;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.container::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  z-index: -1; /* Above stars, below content */
+}
+
+.starLayer {
+  position: fixed;
+  inset: 0;
+  z-index: -2; /* Behind the background image */
+  pointer-events: none;
+}
+
+.main {
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+  flex-grow: 1;
+  padding: 2rem 4rem;
+}
+
+.textSection {
+  max-width: 40%;
+  text-align: left; 
+  margin-top: 6rem;
+  margin-left: 6rem;
+}
+
+.heading {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 100;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.paragraph {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}

@@ -1,0 +1,46 @@
+/* File: client/src/assets/css/portfolio/layout/ResumeLayout.module.css */
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Georgia', serif;
+  color: #222;
+  overflow-x: hidden;
+  z-index: 0;
+  max-width: 100vw;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+.starLayer {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.main {
+  padding: 2rem 4rem;
+  padding-top: 20vh; /* adjusts spacing under navbar */
+  padding-bottom: 4rem;
+}
+
+/* new addition to force layout height to match image */
+.imageSpacer {
+  height: calc(100vw * 1.5); /* same as your aspect ratio: width * height ratio */
+  width: 100%;
+}
