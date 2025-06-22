@@ -360,16 +360,72 @@ const Resume: React.FC = () => {
 
         {/* Volunteer Work */}
         {activeTab === 'volunteer' && (
-          <div>
+        <div className={styles.experienceSection}>
             <h2>Volunteer Work</h2>
-              <ul>
-                <li><strong>The Lavender Society</strong> — Founder & President</li>
-                <li><strong>Austin Creative Reuse</strong> — Events Assistant</li>
-                <li><strong>Dougherty Arts Center</strong> — Gallery Assistant</li>
-                <li><strong>ATX ROX, Wild Wild Westie, ATX Fusion</strong> — Event Staff</li>
-              </ul>
+            <div className={styles.dividingLine}></div>
+
+            <div className={styles.jobEntry}>
+            <p className={styles.job}>The Lavender Society, <em>at Austin Community College</em></p>
+            <p><em>Founder & President | Austin, TX. | March 2024 – May 2025</em></p>
+            <ul>
+                <li>Founded and led a student organization supporting LGBTQ+ students and allies</li>
+                <li>Organized meetings, campus events, and outreach efforts to foster inclusivity and community engagement</li>
+                <li>Collaborated with college staff and departments to advocate for student needs and representation</li>
+            </ul>
             </div>
-          )}
+
+            <div className={styles.thinDividingLine}></div>
+
+            <div className={styles.jobEntry}>
+            <p className={styles.job}>Austin Creative Reuse</p>
+            <p><em>Materials and Events Assistant | Austin, TX. | September 2024 – May 2025</em></p>
+            <ul>
+                <li>Organized donations and promoted the organization’s mission at community events</li>
+            </ul>
+            </div>
+
+            <div className={styles.thinDividingLine}></div>
+
+            <div className={styles.jobEntry}>
+            <p className={styles.job}>Dougherty Arts Center</p>
+            <p><em>Horticulture Assistant & Gallery Assistant | Austin, TX. | July 2024 – May 2025</em></p>
+            <ul>
+                <li>Assisted with garden maintenance, including weeding, pruning, mulching, and planting</li>
+                <li>Monitored gallery and artwork, ensuring proper care and handling during events & greeting visitors</li>
+            </ul>
+            </div>
+
+            <div className={styles.thinDividingLine}></div>
+
+            <div className={styles.jobEntry}>
+            <p className={styles.job}>ATX ROX</p>
+            <p><em>Event Registration Assistant | Austin, TX. | September 26, 2024 – September 29, 2024</em></p>
+            <ul>
+                <li>Handled attendee check-ins, processed registrations and payments, and provided event information for smooth scheduling and navigation</li>
+            </ul>
+            </div>
+
+            <div className={styles.thinDividingLine}></div>
+
+            <div className={styles.jobEntry}>
+            <p className={styles.job}>Wild Wild Westie</p>
+            <p><em>Event Registration Assistant | Dallas, TX. | July 4, 2024 – July 7, 2024</em></p>
+            <ul>
+                <li>Managed check-ins, credential verification, and payments, ensuring data accuracy and guiding attendees on event details</li>
+            </ul>
+            </div>
+
+            <div className={styles.thinDividingLine}></div>
+
+            <div className={styles.jobEntry}>
+            <p className={styles.job}>ATX Fusion</p>
+            <p><em>Assistant Event Coordinator | Austin, TX. | February 2023 – February 2024</em></p>
+            <ul>
+                <li>Coordinated event logistics, managed attendee check-in, and oversaw food/beverage budgets</li>
+            </ul>
+            </div>
+        </div>
+        )}
         </section>
       </div>
     </>
