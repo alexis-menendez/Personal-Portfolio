@@ -2,13 +2,14 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import SectionWrapper from '../../components/portfolio/common/SectionWrapper';
 import styles from '../../assets/css/portfolio/pageStyles/Home.module.css';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className={styles.textSection}>
+    <SectionWrapper>
       <h1 className={styles.heading}>About me</h1>
       <p className={styles.paragraph}>
         I’m a full-stack developer with a soft spot for beautiful design, playful interfaces, and creative problem solving. 
@@ -21,7 +22,7 @@ const Home: React.FC = () => {
       >
         Resume
       </button>
-    </div>
+    </SectionWrapper>
   );
 };
 

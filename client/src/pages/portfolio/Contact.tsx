@@ -1,6 +1,7 @@
 // File: client/src/pages/portfolio/Contact.tsx
 
 import React, { useState } from 'react';
+import SectionWrapper from '../../components/portfolio/common/SectionWrapper';
 import styles from '../../assets/css/portfolio/pageStyles/Home.module.css';
 import formStyles from '../../assets/css/portfolio/common/Form.module.css';
 
@@ -33,38 +34,38 @@ const Contact: React.FC = () => {
   };
 
   return (
-      <div className={styles.textSection}>
-        <h1 className={styles.heading}>Contact Me</h1>
-        <form onSubmit={handleSubmit} className={formStyles.form}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="subject"
-            placeholder="Subject"
-            value={formData.subject}
-            onChange={handleChange}
-            required
-          />
-          <textarea
-            name="message"
-            placeholder="Your Message"
-            rows={6}
-            value={formData.message}
-            onChange={handleChange}
-            required
-          />
-          <button type="submit" className={styles.resumeButton}>
-            Send Message
-          </button>
-        </form>
-      </div>
+    <SectionWrapper>
+      <h1 className={styles.heading}>Contact Me</h1>
+      <form onSubmit={handleSubmit} className={formStyles.form}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Your Name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="subject"
+          placeholder="Subject"
+          value={formData.subject}
+          onChange={handleChange}
+          required
+        />
+        <textarea
+          name="message"
+          placeholder="Your Message"
+          rows={6}
+          value={formData.message}
+          onChange={handleChange}
+          required
+        />
+        <button type="submit" className={styles.resumeButton}>
+          Send Message
+        </button>
+      </form>
+    </SectionWrapper>
   );
 };
 
