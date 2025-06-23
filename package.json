@@ -27,7 +27,7 @@
         "dev:clean:install:build:start": "npm run clean:all && npm run dev:install:build:start",
         "paid:render-build": "npm run install:all",
         "paid:render-pre-start": "npm run build:all",
-        "paid:render-start": "npm run build:all && npm run start:all"
+        "paid:render-start": "npm run build:all && npm run start:all",
         "free:render-build": "npm run install:all && npm run build:all",
         "free:render-start": "npm run start:all"
     },
