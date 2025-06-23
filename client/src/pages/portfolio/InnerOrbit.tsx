@@ -32,7 +32,7 @@ const innerOrbitLinks = [
   },
   {
     name: "Gallery",
-    description: "Coming Soon — visual highlights and screenshots showcasing the InnerOrbit user experience.",
+    description: "Visual highlights and screenshots showcasing the InnerOrbit user experience.",
     image: "/assets/portfolio/icons/innerOrbit/InnerOrbitBlue.png",
     link: "/gallery", // internal route
     isInternal: false, // default to false until implemented
