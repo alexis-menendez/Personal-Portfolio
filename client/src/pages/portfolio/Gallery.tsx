@@ -30,6 +30,21 @@ const gallerySections = [
       { src: '/assets/portfolio/images/gallery/dontDie/DontDieLogin.png', alt: 'Login Page' },
     ]
   },
+  {
+    title: 'Taskadelic',
+    images: [
+      { src: '/assets/portfolio/images/gallery/taskadelic/DesktopHome.png', alt: 'Desktop Home Page' },
+      { src: '/assets/portfolio/images/gallery/taskadelic/DesktopLogin.png', alt: 'Desktop Login Page' },
+      { src: '/assets/portfolio/images/gallery/taskadelic/DesktopBoard.png', alt: 'Desktop Board Page' },
+      { src: '/assets/portfolio/images/gallery/taskadelic/DesktopTicket.png', alt: 'Desktop Create Ticket Page' },
+      { src: '/assets/portfolio/images/gallery/taskadelic/DesktopEdit.png', alt: 'Desktop Edit Ticket Page' },
+      { src: '/assets/portfolio/images/gallery/taskadelic/MobileHome.png', alt: 'Mobile Home Page' },
+      { src: '/assets/portfolio/images/gallery/taskadelic/MobileLogin.png', alt: 'Mobile Login Page' },
+      { src: '/assets/portfolio/images/gallery/taskadelic/MobileBoard.png', alt: 'Mobile Board Page' },
+      { src: '/assets/portfolio/images/gallery/taskadelic/MobileTicket.png', alt: 'Mobile Create Ticket Page' },
+      { src: '/assets/portfolio/images/gallery/taskadelic/MobileEdit.png', alt: 'Mobile Edit Ticket Page' },
+    ]
+  },
 ];
 
 const Gallery: React.FC = () => {

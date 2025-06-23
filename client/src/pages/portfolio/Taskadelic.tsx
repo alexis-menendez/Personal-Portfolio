@@ -4,30 +4,42 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../../assets/css/portfolio/pageStyles/Projects.module.css';
 
-const TaskadelicLinks = [
+const taskadelicLinks = [
   {
-    name: "Gallery",
+    name: "Deployed App",
     description: "Coming Soon!",
-    image: "/assets/portfolio/icons/taskadelic/TaskadelicPsychedelic.png",
-    link: "#",  // Internal route placeholder
-    isInternal: false, // default to false until implemented
+    image: "/assets/portfolio/icons/deployed/DeployedPsychedelic.png",
+    link: "#",
+    isInternal: false,
+    newTab: false,
     imageLeft: false,
   },
   {
     name: "GitHub",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "View the full source code for Taskadelic, the psychedelic productivity tool.",
     image: "/assets/portfolio/icons/git/GitPsychedelic.png",
     link: "https://github.com/alexis-menendez/Module-14-Taskadelic",
     isInternal: false,
+    newTab: true,
     imageLeft: true,
   },
   {
     name: "Documentation",
-    description: "NEED TO REPLACE WITH CORRECT LINK.",
+    description: "Check back soon for design documentation detailing Taskadelic’s features and technical architecture.",
     image: "/assets/portfolio/icons/documentation/DocumentationPsychedelic.png",
     link: "https://docs.google.com/document/d/1K9LzRR68QS5rKAFtXKpg2JLLScKgCeq1-FQufrgHPsQ/edit?tab=t.m171kj9l8bu",
     isInternal: false,
+    newTab: true,
     imageLeft: false,
+  },
+  {
+    name: "Gallery",
+    description: "Visual highlights and screenshots showcasing the Taskadelic user experience.",
+    image: "/assets/portfolio/icons/taskadelic/TaskadelicPsychedelic.png",
+    link: "/gallery", // internal route
+    isInternal: true,
+    newTab: false,
+    imageLeft: true,
   },
 ];
 
@@ -38,12 +50,12 @@ const Taskadelic: React.FC = () => {
         <h1 className={styles.heading}>Taskadelic</h1>
         <p className={styles.paragraph}>
           Taskadelic is a psychedelic productivity tool that transforms task management into a vibrant, sensory experience. 
-          It’s part planner, part moodboard, part meditative ritual—designed to make staying organized feel like a creative act rather than a chore.
+          It’s part planner, part Kanban Board, part mood-board to make staying organized feel like a creative act rather than a chore.
         </p>
       </div>
 
       <div className={styles.projectGrid}>
-        {TaskadelicLinks.map((section, index) => {
+        {taskadelicLinks.map((section, index) => {
           const cardContent = (
             <>
               {section.imageLeft && (
@@ -66,12 +78,30 @@ const Taskadelic: React.FC = () => {
             </>
           );
 
-          return section.isInternal ? (
-            <Link key={index} to={section.link} className={styles.card}>
-              {cardContent}
-            </Link>
-          ) : (
-            <a key={index} href={section.link} target="_blank" rel="noopener noreferrer" className={styles.card}>
+          if (section.newTab) {
+            return (
+              <a
+                key={index}
+                href={section.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.card}
+              >
+                {cardContent}
+              </a>
+            );
+          }
+
+          if (section.isInternal) {
+            return (
+              <Link key={index} to={section.link} className={styles.card}>
+                {cardContent}
+              </Link>
+            );
+          }
+
+          return (
+            <a key={index} href={section.link} className={styles.card}>
               {cardContent}
             </a>
           );

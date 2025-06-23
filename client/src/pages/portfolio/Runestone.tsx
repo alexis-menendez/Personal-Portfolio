@@ -1,33 +1,45 @@
-// File: client/src/pages/portfolio/Runestonetsx
+// File: client/src/pages/portfolio/Runestone.tsx
 
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../../assets/css/portfolio/pageStyles/Projects.module.css';
 
-const RunestoneLinks = [
+const runestoneLinks = [
   {
-    name: "Gallery",
+    name: "Deployed App",
     description: "Coming Soon!",
-    image: "/assets/portfolio/icons/runestone/RunestonePurple.png",
-    link: "#",  // Internal route placeholder
-    isInternal: false, // default to false until implemented
+    image: "/assets/portfolio/icons/deployed/DeployedPurple.png",
+    link: "#",
+    isInternal: false,
+    newTab: false,
     imageLeft: false,
   },
   {
     name: "GitHub",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "View the full source code for the Runestone Evaluation platform on GitHub.",
     image: "/assets/portfolio/icons/git/GitPurple.png",
     link: "https://github.com/alexis-menendez/Module-19-Runestone-Evaluation",
     isInternal: false,
+    newTab: true,
     imageLeft: true,
   },
   {
     name: "Documentation",
-    description: "NEED TO REPLACE WITH CORRECT LINK.",
+    description: "Check back soon for detailed design documentation on the Runestone Evaluation tool!",
     image: "/assets/portfolio/icons/documentation/DocumentationPurple.png",
-    link: "https://docs.google.com/document/d/1K9LzRR68QS5rKAFtXKpg2JLLScKgCeq1-FQufrgHPsQ/edit?tab=t.m171kj9l8bu",
+    link: "#",
     isInternal: false,
+    newTab: false,
     imageLeft: false,
+  },
+  {
+    name: "Gallery",
+    description: "Coming Soon!",
+    image: "/assets/portfolio/icons/runestone/RunestonePurple.png",
+    link: "#",
+    isInternal: false,
+    newTab: false,
+    imageLeft: true,
   },
 ];
 
@@ -43,7 +55,7 @@ const Runestone: React.FC = () => {
       </div>
 
       <div className={styles.projectGrid}>
-        {RunestoneLinks.map((section, index) => {
+        {runestoneLinks.map((section, index) => {
           const cardContent = (
             <>
               {section.imageLeft && (
@@ -66,12 +78,30 @@ const Runestone: React.FC = () => {
             </>
           );
 
-          return section.isInternal ? (
-            <Link key={index} to={section.link!} className={styles.card}>
-              {cardContent}
-            </Link>
-          ) : (
-            <a key={index} href={section.link || "#"} target="_blank" rel="noopener noreferrer" className={styles.card}>
+          if (section.newTab) {
+            return (
+              <a
+                key={index}
+                href={section.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.card}
+              >
+                {cardContent}
+              </a>
+            );
+          }
+
+          if (section.isInternal) {
+            return (
+              <Link key={index} to={section.link} className={styles.card}>
+                {cardContent}
+              </Link>
+            );
+          }
+
+          return (
+            <a key={index} href={section.link} className={styles.card}>
               {cardContent}
             </a>
           );
@@ -82,4 +112,3 @@ const Runestone: React.FC = () => {
 };
 
 export default Runestone;
-
