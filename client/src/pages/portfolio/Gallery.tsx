@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import styles from '../../assets/css/portfolio/pageStyles/Gallery.module.css';
+import GalleryPopUp from '../../components/portfolio/pageComponents/GalleryPopUp';
 
 const gallerySections = [
   {
@@ -28,6 +29,10 @@ const gallerySections = [
 const Gallery: React.FC = () => {
   const [sectionIndices, setSectionIndices] = useState(gallerySections.map(() => 0));
 
+  // Popup state
+  const [popupSection, setPopupSection] = useState<number | null>(null);
+  const [popupIndex, setPopupIndex] = useState<number>(0);
+
   const handleSlide = (sectionIdx: number, direction: 'next' | 'prev', total: number) => {
     setSectionIndices((prev) =>
       prev.map((current, i) =>
@@ -40,6 +45,26 @@ const Gallery: React.FC = () => {
     );
   };
 
+  const openPopUp = (sectionIdx: number, imageIdx: number) => {
+    setPopupSection(sectionIdx);
+    setPopupIndex(imageIdx);
+  };
+
+  const closePopUp = () => {
+    setPopupSection(null);
+  };
+
+  const handlePopUpNext = () => {
+    if (popupSection !== null) {
+      const images = gallerySections[popupSection].images;
+      setPopupIndex((prev) => Math.min(prev + 1, images.length - 1));
+    }
+  };
+
+  const handlePopUpPrev = () => {
+    setPopupIndex((prev) => Math.max(prev - 1, 0));
+  };
+
   return (
     <>
       <h1 className={styles.heading}>Gallery</h1>
@@ -47,7 +72,7 @@ const Gallery: React.FC = () => {
 
       {gallerySections.map((section, sectionIdx) => {
         const index = sectionIndices[sectionIdx];
-        const offset = `-${(100 / 3) * index}%`; // Move one image width per click
+        const offset = `-${(100 / 3) * index}%`;
 
         return (
           <section key={sectionIdx} className={styles.projectSection}>
@@ -69,7 +94,13 @@ const Gallery: React.FC = () => {
                   {section.images.map((img, i) => (
                     <div key={i} className={styles.carouselItem}>
                       <div className={styles.imageCard}>
-                        <img src={img.src} alt={img.alt} className={styles.image} />
+                        <img
+                          src={img.src}
+                          alt={img.alt}
+                          className={styles.image}
+                          onClick={() => openPopUp(sectionIdx, i)}
+                          style={{ cursor: 'pointer' }}
+                        />
                         <p className={styles.caption}>{img.alt}</p>
                       </div>
                     </div>
@@ -88,8 +119,19 @@ const Gallery: React.FC = () => {
           </section>
         );
       })}
+
+      {popupSection !== null && (
+        <GalleryPopUp
+          images={gallerySections[popupSection].images}
+          currentIndex={popupIndex}
+          onClose={closePopUp}
+          onNext={handlePopUpNext}
+          onPrev={handlePopUpPrev}
+        />
+      )}
     </>
   );
 };
 
 export default Gallery;
+
