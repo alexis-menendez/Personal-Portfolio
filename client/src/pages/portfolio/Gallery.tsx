@@ -23,7 +23,13 @@ const gallerySections = [
       { src: '/assets/portfolio/images/gallery/innerOrbit/privacy.png', alt: 'Privacy Policy Page' },
       { src: '/assets/portfolio/images/gallery/innerOrbit/terms.png', alt: 'Terms of Service' },
     ]
-  }
+  },
+  {
+    title: 'How Not To Die',
+    images: [
+      { src: '/assets/portfolio/images/gallery/dontDie/DontDieLogin.png', alt: 'Login Page' },
+    ]
+  },
 ];
 
 const Gallery: React.FC = () => {
