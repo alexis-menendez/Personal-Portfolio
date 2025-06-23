@@ -7,7 +7,7 @@ import styles from '../../assets/css/portfolio/pageStyles/Projects.module.css';
 const innerOrbitLinks = [
   {
     name: "Deployed App",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "Explore the live InnerOrbit wellness app, featuring mood journaling, mood tracking, and meditation guides.",
     image: "/assets/portfolio/icons/deployed/DeployedBlue.png",
     link: "/io-home", // internal route
     isInternal: true,
@@ -16,7 +16,7 @@ const innerOrbitLinks = [
   },
   {
     name: "GitHub",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "View the full source code for the InnerOrbit MERN stack application on GitHub.",
     image: "/assets/portfolio/icons/git/GitBlue.png",
     link: "https://github.com/alexis-menendez/Personal-Portfolio",
     isInternal: false,
@@ -24,7 +24,7 @@ const innerOrbitLinks = [
   },
   {
     name: "Documentation",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "Detailed design documentation and technical breakdown of InnerOrbit, including features, architecture, and development notes.",
     image: "/assets/portfolio/icons/documentation/DocumentationBlue.png",
     link: "https://docs.google.com/document/d/1K9LzRR68QS5rKAFtXKpg2JLLScKgCeq1-FQufrgHPsQ/edit?tab=t.m171kj9l8bu",
     isInternal: false,
@@ -32,9 +32,9 @@ const innerOrbitLinks = [
   },
   {
     name: "Gallery",
-    description: "Coming Soon!",
+    description: "Coming Soon — visual highlights and screenshots showcasing the InnerOrbit user experience.",
     image: "/assets/portfolio/icons/innerOrbit/InnerOrbitBlue.png",
-    link: "#",  // Internal route placeholder
+    link: "/gallery", // internal route
     isInternal: false, // default to false until implemented
     imageLeft: true,
   },
