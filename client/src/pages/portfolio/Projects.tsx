@@ -1,12 +1,14 @@
 // File: client/src/pages/portfolio/Projects.tsx
 
 import React from 'react';
-import styles from '../../assets/css/portfolio/pageStyles/Home.module.css';
+import SectionWrapper from '../../components/portfolio/common/SectionWrapper';
+import sharedStyles from '../../assets/css/portfolio/pageStyles/Home.module.css'; 
+import projectStyles from '../../assets/css/portfolio/pageStyles/Projects.module.css'; 
 
 const projects = [
   {
     name: "InnerOrbit",
-    description: "A cosmic wellness app where users log moods and create journal entires within a soothing visual galaxy.",
+    description: "A cosmic wellness app where users log moods and create journal entries within a soothing visual galaxy.",
     image: "/assets/portfolio/icons/innerOrbit/RetroInnerOrbit.svg",
     link: "/innerOrbit"
   },
@@ -45,32 +47,39 @@ const projects = [
 const Projects: React.FC = () => {
   return (
     <>
-      <div className={styles.textSection}>
-        <h1 className={styles.heading}>Projects</h1>
-        <p className={styles.paragraph}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      <SectionWrapper>
+        <h1 className={sharedStyles.heading}>Projects</h1>
+        <p className={sharedStyles.paragraph}>
+          These projects represent the intersection of imagination, design, and functionality.
+          Each app began as a spark—whether a journaling app born from a love of star maps and 
+          constellations or a survival game wrapped in cosmic mystery—and was shaped through thoughtful code, 
+          narrative depth, and user-centered design.
         </p>
-      </div>
+      </SectionWrapper>
 
-      <div className={styles.projectGrid}>
+      <div className={projectStyles.projectGrid}>
         {projects.map((project, index) => {
-          const isImageLeft = project.name === "How Not To Die" || project.name === "The Solarium" || project.name === "Taskadelic";
+          const isImageLeft =
+            project.name === "How Not To Die" ||
+            project.name === "The Solarium" ||
+            project.name === "Taskadelic";
+
           return (
-            <a key={index} href={project.link} className={styles.card}>
+            <a key={index} href={project.link} className={projectStyles.card}>
               {isImageLeft && (
-                <div className={styles.imageBox}>
+                <div className={projectStyles.imageBox}>
                   <img src={project.image} alt={`${project.name} icon`} />
                 </div>
               )}
 
-              <div className={isImageLeft ? styles.rightText : styles.leftText}>
+              <div className={isImageLeft ? projectStyles.rightText : projectStyles.leftText}>
                 <h2>{project.name}</h2>
                 <p>{project.description}</p>
-                <button className={styles.button}>View Project</button>
+                <button className={projectStyles.button}>View Project</button>
               </div>
 
               {!isImageLeft && (
-                <div className={styles.imageBox}>
+                <div className={projectStyles.imageBox}>
                   <img src={project.image} alt={`${project.name} icon`} />
                 </div>
               )}
@@ -83,4 +92,3 @@ const Projects: React.FC = () => {
 };
 
 export default Projects;
-

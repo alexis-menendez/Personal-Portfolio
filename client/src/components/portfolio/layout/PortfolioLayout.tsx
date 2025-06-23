@@ -2,7 +2,7 @@
 
 import React, { ReactNode } from 'react';
 import { Outlet } from 'react-router-dom';
-import styles from '../../../assets/css/portfolio/layout/PortfolioLayout.module.css'; 
+import styles from '../../../assets/css/portfolio/layout/PortfolioLayout.module.css';
 import StarBackground from '../common/StarBackground';
 import ShootingStar from '../common/ShootingStar';
 import NavBar from './NavBar';
@@ -20,6 +20,9 @@ const PortfolioLayout: React.FC<PortfolioLayoutProps> = ({ children }) => {
         <ShootingStar />
       </div>
 
+      {/* Fade mask image overlay */}
+      <div className={styles.scrollMask} />
+
       <NavBar />
 
       <main className={styles.main}>
@@ -33,3 +36,4 @@ const PortfolioLayout: React.FC<PortfolioLayoutProps> = ({ children }) => {
 };
 
 export default PortfolioLayout;
+
