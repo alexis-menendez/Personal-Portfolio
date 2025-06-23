@@ -1,0 +1,87 @@
+/* File: client/src/assets/css/portfolio/pageStyles/GalleryPopUp.module.css */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.modal {
+  background: rgba(20, 20, 30, 0.95);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  max-width: 80%;
+  max-height: 80%;
+  padding: 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imageWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 90vw;
+  max-height: 75vh;
+  overflow: hidden;
+}
+
+.image {
+  max-width: 100%;
+  max-height: calc(75vh - 3rem); /* subtract estimated caption height */
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid #444;
+}
+
+
+.caption {
+  font-size: 1rem;
+  color: #ccc;
+  text-align: center;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.navButton {
+  background: transparent;
+  color: #fff;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.navButton:hover {
+  color: #f0f0f0;
+}
+
+.closeButton {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: transparent;
+  color: #aaa;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.closeButton:hover {
+  color: #fff;
+}

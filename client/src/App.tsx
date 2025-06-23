@@ -12,6 +12,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import PortfolioLayout from './components/portfolio/layout/PortfolioLayout';
 import PsychedelicLayout from './components/portfolio/layout/PsychedelicLayout';
 import ResumeLayout from './components/portfolio/layout/ResumeLayout';
+import GalleryLayout from './components/portfolio/layout/GalleryLayout';
 
     // innerOrbit Layouts
     import IOLoginLayout from './components/innerOrbit/layout/IOLoginLayout';
@@ -20,14 +21,15 @@ import ResumeLayout from './components/portfolio/layout/ResumeLayout';
 
 // Pages
 import Home from './pages/portfolio/Home';
+   import Resume from './pages/portfolio/Resume';
 import Projects from './pages/portfolio/Projects';
-import DontDie from './pages/portfolio/DontDie';
-import InnerOrbit from './pages/portfolio/InnerOrbit';
-import Lattice from './pages/portfolio/Lattice';
-import Resume from './pages/portfolio/Resume';
-import Solarium from './pages/portfolio/Solarium';
-import Runestone from './pages/portfolio/Runestone';
-import Taskadelic from './pages/portfolio/Taskadelic';
+import Gallery from './pages/portfolio/Gallery';
+   import DontDie from './pages/portfolio/DontDie';
+   import InnerOrbit from './pages/portfolio/InnerOrbit';
+   import Lattice from './pages/portfolio/Lattice';
+   import Solarium from './pages/portfolio/Solarium';
+   import Runestone from './pages/portfolio/Runestone';
+   import Taskadelic from './pages/portfolio/Taskadelic';
 import Contact from './pages/portfolio/Contact';
 
     // innerOrbit Pages
@@ -83,6 +85,11 @@ const App: React.FC = () => {
           <Route path="/resume" element={<Resume />} />
         </Route>
         
+        {/* Routes using GalleryLayout */}
+        <Route element={<GalleryLayout />}>
+          <Route path="/gallery" element={<Gallery />} />
+        </Route>
+
         {/* Routes using IOLoginLayout */} 
         <Route element={<IOLoginLayout />}>
           <Route path="/io-home" element={<IOHome />} />

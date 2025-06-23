@@ -1,0 +1,35 @@
+/* File: client/src/assets/css/portfolio/layout/GalleryLayout.module.css */
+
+/* ----------------------------- */
+/* Layout Container              */
+/* ----------------------------- */
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+  max-width: 100vw;
+  z-index: 0;
+}
+
+/* ----------------------------- */
+/* Star Background Layer         */
+/* ----------------------------- */
+
+.starLayer {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* ----------------------------- */
+/* Page Content Wrapper          */
+/* ----------------------------- */
+
+.main {
+  padding: 2rem 4rem;
+  padding-top: 7vh; /* Controls spacing beneath navbar */
+}
