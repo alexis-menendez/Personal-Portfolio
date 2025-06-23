@@ -4,30 +4,42 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../../assets/css/portfolio/pageStyles/Projects.module.css';
 
-const DontDieLinks = [
+const dontDieLinks = [
   {
-    name: "Gallery",
+    name: "Deployed App",
     description: "Coming Soon!",
-    image: "/assets/portfolio/icons/dontDie/DontDieTeal.png",
-    link: "#",  // Internal route placeholder
-    isInternal: false, // default to false until implemented
+    image: "/assets/portfolio/icons/deployed/DeployedTeal.png",
+    link: "#",
+    isInternal: false,
+    newTab: false,
     imageLeft: false,
   },
   {
     name: "GitHub",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "View the full source code for the How Not to Die survival sim demo on GitHub.",
     image: "/assets/portfolio/icons/git/GitTeal.png",
     link: "https://github.com/alexis-menendez/HowNotToDieDemo",
     isInternal: false,
+    newTab: true,
     imageLeft: true,
   },
   {
     name: "Documentation",
-    description: "NEED TO REPLACE WITH CORRECT LINK.",
+    description: "Detailed design documentation and technical breakdown of How Not To Die, including features, architecture, and development notes.",
     image: "/assets/portfolio/icons/documentation/DocumentationTeal.png",
-    link: "https://docs.google.com/document/d/1K9LzRR68QS5rKAFtXKpg2JLLScKgCeq1-FQufrgHPsQ/edit?tab=t.m171kj9l8bu",
+    link: "https://docs.google.com/document/d/1lG3wGpQglw6aqWl2WG_FtDNSuud-BfDb08JUTFICkO8/edit?usp=sharing",
     isInternal: false,
+    newTab: true,
     imageLeft: false,
+  },
+  {
+    name: "Gallery",
+    description: "Visual highlights and screenshots showcasing the How Not To Die user experience.",
+    image: "/assets/portfolio/icons/dontDie/DontDieTeal.png",
+    link: "/gallery", // internal route
+    isInternal: true,
+    newTab: false,
+    imageLeft: true,
   },
 ];
 
@@ -44,7 +56,7 @@ const DontDie: React.FC = () => {
       </div>
 
       <div className={styles.projectGrid}>
-        {DontDieLinks.map((section, index) => {
+        {dontDieLinks.map((section, index) => {
           const cardContent = (
             <>
               {section.imageLeft && (
@@ -67,12 +79,30 @@ const DontDie: React.FC = () => {
             </>
           );
 
-          return section.isInternal ? (
-            <Link key={index} to={section.link} className={styles.card}>
-              {cardContent}
-            </Link>
-          ) : (
-            <a key={index} href={section.link} target="_blank" rel="noopener noreferrer" className={styles.card}>
+          if (section.newTab) {
+            return (
+              <a
+                key={index}
+                href={section.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.card}
+              >
+                {cardContent}
+              </a>
+            );
+          }
+
+          if (section.isInternal) {
+            return (
+              <Link key={index} to={section.link} className={styles.card}>
+                {cardContent}
+              </Link>
+            );
+          }
+
+          return (
+            <a key={index} href={section.link} className={styles.card}>
               {cardContent}
             </a>
           );
@@ -83,4 +113,3 @@ const DontDie: React.FC = () => {
 };
 
 export default DontDie;
-

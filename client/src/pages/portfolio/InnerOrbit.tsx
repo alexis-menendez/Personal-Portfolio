@@ -11,7 +11,7 @@ const innerOrbitLinks = [
     image: "/assets/portfolio/icons/deployed/DeployedBlue.png",
     link: "/io-home", // internal route
     isInternal: true,
-    newTab: true, // added to indicate open in new tab
+    newTab: true, 
     imageLeft: false,
   },
   {
@@ -20,6 +20,7 @@ const innerOrbitLinks = [
     image: "/assets/portfolio/icons/git/GitBlue.png",
     link: "https://github.com/alexis-menendez/Personal-Portfolio",
     isInternal: false,
+    newTab: true, 
     imageLeft: true,
   },
   {
@@ -28,14 +29,16 @@ const innerOrbitLinks = [
     image: "/assets/portfolio/icons/documentation/DocumentationBlue.png",
     link: "https://docs.google.com/document/d/1K9LzRR68QS5rKAFtXKpg2JLLScKgCeq1-FQufrgHPsQ/edit?tab=t.m171kj9l8bu",
     isInternal: false,
+    newTab: true, 
     imageLeft: false,
   },
   {
     name: "Gallery",
-    description: "Coming Soon — visual highlights and screenshots showcasing the InnerOrbit user experience.",
+    description: "Visual highlights and screenshots showcasing the InnerOrbit user experience.",
     image: "/assets/portfolio/icons/innerOrbit/InnerOrbitBlue.png",
     link: "/gallery", // internal route
-    isInternal: false, // default to false until implemented
+    isInternal: true,
+    newTab: false,
     imageLeft: true,
   },
 ];

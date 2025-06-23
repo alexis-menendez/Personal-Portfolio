@@ -4,30 +4,42 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../../assets/css/portfolio/pageStyles/Projects.module.css';
 
-const LatticeLinks = [
+const latticeLinks = [
   {
-    name: "Gallery",
+    name: "Deployed App",
     description: "Coming Soon!",
-    image: "/assets/portfolio/icons/lattice/LatticeRed.png",
-    link: "#",  // Internal route placeholder
-    isInternal: false, // default to false until implemented
+    image: "/assets/portfolio/icons/deployed/DeployedRed.png",
+    link: "#",
+    isInternal: false,
+    newTab: false,
     imageLeft: false,
   },
   {
     name: "GitHub",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "View the full source code for the Lattice mycology social network on GitHub.",
     image: "/assets/portfolio/icons/git/GitRed.png",
     link: "https://github.com/alexis-menendez/Module-17-Lattice",
     isInternal: false,
+    newTab: true,
     imageLeft: true,
   },
   {
     name: "Documentation",
-    description: "NEED TO REPLACE WITH CORRECT LINK.",
+    description: "Under development, check back soon for design documentation for Lattice, including tech overview and feature notes!",
     image: "/assets/portfolio/icons/documentation/DocumentationRed.png",
-    link: "https://docs.google.com/document/d/1K9LzRR68QS5rKAFtXKpg2JLLScKgCeq1-FQufrgHPsQ/edit?tab=t.m171kj9l8bu",
+    link: "#",
     isInternal: false,
+    newTab: false,
     imageLeft: false,
+  },
+  {
+    name: "Gallery",
+    description: "Coming Soon!",
+    image: "/assets/portfolio/icons/lattice/LatticeRed.png",
+    link: "#",
+    isInternal: false,
+    newTab: false,
+    imageLeft: true,
   },
 ];
 
@@ -44,7 +56,7 @@ const Lattice: React.FC = () => {
       </div>
 
       <div className={styles.projectGrid}>
-        {LatticeLinks.map((section, index) => {
+        {latticeLinks.map((section, index) => {
           const cardContent = (
             <>
               {section.imageLeft && (
@@ -67,12 +79,30 @@ const Lattice: React.FC = () => {
             </>
           );
 
-          return section.isInternal ? (
-            <Link key={index} to={section.link} className={styles.card}>
-              {cardContent}
-            </Link>
-          ) : (
-            <a key={index} href={section.link} target="_blank" rel="noopener noreferrer" className={styles.card}>
+          if (section.newTab) {
+            return (
+              <a
+                key={index}
+                href={section.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.card}
+              >
+                {cardContent}
+              </a>
+            );
+          }
+
+          if (section.isInternal) {
+            return (
+              <Link key={index} to={section.link} className={styles.card}>
+                {cardContent}
+              </Link>
+            );
+          }
+
+          return (
+            <a key={index} href={section.link} className={styles.card}>
               {cardContent}
             </a>
           );
@@ -83,4 +113,3 @@ const Lattice: React.FC = () => {
 };
 
 export default Lattice;
-
