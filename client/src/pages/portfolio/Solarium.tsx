@@ -17,7 +17,7 @@ const solariumLinks = [
   {
     name: "GitHub",
     description: "View the full source code for The Solarium visual knowledge platform on GitHub.",
-    image: "/assets/portfolio/icons/git/GitBrown.png",
+    image: "/assets/portfolio/icons/git/GitBrown.svg",
     link: "https://github.com/alexis-menendez/Module-18-The-Solarium",
     isInternal: false,
     newTab: true,
@@ -35,7 +35,7 @@ const solariumLinks = [
   {
     name: "Gallery",
     description: "Coming Soon!",
-    image: "/assets/portfolio/icons/solarium/SolariumBrown.png",
+    image: "/assets/portfolio/icons/solarium/SolariumBrown.svg",
     link: "#",
     isInternal: false,
     newTab: false,

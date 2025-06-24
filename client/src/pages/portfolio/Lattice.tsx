@@ -17,7 +17,7 @@ const latticeLinks = [
   {
     name: "GitHub",
     description: "View the full source code for the Lattice mycology social network on GitHub.",
-    image: "/assets/portfolio/icons/git/GitRed.png",
+    image: "/assets/portfolio/icons/git/GitRed.svg",
     link: "https://github.com/alexis-menendez/Module-17-Lattice",
     isInternal: false,
     newTab: true,
@@ -35,7 +35,7 @@ const latticeLinks = [
   {
     name: "Gallery",
     description: "Coming Soon!",
-    image: "/assets/portfolio/icons/lattice/LatticeRed.png",
+    image: "/assets/portfolio/icons/lattice/LatticeRed.svg",
     link: "#",
     isInternal: false,
     newTab: false,

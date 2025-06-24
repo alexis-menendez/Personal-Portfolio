@@ -17,7 +17,7 @@ const innerOrbitLinks = [
   {
     name: "GitHub",
     description: "View the full source code for the InnerOrbit MERN stack application on GitHub.",
-    image: "/assets/portfolio/icons/git/GitBlue.png",
+    image: "/assets/portfolio/icons/git/GitBlue.svg",
     link: "https://github.com/alexis-menendez/Personal-Portfolio",
     isInternal: false,
     newTab: true, 
@@ -35,7 +35,7 @@ const innerOrbitLinks = [
   {
     name: "Gallery",
     description: "Visual highlights and screenshots showcasing the InnerOrbit user experience.",
-    image: "/assets/portfolio/icons/innerOrbit/InnerOrbitBlue.png",
+    image: "/assets/portfolio/icons/innerOrbit/InnerOrbitBlue.svg",
     link: "/gallery", // internal route
     isInternal: true,
     newTab: false,

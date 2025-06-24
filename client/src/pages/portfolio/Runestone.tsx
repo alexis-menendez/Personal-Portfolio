@@ -17,7 +17,7 @@ const runestoneLinks = [
   {
     name: "GitHub",
     description: "View the full source code for the Runestone Evaluation platform on GitHub.",
-    image: "/assets/portfolio/icons/git/GitPurple.png",
+    image: "/assets/portfolio/icons/git/GitPurple.svg",
     link: "https://github.com/alexis-menendez/Module-19-Runestone-Evaluation",
     isInternal: false,
     newTab: true,
@@ -35,7 +35,7 @@ const runestoneLinks = [
   {
     name: "Gallery",
     description: "Coming Soon!",
-    image: "/assets/portfolio/icons/runestone/RunestonePurple.png",
+    image: "/assets/portfolio/icons/runestone/RunestonePurple.svg",
     link: "#",
     isInternal: false,
     newTab: false,
