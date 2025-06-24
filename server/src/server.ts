@@ -52,8 +52,13 @@ async function startServer() {
       origin: (origin, callback) => {
         const allowedOrigins = [
           "http://localhost:3000",
+          "http://localhost:3001",
+          "http://localhost:4000",
+          "http://localhost:4001",
           "http://localhost:4173",
-          "https://inner-orbit.onrender.com"
+          "http://localhost:10000",
+          "https://inner-orbit.onrender.com",
+          "https://alex-menendez.onrender.com"
         ];
 
         if (!origin || allowedOrigins.includes(origin)) {
