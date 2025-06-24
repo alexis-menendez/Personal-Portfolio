@@ -1,6 +1,7 @@
 // File: client/src/pages/portfolio/Gallery.tsx
 
 import React, { useState } from 'react';
+import LazyImage from '../../components/portfolio/common/LazyImage';
 import styles from '../../assets/css/portfolio/pageStyles/Gallery.module.css';
 import GalleryPopUp from '../../components/portfolio/pageComponents/GalleryPopUp';
 
@@ -115,7 +116,7 @@ const Gallery: React.FC = () => {
                   {section.images.map((img, i) => (
                     <div key={i} className={styles.carouselItem}>
                       <div className={styles.imageCard}>
-                        <img
+                        <LazyImage
                           src={img.src}
                           alt={img.alt}
                           className={styles.image}
