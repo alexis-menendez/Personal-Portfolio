@@ -26,7 +26,7 @@ const runestoneLinks = [
   {
     name: "Documentation",
     description: "Check back soon for detailed design documentation on the Runestone Evaluation tool!",
-    image: "/assets/portfolio/icons/documentation/DocumentationPurple.png",
+    image: "/assets/portfolio/icons/documentation/DocumentationPurple.svg",
     link: "#",
     isInternal: false,
     newTab: false,

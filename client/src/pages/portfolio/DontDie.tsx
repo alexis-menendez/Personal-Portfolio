@@ -26,7 +26,7 @@ const dontDieLinks = [
   {
     name: "Documentation",
     description: "Detailed design documentation and technical breakdown of How Not To Die, including features, architecture, and development notes.",
-    image: "/assets/portfolio/icons/documentation/DocumentationTeal.png",
+    image: "/assets/portfolio/icons/documentation/DocumentationTeal.svg",
     link: "https://docs.google.com/document/d/1lG3wGpQglw6aqWl2WG_FtDNSuud-BfDb08JUTFICkO8/edit?usp=sharing",
     isInternal: false,
     newTab: true,

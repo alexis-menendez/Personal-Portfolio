@@ -26,7 +26,7 @@ const latticeLinks = [
   {
     name: "Documentation",
     description: "Under development, check back soon for design documentation for Lattice, including tech overview and feature notes!",
-    image: "/assets/portfolio/icons/documentation/DocumentationRed.png",
+    image: "/assets/portfolio/icons/documentation/DocumentationRed.svg",
     link: "#",
     isInternal: false,
     newTab: false,

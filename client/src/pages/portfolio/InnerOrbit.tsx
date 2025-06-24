@@ -26,7 +26,7 @@ const innerOrbitLinks = [
   {
     name: "Documentation",
     description: "Detailed design documentation and technical breakdown of InnerOrbit, including features, architecture, and development notes.",
-    image: "/assets/portfolio/icons/documentation/DocumentationBlue.png",
+    image: "/assets/portfolio/icons/documentation/DocumentationBlue.svg",
     link: "https://docs.google.com/document/d/1K9LzRR68QS5rKAFtXKpg2JLLScKgCeq1-FQufrgHPsQ/edit?tab=t.m171kj9l8bu",
     isInternal: false,
     newTab: true, 

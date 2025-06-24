@@ -26,7 +26,7 @@ const solariumLinks = [
   {
     name: "Documentation",
     description: "Under development, check back soon for design documentation for The Solarium, including tech overview and feature notes!",
-    image: "/assets/portfolio/icons/documentation/DocumentationBrown.png",
+    image: "/assets/portfolio/icons/documentation/DocumentationBrown.svg",
     link: "#",
     isInternal: false,
     newTab: false,
