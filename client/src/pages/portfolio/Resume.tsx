@@ -91,7 +91,7 @@ const Resume: React.FC = () => {
             className={styles.headerIcon}
         >
             <img
-            src="/assets/portfolio/icons/header/EmailHeader.png"
+            src="/assets/portfolio/icons/header/EmailHeader.svg"
             alt="Email"
             className={styles.iconImage}
             />
@@ -103,7 +103,7 @@ const Resume: React.FC = () => {
             rel="noopener noreferrer"
         >
             <img
-            src="/assets/portfolio/icons/header/GitHeader.png"
+            src="/assets/portfolio/icons/header/GitHeader.svg"
             alt="GitHub"
             className={styles.iconImage}
             />
@@ -115,7 +115,7 @@ const Resume: React.FC = () => {
             rel="noopener noreferrer"
         >
             <img
-            src="/assets/portfolio/icons/header/LinkedinHeader.png"
+            src="/assets/portfolio/icons/header/LinkedinHeader.svg"
             alt="LinkedIn"
             className={styles.iconImage}
             />
