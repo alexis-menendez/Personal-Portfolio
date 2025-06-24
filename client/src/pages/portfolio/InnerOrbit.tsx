@@ -8,7 +8,7 @@ const innerOrbitLinks = [
   {
     name: "Deployed App",
     description: "Explore the live InnerOrbit wellness app, featuring mood journaling, mood tracking, and meditation guides.",
-    image: "/assets/portfolio/icons/deployed/DeployedBlue.png",
+    image: "/assets/portfolio/icons/deployed/DeployedBlue.svg",
     link: "/io-home", // internal route
     isInternal: true,
     newTab: true, 

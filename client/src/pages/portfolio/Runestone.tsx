@@ -8,7 +8,7 @@ const runestoneLinks = [
   {
     name: "Deployed App",
     description: "Coming Soon!",
-    image: "/assets/portfolio/icons/deployed/DeployedPurple.png",
+    image: "/assets/portfolio/icons/deployed/DeployedPurple.svg",
     link: "#",
     isInternal: false,
     newTab: false,

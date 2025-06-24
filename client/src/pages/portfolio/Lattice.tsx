@@ -8,7 +8,7 @@ const latticeLinks = [
   {
     name: "Deployed App",
     description: "Coming Soon!",
-    image: "/assets/portfolio/icons/deployed/DeployedRed.png",
+    image: "/assets/portfolio/icons/deployed/DeployedRed.svg",
     link: "#",
     isInternal: false,
     newTab: false,

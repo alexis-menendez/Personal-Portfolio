@@ -8,7 +8,7 @@ const solariumLinks = [
   {
     name: "Deployed App",
     description: "Coming Soon!",
-    image: "/assets/portfolio/icons/deployed/DeployedBrown.png",
+    image: "/assets/portfolio/icons/deployed/DeployedBrown.svg",
     link: "#",
     isInternal: false,
     newTab: false,

@@ -8,7 +8,7 @@ const dontDieLinks = [
   {
     name: "Deployed App",
     description: "Coming Soon!",
-    image: "/assets/portfolio/icons/deployed/DeployedTeal.png",
+    image: "/assets/portfolio/icons/deployed/DeployedTeal.svg",
     link: "#",
     isInternal: false,
     newTab: false,
