@@ -20,37 +20,37 @@ const Resume: React.FC = () => {
     {
       name: "InnerOrbit",
       description: "A cosmic wellness app where users log moods and create journal entires within a soothing visual galaxy.",
-      image: "/assets/portfolio/icons/innerOrbit/InnerOrbitIceBlue.png",
+      image: "/assets/portfolio/icons/innerOrbit/InnerOrbitIceBlue.svg",
       link: "/innerOrbit"
     },
     {
       name: "How Not To Die",
       description: "A narrative survival game disguised as a space console—write explorer logs, survive alien planets, and uncover deep mysteries.",
-      image: "/assets/portfolio/icons/dontDie/DontDieIceBlue.png",
+      image: "/assets/portfolio/icons/dontDie/DontDieIceBlue.svg",
       link: "/dontDie"
     },
     {
       name: "Lattice",
       description: "A social platform for mycologists to share thoughts, reactions, and discoveries in a vibrant network of fungal minds.",
-      image: "/assets/portfolio/icons/lattice/LatticeIceBlue.png",
+      image: "/assets/portfolio/icons/lattice/LatticeIceBlue.svg",
       link: "/lattice"
     },
     {
       name: "The Solarium",
       description: "A whimsical digital library where users search, save, and annotate books in a sun-drenched, plant-filled sanctuary.",
-      image: "/assets/portfolio/icons/solarium/SolariumIceBlue.png",
+      image: "/assets/portfolio/icons/solarium/SolariumIceBlue.svg",
       link: "/solarium"
     },
     {
       name: "Runestone Evaluation",
       description: "A magical quiz app that transforms personality tests into mystical spellcasting rituals for aspiring mages.",
-      image: "/assets/portfolio/icons/runestone/RunestoneIceBlue.png",
+      image: "/assets/portfolio/icons/runestone/RunestoneIceBlue.svg",
       link: "/runestone"
     },
     {
       name: "Taskadelic",
       description: "A psychedelic Kanban board blending bullet journaling with hypnotic visuals to keep tasks flowing and focus high.",
-      image: "/assets/portfolio/icons/taskadelic/TaskadelicIceBlue.png",
+      image: "/assets/portfolio/icons/taskadelic/TaskadelicIceBlue.svg",
       link: "/taskadelic"
     }
   ];

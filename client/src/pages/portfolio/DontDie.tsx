@@ -17,7 +17,7 @@ const dontDieLinks = [
   {
     name: "GitHub",
     description: "View the full source code for the How Not to Die survival sim demo on GitHub.",
-    image: "/assets/portfolio/icons/git/GitTeal.png",
+    image: "/assets/portfolio/icons/git/GitTeal.svg",
     link: "https://github.com/alexis-menendez/HowNotToDieDemo",
     isInternal: false,
     newTab: true,
@@ -35,7 +35,7 @@ const dontDieLinks = [
   {
     name: "Gallery",
     description: "Visual highlights and screenshots showcasing the How Not To Die user experience.",
-    image: "/assets/portfolio/icons/dontDie/DontDieTeal.png",
+    image: "/assets/portfolio/icons/dontDie/DontDieTeal.svg",
     link: "/gallery", // internal route
     isInternal: true,
     newTab: false,
