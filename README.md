@@ -7,7 +7,7 @@ Expect bugs, missing features, and unpolished UI while construction is underway.
 # Personal Portfolio
 
 
-#### [**Alex Menendez**](https://alex-menendez.onrender.com/) – Full-Stack Developer with a focus on UI/UX and team collaboration
+#### [**Alex Menendez**](https://alex-menendez.onrender.com/) – Full-Stack Developer with a focus on UI/UX Design
 
 - **Website**: [Crafted-By-Alex](https://alex-menendez.onrender.com/)
 - **LinkedIn**: [in/alex-d-menendez](https://www.linkedin.com/in/alex-d-menendez/)
