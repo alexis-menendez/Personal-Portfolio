@@ -1,6 +1,7 @@
 // File: client/src/pages/portfolio/Gallery.tsx
 
 import React, { useState } from 'react';
+import LazyImage from '../../components/portfolio/common/LazyImage';
 import styles from '../../assets/css/portfolio/pageStyles/Gallery.module.css';
 import GalleryPopUp from '../../components/portfolio/pageComponents/GalleryPopUp';
 
@@ -8,41 +9,41 @@ const gallerySections = [
   {
     title: 'InnerOrbit',
     images: [
-      { src: '/assets/portfolio/images/gallery/innerOrbit/home.png', alt: 'Home Page' },
-      { src: '/assets/portfolio/images/gallery/innerOrbit/login.png', alt: 'Login Page' },
-      { src: '/assets/portfolio/images/gallery/innerOrbit/register.png', alt: 'Register Page' },
-      { src: '/assets/portfolio/images/gallery/innerOrbit/dashboard.png', alt: 'Dashboard Weekly Review' },
-      { src: '/assets/portfolio/images/gallery/innerOrbit/timer.png', alt: 'Dashboard Pomodoro Timer' },
-      { src: '/assets/portfolio/images/gallery/innerOrbit/timer-settings.png', alt: 'Pomodoro Timer Settings' },
-      { src: '/assets/portfolio/images/gallery/innerOrbit/account.png', alt: 'Account Settings Page' },
-      { src: '/assets/portfolio/images/gallery/innerOrbit/library.png', alt: 'Library Page' },
-      { src: '/assets/portfolio/images/gallery/innerOrbit/tracker.png', alt: 'Tracker' },
-      { src: '/assets/portfolio/images/gallery/innerOrbit/journal-galaxy.png', alt: 'Journal Galaxy View' },
-      { src: '/assets/portfolio/images/gallery/innerOrbit/journal-constellation.png', alt: 'Journal Constellation View' },
-      { src: '/assets/portfolio/images/gallery/innerOrbit/journal-notebook.png', alt: 'Journal Entry Notebook' },
-      { src: '/assets/portfolio/images/gallery/innerOrbit/privacy.png', alt: 'Privacy Policy Page' },
-      { src: '/assets/portfolio/images/gallery/innerOrbit/terms.png', alt: 'Terms of Service' },
+      { src: '/assets/portfolio/images/gallery/innerOrbit/home.webp', alt: 'Home Page' },
+      { src: '/assets/portfolio/images/gallery/innerOrbit/login.webp', alt: 'Login Page' },
+      { src: '/assets/portfolio/images/gallery/innerOrbit/register.webp', alt: 'Register Page' },
+      { src: '/assets/portfolio/images/gallery/innerOrbit/dashboard.webp', alt: 'Dashboard Weekly Review' },
+      { src: '/assets/portfolio/images/gallery/innerOrbit/timer.webp', alt: 'Dashboard Pomodoro Timer' },
+      { src: '/assets/portfolio/images/gallery/innerOrbit/timer-settings.webp', alt: 'Pomodoro Timer Settings' },
+      { src: '/assets/portfolio/images/gallery/innerOrbit/account.webp', alt: 'Account Settings Page' },
+      { src: '/assets/portfolio/images/gallery/innerOrbit/library.webp', alt: 'Library Page' },
+      { src: '/assets/portfolio/images/gallery/innerOrbit/tracker.webp', alt: 'Tracker' },
+      { src: '/assets/portfolio/images/gallery/innerOrbit/journal-galaxy.webp', alt: 'Journal Galaxy View' },
+      { src: '/assets/portfolio/images/gallery/innerOrbit/journal-constellation.webp', alt: 'Journal Constellation View' },
+      { src: '/assets/portfolio/images/gallery/innerOrbit/journal-notebook.webp', alt: 'Journal Entry Notebook' },
+      { src: '/assets/portfolio/images/gallery/innerOrbit/privacy.webp', alt: 'Privacy Policy Page' },
+      { src: '/assets/portfolio/images/gallery/innerOrbit/terms.webp', alt: 'Terms of Service' },
     ]
   },
   {
     title: 'How Not To Die',
     images: [
-      { src: '/assets/portfolio/images/gallery/dontDie/DontDieLogin.png', alt: 'Login Page' },
+      { src: '/assets/portfolio/images/gallery/dontDie/DontDieLogin.webp', alt: 'Login Page' },
     ]
   },
   {
     title: 'Taskadelic',
     images: [
-      { src: '/assets/portfolio/images/gallery/taskadelic/DesktopHome.png', alt: 'Desktop Home Page' },
-      { src: '/assets/portfolio/images/gallery/taskadelic/DesktopLogin.png', alt: 'Desktop Login Page' },
-      { src: '/assets/portfolio/images/gallery/taskadelic/DesktopBoard.png', alt: 'Desktop Board Page' },
-      { src: '/assets/portfolio/images/gallery/taskadelic/DesktopTicket.png', alt: 'Desktop Create Ticket Page' },
-      { src: '/assets/portfolio/images/gallery/taskadelic/DesktopEdit.png', alt: 'Desktop Edit Ticket Page' },
-      { src: '/assets/portfolio/images/gallery/taskadelic/MobileHome.png', alt: 'Mobile Home Page' },
-      { src: '/assets/portfolio/images/gallery/taskadelic/MobileLogin.png', alt: 'Mobile Login Page' },
-      { src: '/assets/portfolio/images/gallery/taskadelic/MobileBoard.png', alt: 'Mobile Board Page' },
-      { src: '/assets/portfolio/images/gallery/taskadelic/MobileTicket.png', alt: 'Mobile Create Ticket Page' },
-      { src: '/assets/portfolio/images/gallery/taskadelic/MobileEdit.png', alt: 'Mobile Edit Ticket Page' },
+      { src: '/assets/portfolio/images/gallery/taskadelic/DesktopHome.webp', alt: 'Desktop Home Page' },
+      { src: '/assets/portfolio/images/gallery/taskadelic/DesktopLogin.webp', alt: 'Desktop Login Page' },
+      { src: '/assets/portfolio/images/gallery/taskadelic/DesktopBoard.webp', alt: 'Desktop Board Page' },
+      { src: '/assets/portfolio/images/gallery/taskadelic/DesktopTicket.webp', alt: 'Desktop Create Ticket Page' },
+      { src: '/assets/portfolio/images/gallery/taskadelic/DesktopEdit.webp', alt: 'Desktop Edit Ticket Page' },
+      { src: '/assets/portfolio/images/gallery/taskadelic/MobileHome.webp', alt: 'Mobile Home Page' },
+      { src: '/assets/portfolio/images/gallery/taskadelic/MobileLogin.webp', alt: 'Mobile Login Page' },
+      { src: '/assets/portfolio/images/gallery/taskadelic/MobileBoard.webp', alt: 'Mobile Board Page' },
+      { src: '/assets/portfolio/images/gallery/taskadelic/MobileTicket.webp', alt: 'Mobile Create Ticket Page' },
+      { src: '/assets/portfolio/images/gallery/taskadelic/MobileEdit.webp', alt: 'Mobile Edit Ticket Page' },
     ]
   },
 ];
@@ -115,7 +116,7 @@ const Gallery: React.FC = () => {
                   {section.images.map((img, i) => (
                     <div key={i} className={styles.carouselItem}>
                       <div className={styles.imageCard}>
-                        <img
+                        <LazyImage
                           src={img.src}
                           alt={img.alt}
                           className={styles.image}

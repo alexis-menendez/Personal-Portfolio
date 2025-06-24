@@ -8,7 +8,7 @@ const dontDieLinks = [
   {
     name: "Deployed App",
     description: "Coming Soon!",
-    image: "/assets/portfolio/icons/deployed/DeployedTeal.png",
+    image: "/assets/portfolio/icons/deployed/DeployedTeal.svg",
     link: "#",
     isInternal: false,
     newTab: false,
@@ -17,7 +17,7 @@ const dontDieLinks = [
   {
     name: "GitHub",
     description: "View the full source code for the How Not to Die survival sim demo on GitHub.",
-    image: "/assets/portfolio/icons/git/GitTeal.png",
+    image: "/assets/portfolio/icons/git/GitTeal.svg",
     link: "https://github.com/alexis-menendez/HowNotToDieDemo",
     isInternal: false,
     newTab: true,
@@ -26,7 +26,7 @@ const dontDieLinks = [
   {
     name: "Documentation",
     description: "Detailed design documentation and technical breakdown of How Not To Die, including features, architecture, and development notes.",
-    image: "/assets/portfolio/icons/documentation/DocumentationTeal.png",
+    image: "/assets/portfolio/icons/documentation/DocumentationTeal.svg",
     link: "https://docs.google.com/document/d/1lG3wGpQglw6aqWl2WG_FtDNSuud-BfDb08JUTFICkO8/edit?usp=sharing",
     isInternal: false,
     newTab: true,
@@ -35,7 +35,7 @@ const dontDieLinks = [
   {
     name: "Gallery",
     description: "Visual highlights and screenshots showcasing the How Not To Die user experience.",
-    image: "/assets/portfolio/icons/dontDie/DontDieTeal.png",
+    image: "/assets/portfolio/icons/dontDie/DontDieTeal.svg",
     link: "/gallery", // internal route
     isInternal: true,
     newTab: false,

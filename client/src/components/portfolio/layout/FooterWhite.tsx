@@ -18,13 +18,13 @@ const FooterWhite: React.FC = () => {
     <footer className={styles.footer}>
       <div className={styles.iconRow}>
         <a href="#" onClick={handleEmailClick} className={styles.footerIcon}>
-          <img src="/assets/portfolio/icons/header/EmailHeader.png" alt="Email" className={styles.iconImage} />
+          <img src="/assets/portfolio/icons/header/EmailHeader.svg" alt="Email" className={styles.iconImage} />
         </a>
         <a href="https://github.com/alexis-menendez" className={styles.footerIcon} target="_blank" rel="noopener noreferrer">
-          <img src="/assets/portfolio/icons/header/GitHeader.png" alt="GitHub" className={styles.iconImage} />
+          <img src="/assets/portfolio/icons/header/GitHeader.svg" alt="GitHub" className={styles.iconImage} />
         </a>
         <a href="https://www.linkedin.com/in/alex-d-menendez/" className={styles.footerIcon} target="_blank" rel="noopener noreferrer">
-          <img src="/assets/portfolio/icons/header/LinkedinHeader.png" alt="LinkedIn" className={styles.iconImage} />
+          <img src="/assets/portfolio/icons/header/LinkedinHeader.svg" alt="LinkedIn" className={styles.iconImage} />
         </a>
       </div>
       <div className={styles.footerLineBlue}></div>

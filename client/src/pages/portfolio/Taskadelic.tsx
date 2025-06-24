@@ -8,7 +8,7 @@ const taskadelicLinks = [
   {
     name: "Deployed App",
     description: "Coming Soon!",
-    image: "/assets/portfolio/icons/deployed/DeployedPsychedelic.png",
+    image: "/assets/portfolio/icons/deployed/DeployedPsychedelic.svg",
     link: "#",
     isInternal: false,
     newTab: false,
@@ -17,7 +17,7 @@ const taskadelicLinks = [
   {
     name: "GitHub",
     description: "View the full source code for Taskadelic, the psychedelic productivity tool.",
-    image: "/assets/portfolio/icons/git/GitPsychedelic.png",
+    image: "/assets/portfolio/icons/git/GitPsychedelic.svg",
     link: "https://github.com/alexis-menendez/Module-14-Taskadelic",
     isInternal: false,
     newTab: true,
@@ -26,7 +26,7 @@ const taskadelicLinks = [
   {
     name: "Documentation",
     description: "Check back soon for design documentation detailing Taskadelic’s features and technical architecture.",
-    image: "/assets/portfolio/icons/documentation/DocumentationPsychedelic.png",
+    image: "/assets/portfolio/icons/documentation/DocumentationPsychedelic.svg",
     link: "https://docs.google.com/document/d/1K9LzRR68QS5rKAFtXKpg2JLLScKgCeq1-FQufrgHPsQ/edit?tab=t.m171kj9l8bu",
     isInternal: false,
     newTab: true,
@@ -35,7 +35,7 @@ const taskadelicLinks = [
   {
     name: "Gallery",
     description: "Visual highlights and screenshots showcasing the Taskadelic user experience.",
-    image: "/assets/portfolio/icons/taskadelic/TaskadelicPsychedelic.png",
+    image: "/assets/portfolio/icons/taskadelic/TaskadelicPsychedelic.svg",
     link: "/gallery", // internal route
     isInternal: true,
     newTab: false,

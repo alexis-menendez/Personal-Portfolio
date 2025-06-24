@@ -15,7 +15,7 @@ const projects = [
   {
     name: "How Not To Die",
     description: "A narrative survival game disguised as a space console—write explorer logs, survive alien planets, and uncover deep mysteries.",
-    image: "/assets/portfolio/icons/dontDie/RetroDontDie.png",
+    image: "/assets/portfolio/icons/dontDie/RetroDontDie.svg",
     link: "/dontDie"
   },
   {
@@ -39,7 +39,7 @@ const projects = [
   {
     name: "Taskadelic",
     description: "A psychedelic Kanban board blending bullet journaling with hypnotic visuals to keep tasks flowing and focus high.",
-    image: "/assets/portfolio/icons/taskadelic/RetroTaskadelic.png",
+    image: "/assets/portfolio/icons/taskadelic/RetroTaskadelic.svg",
     link: "/taskadelic"
   },
 ];
