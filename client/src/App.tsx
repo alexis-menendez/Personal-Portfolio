@@ -42,6 +42,7 @@ import Contact from './pages/portfolio/Contact';
     const UserProfile = lazy(() => import('./pages/innerOrbit/IOUserProfile'));
 
 // Components
+import PageLoader from './components/portfolio/common/PageLoader';
 import NavBar from './components/portfolio/layout/NavBar';
 import Footer from './components/portfolio/layout/Footer';
 import FooterWhite from './components/portfolio/layout/FooterWhite';
@@ -61,6 +62,23 @@ import FooterWhite from './components/portfolio/layout/FooterWhite';
 
 
 const App: React.FC = () => {
+  const [pageLoading, setPageLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const handleLoad = () => setPageLoading(false);
+
+    if (document.readyState === 'complete') {
+      // Already loaded
+      handleLoad();
+    } else {
+      // Wait until load
+      window.addEventListener('load', handleLoad);
+      return () => window.removeEventListener('load', handleLoad);
+    }
+  }, []);
+
+  if (pageLoading) return <PageLoader />; // full-screen animation
+
   return (
     <AuthProvider>
       <Suspense fallback={<div>Loading...</div>}>

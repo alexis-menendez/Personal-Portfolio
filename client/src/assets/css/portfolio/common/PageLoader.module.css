@@ -1,0 +1,11 @@
+/* File: client/src/assets/css/portfolio/common/PageLoader.module.css */
+
+.loaderOverlay {
+  position: fixed;
+  inset: 0;
+  background: #000; /* or use a matching dark gradient */
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
