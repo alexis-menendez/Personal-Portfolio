@@ -1,10 +1,11 @@
 /* File: client/src/index.css */
 
+/* Tailwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Reset margins/padding that might cause white bars */
+/* Margins/Padding */
 html,
 body {
   height: 100%;
@@ -13,9 +14,20 @@ body {
   padding: 0;
 }
 
-/* Global default font and text shadow */
+/* Font and Text shadow */
 body {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 100;
   color: #fff8e7; 
+}
+
+/* Z-Index Layer Variables */
+:root {
+  --z-ui: 0;                 /* Layer 0: UI Elements */
+  --z-cityscape: -1;         /* Layer 1: Cityscape */
+  --z-black-arch: -2;        /* Layer 2: Black Arch */
+  --z-stars: -3;             /* Layer 3: Stars */
+  --z-midnight-gradient: -4; /* Layer 4: Midnight Gradient */
+  --z-clouds: -5;            /* Layer 5: Clouds */
+  --z-sunset-gradient: -6;   /* Layer 6: Sunset Gradient */
 }

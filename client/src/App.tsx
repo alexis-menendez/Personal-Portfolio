@@ -10,6 +10,7 @@ import { AuthProvider } from './context/authContext';
 
 // Layout
 import ProtectedRoute from './components/ProtectedRoute';
+import RetroLayout from './components/portfolio/layout/RetroLayout';
 import PortfolioLayout from './components/portfolio/layout/PortfolioLayout';
 import PsychedelicLayout from './components/portfolio/layout/PsychedelicLayout';
 import ResumeLayout from './components/portfolio/layout/ResumeLayout';
@@ -21,16 +22,17 @@ import GalleryLayout from './components/portfolio/layout/GalleryLayout';
     const IOJournalLayout = lazy(() => import('./components/innerOrbit/layout/IOJournalLayout'));
 
 // Pages
+import DevHome from './pages/portfolio/DevHome';
 import Home from './pages/portfolio/Home';
    import Resume from './pages/portfolio/Resume';
 import Projects from './pages/portfolio/Projects';
-import Gallery from './pages/portfolio/Gallery';
    import DontDie from './pages/portfolio/DontDie';
    import InnerOrbit from './pages/portfolio/InnerOrbit';
    import Lattice from './pages/portfolio/Lattice';
    import Solarium from './pages/portfolio/Solarium';
    import Runestone from './pages/portfolio/Runestone';
    import Taskadelic from './pages/portfolio/Taskadelic';
+     import Gallery from './pages/portfolio/Gallery';
 import Contact from './pages/portfolio/Contact';
 
     // innerOrbit Pages
@@ -65,6 +67,12 @@ const App: React.FC = () => {
     <AuthProvider>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
+          
+          {/* Routes using RetroLayout */}
+          <Route element={<RetroLayout />}>
+            <Route path="/dev-home" element={<DevHome />} />
+          </Route>
+
           {/* Routes using PortfolioLayout */}
           <Route element={<PortfolioLayout />}>
             <Route index element={<Home />} />
