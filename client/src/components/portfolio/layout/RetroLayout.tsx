@@ -3,14 +3,17 @@
 import React, { ReactNode } from 'react';
 import { Outlet } from 'react-router-dom';
 
-// Intentionally no CSS imports yet.
-// This layout is a placeholder so App.tsx can import it without build errors.
-
+// Layout structure
 import NavBar from './NavBar';
 import Footer from './Footer';
-// If you decide to add background components later, you can uncomment these:
+
+// Background elements
+import SunsetGradient from '../common/SunsetGradient';
+import Clouds from '../common/Clouds';
+import SunsetMask from '../common/SunsetMask';
+import TransparentStars from '../common/TransparentStars';
+// If you decide to add other background components later, you can uncomment these:
 // import StarBackground from '../common/StarBackground';
-// import ShootingStar from '../common/ShootingStar';
 
 interface RetroLayoutProps {
   children?: ReactNode;
@@ -19,12 +22,12 @@ interface RetroLayoutProps {
 const RetroLayout: React.FC<RetroLayoutProps> = ({ children }) => {
   return (
     <div>
-      {/* Optional background layer (add when ready)
-      <div>
-        <StarBackground />
-        <ShootingStar />
-      </div>
-      */}
+      {/* Background layers */}
+      <SunsetGradient />       {/* Layer 7: --z-sunset-gradient */}
+      <Clouds />               {/* Layer 6: --z-clouds */}
+      <SunsetMask />           {/* Layer 5: --z-sunset-mask */}
+      <TransparentStars />     {/* Layer 4: --z-stars (includes shooting stars) */}
+      {/* <StarBackground /> */}
 
       <NavBar />
 

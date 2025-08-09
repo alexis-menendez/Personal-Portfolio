@@ -28,6 +28,7 @@ body {
   --z-black-arch: -2;        /* Layer 2: Black Arch */
   --z-stars: -3;             /* Layer 3: Stars */
   --z-midnight-gradient: -4; /* Layer 4: Midnight Gradient */
-  --z-clouds: -5;            /* Layer 5: Clouds */
-  --z-sunset-gradient: -6;   /* Layer 6: Sunset Gradient */
+  --z-sunset-mask: -5;       /* Layer 6: Sunset Mask */
+  --z-clouds: -6;            /* Layer 5: Clouds */
+  --z-sunset-gradient: -7;   /* Layer 7: Sunset Gradient */
 }
