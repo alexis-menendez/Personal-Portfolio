@@ -369,7 +369,21 @@
   -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
   -webkit-text-fill-color: #00ffe1 !important;
 }
-.modalInput:focus { border-color: #00ffe1; }
+.modalInput:focus,
+.modalInput:hover {
+  background: rgba(0, 10, 8, 0.95);
+  border-color: #00ffe1;
+  outline: none;
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  -webkit-text-fill-color: #00ffe1 !important;
+}
+.modalInput:-webkit-autofill,
+.modalInput:-webkit-autofill:hover,
+.modalInput:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  -webkit-text-fill-color: #00ffe1 !important;
+  border: 1px solid #00ffe1;
+}
 .modalInput::placeholder { color: rgba(0, 255, 225, 0.35); }
 
 .modalTextarea {
@@ -388,7 +402,14 @@
   -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
   -webkit-text-fill-color: #00ffe1 !important;
 }
-.modalTextarea:focus { border-color: #00ffe1; }
+.modalTextarea:focus,
+.modalTextarea:hover {
+  background: rgba(0, 10, 8, 0.95);
+  border-color: #00ffe1;
+  outline: none;
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  -webkit-text-fill-color: #00ffe1 !important;
+}
 .modalTextarea::placeholder { color: rgba(0, 255, 225, 0.35); }
 
 .modalActions {
