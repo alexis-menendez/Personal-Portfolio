@@ -1,7 +1,7 @@
-// File: server/src/routes/hntd/index.ts
+// File: server/src/routes/dontDie/index.ts
 
 import { Router } from 'express';
-import authRoutes from './authRoutes.js';
+import authRoutes from './HNTDAuthRoutes.js';
 
 const router = Router();
 router.use('/auth', authRoutes);

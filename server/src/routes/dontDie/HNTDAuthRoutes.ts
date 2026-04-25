@@ -1,9 +1,9 @@
-// File: server/src/routes/hntd/authRoutes.ts
+// File: server/src/routes/dontDie/HNTDAuthRoutes.ts
 
 import { Router, Request, Response } from 'express';
 import bcrypt from 'bcrypt';
-import { HNTDUser } from '../../models/hntd/index.js';
-import { generateHNTDToken } from '../../middleware/hntdAuth.js';
+import { HNTDUser } from '../../models/dontDie/index.js';
+import { generateHNTDToken } from '../../middleware/HNTDAuth.js';
 
 const router = Router();
 

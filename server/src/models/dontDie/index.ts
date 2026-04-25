@@ -1,4 +1,4 @@
-// File: server/src/models/hntd/index.ts
+// File: server/src/models/dontDie/index.ts
 
 import dotenv from 'dotenv';
 dotenv.config();

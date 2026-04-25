@@ -1,8 +1,8 @@
-/* File: client/src/assets/css/hntd/HNTDConsole.module.css */
+/* File: client/src/assets/css/dontDie/HNTDConsole.module.css */
 
 /* ── Console background ───────────────────────────────────────── */
 .consoleBackground {
-  background-image: url('/assets/hntd/images/ConsoleDesktop.png');
+  background-image: url('/assets/dontDie/images/ConsoleDesktop.png');
   background-size: cover;
   background-color: black;
   background-position: center;
@@ -17,14 +17,14 @@
 
 @media screen and (max-width: 767px) {
   .consoleBackground {
-    background-image: url('/assets/hntd/images/ConsoleMobile.png');
+    background-image: url('/assets/dontDie/images/ConsoleMobile.png');
     background-position: center top;
   }
 }
 
 @media screen and (min-width: 768px) and (max-width: 930px) {
   .consoleBackground {
-    background-image: url('/assets/hntd/images/ConsoleTablet.png');
+    background-image: url('/assets/dontDie/images/ConsoleTablet.png');
   }
 }
 

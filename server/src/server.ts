@@ -20,11 +20,11 @@ import { connectDB } from "./config/connections.js";
 // Routes
 import contactRoutes    from './routes/portfolio/contactRoutes.js';
 import taskadelicRoutes from './routes/taskadelic/index.js';
-import hntdRoutes       from './routes/hntd/index.js';
+import hntdRoutes       from './routes/dontDie/index.js';
 
 // Databases
 import { tdSequelize }   from './models/taskadelic/index.js';
-import { hntdSequelize } from './models/hntd/index.js';
+import { hntdSequelize } from './models/dontDie/index.js';
 
 
 

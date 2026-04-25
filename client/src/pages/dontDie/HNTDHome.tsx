@@ -1,10 +1,10 @@
-// File: client/src/pages/hntd/HNTDHome.tsx
+// File: client/src/pages/dontDie/HNTDHome.tsx
 
 import React, { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useHNTDAuth } from '../../context/hntdAuthContext';
-import { loginHNTD, registerHNTD } from '../../api/hntd/authAPI';
-import styles from '../../assets/css/hntd/HNTDConsole.module.css';
+import { useHNTDAuth } from '../../context/HNTDAuthContext';
+import { loginHNTD, registerHNTD } from '../../api/dontDie/HNTDAuthAPI';
+import styles from '../../assets/css/dontDie/HNTDConsole.module.css';
 
 const HNTDHome: React.FC = () => {
   const { login, isAuthenticated } = useHNTDAuth();

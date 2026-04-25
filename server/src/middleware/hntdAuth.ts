@@ -1,4 +1,4 @@
-// File: server/src/middleware/hntdAuth.ts
+// File: server/src/middleware/HNTDAuth.ts
 
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';

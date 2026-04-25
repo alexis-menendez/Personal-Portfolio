@@ -7,11 +7,11 @@ import { lazy, Suspense } from 'react';
 
 // Auth
 import { AuthProvider } from './context/authContext';
-import { HNTDAuthProvider } from './context/hntdAuthContext';
+import { HNTDAuthProvider } from './context/HNTDAuthContext';
 
 // HNTD Pages
-const HNTDHome      = lazy(() => import('./pages/hntd/HNTDHome'));
-const HNTDDashboard = lazy(() => import('./pages/hntd/HNTDDashboard'));
+const HNTDHome      = lazy(() => import('./pages/dontDie/HNTDHome'));
+const HNTDDashboard = lazy(() => import('./pages/dontDie/HNTDDashboard'));
 
 // Layout
 import ProtectedRoute from './components/ProtectedRoute';
