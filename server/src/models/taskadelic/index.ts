@@ -8,7 +8,10 @@ import { TDUserFactory } from './TDUser.js';
 import { TDTicketFactory } from './TDTicket.js';
 
 const tdSequelize = process.env.TD_DB_URL
-  ? new Sequelize(process.env.TD_DB_URL)
+  ? new Sequelize(process.env.TD_DB_URL, {
+      dialectOptions: { ssl: { require: true, rejectUnauthorized: false } },
+      logging: false,
+    })
   : new Sequelize(
       process.env.TD_DB_NAME || 'taskadelic_db',
       process.env.TD_DB_USER || 'postgres',
