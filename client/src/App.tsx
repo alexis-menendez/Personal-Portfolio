@@ -21,6 +21,13 @@ import GalleryLayout from './components/portfolio/layout/GalleryLayout';
     const IOMainLayout = lazy(() => import('./components/innerOrbit/layout/IOmainLayout/IOMainLayout'));
     const IOJournalLayout = lazy(() => import('./components/innerOrbit/layout/IOJournalLayout'));
 
+    // Taskadelic Layout + Pages
+    const TaskadelicLayout  = lazy(() => import('./components/taskadelic/TaskadelicLayout'));
+    const TDLogin           = lazy(() => import('./pages/taskadelic/TDLogin'));
+    const TDBoard           = lazy(() => import('./pages/taskadelic/TDBoard'));
+    const TDCreateTicket    = lazy(() => import('./pages/taskadelic/TDCreateTicket'));
+    const TDEditTicket      = lazy(() => import('./pages/taskadelic/TDEditTicket'));
+
 // Pages
 import DevHome from './pages/portfolio/DevHome';
 import UnderConstruction from './pages/portfolio/UnderConstruction';
@@ -94,6 +101,14 @@ const App: React.FC = () => {
             <Route path="/solarium" element={<Solarium />} />
             <Route path="/runestone" element={<Runestone />} />
             <Route path="/contact" element={<Contact />} />
+          </Route>
+
+          {/* Taskadelic demo routes */}
+          <Route element={<TaskadelicLayout />}>
+            <Route path="/td-home"   element={<TDLogin />} />
+            <Route path="/td-board"  element={<TDBoard />} />
+            <Route path="/td-create" element={<TDCreateTicket />} />
+            <Route path="/td-edit"   element={<TDEditTicket />} />
           </Route>
 
           {/* Routes using PsychedelicLayout — reserved for future use */}

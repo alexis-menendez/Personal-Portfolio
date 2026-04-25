@@ -1,0 +1,441 @@
+/* File: client/src/assets/css/taskadelic/Taskadelic.module.css */
+
+.appWrapper {
+  min-height: 100vh;
+  background-image: url('/assets/taskadelic/trippy.dippy.deco.2.svg');
+  background-size: 500px;
+  background-repeat: repeat;
+  background-position: center center;
+  color: #F2C2D1;
+  font-family: 'Inter Tight', sans-serif;
+}
+
+.main {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+/* ── Nav ──────────────────────────────────────────────────────── */
+.nav {
+  display: flex;
+  padding: 0.6em 2em;
+  background-color: #300B22;
+  width: 70%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.nav ul {
+  display: flex;
+  margin-left: auto;
+}
+
+.navTitle {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 400;
+  font-family: 'Monoton', cursive;
+  letter-spacing: 1px;
+  color: #F2C2D1;
+  text-shadow: 0 0 6px #BF3475, 0 0 12px #BF3475;
+}
+
+.navTitle a {
+  font-family: 'Monoton', cursive;
+  font-weight: 400;
+  color: #F2C2D1;
+  text-decoration: none;
+  text-shadow: 0 0 6px #BF3475, 0 0 12px #BF3475;
+}
+.navItem    { display: block; margin-left: auto; list-style: none; }
+
+.decoBorder {
+  position: relative;
+  border-top: 9px double #BF3475;
+  border-bottom: 9px double #BF3475;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+}
+
+.decoBorder::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 0;
+  transform: translateY(-50%);
+  width: 50%; height: 70%;
+  border-left: 6px double #BF3475;
+  border-top: 6px double #BF3475;
+  border-bottom: 6px double #BF3475;
+  pointer-events: none;
+}
+
+.decoBorder::after {
+  content: "";
+  position: absolute;
+  top: 50%; right: 0;
+  transform: translateY(-50%);
+  width: 50%; height: 70%;
+  border-right: 6px double #BF3475;
+  border-top: 6px double #BF3475;
+  border-bottom: 6px double #BF3475;
+  pointer-events: none;
+}
+
+.logoutBtn {
+  background-color: #F2C2D1;
+  color: #5E1735;
+  border: 4px double #BF3475;
+  padding: 0.6em 1.2em;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 16px;
+  margin-left: 1em;
+  cursor: pointer;
+}
+
+.logoutBtn:hover { background-color: #5E1735; color: #F2C2D1; }
+
+/* ── Board ────────────────────────────────────────────────────── */
+.board {
+  width: 70%;
+  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.newTicketWrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin: 1em 0;
+}
+
+.newTicketBtn {
+  background-color: #F2C2D1;
+  color: #5E1735;
+  border: 4px double #BF3475;
+  padding: 0.6em 1.2em;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.newTicketBtn a { text-decoration: none; color: inherit; }
+.newTicketBtn:hover { background-color: #5E1735; color: #F2C2D1; }
+
+.boardDisplay {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  flex: 1;
+  gap: 10px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .boardDisplay { flex-direction: column; height: auto; }
+  .newTicketWrapper { flex-direction: column; align-items: center; }
+  .newTicketBtn { width: 90%; text-align: center; }
+}
+
+.jumpMenu { display: none; }
+
+@media (max-width: 768px) {
+  .jumpMenu {
+    display: block;
+    margin-top: 0.5rem;
+    width: 90%;
+    background-color: #F2C2D1;
+    color: #5E1735;
+    border: 4px double #BF3475;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    border-radius: 16px;
+    text-align: center;
+  }
+}
+
+/* ── Swimlanes ────────────────────────────────────────────────── */
+.swimlane {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-weight: 900;
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 5px;
+  color: #F2C2D1;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.swimLane { font-size: clamp(0.85rem, 1.5vw, 1rem); }
+
+.laneWrapper {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+}
+
+.todo       { background-color: rgba(65,23,95,0.7);   border-top: 9px double #BF3475; height: 100%; }
+.inprogress { background-color: rgba(90,28,82,0.7);   border-top: 9px double #BF3475; height: 100%; }
+.done       { background-color: rgba(116,33,68,0.7);  border-top: 9px double #BF3475; height: 100%; }
+
+/* ── Ticket Card ──────────────────────────────────────────────── */
+.ticketCard {
+  text-align: left;
+  word-wrap: break-word;
+  background-color: rgba(32,11,48,0.8);
+  color: #F2C2D1;
+  border-top: 6px double #BF3475;
+  border-bottom: 6px double #BF3475;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  max-width: 400px;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 0.85rem;
+}
+
+.ticketCard h3 {
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0 0 0.75rem;
+}
+
+.ticketCard p {
+  font-weight: 400;
+  font-size: 0.8rem;
+  margin: 0 0 0.2rem;
+}
+
+.editBtn, .deleteBtn {
+  display: inline-block;
+  background-color: #300B22;
+  color: #F2C2D1;
+  border-radius: 16px;
+  border: 1px solid #BF3475;
+  padding: 0.6em 1.2em;
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  box-sizing: border-box;
+  line-height: 1.5;
+  vertical-align: middle;
+}
+
+.editBtn { margin-right: 0.5rem; }
+
+.editBtn:hover, .deleteBtn:hover { background-color: #F2C2D1; color: #300B22; }
+
+/* ── Forms ────────────────────────────────────────────────────── */
+.container { width: 100%; }
+
+.loginContainer {
+  width: 100%;
+  height: calc(100vh - 80px);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.loginForm {
+  position: relative;
+  width: 100%;
+  max-width: 290px;
+  background-color: rgba(32, 11, 48, 0.88);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border-top: 9px double #BF3475;
+  border-bottom: 9px double #BF3475;
+  border-left: 9px double #BF3475;
+  border-right: 9px double #BF3475;
+  padding: 2.5rem 2rem;
+  box-sizing: border-box;
+}
+
+/* Extra space before the Password label (4th child: h1, label, input, label) */
+.loginForm label:nth-child(4) {
+  margin-top: 0.75rem;
+}
+
+.passwordWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.passwordWrapper input {
+  width: 100%;
+  padding-right: 2.5rem;
+}
+
+.passwordToggle {
+  position: absolute;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #BF3475;
+  padding: 0;
+  line-height: 1;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.passwordToggle:hover {
+  opacity: 1;
+  background: none;
+  color: #F2C2D1;
+}
+
+.loginForm input {
+  width: 100%;
+  background-color: #300B22;
+  color: #F2C2D1;
+  border: 2px solid #BF3475;
+  border-radius: 0;
+  padding: 0.5em 0.75em;
+  font-family: inherit;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.loginForm button[type="submit"] {
+  width: 100%;
+  background-color: #300B22;
+  color: #F2C2D1;
+  border: 2px solid #BF3475;
+  border-radius: 16px;
+  padding: 0.5em 1.2em;
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background-color 0.25s, color 0.25s;
+}
+
+.loginForm button[type="submit"]:hover {
+  background-color: #F2C2D1;
+  color: #300B22;
+}
+
+/* Inner left bracket */
+.loginForm::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 9px;
+  transform: translateY(-50%);
+  width: 50%;
+  height: 70%;
+  border-left: 6px double #BF3475;
+  border-top: 6px double #BF3475;
+  border-bottom: 6px double #BF3475;
+  pointer-events: none;
+}
+
+/* Inner right bracket */
+.loginForm::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 9px;
+  transform: translateY(-50%);
+  width: 50%;
+  height: 70%;
+  border-right: 6px double #BF3475;
+  border-top: 6px double #BF3475;
+  border-bottom: 6px double #BF3475;
+  pointer-events: none;
+}
+
+.form {
+  width: 70%;
+  background-color: rgba(32,11,48,0.8);
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 4px double #BF3475;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.formTitle {
+  font-family: 'Monoton', cursive;
+  font-weight: 400;
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+  color: #F2C2D1;
+  text-shadow: 0 0 6px #BF3475, 0 0 12px #BF3475;
+  margin-bottom: 1rem;
+}
+
+.form label {
+  color: #F2C2D1;
+  text-shadow: 0 0 6px #BF3475;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.form input, .form textarea, .form select {
+  min-height: 30px;
+  min-width: 200px;
+  background-color: #300B22;
+  color: #F2C2D1;
+  border: 1px solid #BF3475;
+  border-radius: 4px;
+  padding: 0.4em 0.6em;
+  font-family: inherit;
+}
+
+.form button {
+  margin-top: 2.5%;
+  background-color: #300B22;
+  color: #F2C2D1;
+  border: 1px solid #BF3475;
+  border-radius: 16px;
+  padding: 0.6em 1.2em;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.form button:hover { background-color: #F2C2D1; color: #300B22; }
+
+/* ── Board background override ────────────────────────────────── */
+.boardBackground {
+  background-image: url('/assets/taskadelic/trippy.dippy.board.svg') !important;
+}
+
+/* ── Login notice ─────────────────────────────────────────────── */
+.loginNotice {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  color: #300B22;
+  text-shadow: 0 0 4px #F2C2D1, 0 0 8px #F2C2D1;
+  font-family: 'Fascinate Inline', sans-serif;
+}

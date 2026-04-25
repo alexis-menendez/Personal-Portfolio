@@ -97,8 +97,8 @@ const Taskadelic: React.FC = () => {
         </div>
 
         <div className={styles.actions}>
-          <button className={styles.btnComingSoon} disabled>
-            Demo Coming Soon
+          <button className={styles.btnPrimary} onClick={() => navigate('/td-home')}>
+            Launch Demo
           </button>
           <a
             className={styles.btnGhost}
