@@ -78,24 +78,15 @@ function useTypewriter(text: string, speed = 28) {
   return { displayed, done };
 }
 
-// ── Arch button positions ──────────────────────────────────────
-// mid-radius = 62.5vmin, center at (50vw, 100vh)
-// left: calc(50vw + cos(θ) * 62.5vmin)
-// top:  calc(100vh - sin(θ) * 62.5vmin)
-const toCalc = (angleDeg: number): React.CSSProperties => {
-  const r = 62.5;
-  const rad = (angleDeg * Math.PI) / 180;
-  const c = Math.cos(rad);
-  const s = Math.sin(rad);
-  const xSign = c >= 0 ? '+' : '-';
-  const ySign = '+'; // top always uses minus from 100vh, so we flip sign via string
-  return {
-    position: 'absolute',
-    left:      `calc(50vw ${xSign} ${Math.abs(c * r).toFixed(2)}vmin)`,
-    top:       `calc(100vh - ${(s * r).toFixed(2)}vmin)`,
-    transform: 'translate(-50%, -50%)',
-  };
-};
+// ── HUD button positions (% of viewport, placed in the teal exterior) ──
+// The HudDisplay image has the teal ring/frame outside a central circle.
+// Buttons sit in the four quadrant corners of the teal area.
+const HUD_BUTTONS = [
+  { id: 'ship',    label: '↩ Return to Ship', top: '22%', left: '13%',  action: null        },
+  { id: 'log',     label: '✎ Write Log',       top: '72%', left: '13%',  action: 'log'       },
+  { id: 'vera',    label: '⬡ Chat VERA',       top: '72%', left: '87%',  action: 'vera'      },
+  { id: 'weather', label: '⚠ Scanner',          top: '22%', left: '87%', action: 'weather'   },
+] as const;
 
 // ── VERA Chat ──────────────────────────────────────────────────
 const VeraChat: React.FC<{ dialogue: VeraDialogue; onClose: () => void }> = ({ dialogue, onClose }) => {
@@ -240,41 +231,25 @@ const HNTDTravel: React.FC = () => {
       {/* Sector label — always visible */}
       <p className={styles.hudTopLabel}>// SURFACE: {planet.name.toUpperCase()}</p>
 
-      {/* Arch ring — fades when a panel is open */}
-      <div className={`${styles.archRing} ${panelOpen ? styles.archRingHidden : ''}`} />
+      {/* HUD display image — white center becomes transparent via multiply */}
+      <img
+        src="/assets/dontDie/images/HudDisplay.png"
+        alt=""
+        aria-hidden="true"
+        className={`${styles.hudDisplayImg} ${panelOpen ? styles.hudDisplayImgHidden : ''}`}
+      />
 
-      {/* HUD buttons positioned along the arch mid-radius */}
-      <button
-        className={`${styles.archHudBtn} ${panelOpen ? styles.archHudBtnHidden : ''}`}
-        style={toCalc(145)}
-        onClick={() => navigate('/hntd-holomap')}
-      >
-        ↩ Return to Ship
-      </button>
-
-      <button
-        className={`${styles.archHudBtn} ${panelOpen ? styles.archHudBtnHidden : ''}`}
-        style={toCalc(115)}
-        onClick={() => setActivePanel('log')}
-      >
-        ✎ Write Log
-      </button>
-
-      <button
-        className={`${styles.archHudBtn} ${panelOpen ? styles.archHudBtnHidden : ''}`}
-        style={toCalc(65)}
-        onClick={() => setActivePanel('vera')}
-      >
-        ⬡ Chat VERA
-      </button>
-
-      <button
-        className={`${styles.archHudBtn} ${panelOpen ? styles.archHudBtnHidden : ''}`}
-        style={toCalc(35)}
-        onClick={() => setActivePanel('weather')}
-      >
-        ⚠ Scanner
-      </button>
+      {/* HUD buttons in the teal exterior of the image */}
+      {HUD_BUTTONS.map(btn => (
+        <button
+          key={btn.id}
+          className={`${styles.archHudBtn} ${panelOpen ? styles.archHudBtnHidden : ''}`}
+          style={{ top: btn.top, left: btn.left }}
+          onClick={btn.action ? () => setActivePanel(btn.action as Panel) : () => navigate('/hntd-holomap')}
+        >
+          {btn.label}
+        </button>
+      ))}
 
       {/* Panels */}
       {activePanel === 'log' && (
