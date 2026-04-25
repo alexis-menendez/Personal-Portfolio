@@ -17,17 +17,23 @@ export interface HNTDTip {
   createdAt: string;
 }
 
-export const fetchTips = async (): Promise<HNTDTip[]> => {
-  const res = await fetch(BASE);
+export const fetchTips = async (planet?: string): Promise<HNTDTip[]> => {
+  const url = planet ? `${BASE}?planet=${encodeURIComponent(planet)}` : BASE;
+  const res = await fetch(url);
   if (!res.ok) throw new Error('Failed to fetch tips');
   return res.json();
 };
 
-export const createTip = async (token: string, title: string, content: string): Promise<HNTDTip> => {
+export const createTip = async (
+  token: string,
+  title: string,
+  content: string,
+  planet?: string,
+): Promise<HNTDTip> => {
   const res = await fetch(BASE, {
     method: 'POST',
     headers: authHeaders(token),
-    body: JSON.stringify({ title, content }),
+    body: JSON.stringify({ title, content, planet: planet ?? null }),
   });
   if (!res.ok) { const err = await res.json(); throw new Error(err.message); }
   return res.json();

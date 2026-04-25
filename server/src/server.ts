@@ -78,7 +78,7 @@ async function startServer() {
 
   // Sync PostgreSQL tables
   await tdSequelize.sync({ alter: false });
-  await hntdSequelize.sync({ alter: false });
+  await hntdSequelize.sync({ alter: true }); // adds planet column to hntd_survival_tips
 
   // Middleware
   app.use(express.json());

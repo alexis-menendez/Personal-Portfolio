@@ -6,22 +6,26 @@ import { verifyHNTDToken } from '../../middleware/HNTDAuth.js';
 
 const router = Router();
 
-// GET all tips — public, sorted by upvotes desc
-router.get('/', async (_req: Request, res: Response): Promise<void> => {
+// GET tips — public, sorted by upvotes. Optional ?planet= filter.
+router.get('/', async (req: Request, res: Response): Promise<void> => {
   try {
-    const tips = await HNTDSurvivalTip.findAll({ order: [['upvotes', 'DESC'], ['createdAt', 'DESC']] });
+    const { planet } = req.query;
+    const where = planet && typeof planet === 'string'
+      ? { planet }
+      : {};
+    const tips = await HNTDSurvivalTip.findAll({ where, order: [['upvotes', 'DESC'], ['createdAt', 'DESC']] });
     res.json(tips);
   } catch (err: any) { res.status(500).json({ message: err.message }); }
 });
 
-// POST new tip — authenticated
+// POST new tip — authenticated. Optional planet in body.
 router.post('/', verifyHNTDToken, async (req: Request, res: Response): Promise<void> => {
-  const { title, content } = req.body;
+  const { title, content, planet } = req.body;
   if (!title || !content) { res.status(400).json({ message: 'Title and content required' }); return; }
   try {
     const userId   = (req.user as any).userId;
     const username = (req.user as any).username;
-    const tip = await HNTDSurvivalTip.create({ userId, username, title, content });
+    const tip = await HNTDSurvivalTip.create({ userId, username, title, content, planet: planet ?? null });
     res.status(201).json(tip);
   } catch (err: any) { res.status(500).json({ message: err.message }); }
 });

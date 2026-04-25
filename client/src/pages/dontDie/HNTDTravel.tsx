@@ -10,6 +10,8 @@ import styles from '../../assets/css/dontDie/HNTDHolomap.module.css';
 import { createLog } from '../../api/dontDie/HNTDLogAPI';
 import { fetchWeather } from '../../api/dontDie/HNTDWeatherAPI';
 import type { HNTDWeatherData } from '../../api/dontDie/HNTDWeatherAPI';
+import { fetchTips, createTip, voteTip, deleteTip } from '../../api/dontDie/HNTDSurvivalAPI';
+import type { HNTDTip } from '../../api/dontDie/HNTDSurvivalAPI';
 
 // ── Planet data ────────────────────────────────────────────────
 interface VeraDialogue {
@@ -78,13 +80,98 @@ function useTypewriter(text: string, speed = 28) {
   return { displayed, done };
 }
 
+// ── Planet Survival Panel ──────────────────────────────────────
+const PlanetSurvivalPanel: React.FC<{ planetKey: string; onClose: () => void }> = ({ planetKey, onClose }) => {
+  const { token, user } = useHNTDAuth();
+  const [tips,      setTips]      = useState<HNTDTip[]>([]);
+  const [votedIds,  setVotedIds]  = useState<Set<number>>(new Set());
+  const [loading,   setLoading]   = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    fetchTips(planetKey)
+      .then(setTips)
+      .finally(() => setLoading(false));
+  }, [planetKey]);
+
+  const handleSaveTip = async (title: string, content: string) => {
+    if (!token) return;
+    const created = await createTip(token, title, content, planetKey);
+    setTips(prev => [created, ...prev]);
+  };
+
+  const handleVote = async (id: number) => {
+    if (!token) return;
+    const { upvotes, voted } = await voteTip(token, id);
+    setTips(prev => prev.map(t => t.id === id ? { ...t, upvotes } : t));
+    setVotedIds(prev => { const n = new Set(prev); voted ? n.add(id) : n.delete(id); return n; });
+  };
+
+  const handleDelete = async (id: number) => {
+    if (!token) return;
+    await deleteTip(token, id);
+    setTips(prev => prev.filter(t => t.id !== id));
+  };
+
+  const fmt = (iso: string) =>
+    new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+  return (
+    <div className={styles.hudPanel}>
+      <div className={styles.hudPanelBox}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <p className={styles.hudPanelTitle}>// PLANET SURVIVAL GUIDE</p>
+          <button
+            style={{ background: 'none', border: 'none', color: 'rgba(0,255,225,0.5)', fontFamily: 'Courier New', fontSize: '0.75rem', cursor: 'pointer' }}
+            onClick={() => setModalOpen(true)}
+          >+ Add Tip</button>
+        </div>
+
+        {loading && <p className={styles.hudPanelTitle}>Loading field data...</p>}
+        {!loading && tips.length === 0 && (
+          <p className={styles.weatherBrokenNote}>No survival tips logged for this planet yet. Be the first.</p>
+        )}
+
+        {tips.map(tip => (
+          <div key={tip.id} className={styles.tipCard}>
+            <div className={styles.tipVote}>
+              <button
+                className={`${styles.tipVoteBtn} ${votedIds.has(tip.id) ? styles.tipVoteBtnActive : ''}`}
+                onClick={() => handleVote(tip.id)}
+              >▲</button>
+              <span className={styles.tipVoteCount}>{tip.upvotes}</span>
+            </div>
+            <div className={styles.tipBody}>
+              <p className={styles.tipTitle}>{tip.title}</p>
+              <p className={styles.tipContent}>{tip.content}</p>
+              <p className={styles.tipMeta}>{tip.username} · {fmt(tip.createdAt)}</p>
+            </div>
+            {user?.id === tip.userId && (
+              <button className={styles.tipDeleteBtn} onClick={() => handleDelete(tip.id)}>[x]</button>
+            )}
+          </div>
+        ))}
+
+        <button className={styles.veraCloseBtn} onClick={onClose}>[ Close ]</button>
+      </div>
+
+      {modalOpen && (
+        <HNTDEditLogModal
+          log={null}
+          onSave={handleSaveTip}
+          onClose={() => setModalOpen(false)}
+        />
+      )}
+    </div>
+  );
+};
+
 // ── HUD button positions (% of viewport, placed in the teal exterior) ──
-// The HudDisplay image has the teal ring/frame outside a central circle.
-// Buttons sit in the four quadrant corners of the teal area.
 const HUD_BUTTONS = [
   { id: 'ship',    label: '↩ Return to Ship', top: '22%', left: '13%',  action: null        },
-  { id: 'log',     label: '✎ Write Log',       top: '72%', left: '13%',  action: 'log'       },
-  { id: 'vera',    label: '⬡ Chat VERA',       top: '72%', left: '87%',  action: 'vera'      },
+  { id: 'log',     label: '✎ Write Log',       top: '55%', left: '10%',  action: 'log'       },
+  { id: 'guide',   label: '⊕ Planet Guide',    top: '82%', left: '50%',  action: 'guide'     },
+  { id: 'vera',    label: '⬡ Chat VERA',       top: '55%', left: '90%',  action: 'vera'      },
   { id: 'weather', label: '⚠ Scanner',          top: '22%', left: '87%', action: 'weather'   },
 ] as const;
 
@@ -182,7 +269,7 @@ const WeatherPanel: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 };
 
 // ── Main HUD ───────────────────────────────────────────────────
-type Panel = 'log' | 'vera' | 'weather' | null;
+type Panel = 'log' | 'vera' | 'weather' | 'guide' | null;
 
 const HNTDTravel: React.FC = () => {
   const navigate = useNavigate();
@@ -260,6 +347,9 @@ const HNTDTravel: React.FC = () => {
       )}
       {activePanel === 'weather' && (
         <WeatherPanel onClose={() => setActivePanel(null)} />
+      )}
+      {activePanel === 'guide' && (
+        <PlanetSurvivalPanel planetKey={key} onClose={() => setActivePanel(null)} />
       )}
 
       <ReturnToPortfolio />
