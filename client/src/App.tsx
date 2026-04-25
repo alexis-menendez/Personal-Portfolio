@@ -7,6 +7,11 @@ import { lazy, Suspense } from 'react';
 
 // Auth
 import { AuthProvider } from './context/authContext';
+import { HNTDAuthProvider } from './context/hntdAuthContext';
+
+// HNTD Pages
+const HNTDHome      = lazy(() => import('./pages/hntd/HNTDHome'));
+const HNTDDashboard = lazy(() => import('./pages/hntd/HNTDDashboard'));
 
 // Layout
 import ProtectedRoute from './components/ProtectedRoute';
@@ -72,6 +77,7 @@ import Contact from './pages/portfolio/Contact';
 const App: React.FC = () => {
   return (
     <AuthProvider>
+      <HNTDAuthProvider>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           
@@ -88,6 +94,10 @@ const App: React.FC = () => {
 
           {/* /home — self-contained, no layout wrapper */}
           <Route path="/home" element={<SpaceCity />} />
+
+          {/* HNTD demo routes */}
+          <Route path="/hntd-home"      element={<HNTDHome />} />
+          <Route path="/hntd-dashboard" element={<HNTDDashboard />} />
 
           {/* Standalone project detail pages */}
           <Route path="/innerOrbit" element={<InnerOrbit />} />
@@ -149,6 +159,7 @@ const App: React.FC = () => {
           </Route>
         </Routes>
       </Suspense>
+      </HNTDAuthProvider>
     </AuthProvider>
   );
 };
