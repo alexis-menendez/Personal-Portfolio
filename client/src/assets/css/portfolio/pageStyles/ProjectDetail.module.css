@@ -83,6 +83,72 @@
   background-clip: text;
 }
 
+/* ── Taskadelic page background ───────────────────────────────── */
+.pageTaskadelic {
+  background:
+    radial-gradient(ellipse at 25% 0%,   rgba(185, 90, 110, 0.45) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 100%, rgba(140, 45, 65, 0.3)   0%, transparent 50%),
+    #0d0608;
+}
+
+/* ── Art Deco elements (Taskadelic) ───────────────────────────── */
+
+/* Hero section with relative positioning for corner brackets */
+.heroTaskadelic {
+  position: relative;
+}
+
+/* Corner bracket spans — framing the content area */
+.cornerTL, .cornerTR, .cornerBL, .cornerBR {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  pointer-events: none;
+}
+
+.cornerTL { top: 6.5rem;  left: 0;  border-top:  1.5px solid rgba(255, 97, 210, 0.6); border-left:  1.5px solid rgba(255, 97, 210, 0.6); }
+.cornerTR { top: 6.5rem;  right: 0; border-top:  1.5px solid rgba(255, 97, 210, 0.6); border-right: 1.5px solid rgba(255, 97, 210, 0.6); }
+.cornerBL { bottom: 0.5rem; left: 0;  border-bottom: 1.5px solid rgba(255, 97, 210, 0.6); border-left:  1.5px solid rgba(255, 97, 210, 0.6); }
+.cornerBR { bottom: 0.5rem; right: 0; border-bottom: 1.5px solid rgba(255, 97, 210, 0.6); border-right: 1.5px solid rgba(255, 97, 210, 0.6); }
+
+/* Ornament — full width of hero */
+.artDecoOrnament {
+  width: 100%;
+  height: 44px;
+  display: block;
+}
+
+/* Full-width divider between hero and screenshots */
+.artDecoDivider {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  height: 32px;
+  margin: 0 auto -1rem;
+  padding: 0 2rem;
+}
+
+/* Per-project title gradient overrides */
+.titleTaskadelic {
+  background: linear-gradient(90deg, #bf5fff 0%, #ff61d2 35%, #ff9f43 70%, #ffd700 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btnComingSoon {
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(200, 230, 255, 0.3);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  letter-spacing: 0.03em;
+  cursor: not-allowed;
+}
+
 .description {
   font-size: 1rem;
   line-height: 1.75;
