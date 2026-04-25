@@ -6,7 +6,8 @@ import { useHNTDAuth } from '../../context/HNTDAuthContext';
 import styles from '../../assets/css/dontDie/HNTDConsole.module.css';
 
 const NAV_LINKS = [
-  { to: '/hntd-dashboard',  label: 'Command Center'  },
+  { to: '/hntd-dashboard', label: 'Command Center' },
+  { to: '/hntd-holomap',   label: 'Galaxy Map'     },
 ];
 
 const HNTDNavigation: React.FC = () => {
