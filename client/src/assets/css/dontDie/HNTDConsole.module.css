@@ -118,13 +118,32 @@
 .authInput {
   width: 100%;
   max-width: 260px;
-  background: rgba(0, 255, 225, 0.05);
+  background: rgba(0, 10, 8, 0.85);
   border: 1px solid #00ffe1;
   color: #00ffe1;
   padding: 0.4rem 0.6rem;
   font-family: 'Courier New', monospace;
   font-size: 0.85rem;
   outline: none;
+  caret-color: #00ffe1;
+  /* Override browser autofill white background */
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  -webkit-text-fill-color: #00ffe1 !important;
+}
+
+.authInput:focus,
+.authInput:hover {
+  background: rgba(0, 10, 8, 0.95);
+  border-color: #00ffe1;
+  outline: none;
+}
+
+.authInput:-webkit-autofill,
+.authInput:-webkit-autofill:hover,
+.authInput:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  -webkit-text-fill-color: #00ffe1 !important;
+  border: 1px solid #00ffe1;
 }
 
 .authInput::placeholder { color: rgba(0, 255, 225, 0.4); }
