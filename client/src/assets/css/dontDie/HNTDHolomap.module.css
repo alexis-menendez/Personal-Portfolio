@@ -276,8 +276,6 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  /* multiply: white center → transparent, teal exterior → teal overlay */
-  mix-blend-mode: multiply;
   pointer-events: none;
   z-index: 2;
   transition: opacity 0.3s ease;
