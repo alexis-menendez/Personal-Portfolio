@@ -83,6 +83,36 @@
   background-clip: text;
 }
 
+/* ── How Not To Die page background ──────────────────────────── */
+.pageDontDie {
+  background:
+    radial-gradient(ellipse at 20% 0%,   rgba(0, 255, 200, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 90%,  rgba(0, 180, 130, 0.15) 0%, transparent 50%),
+    #000000;
+}
+
+.titleDontDie {
+  background: linear-gradient(90deg, #00ffe1 0%, #00ffaa 40%, #00e5c0 70%, #00bfa0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tagDontDie {
+  background: rgba(0, 255, 200, 0.08);
+  border: 1px solid rgba(0, 255, 200, 0.3);
+  color: rgba(0, 255, 200, 0.9);
+}
+
+.btnPrimaryDontDie {
+  background: #00ffe1;
+  color: #000000;
+}
+
+.btnPrimaryDontDie:hover {
+  box-shadow: 0 8px 30px rgba(0, 255, 200, 0.4);
+}
+
 /* ── Taskadelic page background ───────────────────────────────── */
 .pageTaskadelic {
   background:
