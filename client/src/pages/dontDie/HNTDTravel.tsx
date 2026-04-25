@@ -1,6 +1,6 @@
 // File: client/src/pages/dontDie/HNTDTravel.tsx
 
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useHNTDAuth } from '../../context/HNTDAuthContext';
 import { useHNTDPlanets } from '../../context/HNTDPlanetContext';
@@ -30,9 +30,9 @@ const PLANETS: Record<string, PlanetData> = {
     vera: {
       opening: `I have been running atmospheric analysis for the past six minutes. The hum is not geological. Not electromagnetic. I want you to know that.`,
       responses: [
-        { label: 'What do you think it is?',       reply: `I don't know. That is the part that concerns me. I always know.` },
-        { label: "I'd rather not know.",             reply: `...That is probably the wisest thing you have said since we left port. I will keep my findings to myself.` },
-        { label: 'Could it be alive?',              reply: `I ran that probability. I have chosen not to share the results. Please stop asking follow-up questions.` },
+        { label: 'What do you think it is?',  reply: `I don't know. That is the part that concerns me. I always know.` },
+        { label: "I'd rather not know.",       reply: `...That is probably the wisest thing you have said since we left port. I will keep my findings to myself.` },
+        { label: 'Could it be alive?',         reply: `I ran that probability. I have chosen not to share the results. Please stop asking follow-up questions.` },
       ],
     },
   },
@@ -42,9 +42,9 @@ const PLANETS: Record<string, PlanetData> = {
     vera: {
       opening: `The pre-colony structure is transmitting something. It is not a distress signal. It is not a navigation beacon. It is a record. Someone was cataloguing everyone who came here.`,
       responses: [
-        { label: 'Are we in the record?',  reply: `You are now.` },
-        { label: 'How old is this?',       reply: `Older than our oldest colony. Older than our records of expansion. I am still processing what that implies.` },
-        { label: 'Who built it?',          reply: `Unknown. But they used our units of measurement. That implies contact at a point in history we have no record of. I find that unsettling. I did not expect to find things unsettling.` },
+        { label: 'Are we in the record?', reply: `You are now.` },
+        { label: 'How old is this?',      reply: `Older than our oldest colony. Older than our records of expansion. I am still processing what that implies.` },
+        { label: 'Who built it?',         reply: `Unknown. But they used our units of measurement. That implies contact at a point in history we have no record of. I find that unsettling. I did not expect to find things unsettling.` },
       ],
     },
   },
@@ -57,22 +57,15 @@ const EARTH_CITIES = [
   'Paris', 'Mexico City', 'Dubai', 'Buenos Aires', 'Jakarta',
   'Istanbul', 'Beijing', 'Chicago', 'Cape Town', 'Moscow',
 ];
-
 const randomCity = () => EARTH_CITIES[Math.floor(Math.random() * EARTH_CITIES.length)];
-
-const windDir = (deg: number) => {
-  const dirs = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
-  return dirs[Math.round(deg / 45) % 8];
-};
+const windDir = (deg: number) => ['N','NE','E','SE','S','SW','W','NW'][Math.round(deg / 45) % 8];
 
 // ── Typewriter hook ────────────────────────────────────────────
 function useTypewriter(text: string, speed = 28) {
   const [displayed, setDisplayed] = useState('');
-  const [done, setDone] = useState(false);
-
+  const [done,      setDone]      = useState(false);
   useEffect(() => {
-    setDisplayed('');
-    setDone(false);
+    setDisplayed(''); setDone(false);
     if (!text) return;
     let i = 0;
     const id = setInterval(() => {
@@ -82,17 +75,30 @@ function useTypewriter(text: string, speed = 28) {
     }, speed);
     return () => clearInterval(id);
   }, [text, speed]);
-
   return { displayed, done };
 }
 
-// ── VERA Chat component ────────────────────────────────────────
-interface VeraChatProps {
-  dialogue: VeraDialogue;
-  onClose: () => void;
-}
+// ── Arch button positions ──────────────────────────────────────
+// mid-radius = 62.5vmin, center at (50vw, 100vh)
+// left: calc(50vw + cos(θ) * 62.5vmin)
+// top:  calc(100vh - sin(θ) * 62.5vmin)
+const toCalc = (angleDeg: number): React.CSSProperties => {
+  const r = 62.5;
+  const rad = (angleDeg * Math.PI) / 180;
+  const c = Math.cos(rad);
+  const s = Math.sin(rad);
+  const xSign = c >= 0 ? '+' : '-';
+  const ySign = '+'; // top always uses minus from 100vh, so we flip sign via string
+  return {
+    position: 'absolute',
+    left:      `calc(50vw ${xSign} ${Math.abs(c * r).toFixed(2)}vmin)`,
+    top:       `calc(100vh - ${(s * r).toFixed(2)}vmin)`,
+    transform: 'translate(-50%, -50%)',
+  };
+};
 
-const VeraChat: React.FC<VeraChatProps> = ({ dialogue, onClose }) => {
+// ── VERA Chat ──────────────────────────────────────────────────
+const VeraChat: React.FC<{ dialogue: VeraDialogue; onClose: () => void }> = ({ dialogue, onClose }) => {
   const [phase,       setPhase]       = useState<'opening' | 'replied'>('opening');
   const [activeText,  setActiveText]  = useState(dialogue.opening);
   const [chosenLabel, setChosenLabel] = useState('');
@@ -108,45 +114,31 @@ const VeraChat: React.FC<VeraChatProps> = ({ dialogue, onClose }) => {
     <div className={styles.hudPanel}>
       <div className={styles.hudPanelBox}>
         <p className={styles.hudPanelTitle}>// VERA TERMINAL</p>
-
-        {phase === 'replied' && chosenLabel && (
-          <p className={styles.veraUserLine}>You: &ldquo;{chosenLabel}&rdquo;</p>
-        )}
-
+        {chosenLabel && <p className={styles.veraUserLine}>You: &ldquo;{chosenLabel}&rdquo;</p>}
         <p className={styles.veraTypingText}>
           VERA: &ldquo;{displayed}&rdquo;
           {!done && <span className={styles.veraTypingCursor} />}
         </p>
-
         {done && phase === 'opening' && (
           <div className={styles.veraReplies}>
             {dialogue.responses.map(r => (
-              <button
-                key={r.label}
-                className={styles.veraReplyBtn}
-                onClick={() => handleResponse(r.label, r.reply)}
-              >
+              <button key={r.label} className={styles.veraReplyBtn} onClick={() => handleResponse(r.label, r.reply)}>
                 &rsaquo; {r.label}
               </button>
             ))}
           </div>
         )}
-
         {done && phase === 'replied' && (
-          <button className={styles.veraCloseBtn} onClick={onClose}>
-            [ Close terminal ]
-          </button>
+          <button className={styles.veraCloseBtn} onClick={onClose}>[ Close terminal ]</button>
         )}
       </div>
     </div>
   );
 };
 
-// ── Weather Scanner component ──────────────────────────────────
-interface WeatherPanelProps { onClose: () => void; }
-
-const WeatherPanel: React.FC<WeatherPanelProps> = ({ onClose }) => {
-  const [city,    setCity]    = useState(() => randomCity());
+// ── Weather Panel ──────────────────────────────────────────────
+const WeatherPanel: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+  const [city]    = useState(randomCity);
   const [data,    setData]    = useState<HNTDWeatherData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error,   setError]   = useState('');
@@ -161,25 +153,17 @@ const WeatherPanel: React.FC<WeatherPanelProps> = ({ onClose }) => {
   return (
     <div className={styles.hudPanel}>
       <div className={styles.hudPanelBox}>
-        <p className={styles.weatherMalfunctionHeader}>
-          !! SCANNER MALFUNCTION — CALIBRATION ERROR
-        </p>
+        <p className={styles.weatherMalfunctionHeader}>!! SCANNER MALFUNCTION — CALIBRATION ERROR</p>
         <p className={styles.weatherBrokenNote}>
           VERA: &ldquo;The atmospheric scanner appears to be calibrated to... Earth? That is embarrassing.
           I am displaying what I have. Please do not tell anyone about this.&rdquo;
         </p>
-
         {loading && <p className={styles.hudPanelTitle}>Scanning...</p>}
         {error   && <p className={styles.hudPanelTitle} style={{ color: '#ff4d4d' }}>Signal lost: {error}</p>}
-
         {data && (
           <>
-            <p className={styles.hudPanelTitle}>
-              // INTERCEPTED SIGNAL: {data.name.toUpperCase()}, {data.sys.country}
-            </p>
-            <p className={styles.weatherBrokenNote}>
-              Condition: {data.weather[0]?.description?.toUpperCase() ?? 'UNKNOWN'}
-            </p>
+            <p className={styles.hudPanelTitle}>// INTERCEPTED SIGNAL: {data.name.toUpperCase()}, {data.sys.country}</p>
+            <p className={styles.weatherBrokenNote}>Condition: {data.weather[0]?.description?.toUpperCase() ?? 'UNKNOWN'}</p>
             <div className={styles.weatherGrid}>
               <div className={styles.weatherRow}>
                 <span className={styles.weatherLabel}>Temp</span>
@@ -200,10 +184,7 @@ const WeatherPanel: React.FC<WeatherPanelProps> = ({ onClose }) => {
             </div>
           </>
         )}
-
-        <button className={styles.weatherHudCloseBtn} onClick={onClose}>
-          [ Close scanner ]
-        </button>
+        <button className={styles.weatherHudCloseBtn} onClick={onClose}>[ Close scanner ]</button>
       </div>
     </div>
   );
@@ -220,7 +201,6 @@ const HNTDTravel: React.FC = () => {
 
   const key    = params.get('planet') ?? '';
   const planet = PLANETS[key];
-
   const [activePanel, setActivePanel] = useState<Panel>(null);
 
   useEffect(() => {
@@ -232,6 +212,8 @@ const HNTDTravel: React.FC = () => {
     await createLog(token, title, content);
   }, [token]);
 
+  const panelOpen = activePanel !== null;
+
   if (!planet) {
     return (
       <div className={styles.shuttleWrapper}>
@@ -240,9 +222,7 @@ const HNTDTravel: React.FC = () => {
           <p className={styles.shuttleVera}>
             VERA: &ldquo;I have no data on this location. That is either very exciting or very bad. Historically, it has been the latter.&rdquo;
           </p>
-          <button className={styles.shuttleBtn} onClick={() => navigate('/hntd-holomap')}>
-            Return to Galaxy Map
-          </button>
+          <button className={styles.shuttleBtn} onClick={() => navigate('/hntd-holomap')}>Return to Galaxy Map</button>
         </div>
         <ReturnToPortfolio />
       </div>
@@ -251,51 +231,58 @@ const HNTDTravel: React.FC = () => {
 
   return (
     <div className={styles.hudWrapper}>
-      {/* Background planet image */}
+      {/* Background — undimmed on landing, dims when a panel opens */}
       <div
-        className={`${styles.hudBg} ${activePanel === 'log' ? styles.hudBgBlurred : ''}`}
+        className={`${styles.hudBg} ${panelOpen ? styles.hudBgDimmed : ''}`}
         style={{ backgroundImage: `url(${planet.image})` }}
       />
 
-      {/* Top-left sector label */}
+      {/* Sector label — always visible */}
       <p className={styles.hudTopLabel}>// SURFACE: {planet.name.toUpperCase()}</p>
 
-      {/* Bottom HUD buttons */}
-      {activePanel === null && (
-        <div className={styles.hudButtons}>
-          <button className={styles.hudBtn} onClick={() => navigate('/hntd-holomap')}>
-            ↩ Return to Ship
-          </button>
-          <button className={styles.hudBtn} onClick={() => setActivePanel('log')}>
-            ✎ Write Personal Log
-          </button>
-          <button className={styles.hudBtn} onClick={() => setActivePanel('vera')}>
-            ⬡ Chat with VERA
-          </button>
-          <button className={styles.hudBtn} onClick={() => setActivePanel('weather')}>
-            ⚠ Weather Scanner
-          </button>
-        </div>
-      )}
+      {/* Arch ring — fades when a panel is open */}
+      <div className={`${styles.archRing} ${panelOpen ? styles.archRingHidden : ''}`} />
 
-      {/* Log modal */}
+      {/* HUD buttons positioned along the arch mid-radius */}
+      <button
+        className={`${styles.archHudBtn} ${panelOpen ? styles.archHudBtnHidden : ''}`}
+        style={toCalc(145)}
+        onClick={() => navigate('/hntd-holomap')}
+      >
+        ↩ Return to Ship
+      </button>
+
+      <button
+        className={`${styles.archHudBtn} ${panelOpen ? styles.archHudBtnHidden : ''}`}
+        style={toCalc(115)}
+        onClick={() => setActivePanel('log')}
+      >
+        ✎ Write Log
+      </button>
+
+      <button
+        className={`${styles.archHudBtn} ${panelOpen ? styles.archHudBtnHidden : ''}`}
+        style={toCalc(65)}
+        onClick={() => setActivePanel('vera')}
+      >
+        ⬡ Chat VERA
+      </button>
+
+      <button
+        className={`${styles.archHudBtn} ${panelOpen ? styles.archHudBtnHidden : ''}`}
+        style={toCalc(35)}
+        onClick={() => setActivePanel('weather')}
+      >
+        ⚠ Scanner
+      </button>
+
+      {/* Panels */}
       {activePanel === 'log' && (
-        <HNTDEditLogModal
-          log={null}
-          onSave={handleSaveLog}
-          onClose={() => setActivePanel(null)}
-        />
+        <HNTDEditLogModal log={null} onSave={handleSaveLog} onClose={() => setActivePanel(null)} />
       )}
-
-      {/* VERA chat */}
       {activePanel === 'vera' && (
-        <VeraChat
-          dialogue={planet.vera}
-          onClose={() => setActivePanel(null)}
-        />
+        <VeraChat dialogue={planet.vera} onClose={() => setActivePanel(null)} />
       )}
-
-      {/* Weather scanner */}
       {activePanel === 'weather' && (
         <WeatherPanel onClose={() => setActivePanel(null)} />
       )}
