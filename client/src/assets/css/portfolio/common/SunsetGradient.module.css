@@ -1,0 +1,41 @@
+/* File: client/src/assets/css/portfolio/common/SunsetGradient.module.css */
+
+.sunsetGradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-sunset-gradient);
+  pointer-events: none; /* Let clicks pass through */
+
+  background: linear-gradient(
+    to bottom,
+    #2b5876 0%,    /* deep blue at horizon */
+    #a18cd1 20%,   /* pastel purple */
+    #fbc2eb 40%,   /* pink lavender */
+    #fad0c4 60%,   /* light peach */
+    #ff9a9e 80%,   /* soft pink */
+    #ff9a9e 100%   /* soft pink */
+  );
+}
+
+.sunsetMask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-sunset-mask);
+  pointer-events: none; /* Let clicks pass through */
+
+  background: linear-gradient(
+    to bottom,
+    #2b58761a 0%,    /* deep blue at horizon */
+    #a18cd11a 20%,   /* pastel purple */
+    #fbc2eb1a 40%,   /* pink lavender */
+    #fad0c41a 60%,   /* light peach */
+    #ff9a9e1a 80%,   /* soft pink */
+    #ff9a9e 100%     /* soft pink */
+  );
+}

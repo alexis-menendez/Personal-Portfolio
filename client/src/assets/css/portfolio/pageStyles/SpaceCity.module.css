@@ -1,0 +1,856 @@
+/* File: client/src/assets/css/portfolio/pageStyles/SpaceCity.module.css */
+
+/* ─── Page shell ─────────────────────────────────────────────────────── */
+.page {
+  position: relative;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 65% 30%, rgba(90,20,140,0.2) 0%, transparent 55%),
+    radial-gradient(ellipse at 25% 75%, rgba(200,35,70,0.1) 0%, transparent 40%),
+    #05030f;
+  color: #f0f8ff;
+  font-family: 'Inter Tight', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Star layer sits behind everything */
+.stars {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ─── Navigation ─────────────────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  height: 68px;
+  background: rgba(5, 3, 15, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.navLogo {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f0f8ff;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(200, 230, 255, 0.6);
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0;
+  position: relative;
+  transition: color 0.25s;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #00dde0;
+  transition: width 0.3s ease;
+}
+
+.navLink:hover {
+  color: #f0f8ff;
+}
+
+.navLink:hover::after,
+.navLinkActive::after {
+  width: 100%;
+}
+
+.navLinkActive {
+  color: #f0f8ff;
+}
+
+.navCta {
+  background: none;
+  border: 1.5px solid #00dde0;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #00dde0;
+  padding: 0.45rem 1.25rem;
+  letter-spacing: 0.04em;
+  transition: background 0.25s, color 0.25s;
+}
+
+.navCta:hover {
+  background: #00dde0;
+  color: #05030f;
+}
+
+/* ─── Section base ───────────────────────────────────────────────────── */
+.section {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+/* ─── Hero ───────────────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 68px 2rem 0;
+  overflow: hidden;
+}
+
+.heroInner {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 15;
+  padding: 1.5rem 1rem 8rem;
+}
+
+/* Atmospheric blobs behind buildings */
+.blobLeft {
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: rgba(0, 200, 220, 0.35);
+  filter: blur(100px);
+  left: -50px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.blobRight {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: rgba(130, 20, 200, 0.32);
+  filter: blur(90px);
+  right: -20px;
+  top: 45%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Decorative buildings — left side */
+.heroBuildingFarLeft {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 58vh;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+}
+
+.heroBuildingMidLeft {
+  position: absolute;
+  left: -4%;
+  bottom: -14vh;
+  height: 135vh;
+  z-index: 10;
+  pointer-events: none;
+  user-select: none;
+}
+
+.heroBuildingSoloLeft {
+  position: absolute;
+  left: 22%;
+  bottom: -14vh;
+  height: 75vh;
+  z-index: 8;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Decorative buildings — right side */
+.heroBuildingTwoTowersRight {
+  position: absolute;
+  right: 17%;
+  bottom: -14vh;
+  height: 80vh;
+  z-index: 8;
+  pointer-events: none;
+  user-select: none;
+}
+
+.heroBuildingBackRight {
+  position: absolute;
+  right: 4%;
+  bottom: 0;
+  height: 32vh;
+  z-index: 1;
+  opacity: 0.5;
+  pointer-events: none;
+  user-select: none;
+}
+
+.heroBuildingRight {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 52vh;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+}
+
+.heroBuildingCenterRight {
+  position: absolute;
+  right: 28%;
+  bottom: 0;
+  height: 78vh;
+  z-index: 3;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 0 24px rgba(0, 221, 224, 0.4));
+}
+
+.heroBuildingFarRight {
+  position: absolute;
+  right: -11%;
+  bottom: -14vh;
+  height: 132vh;
+  z-index: 10;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Hero name (cursive) */
+.heroName {
+  font-family: 'La Belle Aurore', cursive;
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+  font-weight: 400;
+  color: #f0f8ff;
+  margin: 0;
+  text-shadow: 0 0 30px rgba(0, 221, 224, 0.3);
+  position: relative;
+  z-index: 2;
+}
+
+/* Creative title subtitle */
+.heroCreativeTitle {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(200, 230, 255, 0.5);
+  margin: 0 0 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Hero heading */
+.heroHeading {
+  font-family: 'Jost', sans-serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.0;
+  margin: 0 0 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.heroHeadingLine {
+  display: block;
+  color: #f0f8ff;
+}
+
+.heroHeadingGradient {
+  display: block;
+  background: linear-gradient(90deg, #00e5e5 0%, #00ff88 22%, #ffdd00 48%, #ff8800 72%, #ff2d7a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroSub {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 400;
+  color: rgba(200, 230, 255, 0.6);
+  max-width: 520px;
+  line-height: 1.65;
+  margin: 0 auto 2.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.heroButtons {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.btnPrimary {
+  background: #00dde0;
+  color: #05030f;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  letter-spacing: 0.03em;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 221, 224, 0.35);
+}
+
+.btnGhost {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(200, 230, 255, 0.75);
+  padding: 0.75rem 0.5rem;
+  letter-spacing: 0.03em;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+
+.btnGhost:hover {
+  color: #f0f8ff;
+}
+
+/* ─── About ──────────────────────────────────────────────────────────── */
+.about {
+  padding: 7rem 2rem;
+}
+
+.aboutGrid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.aboutImageCol {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.aboutOval1 {
+  position: absolute;
+  width: 85%;
+  height: 55%;
+  border-radius: 50%;
+  background: rgba(0, 180, 200, 0.15);
+  border: 2px solid rgba(0, 230, 255, 1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transform: rotate(-8deg) translate(-6%, -35%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.aboutOval2 {
+  position: absolute;
+  width: 75%;
+  height: 48%;
+  border-radius: 50%;
+  background: rgba(180, 20, 90, 0.15);
+  border: 2px solid rgba(255, 40, 120, 1);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transform: rotate(7deg) translate(8%, -15%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.aboutBuilding {
+  position: relative;
+  z-index: 2;
+  max-height: 70vh;
+  width: 100%;
+  object-fit: contain;
+  object-position: bottom;
+  user-select: none;
+  pointer-events: none;
+}
+
+.aboutContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* Shared section heading */
+.sectionEyebrow {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ffd700;
+  margin: 0;
+}
+
+.sectionHeading {
+  font-family: 'Jost', sans-serif;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0;
+  color: #f0f8ff;
+}
+
+.gradientWord {
+  background: linear-gradient(90deg, #00e5e5 0%, #00ff88 22%, #ffdd00 48%, #ff8800 72%, #ff2d7a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.techTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.techTag {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  background: rgba(0, 229, 229, 0.08);
+  border: 1px solid rgba(0, 229, 229, 0.25);
+  color: rgba(0, 229, 229, 0.9);
+}
+
+.aboutBio {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(200, 230, 255, 0.75);
+  margin: 0;
+}
+
+/* ─── Skills ─────────────────────────────────────────────────────────── */
+.skills {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.skillRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.skillMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.skillLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(200, 230, 255, 0.85);
+  letter-spacing: 0.02em;
+}
+
+.skillPct {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(200, 230, 255, 0.5);
+}
+
+.skillTrack {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+}
+
+.skillFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #00e5e5, #a855f7);
+  transition: width 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Projects ───────────────────────────────────────────────────────── */
+.projects {
+  padding: 7rem 2rem;
+}
+
+.projectsInner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.projectsHeader {
+  margin-bottom: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem;
+}
+
+.card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 229, 229, 0.35);
+  box-shadow: 0 8px 32px rgba(0, 229, 229, 0.1);
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.cardTitle {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #f0f8ff;
+  margin: 0;
+}
+
+.cardLinks {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.cardIconLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(200, 230, 255, 0.7);
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  line-height: 1;
+}
+
+.cardIconLink:hover {
+  background: rgba(0, 229, 229, 0.12);
+  border-color: rgba(0, 229, 229, 0.4);
+  color: #00e5e5;
+}
+
+.cardDesc {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: rgba(200, 230, 255, 0.6);
+  margin: 0;
+}
+
+.cardTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.3rem 0.75rem;
+  border-radius: 50px;
+  background: rgba(0, 229, 229, 0.1);
+  border: 1px solid rgba(0, 229, 229, 0.2);
+  color: rgba(0, 229, 229, 0.85);
+}
+
+/* ─── Contact ────────────────────────────────────────────────────────── */
+.contact {
+  padding: 7rem 2rem 9rem;
+}
+
+.contactInner {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.contactParagraph {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(200, 230, 255, 0.6);
+  margin: 0;
+}
+
+.contactBtn {
+  display: inline-block;
+  background: #00dde0;
+  color: #05030f;
+  border-radius: 50px;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.8rem 2.2rem;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.contactBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 221, 224, 0.35);
+}
+
+.socialRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.65;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.socialLink:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.socialIcon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────── */
+
+/* ── Tablet (≤ 900px) ── */
+@media (max-width: 900px) {
+  .aboutGrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .aboutImageCol {
+    order: -1;
+    max-height: 300px;
+  }
+
+  .aboutBuilding {
+    max-height: 300px;
+  }
+
+  .projectsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroBuildingMidLeft {
+    height: 85vh;
+    left: -8%;
+  }
+
+  .heroBuildingSoloLeft {
+    height: 55vh;
+    left: 16%;
+  }
+
+  .heroBuildingTwoTowersRight {
+    height: 55vh;
+    right: 18%;
+  }
+
+  .heroBuildingFarRight {
+    height: 85vh;
+    right: -10%;
+  }
+
+  .heroBuildingFarLeft,
+  .heroBuildingRight,
+  .heroBuildingCenterRight,
+  .heroBuildingBackRight {
+    display: none;
+  }
+
+  .blobLeft,
+  .blobRight {
+    width: 260px;
+    height: 260px;
+  }
+}
+
+/* ── Mobile (≤ 600px) ── */
+@media (max-width: 600px) {
+  .nav {
+    padding: 0 1.25rem;
+  }
+
+  .navLinks {
+    gap: 1rem;
+  }
+
+  .heroButtons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .about,
+  .projects,
+  .contact {
+    padding: 5rem 1.25rem;
+  }
+
+  /* Vertically center hero content with the buildings */
+  .hero {
+    align-items: center;
+    padding-top: 68px;
+  }
+
+  /* Frosted glass backdrop so text stays readable over buildings */
+  .heroInner {
+    padding: 1rem 1.25rem;
+    transform: translateY(-18vh);
+    background: rgba(5, 3, 15, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    max-width: 72vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .heroName {
+    font-size: 1.6rem;
+    margin: 0 0 0.1rem;
+  }
+
+  .heroCreativeTitle {
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    margin: 0 0 1rem;
+  }
+
+  .heroHeading {
+    font-size: clamp(1.3rem, 5vw, 2rem);
+    margin: 0 0 0.75rem;
+  }
+
+  .heroSub {
+    font-size: 0.82rem;
+    margin: 0 auto 1.25rem;
+  }
+
+  /* Keep buildings but push to edges and shrink so they frame the text */
+  .heroBuildingMidLeft {
+    height: 65vh;
+    left: -12%;
+    bottom: 35vh;
+  }
+
+  .heroBuildingSoloLeft {
+    display: none;
+  }
+
+  .heroBuildingTwoTowersRight {
+    display: none;
+  }
+
+  .heroBuildingFarRight {
+    height: 65vh;
+    right: -12%;
+    bottom: 35vh;
+  }
+
+  .heroBuildingFarLeft,
+  .heroBuildingRight,
+  .heroBuildingCenterRight,
+  .heroBuildingBackRight {
+    display: none;
+  }
+
+  .blobLeft,
+  .blobRight {
+    display: none;
+  }
+}

@@ -15,7 +15,7 @@ const ProtectedRoute: React.FC<Props> = ({ children }) => {
   const { user } = useAuth();
 
   if (!user) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/io-home" replace />;
   }
 
   return <>{children}</>;

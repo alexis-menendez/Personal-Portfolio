@@ -1,0 +1,32 @@
+/* File: client/src/assets/css/portfolio/common/Clouds.module.css */
+
+.cloudLayer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-clouds); /* Layer 5: Clouds (-5) */
+  pointer-events: none; /* So it won't block clicks */
+  overflow: hidden; /* Hide overflow while moving */
+}
+
+.cloud {
+  position: absolute;
+  top: 20%; /* Adjust vertical position */
+  left: -300px; /* Start fully off-screen to the left */
+  width: 600px; /* Adjust cloud size */
+  height: auto;
+  animation: drift 120s linear infinite; /* Very slow movement */
+  opacity: 0.8; /* Slight transparency for blending */
+}
+
+@keyframes drift {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(100vw + 600px)); /* Moves across & past screen */
+  }
+}
+

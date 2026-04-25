@@ -1,10 +1,11 @@
 /* File: client/src/index.css */
 
+/* Tailwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Reset margins/padding that might cause white bars */
+/* Margins/Padding */
 html,
 body {
   height: 100%;
@@ -13,9 +14,81 @@ body {
   padding: 0;
 }
 
-/* Global default font and text shadow */
+/* Font and Text shadow */
 body {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 100;
   color: #fff8e7; 
+}
+
+/* ── Scrollbar base (width/track shared by all themes) ────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(5, 3, 15, 0.6);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* ── InnerOrbit scrollbar — pink/rose ─────────────────────────── */
+html[data-scrollbar="innerOrbit"]::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    to bottom,
+    rgba(200, 40, 100, 0.7),
+    rgba(140, 20, 80, 0.5)
+  );
+  border-radius: 999px;
+}
+
+html[data-scrollbar="innerOrbit"]::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 60, 130, 0.9),
+    rgba(200, 40, 100, 0.7)
+  );
+}
+
+html[data-scrollbar="innerOrbit"] {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(200, 40, 100, 0.6) rgba(5, 3, 15, 0.6);
+}
+
+/* ── Portfolio scrollbar — teal/rainbow ───────────────────────── */
+html[data-scrollbar="portfolio"]::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    to bottom,
+    #00e5e5,
+    #00ff88,
+    #ffdd00,
+    #ff8800,
+    #ff2d7a
+  );
+  border-radius: 999px;
+}
+
+html[data-scrollbar="portfolio"]::-webkit-scrollbar-thumb:hover {
+  opacity: 0.85;
+  filter: brightness(1.2);
+}
+
+html[data-scrollbar="portfolio"] {
+  scrollbar-width: thin;
+  scrollbar-color: #00e5e5 rgba(5, 3, 15, 0.6);
+}
+
+/* ── Z-Index Layer Variables ──────────────────────────────────── */
+:root {
+  --z-ui: 0;                 /* Layer 0: UI Elements */
+  --z-cityscape: -1;         /* Layer 1: Cityscape */
+  --z-black-arch: -2;        /* Layer 2: Black Arch */
+  --z-stars: -3;             /* Layer 3: Stars */
+  --z-midnight-gradient: -4; /* Layer 4: Midnight Gradient */
+  --z-sunset-mask: -5;       /* Layer 6: Sunset Mask */
+  --z-clouds: -6;            /* Layer 5: Clouds */
+  --z-sunset-gradient: -7;   /* Layer 7: Sunset Gradient */
 }

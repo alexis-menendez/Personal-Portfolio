@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
         </a>
       </div>
       <div className={styles.footerLine}></div>
-      <span className={styles.footerText}>Alex Menendez 2025</span>
+      <span className={styles.footerText}>Alex Menendez 2026</span>
     </footer>
   );
 };

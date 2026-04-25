@@ -1,43 +1,6 @@
 /* File: client/src/assets/css/portfolio/pageStyles/Home.module.css */
 
-/* ------------------------------ */
-/* General Container & Background */
-/* ------------------------------ */
-
-.container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  font-family: 'Georgia', serif;
-  color: #222;
-  overflow: hidden;
-  z-index: 0;
-}
-
-.starLayer {
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  pointer-events: none;
-}
-
-/* ------------------------------ */
-/* Main Content Wrapper           */
-/* ------------------------------ */
-
-.main {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  flex-grow: 1;
-  padding: 2rem 4rem;
-}
-
-/* ------------------------------ */
-/* Text Section & Typography      */
-/* ------------------------------ */
-
+/* ─── Preserved for SectionWrapper (used by other pages) ────── */
 .textSection {
   max-width: 40%;
   text-align: left;
@@ -45,43 +8,170 @@
   margin-left: 6rem;
 }
 
-.heading {
+/* ─── Text content — left sky ───────────────────────────────── */
+
+.content {
+  position: relative;
+  z-index: 5;
+  max-width: 42%;
+  padding-bottom: 48vh; /* stay above the cityscape */
+}
+
+.eyebrow {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 400;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: rgba(0, 221, 224, 0.65);
+  margin: 0 0 1.4rem;
+}
+
+.name {
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  font-size: clamp(3.5rem, 7.5vw, 6.5rem);
+  line-height: 0.95;
+  color: #edf8ff;
+  margin: 0 0 1.5rem;
+  text-shadow:
+    0 0 30px rgba(0, 221, 224, 0.45),
+    0 0 70px rgba(0, 221, 224, 0.2);
+}
+
+.nameLine {
+  width: 64px;
+  height: 1px;
+  background: linear-gradient(to right, #00dde0, rgba(232, 32, 90, 0.6), transparent);
+  margin: 0 0 1.8rem;
+}
+
+.bio {
   font-family: 'Inter Tight', sans-serif;
   font-weight: 100;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: rgba(200, 232, 255, 0.62);
+  margin: 0 0 2.4rem;
+  max-width: 380px;
 }
 
-.paragraph {
+.cta {
   font-family: 'Inter Tight', sans-serif;
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-}
-
-/* ------------------------------ */
-/* Resume / Submit Button         */
-/* ------------------------------ */
-
-.resumeButton {
-  font-family: 'Inter Tight', sans-serif;
-  background-color: #3c7f72;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 6px;
+  font-weight: 400;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: transparent;
+  color: #00dde0;
+  border: 1px solid rgba(0, 221, 224, 0.4);
+  padding: 0.85rem 2.2rem;
+  border-radius: 2px;
   cursor: pointer;
-  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 16px rgba(0, 221, 224, 0.15), inset 0 0 16px rgba(0, 221, 224, 0.05);
 }
 
-.resumeButton:hover {
-  background-color: #0f135e;
+.cta:hover {
+  background: rgba(0, 221, 224, 0.08);
+  border-color: #00dde0;
+  box-shadow: 0 0 32px rgba(0, 221, 224, 0.35), inset 0 0 20px rgba(0, 221, 224, 0.08);
+  color: #ffffff;
 }
 
+/* ─── Cityscape — fixed bottom horizon ──────────────────────── */
 
-.fadeScrollWrapper {
-  will-change: mask-image, -webkit-mask-image;
-  transition: mask-image 0.1s linear, -webkit-mask-image 0.1s linear;
+.cityscape {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 52vh;
+  pointer-events: none;
 }
 
+/* All buildings anchor to the bottom of the cityscape container */
+.building {
+  position: absolute;
+  bottom: 0;
+  width: auto;
+  object-fit: contain;
+  object-position: bottom;
+}
 
+/* ── Back layer: furthest, smallest, most faded ── */
+
+/* SoloTower2 — elegant Space Needle, far right background */
+.b_soloTower2 {
+  right: 4%;
+  height: 50%;
+  z-index: 1;
+  opacity: 0.55;
+  filter: drop-shadow(0 0 10px rgba(0, 221, 224, 0.2));
+}
+
+/* ── Mid layer ── */
+
+/* TwoTowers — left side */
+.b_twoTowers {
+  left: 3%;
+  height: 62%;
+  z-index: 2;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 14px rgba(0, 221, 224, 0.25));
+}
+
+/* BackgroundBuildings2 — right-center */
+.b_buildings2 {
+  left: 56%;
+  height: 66%;
+  z-index: 2;
+  opacity: 0.82;
+  filter: drop-shadow(0 0 14px rgba(232, 32, 90, 0.2));
+}
+
+/* ── Near layer ── */
+
+/* BakcgroundTowers1 — left-center */
+.b_towers1 {
+  left: 14%;
+  height: 74%;
+  z-index: 3;
+  filter: drop-shadow(0 0 18px rgba(0, 221, 224, 0.3));
+}
+
+/* SoloTower1 — right side, mushroom tower */
+.b_soloTower1 {
+  left: 70%;
+  height: 80%;
+  z-index: 3;
+  filter: drop-shadow(0 0 18px rgba(240, 128, 32, 0.3));
+}
+
+/* ── Focal centerpiece ── */
+
+/* BackgroundTowers3 — center-right, tallest, dominates the skyline */
+.b_towers3 {
+  left: 38%;
+  height: 92%;
+  z-index: 4;
+  filter:
+    drop-shadow(0 0 24px rgba(0, 221, 224, 0.4))
+    drop-shadow(0 0 50px rgba(0, 221, 224, 0.15));
+}
+
+/* ── Ground glow — atmospheric city light bleeding upward ── */
+.groundGlow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 28%;
+  z-index: 5;
+  background: linear-gradient(
+    to top,
+    rgba(0, 180, 200, 0.12) 0%,
+    rgba(200, 30, 80, 0.07) 40%,
+    transparent 100%
+  );
+  pointer-events: none;
+}

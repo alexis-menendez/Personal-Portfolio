@@ -133,10 +133,19 @@ const Constellation: React.FC = () => {
             return null;
           })}
 
-          {entriesInConstellation.map((entry: { title: string }, i: number) => {
+          {entriesInConstellation.map((_entry: { title: string }, i: number) => {
             const star = constellation.stars[i];
+            const isNewest = baseEntryIndex + i === entries.length - 1;
             return (
               <g key={`star-group-${i}`}>
+                {isNewest && (
+                  <circle
+                    cx={star.x}
+                    cy={star.y}
+                    r={(star.size ?? 1) * 3.5}
+                    className={styles.recentStarRing}
+                  />
+                )}
                 <circle
                   cx={star.x}
                   cy={star.y}
@@ -145,7 +154,7 @@ const Constellation: React.FC = () => {
                   filter={hoveredIndex === i ? 'url(#blueGlow)' : 'url(#whiteGlow)'}
                   onMouseEnter={() => setHoveredIndex(i)}
                   onMouseLeave={() => setHoveredIndex(null)}
-                  onClick={() => navigate(`/journal/entry/${index}-${i}`)}
+                  onClick={() => navigate(`/io-journal/entry/${index}-${i}`)}
                   style={{
                     pointerEvents: 'all',
                     animationDelay: `${Math.random() * 2.5}s`,

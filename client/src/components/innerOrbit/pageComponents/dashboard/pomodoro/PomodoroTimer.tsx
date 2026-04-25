@@ -4,7 +4,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 //Hooks
-import { Task, useTaskStore } from '../../../../../hooks/innerOrbit/useTaskStore';
+import { useTaskStore } from '../../../../../hooks/innerOrbit/useTaskStore';
 
 // Subcomponents
 import TimerSettings from './TimerSettings';
@@ -25,7 +25,7 @@ const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
   onBreakStart
 }) => {
   const { getSelectedTask } = useTaskStore();
-  const task: Task | null = getSelectedTask();
+  getSelectedTask();
 
   const TASK_5_MIN = 5 * 60;
   const TASK_15_MIN = 15 * 60;
@@ -38,11 +38,11 @@ const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
   const [initialTime, setInitialTime] = useState(TASK_5_MIN);
 
   const [showSettings, setShowSettings] = useState(false);
-  const [soundSrc, setSoundSrc] = useState('/assets/audio/timer-end.mp3');
+  const [soundSrc, setSoundSrc] = useState('/assets/innerOrbit/audio/Fallen-Star.mp3');
   const [volume, setVolume] = useState(1);
   const [soundEnabled, setSoundEnabled] = useState(true);
 
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const formatTime = (secs: number) =>
     `${Math.floor(secs / 60).toString().padStart(2, '0')}:${(secs % 60)

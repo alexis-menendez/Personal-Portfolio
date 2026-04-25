@@ -1,0 +1,28 @@
+/* File: client/src/assets/css/portfolio/layout/SpaceCityLayout.module.css */
+
+.container {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  /* Deep space — subtle purple nebula around center, pink warmth near horizon */
+  background:
+    radial-gradient(ellipse at 65% 35%, rgba(90, 20, 140, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 25% 80%, rgba(200, 35, 70, 0.1)  0%, transparent 40%),
+    linear-gradient(180deg, #04020e 0%, #07051a 55%, #0b0820 100%);
+  color: #dff4ff;
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.main {
+  position: relative;
+  z-index: 1;
+  padding: 0 4rem;
+  padding-top: 10vh;
+  min-height: 100vh;
+}

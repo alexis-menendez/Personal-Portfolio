@@ -133,7 +133,7 @@ const Journal: React.FC = () => {
             key={index}
             className={styles.gridCell}
             onClick={() =>
-              navigate(`/journal/constellation/${index}`, {
+              navigate(`/io-journal/constellation/${index}`, {
                 state: { entries: data.getJournalEntries.entries }
               })
             }
@@ -172,19 +172,32 @@ const Journal: React.FC = () => {
                 );
               })}
 
-              {stars.map((star, i) => (
-                <circle
-                  key={`star-${i}`}
-                  cx={star.x}
-                  cy={star.y}
-                  r={star.size ?? 1}
-                  className={styles.star}
-                  filter="url(#whiteGlow)"
-                  style={{ 
-                    pointerEvents: 'all', 
-                    animationDelay: `${Math.random() * 2.5}s` }}
-                />
-              ))}
+              {stars.map((star, i) => {
+                const isNewest = index === unlockedData.length - 1 && i === stars.length - 1;
+                return (
+                  <g key={`star-${i}`}>
+                    {isNewest && (
+                      <circle
+                        cx={star.x}
+                        cy={star.y}
+                        r={(star.size ?? 1) * 3.5}
+                        className={styles.recentStarRing}
+                      />
+                    )}
+                    <circle
+                      cx={star.x}
+                      cy={star.y}
+                      r={star.size ?? 1}
+                      className={styles.star}
+                      filter="url(#whiteGlow)"
+                      style={{
+                        pointerEvents: 'all',
+                        animationDelay: `${Math.random() * 2.5}s`,
+                      }}
+                    />
+                  </g>
+                );
+              })}
             </svg>
             <div className={styles.label}>
               {stars.length === constellation.stars.length ? constellation.name : "???"}
