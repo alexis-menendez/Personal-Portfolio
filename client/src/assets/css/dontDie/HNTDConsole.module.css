@@ -233,3 +233,224 @@
 }
 
 .navLink:hover, .navLinkActive { color: #00ffe1; }
+
+/* ── Personal Logs ────────────────────────────────────────────── */
+.logsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  flex-shrink: 0;
+}
+
+.logsTitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.65rem, 1.3vw, 0.85rem);
+  color: #00ffe1;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+.newLogBtn {
+  background: transparent;
+  border: 1px solid #00ffe1;
+  color: #00ffe1;
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem;
+  padding: 0.25rem 0.65rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.newLogBtn:hover { background: rgba(0, 255, 225, 0.12); }
+
+.logsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.logCard {
+  border: 1px solid rgba(0, 255, 200, 0.25);
+  border-radius: 4px;
+  padding: 0.5rem 0.65rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  background: rgba(0, 0, 0, 0.3);
+}
+.logCard:hover {
+  border-color: rgba(0, 255, 200, 0.6);
+  background: rgba(0, 255, 200, 0.05);
+}
+
+.logCardTitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.55rem, 1.1vw, 0.72rem);
+  color: #00ffe1;
+  margin: 0 0 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.logCardMeta {
+  font-family: 'Courier New', monospace;
+  font-size: 0.65rem;
+  color: rgba(0, 255, 225, 0.4);
+}
+
+.logCardSnippet {
+  font-family: 'Courier New', monospace;
+  font-size: 0.68rem;
+  color: rgba(0, 255, 225, 0.65);
+  margin-top: 0.2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.emptyLogs {
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: rgba(0, 255, 225, 0.4);
+  text-align: center;
+  margin-top: 1.5rem;
+  line-height: 1.7;
+}
+
+/* ── Log Modal (Edit / Create) ────────────────────────────────── */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9000;
+}
+
+.modal {
+  background: #000;
+  border: 1px solid #00ffe1;
+  border-radius: 10px;
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 520px;
+  max-height: 80vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: 0 0 24px rgba(0, 255, 200, 0.25);
+  position: relative;
+}
+
+.modalTitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  color: #00ffe1;
+  margin: 0;
+}
+
+.modalInput {
+  width: 100%;
+  background: rgba(0, 10, 8, 0.85);
+  border: 1px solid rgba(0, 255, 200, 0.4);
+  color: #00ffe1;
+  padding: 0.45rem 0.6rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+  outline: none;
+  caret-color: #00ffe1;
+  box-sizing: border-box;
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  -webkit-text-fill-color: #00ffe1 !important;
+}
+.modalInput:focus { border-color: #00ffe1; }
+.modalInput::placeholder { color: rgba(0, 255, 225, 0.35); }
+
+.modalTextarea {
+  width: 100%;
+  min-height: 160px;
+  background: rgba(0, 10, 8, 0.85);
+  border: 1px solid rgba(0, 255, 200, 0.4);
+  color: #00ffe1;
+  padding: 0.45rem 0.6rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+  outline: none;
+  caret-color: #00ffe1;
+  resize: vertical;
+  box-sizing: border-box;
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  -webkit-text-fill-color: #00ffe1 !important;
+}
+.modalTextarea:focus { border-color: #00ffe1; }
+.modalTextarea::placeholder { color: rgba(0, 255, 225, 0.35); }
+
+.modalActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.modalSaveBtn {
+  background: transparent;
+  border: 1px solid #00ffe1;
+  color: #00ffe1;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.modalSaveBtn:hover { background: rgba(0, 255, 225, 0.15); }
+
+.modalDeleteBtn {
+  background: transparent;
+  border: 1px solid rgba(255, 77, 77, 0.5);
+  color: rgba(255, 77, 77, 0.7);
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.modalDeleteBtn:hover { background: rgba(255, 77, 77, 0.1); border-color: #ff4d4d; color: #ff4d4d; }
+
+.modalCancelBtn {
+  background: none;
+  border: none;
+  color: rgba(0, 255, 225, 0.45);
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.modalCancelBtn:hover { color: #00ffe1; }
+
+.modalCloseX {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  color: #00ffe1;
+  font-size: 1.3rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.logsPageContent {
+  width: 70%;
+  padding-left: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}

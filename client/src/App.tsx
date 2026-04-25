@@ -12,9 +12,10 @@ import { HNTDPlanetProvider } from './context/HNTDPlanetContext';
 import HNTDPrivateRoute from './components/dontDie/HNTDPrivateRoute';
 
 // HNTD Pages
-const HNTDHome      = lazy(() => import('./pages/dontDie/HNTDHome'));
-const HNTDDashboard = lazy(() => import('./pages/dontDie/HNTDDashboard'));
-const HNTDHolomap   = lazy(() => import('./pages/dontDie/HNTDHolomap'));
+const HNTDHome         = lazy(() => import('./pages/dontDie/HNTDHome'));
+const HNTDDashboard    = lazy(() => import('./pages/dontDie/HNTDDashboard'));
+const HNTDHolomap      = lazy(() => import('./pages/dontDie/HNTDHolomap'));
+const HNTDPersonalLogs = lazy(() => import('./pages/dontDie/HNTDPersonalLogs'));
 
 // Layout
 import ProtectedRoute from './components/ProtectedRoute';
@@ -100,9 +101,10 @@ const App: React.FC = () => {
           <Route path="/home" element={<SpaceCity />} />
 
           {/* HNTD demo routes */}
-          <Route path="/hntd-home"      element={<HNTDHome />} />
-          <Route path="/hntd-dashboard" element={<HNTDPrivateRoute><HNTDDashboard /></HNTDPrivateRoute>} />
-          <Route path="/hntd-holomap"   element={<HNTDPrivateRoute><HNTDHolomap /></HNTDPrivateRoute>} />
+          <Route path="/hntd-home"          element={<HNTDHome />} />
+          <Route path="/hntd-dashboard"     element={<HNTDPrivateRoute><HNTDDashboard /></HNTDPrivateRoute>} />
+          <Route path="/hntd-holomap"       element={<HNTDPrivateRoute><HNTDHolomap /></HNTDPrivateRoute>} />
+          <Route path="/hntd-personal-logs" element={<HNTDPrivateRoute><HNTDPersonalLogs /></HNTDPrivateRoute>} />
 
           {/* Standalone project detail pages */}
           <Route path="/innerOrbit" element={<InnerOrbit />} />
