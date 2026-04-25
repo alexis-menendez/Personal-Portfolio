@@ -569,3 +569,137 @@
   transition: color 0.15s;
 }
 .tipDeleteBtn:hover { color: #ff4d4d; }
+
+/* ── Weather Scanner ──────────────────────────────────────────── */
+.weatherPageContent {
+  width: 70%;
+  padding-left: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.weatherSearchRow {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  flex-shrink: 0;
+}
+
+.weatherSearchInput {
+  flex: 1;
+  background: rgba(0, 10, 8, 0.85);
+  border: 1px solid rgba(0, 255, 200, 0.4);
+  color: #00ffe1;
+  padding: 0.4rem 0.6rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  outline: none;
+  caret-color: #00ffe1;
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  -webkit-text-fill-color: #00ffe1 !important;
+}
+.weatherSearchInput:focus,
+.weatherSearchInput:hover {
+  background: rgba(0, 10, 8, 0.95);
+  border-color: #00ffe1;
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  -webkit-text-fill-color: #00ffe1 !important;
+}
+.weatherSearchInput::placeholder { color: rgba(0, 255, 225, 0.35); }
+
+.weatherScanBtn {
+  background: transparent;
+  border: 1px solid #00ffe1;
+  color: #00ffe1;
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.weatherScanBtn:hover    { background: rgba(0, 255, 225, 0.12); }
+.weatherScanBtn:disabled { opacity: 0.45; cursor: default; }
+
+.weatherError {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: #ff4d4d;
+  margin-bottom: 0.5rem;
+}
+
+.weatherIdle {
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: rgba(0, 255, 225, 0.4);
+  text-align: center;
+  margin-top: 1.5rem;
+  line-height: 1.8;
+}
+
+.weatherCard {
+  border: 1px solid rgba(0, 255, 200, 0.3);
+  border-radius: 6px;
+  padding: 0.9rem 1rem;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.weatherLocation {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.7rem, 1.4vw, 0.9rem);
+  color: #00ffe1;
+  margin: 0;
+  letter-spacing: 0.08em;
+}
+
+.weatherCondition {
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem;
+  color: rgba(0, 255, 225, 0.6);
+  font-style: italic;
+  margin: 0;
+  border-left: 2px solid rgba(0, 255, 200, 0.3);
+  padding-left: 0.6rem;
+}
+
+.weatherGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem 0.8rem;
+}
+
+.weatherRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.weatherLabel {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.55rem;
+  color: rgba(0, 255, 200, 0.4);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.weatherValue {
+  font-family: 'Courier New', monospace;
+  font-size: clamp(0.7rem, 1.3vw, 0.82rem);
+  color: #00ffe1;
+}
+
+.weatherVeraLine {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  color: rgba(0, 255, 225, 0.5);
+  font-style: italic;
+  border-top: 1px solid rgba(0, 255, 200, 0.15);
+  padding-top: 0.5rem;
+  line-height: 1.5;
+}
