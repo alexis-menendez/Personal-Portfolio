@@ -475,3 +475,97 @@
   flex-direction: column;
   height: 100%;
 }
+
+/* ── Survival Guide ───────────────────────────────────────────── */
+.survivalPageContent {
+  width: 70%;
+  padding-left: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tipCard {
+  border: 1px solid rgba(0, 255, 200, 0.2);
+  border-radius: 4px;
+  padding: 0.55rem 0.7rem;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  transition: border-color 0.2s;
+}
+.tipCard:hover { border-color: rgba(0, 255, 200, 0.5); }
+
+.tipVote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  flex-shrink: 0;
+  min-width: 2rem;
+}
+
+.tipVoteBtn {
+  background: none;
+  border: none;
+  color: rgba(0, 255, 225, 0.45);
+  font-size: 0.9rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  transition: color 0.15s;
+}
+.tipVoteBtn:hover       { color: #00ffe1; }
+.tipVoteBtnActive       { color: #00ffe1 !important; }
+
+.tipVoteCount {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  color: rgba(0, 255, 225, 0.6);
+}
+
+.tipBody { flex: 1; min-width: 0; }
+
+.tipTitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.55rem, 1.1vw, 0.72rem);
+  color: #00ffe1;
+  margin: 0 0 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tipContent {
+  font-family: 'Courier New', monospace;
+  font-size: 0.68rem;
+  color: rgba(0, 255, 225, 0.7);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tipMeta {
+  font-family: 'Courier New', monospace;
+  font-size: 0.6rem;
+  color: rgba(0, 255, 225, 0.35);
+  margin-top: 0.25rem;
+}
+
+.tipDeleteBtn {
+  background: none;
+  border: none;
+  color: rgba(255, 77, 77, 0.4);
+  font-size: 0.7rem;
+  cursor: pointer;
+  padding: 0;
+  font-family: 'Courier New', monospace;
+  flex-shrink: 0;
+  align-self: flex-start;
+  transition: color 0.15s;
+}
+.tipDeleteBtn:hover { color: #ff4d4d; }

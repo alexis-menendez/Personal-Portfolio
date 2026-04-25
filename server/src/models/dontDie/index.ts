@@ -4,8 +4,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import { Sequelize } from 'sequelize';
-import { HNTDUserFactory } from './HNTDUser.js';
-import { HNTDLogFactory  } from './HNTDLog.js';
+import { HNTDUserFactory        } from './HNTDUser.js';
+import { HNTDLogFactory         } from './HNTDLog.js';
+import { HNTDSurvivalTipFactory } from './HNTDSurvivalTip.js';
+import { HNTDVoteFactory        } from './HNTDVote.js';
 
 // Reuse the same Neon DB as Taskadelic — tables are prefixed hntd_*
 const hntdSequelize = process.env.TD_DB_URL
@@ -25,10 +27,15 @@ const hntdSequelize = process.env.TD_DB_URL
       }
     );
 
-const HNTDUser = HNTDUserFactory(hntdSequelize);
-const HNTDLog  = HNTDLogFactory(hntdSequelize);
+const HNTDUser        = HNTDUserFactory(hntdSequelize);
+const HNTDLog         = HNTDLogFactory(hntdSequelize);
+const HNTDSurvivalTip = HNTDSurvivalTipFactory(hntdSequelize);
+const HNTDVote        = HNTDVoteFactory(hntdSequelize);
 
-HNTDUser.hasMany(HNTDLog, { foreignKey: 'userId' });
-HNTDLog.belongsTo(HNTDUser, { foreignKey: 'userId' });
+HNTDUser.hasMany(HNTDLog,         { foreignKey: 'userId' });
+HNTDLog.belongsTo(HNTDUser,       { foreignKey: 'userId' });
 
-export { hntdSequelize, HNTDUser, HNTDLog };
+HNTDSurvivalTip.hasMany(HNTDVote, { foreignKey: 'tipId' });
+HNTDVote.belongsTo(HNTDSurvivalTip, { foreignKey: 'tipId' });
+
+export { hntdSequelize, HNTDUser, HNTDLog, HNTDSurvivalTip, HNTDVote };
