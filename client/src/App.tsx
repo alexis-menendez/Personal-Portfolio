@@ -15,6 +15,8 @@ import HNTDPrivateRoute from './components/dontDie/HNTDPrivateRoute';
 const HNTDHome           = lazy(() => import('./pages/dontDie/HNTDHome'));
 const HNTDDashboard      = lazy(() => import('./pages/dontDie/HNTDDashboard'));
 const HNTDHolomap        = lazy(() => import('./pages/dontDie/HNTDHolomap'));
+const HNTDTravel         = lazy(() => import('./pages/dontDie/HNTDTravel'));
+const HNTDShuttleBreak   = lazy(() => import('./pages/dontDie/HNTDShuttleBreak'));
 const HNTDPersonalLogs   = lazy(() => import('./pages/dontDie/HNTDPersonalLogs'));
 const HNTDSurvivalGuide  = lazy(() => import('./pages/dontDie/HNTDSurvivalGuide'));
 const HNTDWeatherScanner = lazy(() => import('./pages/dontDie/HNTDWeatherScanner'));
@@ -106,6 +108,8 @@ const App: React.FC = () => {
           <Route path="/hntd-home"            element={<HNTDHome />} />
           <Route path="/hntd-dashboard"       element={<HNTDPrivateRoute><HNTDDashboard /></HNTDPrivateRoute>} />
           <Route path="/hntd-holomap"         element={<HNTDPrivateRoute><HNTDHolomap /></HNTDPrivateRoute>} />
+          <Route path="/hntd-travel"          element={<HNTDPrivateRoute><HNTDTravel /></HNTDPrivateRoute>} />
+          <Route path="/hntd-shuttlebreak"    element={<HNTDPrivateRoute><HNTDShuttleBreak /></HNTDPrivateRoute>} />
           <Route path="/hntd-survival-guide"  element={<HNTDPrivateRoute><HNTDSurvivalGuide /></HNTDPrivateRoute>} />
           <Route path="/hntd-weather-scanner" element={<HNTDPrivateRoute><HNTDWeatherScanner /></HNTDPrivateRoute>} />
           <Route path="/hntd-personal-logs"   element={<HNTDPrivateRoute><HNTDPersonalLogs /></HNTDPrivateRoute>} />
