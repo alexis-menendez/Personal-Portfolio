@@ -81,6 +81,21 @@ html[data-scrollbar="portfolio"] {
   scrollbar-color: #00e5e5 rgba(5, 3, 15, 0.6);
 }
 
+/* ── How Not To Die scrollbar — cyan/teal ─────────────────────── */
+html[data-scrollbar="dontDie"]::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #00ffe1, #00c9a7);
+  border-radius: 999px;
+}
+
+html[data-scrollbar="dontDie"]::-webkit-scrollbar-thumb:hover {
+  filter: brightness(1.2);
+}
+
+html[data-scrollbar="dontDie"] {
+  scrollbar-width: thin;
+  scrollbar-color: #00ffe1 rgba(0, 0, 0, 0.6);
+}
+
 /* ── Taskadelic scrollbar — psychedelic purple/pink ───────────── */
 html[data-scrollbar="taskadelic"]::-webkit-scrollbar-thumb {
   background: linear-gradient(

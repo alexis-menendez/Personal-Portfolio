@@ -92,11 +92,11 @@ const App: React.FC = () => {
           {/* Standalone project detail pages */}
           <Route path="/innerOrbit" element={<InnerOrbit />} />
           <Route path="/taskadelic" element={<Taskadelic />} />
+          <Route path="/dontDie" element={<DontDie />} />
 
           {/* Routes using PortfolioLayout */}
           <Route element={<PortfolioLayout />}>
             <Route path="/projects" element={<Projects />} />
-            <Route path="/dontDie" element={<DontDie />} />
             <Route path="/lattice" element={<Lattice />} />
             <Route path="/solarium" element={<Solarium />} />
             <Route path="/runestone" element={<Runestone />} />
