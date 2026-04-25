@@ -2,8 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import StarBackground from '../../components/portfolio/common/StarBackground';
-import ShootingStar from '../../components/portfolio/common/ShootingStar';
 import styles from '../../assets/css/portfolio/pageStyles/ProjectDetail.module.css';
 
 const SCREENSHOTS = [
@@ -24,7 +22,7 @@ const Taskadelic: React.FC = () => {
   const [lightbox, setLightbox] = useState<{ src: string; label: string } | null>(null);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-scrollbar', 'taskadelic');
+    document.documentElement.setAttribute('data-scrollbar', 'innerOrbit');
     return () => document.documentElement.removeAttribute('data-scrollbar');
   }, []);
 
@@ -35,12 +33,7 @@ const Taskadelic: React.FC = () => {
   }, []);
 
   return (
-    <div className={styles.page}>
-      <div className={styles.stars}>
-        <StarBackground />
-        <ShootingStar />
-      </div>
-
+    <div className={`${styles.page} ${styles.pageTaskadelic}`}>
       {/* Nav */}
       <nav className={styles.nav}>
         <button className={styles.navBack} onClick={() => navigate('/home')}>

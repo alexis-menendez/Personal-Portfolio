@@ -83,6 +83,14 @@
   background-clip: text;
 }
 
+/* ── Taskadelic page background ───────────────────────────────── */
+.pageTaskadelic {
+  background:
+    radial-gradient(ellipse at 25% 0%,   rgba(185, 90, 110, 0.45) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 100%, rgba(140, 45, 65, 0.3)   0%, transparent 50%),
+    #0d0608;
+}
+
 /* ── Art Deco elements (Taskadelic) ───────────────────────────── */
 
 /* Hero section with relative positioning for corner brackets */
