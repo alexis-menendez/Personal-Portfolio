@@ -231,88 +231,242 @@
   to   { opacity: 1; transform: scale(1); }
 }
 
-/* ── Travel / Planet Surface ──────────────────────────────────── */
-.travelWrapper {
+/* ── Travel HUD ───────────────────────────────────────────────── */
+.hudWrapper {
   height: 100vh;
   width: 100vw;
   background: #000;
   position: relative;
   overflow: hidden;
+}
+
+.hudBg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.3);
+  transition: filter 0.4s ease;
+  z-index: 0;
+}
+
+.hudBgBlurred {
+  filter: brightness(0.15) blur(6px);
+}
+
+/* Top-left sector label */
+.hudTopLabel {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.5rem;
+  z-index: 2;
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.65rem, 1.5vw, 0.9rem);
+  color: rgba(0, 255, 200, 0.6);
+  letter-spacing: 0.14em;
+  text-shadow: 0 0 8px rgba(0, 255, 200, 0.3);
+}
+
+/* Bottom HUD button bar */
+.hudButtons {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hudBtn {
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(0, 255, 200, 0.5);
+  color: #00ffe1;
+  font-family: 'Courier New', monospace;
+  font-size: clamp(0.7rem, 1.5vw, 0.82rem);
+  padding: 0.5rem 1.1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.hudBtn:hover {
+  background: rgba(0, 255, 200, 0.12);
+  border-color: #00ffe1;
+}
+
+/* Centred overlay panel (chat / weather) */
+.hudPanel {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.travelBg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  filter: brightness(0.35);
-  z-index: 0;
-}
-
-.travelContent {
-  position: relative;
-  z-index: 1;
-  max-width: 600px;
-  width: 90%;
-  background: rgba(0, 0, 0, 0.7);
-  border: 1px solid rgba(0, 255, 200, 0.35);
+.hudPanelBox {
+  background: rgba(0, 0, 0, 0.88);
+  border: 1px solid rgba(0, 255, 200, 0.4);
   border-radius: 10px;
-  padding: 2rem;
+  padding: 1.75rem;
+  max-width: 540px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.9rem;
   box-shadow: 0 0 30px rgba(0, 255, 200, 0.15);
-  animation: popIn 0.35s ease-out;
+  animation: popIn 0.3s ease-out;
 }
 
-.travelPlanetName {
+.hudPanelTitle {
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
-  color: #00ffe1;
-  margin: 0;
+  font-size: 0.8rem;
+  color: rgba(0, 255, 200, 0.5);
   letter-spacing: 0.12em;
-  text-shadow: 0 0 12px rgba(0, 255, 200, 0.5);
+  margin: 0;
 }
 
-.travelVeraLine {
+/* ── VERA Chat ────────────────────────────────────────────────── */
+.veraTypingText {
   font-family: 'Courier New', monospace;
-  font-size: 0.8rem;
-  color: rgba(0, 255, 225, 0.6);
-  font-style: italic;
+  font-size: 0.82rem;
+  color: rgba(0, 255, 225, 0.85);
+  line-height: 1.7;
   border-left: 2px solid rgba(0, 255, 200, 0.3);
   padding-left: 0.75rem;
+  min-height: 3rem;
+}
+
+.veraTypingCursor {
+  display: inline-block;
+  width: 7px;
+  height: 0.9em;
+  background: #00ffe1;
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.veraUserLine {
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: rgba(0, 255, 225, 0.5);
+  font-style: italic;
+  padding-left: 0.75rem;
+}
+
+.veraReplies {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.veraReplyBtn {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 255, 200, 0.3);
+  color: rgba(0, 255, 225, 0.75);
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.veraReplyBtn:hover {
+  background: rgba(0, 255, 200, 0.08);
+  color: #00ffe1;
+  border-color: rgba(0, 255, 200, 0.6);
+}
+
+.veraCloseBtn {
+  align-self: flex-start;
+  background: transparent;
+  border: none;
+  color: rgba(0, 255, 225, 0.4);
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+.veraCloseBtn:hover { color: #00ffe1; }
+
+/* ── Weather Scanner (broken) ─────────────────────────────────── */
+.weatherMalfunctionHeader {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75rem;
+  color: #ff4d4d;
+  letter-spacing: 0.15em;
+  text-shadow: 0 0 8px rgba(255, 77, 77, 0.5);
+  animation: flicker 2.5s infinite;
+}
+
+@keyframes flicker {
+  0%, 95%, 100% { opacity: 1; }
+  96%           { opacity: 0.4; }
+  97%           { opacity: 1; }
+  98%           { opacity: 0.2; }
+  99%           { opacity: 0.9; }
+}
+
+.weatherBrokenNote {
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem;
+  color: rgba(0, 255, 225, 0.45);
+  font-style: italic;
+  border-left: 2px solid rgba(255, 77, 77, 0.3);
+  padding-left: 0.65rem;
   line-height: 1.6;
 }
 
-.travelLog {
-  font-family: 'Courier New', monospace;
-  font-size: 0.82rem;
-  color: rgba(0, 255, 225, 0.8);
-  line-height: 1.7;
-}
-
-.travelBtnRow {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  margin-top: 0.5rem;
-}
-
-.travelNavBtn {
+.weatherHudCloseBtn {
+  align-self: flex-start;
   background: transparent;
-  border: 1px solid #00ffe1;
-  color: #00ffe1;
+  border: none;
+  color: rgba(0, 255, 225, 0.4);
   font-family: 'Courier New', monospace;
-  font-size: 0.8rem;
-  padding: 0.45rem 1rem;
-  border-radius: 6px;
+  font-size: 0.75rem;
   cursor: pointer;
-  transition: background 0.2s;
+  text-decoration: underline;
+  padding: 0;
 }
-.travelNavBtn:hover { background: rgba(0, 255, 225, 0.12); }
+.weatherHudCloseBtn:hover { color: #00ffe1; }
+
+.weatherGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem 0.8rem;
+}
+
+.weatherRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.weatherLabel {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.55rem;
+  color: rgba(0, 255, 200, 0.4);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.weatherValue {
+  font-family: 'Courier New', monospace;
+  font-size: clamp(0.7rem, 1.3vw, 0.82rem);
+  color: #00ffe1;
+}
 
 /* ── Shuttle Break ────────────────────────────────────────────── */
 .shuttleWrapper {

@@ -12,14 +12,13 @@ import { HNTDPlanetProvider } from './context/HNTDPlanetContext';
 import HNTDPrivateRoute from './components/dontDie/HNTDPrivateRoute';
 
 // HNTD Pages
-const HNTDHome           = lazy(() => import('./pages/dontDie/HNTDHome'));
-const HNTDDashboard      = lazy(() => import('./pages/dontDie/HNTDDashboard'));
-const HNTDHolomap        = lazy(() => import('./pages/dontDie/HNTDHolomap'));
-const HNTDTravel         = lazy(() => import('./pages/dontDie/HNTDTravel'));
-const HNTDShuttleBreak   = lazy(() => import('./pages/dontDie/HNTDShuttleBreak'));
-const HNTDPersonalLogs   = lazy(() => import('./pages/dontDie/HNTDPersonalLogs'));
-const HNTDSurvivalGuide  = lazy(() => import('./pages/dontDie/HNTDSurvivalGuide'));
-const HNTDWeatherScanner = lazy(() => import('./pages/dontDie/HNTDWeatherScanner'));
+const HNTDHome          = lazy(() => import('./pages/dontDie/HNTDHome'));
+const HNTDDashboard     = lazy(() => import('./pages/dontDie/HNTDDashboard'));
+const HNTDHolomap       = lazy(() => import('./pages/dontDie/HNTDHolomap'));
+const HNTDTravel        = lazy(() => import('./pages/dontDie/HNTDTravel'));
+const HNTDShuttleBreak  = lazy(() => import('./pages/dontDie/HNTDShuttleBreak'));
+const HNTDPersonalLogs  = lazy(() => import('./pages/dontDie/HNTDPersonalLogs'));
+const HNTDSurvivalGuide = lazy(() => import('./pages/dontDie/HNTDSurvivalGuide'));
 
 // Layout
 import ProtectedRoute from './components/ProtectedRoute';
@@ -105,14 +104,13 @@ const App: React.FC = () => {
           <Route path="/home" element={<SpaceCity />} />
 
           {/* HNTD demo routes */}
-          <Route path="/hntd-home"            element={<HNTDHome />} />
-          <Route path="/hntd-dashboard"       element={<HNTDPrivateRoute><HNTDDashboard /></HNTDPrivateRoute>} />
-          <Route path="/hntd-holomap"         element={<HNTDPrivateRoute><HNTDHolomap /></HNTDPrivateRoute>} />
-          <Route path="/hntd-travel"          element={<HNTDPrivateRoute><HNTDTravel /></HNTDPrivateRoute>} />
-          <Route path="/hntd-shuttlebreak"    element={<HNTDPrivateRoute><HNTDShuttleBreak /></HNTDPrivateRoute>} />
-          <Route path="/hntd-survival-guide"  element={<HNTDPrivateRoute><HNTDSurvivalGuide /></HNTDPrivateRoute>} />
-          <Route path="/hntd-weather-scanner" element={<HNTDPrivateRoute><HNTDWeatherScanner /></HNTDPrivateRoute>} />
-          <Route path="/hntd-personal-logs"   element={<HNTDPrivateRoute><HNTDPersonalLogs /></HNTDPrivateRoute>} />
+          <Route path="/hntd-home"           element={<HNTDHome />} />
+          <Route path="/hntd-dashboard"      element={<HNTDPrivateRoute><HNTDDashboard /></HNTDPrivateRoute>} />
+          <Route path="/hntd-holomap"        element={<HNTDPrivateRoute><HNTDHolomap /></HNTDPrivateRoute>} />
+          <Route path="/hntd-travel"         element={<HNTDPrivateRoute><HNTDTravel /></HNTDPrivateRoute>} />
+          <Route path="/hntd-shuttlebreak"   element={<HNTDPrivateRoute><HNTDShuttleBreak /></HNTDPrivateRoute>} />
+          <Route path="/hntd-survival-guide" element={<HNTDPrivateRoute><HNTDSurvivalGuide /></HNTDPrivateRoute>} />
+          <Route path="/hntd-personal-logs"  element={<HNTDPrivateRoute><HNTDPersonalLogs /></HNTDPrivateRoute>} />
 
           {/* Standalone project detail pages */}
           <Route path="/innerOrbit" element={<InnerOrbit />} />
