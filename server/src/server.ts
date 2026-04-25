@@ -18,7 +18,6 @@ import resolvers from "./schema/resolvers.js";
 import { connectDB } from "./config/connections.js";
 
 // Routes
-import libraryRoutes from "./routes/innerOrbit/libraryRoutes.js";
 import contactRoutes from './routes/portfolio/contactRoutes.js';
 
 
@@ -73,7 +72,6 @@ async function startServer() {
 
   // Middleware
   app.use(express.json());
-  app.use('/api/library', libraryRoutes);
   app.use('/api/contact', contactRoutes);
 
   const server = new ApolloServer({

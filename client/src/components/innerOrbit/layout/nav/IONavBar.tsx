@@ -46,14 +46,6 @@ const NavBar: React.FC = () => {
         </li>
         <li>
           <NavLink
-            to="/io-library"
-            className={({ isActive }) => isActive ? `${styles.navLinkItem} ${styles.active}` : styles.navLinkItem}
-          >
-            Library
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
             to="/io-account"
             className={({ isActive }) => isActive ? `${styles.navLinkItem} ${styles.active}` : styles.navLinkItem}
           >

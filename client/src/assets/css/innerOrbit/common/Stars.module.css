@@ -79,6 +79,27 @@
   50% { opacity: 0.3; }
 }
 
+.recentStarRing {
+  fill: none;
+  stroke: rgba(147, 197, 253, 0.75);
+  stroke-width: 0.35;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ringPulse 4s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes ringPulse {
+  0%, 100% {
+    stroke-opacity: 0.75;
+    transform: scale(1);
+  }
+  50% {
+    stroke-opacity: 0.15;
+    transform: scale(1.5);
+  }
+}
+
 .gridContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

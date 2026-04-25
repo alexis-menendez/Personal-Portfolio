@@ -12,7 +12,7 @@
   font-family: 'Georgia', serif;
   line-height: 1.7;
   color: #2b2b2b;
-  background-image: url('/assets/images/Notebook.svg');
+  background-image: url('/assets/innerOrbit/images/Notebook.svg');
   background-repeat: repeat-y;
   background-position: left top;
   background-size: contain; 
@@ -50,7 +50,7 @@
 /* Large Desktop/Laptop styles (1920px to 2350px) */
 @media (max-width: 2350px) {
   .notebookContainer {
-  background-image: url('/assets/images/Notebook.svg');
+  background-image: url('/assets/innerOrbit/images/Notebook.svg');
   background-repeat: repeat-y;
   background-position: center top;
   background-size: 100% auto;
@@ -67,7 +67,7 @@
 /* Small Desktop/Laptop styles (1000px to 1919px) */
 @media (max-width: 1919px) {
   .notebookContainer {
-  background-image: url('/assets/images/Notebook.svg');
+  background-image: url('/assets/innerOrbit/images/Notebook.svg');
   background-repeat: repeat-y;
   background-position: center top;
   background-size: 100% auto;
@@ -84,7 +84,7 @@
 /* Extra Large Tablet styles (900px to 999px) */
 @media (max-width: 999px) {
   .notebookContainer {
-  background-image: url('/assets/images/Notebook.svg');
+  background-image: url('/assets/innerOrbit/images/Notebook.svg');
   background-repeat: repeat-y;
   background-position: center top;
   background-size: 100% auto;
@@ -101,7 +101,7 @@
 /* Large Tablet styles (700px to 899px) */
 @media (max-width: 899px) {
   .notebookContainer {
-  background-image: url('/assets/images/Notebook.svg');
+  background-image: url('/assets/innerOrbit/images/Notebook.svg');
   background-repeat: repeat-y;
   background-position: center top;
   background-size: 100% auto;
@@ -119,7 +119,7 @@
 /* Tablet styles (500px to 699px) */
 @media (max-width: 699px) {
   .notebookContainer {
-  background-image: url('/assets/images/Notebook.svg');
+  background-image: url('/assets/innerOrbit/images/Notebook.svg');
   background-repeat: repeat-y;
   background-position: center top;
   background-size: 100% auto;
@@ -136,7 +136,7 @@
 /* Mobile styles (300px to 499) */
 @media (max-width: 499px) {
   .notebookContainer {
-  background-image: url('/assets/images/Notebook.svg');
+  background-image: url('/assets/innerOrbit/images/Notebook.svg');
   background-repeat: repeat-y;
   background-position: center top;
   background-size: 100% auto;
@@ -152,7 +152,7 @@
 /* Small Mobile styles (399px and under) */
 @media (max-width: 399px) {
   .notebookContainer {
-  background-image: url('/assets/images/Notebook.svg');
+  background-image: url('/assets/innerOrbit/images/Notebook.svg');
   background-repeat: repeat-y;
   background-position: center top;
   background-size: 100% auto;

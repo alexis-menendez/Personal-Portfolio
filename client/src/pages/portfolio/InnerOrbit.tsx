@@ -1,124 +1,112 @@
 // File: client/src/pages/portfolio/InnerOrbit.tsx
 
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styles from '../../assets/css/portfolio/pageStyles/Projects.module.css';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import StarBackground from '../../components/portfolio/common/StarBackground';
+import ShootingStar from '../../components/portfolio/common/ShootingStar';
+import IOMainLayoutBackground from '../../components/innerOrbit/layout/IOmainLayout/IOMainLayoutBackground';
+import styles from '../../assets/css/portfolio/pageStyles/ProjectDetail.module.css';
 
-const innerOrbitLinks = [
-  {
-    name: "Deployed App",
-    description: "Explore the live InnerOrbit wellness app, featuring mood journaling, mood tracking, and meditation guides.",
-    image: "/assets/portfolio/icons/deployed/DeployedBlue.svg",
-    link: "/io-home", // internal route
-    isInternal: true,
-    newTab: true, 
-    imageLeft: false,
-  },
-  {
-    name: "GitHub",
-    description: "View the full source code for the InnerOrbit MERN stack application on GitHub.",
-    image: "/assets/portfolio/icons/git/GitBlue.svg",
-    link: "https://github.com/alexis-menendez/Personal-Portfolio",
-    isInternal: false,
-    newTab: true, 
-    imageLeft: true,
-  },
-  {
-    name: "Documentation",
-    description: "Detailed design documentation and technical breakdown of InnerOrbit, including features, architecture, and development notes.",
-    image: "/assets/portfolio/icons/documentation/DocumentationBlue.svg",
-    link: "https://docs.google.com/document/d/1K9LzRR68QS5rKAFtXKpg2JLLScKgCeq1-FQufrgHPsQ/edit?tab=t.m171kj9l8bu",
-    isInternal: false,
-    newTab: true, 
-    imageLeft: false,
-  },
-  {
-    name: "Gallery",
-    description: "Visual highlights and screenshots showcasing the InnerOrbit user experience.",
-    image: "/assets/portfolio/icons/innerOrbit/InnerOrbitBlue.svg",
-    link: "/gallery", // internal route
-    isInternal: true,
-    newTab: false,
-    imageLeft: true,
-  },
+const SCREENSHOTS = [
+  { src: '/assets/portfolio/images/gallery/innerOrbit/home.webp',                label: 'Home' },
+  { src: '/assets/portfolio/images/gallery/innerOrbit/dashboard.webp',           label: 'Dashboard' },
+  { src: '/assets/portfolio/images/gallery/innerOrbit/journal-galaxy.webp',      label: 'Journal Galaxy' },
+  { src: '/assets/portfolio/images/gallery/innerOrbit/journal-notebook.webp',    label: 'Journal Entry' },
+  { src: '/assets/portfolio/images/gallery/innerOrbit/tracker.webp',             label: 'Mood Tracker' },
+  { src: '/assets/portfolio/images/gallery/innerOrbit/timer.webp',               label: 'Focus Timer' },
 ];
 
+const TECH = ['React', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB', 'GraphQL', 'JWT', 'CSS / Animation'];
+
 const InnerOrbit: React.FC = () => {
+  const navigate = useNavigate();
+  const [lightbox, setLightbox] = useState<{ src: string; label: string } | null>(null);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-scrollbar', 'portfolio');
+    return () => document.documentElement.removeAttribute('data-scrollbar');
+  }, []);
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setLightbox(null); };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, []);
+
   return (
-    <>
-      <div className={styles.textSection}>
-        <h1 className={styles.heading}>InnerOrbit</h1>
-        <p className={styles.paragraph}>
-          InnerOrbit is a space-themed mental health journaling tool built with the MERN stack. 
-          It allows users to track moods, write entries, and explore constellations — all within a calm, immersive interface.
+    <div className={styles.page}>
+      <div className={styles.stars}>
+        <StarBackground />
+        <ShootingStar />
+        <IOMainLayoutBackground />
+      </div>
+
+      {/* Nav */}
+      <nav className={styles.nav}>
+        <button className={styles.navBack} onClick={() => navigate('/home')}>
+          ← Back
+        </button>
+      </nav>
+
+      {/* Hero */}
+      <section className={styles.hero}>
+        <p className={styles.eyebrow}>Project</p>
+        <h1 className={styles.title}>InnerOrbit</h1>
+        <p className={styles.description}>
+          A space-themed mental wellness app built with the MERN stack. Users track their moods,
+          write journal entries, and watch them become stars in a personal constellation — all
+          within a calm, immersive cosmic interface.
         </p>
-      </div>
 
-      <div className={styles.projectGrid}>
-        {innerOrbitLinks.map((section, index) => {
-          const cardContent = (
-            <>
-              {section.imageLeft && (
-                <div className={styles.imageBox}>
-                  <img src={section.image} alt={`${section.name} icon`} />
-                </div>
-              )}
+        <div className={styles.tags}>
+          {TECH.map(t => <span key={t} className={styles.tag}>{t}</span>)}
+        </div>
 
-              <div className={section.imageLeft ? styles.rightText : styles.leftText}>
-                <h2>{section.name}</h2>
-                <p>{section.description}</p>
-                <button className={styles.button}>View Project</button>
-              </div>
+        <div className={styles.actions}>
+          <button className={styles.btnPrimary} onClick={() => navigate('/io-home')}>
+            Launch Demo
+          </button>
+          <a
+            className={styles.btnGhost}
+            href="https://github.com/alexis-menendez/Inner-Orbit"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub ↗
+          </a>
+          <a
+            className={styles.btnGhost}
+            href="https://docs.google.com/document/d/1K9LzRR68QS5rKAFtXKpg2JLLScKgCeq1-FQufrgHPsQ/edit?tab=t.m171kj9l8bu"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Docs ↗
+          </a>
+        </div>
+      </section>
 
-              {!section.imageLeft && (
-                <div className={styles.imageBox}>
-                  <img src={section.image} alt={`${section.name} icon`} />
-                </div>
-              )}
-            </>
-          );
+      {/* Screenshots */}
+      <section className={styles.screenshots}>
+        <p className={styles.sectionEyebrow}>Screenshots</p>
+        <div className={styles.screenshotGrid}>
+          {SCREENSHOTS.map(s => (
+            <div key={s.label} className={styles.screenshotCard} onClick={() => setLightbox(s)} style={{ cursor: 'pointer' }}>
+              <img src={s.src} alt={s.label} className={styles.screenshotImg} loading="lazy" />
+              <span className={styles.screenshotLabel}>{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
 
-          // Open in new tab if specified (even if internal)
-          if (section.newTab) {
-            return (
-              <a
-                key={index}
-                href={section.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.card}
-              >
-                {cardContent}
-              </a>
-            );
-          }
-
-          // Internal links (same tab)
-          if (section.isInternal) {
-            return (
-              <Link key={index} to={section.link} className={styles.card}>
-                {cardContent}
-              </Link>
-            );
-          }
-
-          // External links (new tab)
-          return (
-            <a
-              key={index}
-              href={section.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.card}
-            >
-              {cardContent}
-            </a>
-          );
-        })}
-      </div>
-    </>
+      {/* Lightbox */}
+      {lightbox && (
+        <div className={styles.lightboxOverlay} onClick={() => setLightbox(null)}>
+          <img src={lightbox.src} alt={lightbox.label} className={styles.lightboxImg} />
+          <span className={styles.lightboxLabel}>{lightbox.label}</span>
+        </div>
+      )}
+    </div>
   );
 };
 
 export default InnerOrbit;
-

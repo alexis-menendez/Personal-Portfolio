@@ -12,14 +12,17 @@ import SunsetGradient from '../common/SunsetGradient';
 import Clouds from '../common/Clouds';
 import SunsetMask from '../common/SunsetMask';
 import TransparentStars from '../common/TransparentStars';
+import Arch from '../common/Arch';
 // If you decide to add other background components later, you can uncomment these:
 // import StarBackground from '../common/StarBackground';
 
 interface RetroLayoutProps {
   children?: ReactNode;
+  showNav?: boolean;
+  showArch?: boolean;
 }
 
-const RetroLayout: React.FC<RetroLayoutProps> = ({ children }) => {
+const RetroLayout: React.FC<RetroLayoutProps> = ({ children, showNav = true, showArch = true }) => {
   return (
     <div>
       {/* Background layers */}
@@ -27,9 +30,9 @@ const RetroLayout: React.FC<RetroLayoutProps> = ({ children }) => {
       <Clouds />               {/* Layer 6: --z-clouds */}
       <SunsetMask />           {/* Layer 5: --z-sunset-mask */}
       <TransparentStars />     {/* Layer 4: --z-stars (includes shooting stars) */}
-      {/* <StarBackground /> */}
+      {showArch && <Arch />}   {/* Layer 2: --z-black-arch */}
 
-      <NavBar />
+      {showNav && <NavBar />}
 
       <main>
         {children}

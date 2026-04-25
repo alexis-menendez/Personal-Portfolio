@@ -1,14 +1,20 @@
 // File: client/src/components/innerOrbit/layout/JournalLayout.tsx
 
 // React
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 
 // Subcomponents
 import StarBackground from '../common/StarBackground';
 import NavBar from './nav/IONavBar';
+import ReturnToPortfolio from '../common/ReturnToPortfolio';
 
 const IOJournalLayout: React.FC = () => {
+  useEffect(() => {
+    document.documentElement.setAttribute('data-scrollbar', 'innerOrbit');
+    return () => document.documentElement.removeAttribute('data-scrollbar');
+  }, []);
+
   return (
     <>
       <div
@@ -16,6 +22,7 @@ const IOJournalLayout: React.FC = () => {
         style={{ backgroundColor: 'transparent' }}
       >
         <StarBackground />
+        <ReturnToPortfolio />
 
         <div className="relative z-10 flex flex-col items-center min-h-screen">
           {/* Leave NavBar untouched to use full width */}

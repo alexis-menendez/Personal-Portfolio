@@ -52,7 +52,7 @@ const Login = () => {
       if (data?.loginUser?.token && data?.loginUser?.user) {
         const { _id, username, email } = data.loginUser.user;
         login({ id: _id, username, email }, data.loginUser.token);
-        navigate('/dashboard');
+        navigate('/io-dashboard');
       } else {
         alert('Login failed.');
       }

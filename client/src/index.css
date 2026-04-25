@@ -21,7 +21,67 @@ body {
   color: #fff8e7; 
 }
 
-/* Z-Index Layer Variables */
+/* ── Scrollbar base (width/track shared by all themes) ────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(5, 3, 15, 0.6);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* ── InnerOrbit scrollbar — pink/rose ─────────────────────────── */
+html[data-scrollbar="innerOrbit"]::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    to bottom,
+    rgba(200, 40, 100, 0.7),
+    rgba(140, 20, 80, 0.5)
+  );
+  border-radius: 999px;
+}
+
+html[data-scrollbar="innerOrbit"]::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 60, 130, 0.9),
+    rgba(200, 40, 100, 0.7)
+  );
+}
+
+html[data-scrollbar="innerOrbit"] {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(200, 40, 100, 0.6) rgba(5, 3, 15, 0.6);
+}
+
+/* ── Portfolio scrollbar — teal/rainbow ───────────────────────── */
+html[data-scrollbar="portfolio"]::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    to bottom,
+    #00e5e5,
+    #00ff88,
+    #ffdd00,
+    #ff8800,
+    #ff2d7a
+  );
+  border-radius: 999px;
+}
+
+html[data-scrollbar="portfolio"]::-webkit-scrollbar-thumb:hover {
+  opacity: 0.85;
+  filter: brightness(1.2);
+}
+
+html[data-scrollbar="portfolio"] {
+  scrollbar-width: thin;
+  scrollbar-color: #00e5e5 rgba(5, 3, 15, 0.6);
+}
+
+/* ── Z-Index Layer Variables ──────────────────────────────────── */
 :root {
   --z-ui: 0;                 /* Layer 0: UI Elements */
   --z-cityscape: -1;         /* Layer 1: Cityscape */

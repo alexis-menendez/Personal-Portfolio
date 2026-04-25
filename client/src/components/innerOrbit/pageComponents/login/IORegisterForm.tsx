@@ -66,7 +66,7 @@ const Register = () => {
         const { _id, username, email } = data.registerUser.user;
         console.log(`✅ User created successfully: ${username} (ID: ${_id})`);
         login({ id: _id, username, email }, data.registerUser.token);
-        navigate('/dashboard');
+        navigate('/io-dashboard');
       } else {
         alert(data?.registerUser?.message || 'Registration failed');
       }

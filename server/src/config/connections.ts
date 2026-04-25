@@ -21,7 +21,7 @@ export const connectDB = async () => {
     } else {
       console.error('MongoDB connection error: unknown error');
     }
-    process.exit(1);
+    // process.exit(1); // TODO: Re-enable after setting up new MongoDB connection
   }
 };
 

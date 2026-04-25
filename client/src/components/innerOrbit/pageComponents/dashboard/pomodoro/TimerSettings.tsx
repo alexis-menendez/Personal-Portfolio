@@ -19,12 +19,12 @@ interface TimerSettingsProps {
 }
 
 const soundOptions = [
-  { label: 'Shooting Star', value: '/assets/audio/Shooting-Star.mp3' },
-  { label: 'Night Sky', value: '/assets/audio/Night-Sky.mp3' },
-  { label: 'Sunrise', value: '/assets/audio/Sunrise.mp3' },
-  { label: 'Space Beats', value: '/assets/audio/Space-Beats.mp3' },
-  { label: 'Galaxy Path', value: '/assets/audio/Galaxy-Path.mp3' },
-  { label: 'Fallen Star', value: '/assets/audio/Fallen-Star.mp3' }
+  { label: 'Shooting Star', value: '/assets/innerOrbit/audio/Shooting-Star.mp3' },
+  { label: 'Night Sky', value: '/assets/innerOrbit/audio/Night-Sky.mp3' },
+  { label: 'Sunrise', value: '/assets/innerOrbit/audio/Sunrise.mp3' },
+  { label: 'Space Beats', value: '/assets/innerOrbit/audio/Space-Beats.mp3' },
+  { label: 'Galaxy Path', value: '/assets/innerOrbit/audio/Galaxy-Path.mp3' },
+  { label: 'Fallen Star', value: '/assets/innerOrbit/audio/Fallen-Star.mp3' }
 ];
 
 const TimerSettings: React.FC<TimerSettingsProps> = ({

@@ -23,7 +23,8 @@ import GalleryLayout from './components/portfolio/layout/GalleryLayout';
 
 // Pages
 import DevHome from './pages/portfolio/DevHome';
-import Home from './pages/portfolio/Home';
+import UnderConstruction from './pages/portfolio/UnderConstruction';
+import SpaceCity from './pages/portfolio/SpaceCity';
    import Resume from './pages/portfolio/Resume';
 import Projects from './pages/portfolio/Projects';
    import DontDie from './pages/portfolio/DontDie';
@@ -40,13 +41,12 @@ import Contact from './pages/portfolio/Contact';
     const Dashboard = lazy(() => import('./pages/innerOrbit/IODashboard'));
     const Journal = lazy(() => import('./pages/innerOrbit/Journal'));
     const Tracker = lazy(() => import('./pages/innerOrbit/Tracker'));
-    const Library = lazy(() => import('./pages/innerOrbit/Library'));
     const UserProfile = lazy(() => import('./pages/innerOrbit/IOUserProfile'));
 
 // Components
-import NavBar from './components/portfolio/layout/NavBar';
-import Footer from './components/portfolio/layout/Footer';
-import FooterWhite from './components/portfolio/layout/FooterWhite';
+// import NavBar from './components/portfolio/layout/NavBar';
+// import Footer from './components/portfolio/layout/Footer';
+// import FooterWhite from './components/portfolio/layout/FooterWhite';
 
     // innerOrbit Components
     const IOLogin = lazy(() => import('./components/innerOrbit/pageComponents/login/IOLoginForm'));
@@ -68,16 +68,26 @@ const App: React.FC = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           
-          {/* Routes using RetroLayout */}
+          {/* Routes using RetroLayout — no nav (under construction) */}
+          <Route element={<RetroLayout showNav={false} showArch={false} />}>
+            <Route index element={<UnderConstruction />} />
+            <Route path="*" element={<UnderConstruction />} />
+          </Route>
+
+          {/* Routes using RetroLayout — with nav */}
           <Route element={<RetroLayout />}>
             <Route path="/dev-home" element={<DevHome />} />
           </Route>
 
+          {/* /home — self-contained, no layout wrapper */}
+          <Route path="/home" element={<SpaceCity />} />
+
+          {/* Standalone project detail pages */}
+          <Route path="/innerOrbit" element={<InnerOrbit />} />
+
           {/* Routes using PortfolioLayout */}
           <Route element={<PortfolioLayout />}>
-            <Route index element={<Home />} />
             <Route path="/projects" element={<Projects />} />
-            <Route path="/innerOrbit" element={<InnerOrbit />} />
             <Route path="/dontDie" element={<DontDie />} />
             <Route path="/lattice" element={<Lattice />} />
             <Route path="/solarium" element={<Solarium />} />
@@ -113,7 +123,6 @@ const App: React.FC = () => {
           <Route element={<IOMainLayout />}>
             <Route path="/io-dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/io-tracker" element={<ProtectedRoute><Tracker /></ProtectedRoute>} />
-            <Route path="/io-library" element={<ProtectedRoute><Library /></ProtectedRoute>} />
             <Route path="/io-account" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
             <Route path="/io-dev-constellations" element={<DevelopConstellations />} />
             <Route path="/io-dev-stars" element={<DevStars />} />
