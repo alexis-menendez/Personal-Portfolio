@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { retrieveTickets, deleteTicket } from '../../api/taskadelic/ticketAPI';
+import { retrieveTickets, deleteTicket, updateTicket } from '../../api/taskadelic/ticketAPI';
 import TDSwimlane from '../../components/taskadelic/TDSwimlane';
 import { TicketData } from '../../interfaces/taskadelic/TicketData';
 import { ApiMessage } from '../../interfaces/taskadelic/ApiMessage';
@@ -27,6 +27,11 @@ const TDBoard = () => {
     const msg = await deleteTicket(id);
     fetchTickets();
     return msg;
+  };
+
+  const handleMove = async (ticket: TicketData, newStatus: string) => {
+    await updateTicket(ticket.id!, { ...ticket, status: newStatus });
+    fetchTickets();
   };
 
   useLayoutEffect(() => { checkLogin(); }, []);
@@ -78,6 +83,7 @@ const TDBoard = () => {
                   title={status}
                   tickets={tickets.filter(t => t.status === status)}
                   deleteTicket={handleDelete}
+                  moveTicket={handleMove}
                 />
               </div>
             ))}

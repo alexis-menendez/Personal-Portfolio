@@ -38,7 +38,7 @@ const TDEditTicket = () => {
 
   return (
     <div className={tdStyles.container}>
-      <form className={tdStyles.form} onSubmit={handleSubmit}>
+      <form className={tdStyles.formNarrow} onSubmit={handleSubmit}>
         <h1>Edit Ticket</h1>
         <label>Ticket Name</label>
         <textarea name="name" value={ticket.name || ''} onChange={handleText} />

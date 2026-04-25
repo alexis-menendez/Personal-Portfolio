@@ -1,6 +1,6 @@
 // File: client/src/pages/taskadelic/TDLogin.tsx
 
-import { useState, FormEvent, ChangeEvent } from 'react';
+import { useState, FormEvent, ChangeEvent, useRef } from 'react';
 import Auth from '../../utils/taskadelic/auth';
 import { login } from '../../api/taskadelic/authAPI';
 import tdStyles from '../../assets/css/taskadelic/Taskadelic.module.css';
@@ -8,6 +8,8 @@ import tdStyles from '../../assets/css/taskadelic/Taskadelic.module.css';
 const TDLogin = () => {
   const [loginData, setLoginData] = useState({ username: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
+  const [showHelp, setShowHelp]         = useState(false);
+  const helpRef = useRef<HTMLDivElement>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
@@ -44,10 +46,27 @@ const TDLogin = () => {
             onClick={() => setShowPassword(prev => !prev)}
             aria-label={showPassword ? 'Hide password' : 'Show password'}
           >
-            {showPassword ? 'show' : 'hide'}
+            {showPassword ? 'hide' : 'show'}
           </button>
         </div>
         <button type="submit">Login</button>
+
+        {/* Help hint */}
+        <div
+          ref={helpRef}
+          className={tdStyles.helpWrapper}
+          onMouseEnter={() => setShowHelp(true)}
+          onMouseLeave={() => setShowHelp(false)}
+        >
+          <span className={tdStyles.helpTrigger}>Need help signing in?</span>
+          {showHelp && (
+            <div className={tdStyles.helpTooltip}>
+              <p>If this were a live app, clicking here would let you reset your password.</p>
+              <p>For this demo, sign in with:</p>
+              <p><strong>demo</strong> / demo1234</p>
+            </div>
+          )}
+        </div>
       </form>
     </div>
   );
