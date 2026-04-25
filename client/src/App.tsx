@@ -8,6 +8,7 @@ import { lazy, Suspense } from 'react';
 // Auth
 import { AuthProvider } from './context/authContext';
 import { HNTDAuthProvider } from './context/HNTDAuthContext';
+import HNTDPrivateRoute from './components/dontDie/HNTDPrivateRoute';
 
 // HNTD Pages
 const HNTDHome      = lazy(() => import('./pages/dontDie/HNTDHome'));
@@ -97,7 +98,7 @@ const App: React.FC = () => {
 
           {/* HNTD demo routes */}
           <Route path="/hntd-home"      element={<HNTDHome />} />
-          <Route path="/hntd-dashboard" element={<HNTDDashboard />} />
+          <Route path="/hntd-dashboard" element={<HNTDPrivateRoute><HNTDDashboard /></HNTDPrivateRoute>} />
 
           {/* Standalone project detail pages */}
           <Route path="/innerOrbit" element={<InnerOrbit />} />
