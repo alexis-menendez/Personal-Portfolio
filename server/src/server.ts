@@ -93,6 +93,13 @@ async function startServer() {
 
   await server.start();
 
+  app.use(
+    "/graphql",
+    expressMiddleware(server, {
+      context,
+    })
+  );
+
   if (process.env.NODE_ENV === 'production') {
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = path.dirname(__filename);
@@ -104,16 +111,8 @@ async function startServer() {
     });
   }
 
-  app.use(
-    "/graphql",
-    expressMiddleware(server, {
-      context,
-    })
-  );
-
   app.listen(PORT, () => {
     console.log(`Server ready at http://localhost:${PORT}/graphql`);
-    console.log(`Library REST API ready at http://localhost:${PORT}/api/library/videos`);
   });
 }
 

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import auth from '../../utils/taskadelic/auth';
 import tdStyles from '../../assets/css/taskadelic/Taskadelic.module.css';
 
-const TDNavbar = ({ narrow = false }: { narrow?: boolean }) => {
+const TDNavbar = ({ narrow = false, hideLogin = false }: { narrow?: boolean; hideLogin?: boolean }) => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -13,25 +13,33 @@ const TDNavbar = ({ narrow = false }: { narrow?: boolean }) => {
   }, []);
 
   return (
-    <div className={`${tdStyles.nav} ${tdStyles.decoBorder}`} style={narrow ? { maxWidth: '540px' } : undefined}>
-      <div className={tdStyles.navTitle}>
+    <div
+      className={`${tdStyles.nav} ${tdStyles.decoBorder}`}
+      style={{
+        ...(narrow ? { maxWidth: '540px' } : {}),
+        ...(hideLogin ? { justifyContent: 'center' } : {}),
+      }}
+    >
+      <div className={tdStyles.navTitle} style={hideLogin ? { fontSize: '2.5rem' } : undefined}>
         <Link to="/td-board">Taskadelic</Link>
       </div>
-      <ul>
-        {!loggedIn ? (
-          <li className={tdStyles.navItem}>
-            <button type="button" className={tdStyles.logoutBtn}>
-              <Link to="/td-home" style={{ color: 'inherit', textDecoration: 'none' }}>Login</Link>
-            </button>
-          </li>
-        ) : (
-          <li className={tdStyles.navItem}>
-            <button type="button" className={tdStyles.logoutBtn} onClick={() => auth.logout()}>
-              Logout
-            </button>
-          </li>
-        )}
-      </ul>
+      {!hideLogin && (
+        <ul>
+          {!loggedIn ? (
+            <li className={tdStyles.navItem}>
+              <button type="button" className={tdStyles.logoutBtn}>
+                <Link to="/td-home" style={{ color: 'inherit', textDecoration: 'none' }}>Login</Link>
+              </button>
+            </li>
+          ) : (
+            <li className={tdStyles.navItem}>
+              <button type="button" className={tdStyles.logoutBtn} onClick={() => auth.logout()}>
+                Logout
+              </button>
+            </li>
+          )}
+        </ul>
+      )}
     </div>
   );
 };

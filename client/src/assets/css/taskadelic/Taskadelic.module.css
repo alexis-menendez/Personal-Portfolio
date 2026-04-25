@@ -22,7 +22,7 @@
   display: flex;
   padding: 0.6em 2em;
   background-color: #300B22;
-  width: 70%;
+  width: 72%;
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -100,7 +100,7 @@
 
 /* ── Board ────────────────────────────────────────────────────── */
 .board {
-  width: 70%;
+  width: 72%;
   margin: 0 auto;
   height: 100vh;
   display: flex;
@@ -186,6 +186,157 @@
 .inprogress { background-color: rgba(90,28,82,0.7);   border-top: 9px double #BF3475; height: 100%; }
 .done       { background-color: rgba(116,33,68,0.7);  border-top: 9px double #BF3475; height: 100%; }
 
+.todo .ticketCard       { background-color: rgba(45,15,68,0.95); }
+.inprogress .ticketCard { background-color: rgba(65,18,58,0.95); }
+.done .ticketCard       { background-color: rgba(85,22,48,0.95); }
+
+/* ── Ticket actions row ───────────────────────────────────────── */
+.ticketActions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+/* Move button */
+.moveWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.moveBtn {
+  display: inline-block;
+  background-color: #300B22;
+  color: #F2C2D1;
+  border-radius: 16px;
+  border: 1px solid #BF3475;
+  padding: 0.3em 0.8em;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+
+.moveBtn:hover { background-color: #F2C2D1; color: #300B22; }
+
+/* Dropdown */
+.moveDropdown {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 0;
+  z-index: 100;
+  background-color: #200B30;
+  border: 1px solid #BF3475;
+  border-radius: 8px;
+  overflow: hidden;
+  min-width: 120px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+
+.moveDropdownItem {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(191,52,117,0.3);
+  color: #F2C2D1;
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  font-size: 0.82rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.moveDropdownItem:last-child { border-bottom: none; }
+.moveDropdownItem:hover { background-color: rgba(191,52,117,0.25); }
+
+/* Confirmation modal */
+.moveModalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.moveModalBox {
+  background-color: #200B30;
+  border: 4px double #BF3475;
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  color: #F2C2D1;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.moveModalButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.moveModalYes {
+  background-color: #300B22;
+  color: #F2C2D1;
+  border: 1px solid #BF3475;
+  border-radius: 16px;
+  padding: 0.5rem 1.5rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.moveModalYes:hover { background-color: #F2C2D1; color: #300B22; }
+
+.moveModalNo {
+  background-color: transparent;
+  color: rgba(242,194,209,0.6);
+  border: 1px solid rgba(191,52,117,0.4);
+  border-radius: 16px;
+  padding: 0.5rem 1.5rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.moveModalNo:hover { background-color: rgba(191,52,117,0.15); color: #F2C2D1; }
+
+/* Todo lane buttons — deep purple, pastel lavender on hover */
+.todo .editBtn, .todo .deleteBtn { background-color: rgba(28,8,48,0.98); color: #F2C2D1; }
+.todo .editBtn:hover, .todo .deleteBtn:hover { background-color: rgba(210,185,240,0.9); color: #1c0830; }
+
+/* Todo Move — pastel lavender, deep purple on hover */
+.todo .moveBtn { background-color: rgba(210,185,240,0.85); color: #1c0830; }
+.todo .moveBtn:hover { background-color: rgba(28,8,48,0.98); color: #F2C2D1; }
+
+/* In Progress lane buttons — deep purple-pink, pastel lilac on hover */
+.inprogress .editBtn, .inprogress .deleteBtn { background-color: rgba(38,10,35,0.98); color: #F2C2D1; }
+.inprogress .editBtn:hover, .inprogress .deleteBtn:hover { background-color: rgba(230,185,225,0.9); color: #260a23; }
+
+/* In Progress Move — pastel lilac, deep purple-pink on hover */
+.inprogress .moveBtn { background-color: rgba(230,185,225,0.85); color: #260a23; }
+.inprogress .moveBtn:hover { background-color: rgba(38,10,35,0.98); color: #F2C2D1; }
+
+/* Done lane buttons — deep maroon, pastel rose on hover */
+.done .editBtn, .done .deleteBtn { background-color: rgba(50,12,25,0.98); color: #F2C2D1; }
+.done .editBtn:hover, .done .deleteBtn:hover { background-color: rgba(240,195,210,0.9); color: #320c19; }
+
+/* Done Move — pastel rose, deep maroon on hover */
+.done .moveBtn { background-color: rgba(240,195,210,0.85); color: #320c19; }
+.done .moveBtn:hover { background-color: rgba(50,12,25,0.98); color: #F2C2D1; }
+
 /* ── Ticket Card ──────────────────────────────────────────────── */
 .ticketCard {
   text-align: left;
@@ -220,9 +371,9 @@
   color: #F2C2D1;
   border-radius: 16px;
   border: 1px solid #BF3475;
-  padding: 0.6em 1.2em;
+  padding: 0.3em 0.8em;
   font-family: inherit;
-  font-size: 1em;
+  font-size: 0.75rem;
   font-weight: 500;
   cursor: pointer;
   text-decoration: none;
@@ -231,7 +382,7 @@
   vertical-align: middle;
 }
 
-.editBtn { margin-right: 0.5rem; }
+.editBtn { margin-right: 0; }
 
 .editBtn:hover, .deleteBtn:hover { background-color: #F2C2D1; color: #300B22; }
 
@@ -262,6 +413,55 @@
   border-right: 9px double #BF3475;
   padding: 2.5rem 2rem;
   box-sizing: border-box;
+}
+
+/* ── Help hint ────────────────────────────────────────────────── */
+.helpWrapper {
+  position: relative;
+  text-align: center;
+  margin-top: -0.25rem;
+  margin-bottom: 1rem;
+}
+
+.helpTrigger {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.82rem;
+  color: rgba(242, 194, 209, 0.85);
+  cursor: default;
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+
+.helpTrigger:hover { color: #F2C2D1; }
+
+.helpTooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  background-color: rgba(32, 11, 48, 0.97);
+  border: 1px solid rgba(191, 52, 117, 0.6);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  z-index: 100;
+  text-align: left;
+}
+
+.helpTooltip p {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.72rem;
+  color: #F2C2D1;
+  margin: 0 0 0.35rem;
+  line-height: 1.45;
+  font-weight: 400;
+}
+
+.helpTooltip p:last-child { margin-bottom: 0; }
+
+.helpTooltip strong {
+  color: #BF3475;
+  font-weight: 700;
 }
 
 /* Extra space before the Password label (4th child: h1, label, input, label) */
@@ -328,7 +528,7 @@
   font-family: inherit;
   font-size: 0.9rem;
   cursor: pointer;
-  margin-top: 0.5rem;
+  margin-top: 1.25rem;
   transition: background-color 0.25s, color 0.25s;
 }
 
@@ -380,6 +580,22 @@
   box-sizing: border-box;
 }
 
+.formNarrow {
+  width: 100%;
+  max-width: 540px;
+  background-color: rgba(32,11,48,0.8);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 4px double #BF3475;
+  border-top: none;
+  padding: 2rem;
+  box-sizing: border-box;
+  min-height: calc(100vh - 80px);
+}
+
 .formTitle {
   font-family: 'Monoton', cursive;
   font-weight: 400;
@@ -390,7 +606,7 @@
   margin-bottom: 1rem;
 }
 
-.form label {
+.form label, .formNarrow label {
   color: #F2C2D1;
   text-shadow: 0 0 6px #BF3475;
   margin-top: 2.5%;
@@ -400,7 +616,8 @@
   text-align: center;
 }
 
-.form input, .form textarea, .form select {
+.form input, .form textarea, .form select,
+.formNarrow input, .formNarrow textarea, .formNarrow select {
   min-height: 30px;
   min-width: 200px;
   background-color: #300B22;
@@ -411,7 +628,7 @@
   font-family: inherit;
 }
 
-.form button {
+.form button, .formNarrow button {
   margin-top: 2.5%;
   background-color: #300B22;
   color: #F2C2D1;
@@ -422,7 +639,7 @@
   font-size: 1em;
 }
 
-.form button:hover { background-color: #F2C2D1; color: #300B22; }
+.form button:hover, .formNarrow button:hover { background-color: #F2C2D1; color: #300B22; }
 
 /* ── Board background override ────────────────────────────────── */
 .boardBackground {
