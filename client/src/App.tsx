@@ -84,6 +84,7 @@ const App: React.FC = () => {
 
           {/* Standalone project detail pages */}
           <Route path="/innerOrbit" element={<InnerOrbit />} />
+          <Route path="/taskadelic" element={<Taskadelic />} />
 
           {/* Routes using PortfolioLayout */}
           <Route element={<PortfolioLayout />}>
@@ -95,10 +96,7 @@ const App: React.FC = () => {
             <Route path="/contact" element={<Contact />} />
           </Route>
 
-          {/* Routes using PsychedelicLayout */}
-          <Route element={<PsychedelicLayout />}>
-            <Route path="/taskadelic" element={<Taskadelic />} />
-          </Route>
+          {/* Routes using PsychedelicLayout — reserved for future use */}
 
           {/* Routes using ResumeLayout */}
           <Route element={<ResumeLayout />}>

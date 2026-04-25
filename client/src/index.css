@@ -81,6 +81,26 @@ html[data-scrollbar="portfolio"] {
   scrollbar-color: #00e5e5 rgba(5, 3, 15, 0.6);
 }
 
+/* ── Taskadelic scrollbar — psychedelic purple/pink ───────────── */
+html[data-scrollbar="taskadelic"]::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    to bottom,
+    #bf5fff,
+    #ff61d2,
+    #ff9f43
+  );
+  border-radius: 999px;
+}
+
+html[data-scrollbar="taskadelic"]::-webkit-scrollbar-thumb:hover {
+  filter: brightness(1.2);
+}
+
+html[data-scrollbar="taskadelic"] {
+  scrollbar-width: thin;
+  scrollbar-color: #bf5fff rgba(5, 3, 15, 0.6);
+}
+
 /* ── Z-Index Layer Variables ──────────────────────────────────── */
 :root {
   --z-ui: 0;                 /* Layer 0: UI Elements */

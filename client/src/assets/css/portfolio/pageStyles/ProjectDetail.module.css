@@ -83,6 +83,27 @@
   background-clip: text;
 }
 
+/* Per-project title gradient overrides */
+.titleTaskadelic {
+  background: linear-gradient(90deg, #bf5fff 0%, #ff61d2 35%, #ff9f43 70%, #ffd700 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btnComingSoon {
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(200, 230, 255, 0.3);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  letter-spacing: 0.03em;
+  cursor: not-allowed;
+}
+
 .description {
   font-size: 1rem;
   line-height: 1.75;
