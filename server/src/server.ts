@@ -18,7 +18,11 @@ import resolvers from "./schema/resolvers.js";
 import { connectDB } from "./config/connections.js";
 
 // Routes
-import contactRoutes from './routes/portfolio/contactRoutes.js';
+import contactRoutes    from './routes/portfolio/contactRoutes.js';
+import taskadelicRoutes from './routes/taskadelic/index.js';
+
+// Taskadelic DB
+import { tdSequelize } from './models/taskadelic/index.js';
 
 
 
@@ -70,9 +74,13 @@ async function startServer() {
     })
   );
 
+  // Sync Taskadelic PostgreSQL tables
+  await tdSequelize.sync({ alter: false });
+
   // Middleware
   app.use(express.json());
   app.use('/api/contact', contactRoutes);
+  app.use('/taskadelic', taskadelicRoutes);
 
   const server = new ApolloServer({
     typeDefs,
