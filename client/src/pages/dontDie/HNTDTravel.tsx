@@ -1,6 +1,6 @@
 // File: client/src/pages/dontDie/HNTDTravel.tsx
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useHNTDAuth } from '../../context/HNTDAuthContext';
 import { useHNTDPlanets } from '../../context/HNTDPlanetContext';
@@ -13,34 +13,61 @@ import type { HNTDWeatherData } from '../../api/dontDie/HNTDWeatherAPI';
 import { fetchTips, createTip, voteTip, deleteTip } from '../../api/dontDie/HNTDSurvivalAPI';
 import type { HNTDTip } from '../../api/dontDie/HNTDSurvivalAPI';
 
-// ── Planet data ────────────────────────────────────────────────
+// ── Types ──────────────────────────────────────────────────────
 interface VeraDialogue {
   opening: string;
   responses: { label: string; reply: string }[];
+}
+
+interface SensorReading {
+  label: string;
+  value: string;
+  alert?: boolean;
 }
 
 interface PlanetData {
   name: string;
   image: string;
   vera: VeraDialogue;
+  sensors: SensorReading[];
+  deathVera: string;
 }
 
+// ── Planet data ────────────────────────────────────────────────
 const PLANETS: Record<string, PlanetData> = {
   planetone: {
     name: 'Doubt',
     image: '/assets/dontDie/images/planet-one/PlanetOne.png',
+    sensors: [
+      { label: 'Temperature',  value: '118°F / 48°C',        alert: true  },
+      { label: 'Composition',  value: 'N₂ 68% | CO₂ 22% | SO₂ 10%'       },
+      { label: 'Breathable',   value: 'NO — toxic',           alert: true  },
+      { label: 'Pressure',     value: '0.8 atm'                            },
+      { label: 'Humidity',     value: '2%'                                 },
+      { label: 'UV Radiation', value: 'EXTREME',              alert: true  },
+    ],
+    deathVera: `Oxygen reserves depleted on the surface of Doubt. The desert took you before I could do anything about it. I want you to know I did attempt to warn you about the time constraints. This is noted in the official record.`,
     vera: {
       opening: `I have been running atmospheric analysis for the past six minutes. The hum is not geological. Not electromagnetic. I want you to know that.`,
       responses: [
-        { label: 'What do you think it is?',  reply: `I don't know. That is the part that concerns me. I always know.` },
-        { label: "I'd rather not know.",       reply: `...That is probably the wisest thing you have said since we left port. I will keep my findings to myself.` },
-        { label: 'Could it be alive?',         reply: `I ran that probability. I have chosen not to share the results. Please stop asking follow-up questions.` },
+        { label: 'What do you think it is?', reply: `I don't know. That is the part that concerns me. I always know.` },
+        { label: "I'd rather not know.",      reply: `...That is probably the wisest thing you have said since we left port. I will keep my findings to myself.` },
+        { label: 'Could it be alive?',        reply: `I ran that probability. I have chosen not to share the results. Please stop asking follow-up questions.` },
       ],
     },
   },
   planettwo: {
     name: 'Brune',
     image: '/assets/dontDie/images/planet-two/PlanetTwo.png',
+    sensors: [
+      { label: 'Temperature',  value: '-12°F / -24°C',        alert: true  },
+      { label: 'Composition',  value: 'N₂ 78% | O₂ 6% | Ar 16%'           },
+      { label: 'Breathable',   value: 'NO — O₂ insufficient', alert: true  },
+      { label: 'Pressure',     value: '0.3 atm',              alert: true  },
+      { label: 'Humidity',     value: '45%'                                },
+      { label: 'Wind Speed',   value: '94 mph',               alert: true  },
+    ],
+    deathVera: `Life support failure confirmed on Brune. Oxygen depletion complete. I told you about the thin atmosphere. I believe I was quite clear about the time constraints. I will note your coordinates in the expedition log.`,
     vera: {
       opening: `The pre-colony structure is transmitting something. It is not a distress signal. It is not a navigation beacon. It is a record. Someone was cataloguing everyone who came here.`,
       responses: [
@@ -52,15 +79,14 @@ const PLANETS: Record<string, PlanetData> = {
   },
 };
 
-// ── Random Earth cities for broken scanner ─────────────────────
+// ── Random Earth cities ────────────────────────────────────────
 const EARTH_CITIES = [
-  'New York', 'Tokyo', 'London', 'Sydney', 'Cairo',
-  'Rio de Janeiro', 'Mumbai', 'Toronto', 'Lagos', 'Seoul',
-  'Paris', 'Mexico City', 'Dubai', 'Buenos Aires', 'Jakarta',
-  'Istanbul', 'Beijing', 'Chicago', 'Cape Town', 'Moscow',
+  'New York','Tokyo','London','Sydney','Cairo','Rio de Janeiro',
+  'Mumbai','Toronto','Lagos','Seoul','Paris','Mexico City',
+  'Dubai','Buenos Aires','Jakarta','Istanbul','Beijing','Chicago','Cape Town','Moscow',
 ];
 const randomCity = () => EARTH_CITIES[Math.floor(Math.random() * EARTH_CITIES.length)];
-const windDir = (deg: number) => ['N','NE','E','SE','S','SW','W','NW'][Math.round(deg / 45) % 8];
+const windDir    = (deg: number) => ['N','NE','E','SE','S','SW','W','NW'][Math.round(deg / 45) % 8];
 
 // ── Typewriter hook ────────────────────────────────────────────
 function useTypewriter(text: string, speed = 28) {
@@ -80,101 +106,6 @@ function useTypewriter(text: string, speed = 28) {
   return { displayed, done };
 }
 
-// ── Planet Survival Panel ──────────────────────────────────────
-const PlanetSurvivalPanel: React.FC<{ planetKey: string; onClose: () => void }> = ({ planetKey, onClose }) => {
-  const { token, user } = useHNTDAuth();
-  const [tips,      setTips]      = useState<HNTDTip[]>([]);
-  const [votedIds,  setVotedIds]  = useState<Set<number>>(new Set());
-  const [loading,   setLoading]   = useState(true);
-  const [modalOpen, setModalOpen] = useState(false);
-
-  useEffect(() => {
-    fetchTips(planetKey)
-      .then(setTips)
-      .finally(() => setLoading(false));
-  }, [planetKey]);
-
-  const handleSaveTip = async (title: string, content: string) => {
-    if (!token) return;
-    const created = await createTip(token, title, content, planetKey);
-    setTips(prev => [created, ...prev]);
-  };
-
-  const handleVote = async (id: number) => {
-    if (!token) return;
-    const { upvotes, voted } = await voteTip(token, id);
-    setTips(prev => prev.map(t => t.id === id ? { ...t, upvotes } : t));
-    setVotedIds(prev => { const n = new Set(prev); voted ? n.add(id) : n.delete(id); return n; });
-  };
-
-  const handleDelete = async (id: number) => {
-    if (!token) return;
-    await deleteTip(token, id);
-    setTips(prev => prev.filter(t => t.id !== id));
-  };
-
-  const fmt = (iso: string) =>
-    new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-
-  return (
-    <div className={styles.hudPanel}>
-      <div className={styles.hudPanelBox}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <p className={styles.hudPanelTitle}>// PLANET SURVIVAL GUIDE</p>
-          <button
-            style={{ background: 'none', border: 'none', color: 'rgba(0,255,225,0.5)', fontFamily: 'Courier New', fontSize: '0.75rem', cursor: 'pointer' }}
-            onClick={() => setModalOpen(true)}
-          >+ Add Tip</button>
-        </div>
-
-        {loading && <p className={styles.hudPanelTitle}>Loading field data...</p>}
-        {!loading && tips.length === 0 && (
-          <p className={styles.weatherBrokenNote}>No survival tips logged for this planet yet. Be the first.</p>
-        )}
-
-        {tips.map(tip => (
-          <div key={tip.id} className={styles.tipCard}>
-            <div className={styles.tipVote}>
-              <button
-                className={`${styles.tipVoteBtn} ${votedIds.has(tip.id) ? styles.tipVoteBtnActive : ''}`}
-                onClick={() => handleVote(tip.id)}
-              >▲</button>
-              <span className={styles.tipVoteCount}>{tip.upvotes}</span>
-            </div>
-            <div className={styles.tipBody}>
-              <p className={styles.tipTitle}>{tip.title}</p>
-              <p className={styles.tipContent}>{tip.content}</p>
-              <p className={styles.tipMeta}>{tip.username} · {fmt(tip.createdAt)}</p>
-            </div>
-            {user?.id === tip.userId && (
-              <button className={styles.tipDeleteBtn} onClick={() => handleDelete(tip.id)}>[x]</button>
-            )}
-          </div>
-        ))}
-
-        <button className={styles.veraCloseBtn} onClick={onClose}>[ Close ]</button>
-      </div>
-
-      {modalOpen && (
-        <HNTDEditLogModal
-          log={null}
-          onSave={handleSaveTip}
-          onClose={() => setModalOpen(false)}
-        />
-      )}
-    </div>
-  );
-};
-
-// ── HUD button positions (% of viewport, placed in the teal exterior) ──
-const HUD_BUTTONS = [
-  { id: 'ship',    label: '↩ Return to Ship', top: '22%', left: '13%',  action: null        },
-  { id: 'log',     label: '✎ Write Log',       top: '55%', left: '10%',  action: 'log'       },
-  { id: 'guide',   label: '⊕ Planet Guide',    top: '82%', left: '50%',  action: 'guide'     },
-  { id: 'vera',    label: '⬡ Chat VERA',       top: '55%', left: '90%',  action: 'vera'      },
-  { id: 'weather', label: '⚠ Scanner',          top: '22%', left: '87%', action: 'weather'   },
-] as const;
-
 // ── VERA Chat ──────────────────────────────────────────────────
 const VeraChat: React.FC<{ dialogue: VeraDialogue; onClose: () => void }> = ({ dialogue, onClose }) => {
   const [phase,       setPhase]       = useState<'opening' | 'replied'>('opening');
@@ -183,9 +114,7 @@ const VeraChat: React.FC<{ dialogue: VeraDialogue; onClose: () => void }> = ({ d
   const { displayed, done } = useTypewriter(activeText);
 
   const handleResponse = (label: string, reply: string) => {
-    setChosenLabel(label);
-    setActiveText(reply);
-    setPhase('replied');
+    setChosenLabel(label); setActiveText(reply); setPhase('replied');
   };
 
   return (
@@ -222,10 +151,7 @@ const WeatherPanel: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [error,   setError]   = useState('');
 
   useEffect(() => {
-    fetchWeather(city)
-      .then(setData)
-      .catch(err => setError(err.message))
-      .finally(() => setLoading(false));
+    fetchWeather(city).then(setData).catch(err => setError(err.message)).finally(() => setLoading(false));
   }, [city]);
 
   return (
@@ -233,8 +159,7 @@ const WeatherPanel: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       <div className={styles.hudPanelBox}>
         <p className={styles.weatherMalfunctionHeader}>!! SCANNER MALFUNCTION — CALIBRATION ERROR</p>
         <p className={styles.weatherBrokenNote}>
-          VERA: &ldquo;The atmospheric scanner appears to be calibrated to... Earth? That is embarrassing.
-          I am displaying what I have. Please do not tell anyone about this.&rdquo;
+          VERA: &ldquo;The atmospheric scanner appears to be calibrated to... Earth? That is embarrassing. I am displaying what I have. Please do not tell anyone about this.&rdquo;
         </p>
         {loading && <p className={styles.hudPanelTitle}>Scanning...</p>}
         {error   && <p className={styles.hudPanelTitle} style={{ color: '#ff4d4d' }}>Signal lost: {error}</p>}
@@ -243,22 +168,10 @@ const WeatherPanel: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             <p className={styles.hudPanelTitle}>// INTERCEPTED SIGNAL: {data.name.toUpperCase()}, {data.sys.country}</p>
             <p className={styles.weatherBrokenNote}>Condition: {data.weather[0]?.description?.toUpperCase() ?? 'UNKNOWN'}</p>
             <div className={styles.weatherGrid}>
-              <div className={styles.weatherRow}>
-                <span className={styles.weatherLabel}>Temp</span>
-                <span className={styles.weatherValue}>{Math.round(data.main.temp)}°F</span>
-              </div>
-              <div className={styles.weatherRow}>
-                <span className={styles.weatherLabel}>Humidity</span>
-                <span className={styles.weatherValue}>{data.main.humidity}%</span>
-              </div>
-              <div className={styles.weatherRow}>
-                <span className={styles.weatherLabel}>Wind</span>
-                <span className={styles.weatherValue}>{Math.round(data.wind.speed)} mph {windDir(data.wind.deg)}</span>
-              </div>
-              <div className={styles.weatherRow}>
-                <span className={styles.weatherLabel}>Pressure</span>
-                <span className={styles.weatherValue}>{data.main.pressure} hPa</span>
-              </div>
+              <div className={styles.weatherRow}><span className={styles.weatherLabel}>Temp</span><span className={styles.weatherValue}>{Math.round(data.main.temp)}°F</span></div>
+              <div className={styles.weatherRow}><span className={styles.weatherLabel}>Humidity</span><span className={styles.weatherValue}>{data.main.humidity}%</span></div>
+              <div className={styles.weatherRow}><span className={styles.weatherLabel}>Wind</span><span className={styles.weatherValue}>{Math.round(data.wind.speed)} mph {windDir(data.wind.deg)}</span></div>
+              <div className={styles.weatherRow}><span className={styles.weatherLabel}>Pressure</span><span className={styles.weatherValue}>{data.main.pressure} hPa</span></div>
             </div>
           </>
         )}
@@ -268,27 +181,134 @@ const WeatherPanel: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   );
 };
 
+// ── Planet Survival Panel ──────────────────────────────────────
+const PlanetSurvivalPanel: React.FC<{ planetKey: string; onClose: () => void }> = ({ planetKey, onClose }) => {
+  const { token, user } = useHNTDAuth();
+  const [tips,      setTips]      = useState<HNTDTip[]>([]);
+  const [votedIds,  setVotedIds]  = useState<Set<number>>(new Set());
+  const [loading,   setLoading]   = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    fetchTips(planetKey).then(setTips).finally(() => setLoading(false));
+  }, [planetKey]);
+
+  const handleSaveTip = async (title: string, content: string) => {
+    if (!token) return;
+    const created = await createTip(token, title, content, planetKey);
+    setTips(prev => [created, ...prev]);
+  };
+
+  const handleVote = async (id: number) => {
+    if (!token) return;
+    const { upvotes, voted } = await voteTip(token, id);
+    setTips(prev => prev.map(t => t.id === id ? { ...t, upvotes } : t));
+    setVotedIds(prev => { const n = new Set(prev); voted ? n.add(id) : n.delete(id); return n; });
+  };
+
+  const handleDelete = async (id: number) => {
+    if (!token) return;
+    await deleteTip(token, id);
+    setTips(prev => prev.filter(t => t.id !== id));
+  };
+
+  const fmt = (iso: string) =>
+    new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+  return (
+    <div className={styles.hudPanel}>
+      <div className={styles.hudPanelBox}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <p className={styles.hudPanelTitle}>// PLANET SURVIVAL GUIDE</p>
+          <button style={{ background: 'none', border: 'none', color: 'rgba(0,255,225,0.5)', fontFamily: 'Courier New', fontSize: '0.75rem', cursor: 'pointer' }}
+            onClick={() => setModalOpen(true)}>+ Add Tip</button>
+        </div>
+        {loading && <p className={styles.hudPanelTitle}>Loading field data...</p>}
+        {!loading && tips.length === 0 && (
+          <p className={styles.weatherBrokenNote}>No survival tips logged for this planet yet. Be the first.</p>
+        )}
+        {tips.map(tip => (
+          <div key={tip.id} className={styles.tipCard}>
+            <div className={styles.tipVote}>
+              <button className={`${styles.tipVoteBtn} ${votedIds.has(tip.id) ? styles.tipVoteBtnActive : ''}`} onClick={() => handleVote(tip.id)}>▲</button>
+              <span className={styles.tipVoteCount}>{tip.upvotes}</span>
+            </div>
+            <div className={styles.tipBody}>
+              <p className={styles.tipTitle}>{tip.title}</p>
+              <p className={styles.tipContent}>{tip.content}</p>
+              <p className={styles.tipMeta}>{tip.username} · {fmt(tip.createdAt)}</p>
+            </div>
+            {user?.id === tip.userId && (
+              <button className={styles.tipDeleteBtn} onClick={() => handleDelete(tip.id)}>[x]</button>
+            )}
+          </div>
+        ))}
+        <button className={styles.veraCloseBtn} onClick={onClose}>[ Close ]</button>
+      </div>
+      {modalOpen && (
+        <HNTDEditLogModal log={null} onSave={handleSaveTip} onClose={() => setModalOpen(false)} />
+      )}
+    </div>
+  );
+};
+
+// ── HUD button config ──────────────────────────────────────────
+const HUD_BUTTONS = [
+  { id: 'ship',    label: '↩ Return to Ship', top: '22%', left: '13%', action: null      },
+  { id: 'log',     label: '✎ Write Log',       top: '55%', left: '10%', action: 'log'    },
+  { id: 'vera',    label: '⬡ Chat VERA',       top: '45%', left: '90%', action: 'vera'   },
+  { id: 'guide',   label: '⊕ Planet Guide',    top: '62%', left: '90%', action: 'guide'  },
+  { id: 'weather', label: '⚠ Scanner',          top: '22%', left: '87%', action: 'weather'},
+] as const;
+
 // ── Main HUD ───────────────────────────────────────────────────
 type Panel = 'log' | 'vera' | 'weather' | 'guide' | null;
 
 const HNTDTravel: React.FC = () => {
-  const navigate = useNavigate();
-  const [params] = useSearchParams();
-  const { token } = useHNTDAuth();
-  const { markPlanetVisited } = useHNTDPlanets();
+  const navigate                = useNavigate();
+  const [params]                = useSearchParams();
+  const { token, logout }       = useHNTDAuth();
+  const { markPlanetVisited }   = useHNTDPlanets();
 
   const key    = params.get('planet') ?? '';
   const planet = PLANETS[key];
-  const [activePanel, setActivePanel] = useState<Panel>(null);
 
+  const [activePanel, setActivePanel] = useState<Panel>(null);
+  const [oxygen,      setOxygen]      = useState(100);
+  const [isDead,      setIsDead]      = useState(false);
+
+  // Mark planet visited
   useEffect(() => {
     if (key && PLANETS[key]) markPlanetVisited(key);
   }, [key, markPlanetVisited]);
+
+  // Oxygen timer — 5% per minute
+  useEffect(() => {
+    const id = setInterval(() => {
+      setOxygen(prev => Math.max(0, prev - 5));
+    }, 60_000);
+    return () => clearInterval(id);
+  }, []);
+
+  // Trigger death when oxygen hits 0
+  useEffect(() => {
+    if (oxygen <= 0) setIsDead(true);
+  }, [oxygen]);
 
   const handleSaveLog = useCallback(async (title: string, content: string) => {
     if (!token) return;
     await createLog(token, title, content);
   }, [token]);
+
+  const handleRestart = () => {
+    logout();
+    navigate('/hntd-home');
+  };
+
+  const oxygenColor =
+    oxygen > 60 ? '#00ffe1' :
+    oxygen > 40 ? '#c8ff00' :
+    oxygen > 20 ? '#ff8800' : '#ff4d4d';
 
   const panelOpen = activePanel !== null;
 
@@ -297,9 +317,7 @@ const HNTDTravel: React.FC = () => {
       <div className={styles.shuttleWrapper}>
         <div className={styles.shuttleContent}>
           <p className={styles.shuttleTitle}>// UNKNOWN SECTOR</p>
-          <p className={styles.shuttleVera}>
-            VERA: &ldquo;I have no data on this location. That is either very exciting or very bad. Historically, it has been the latter.&rdquo;
-          </p>
+          <p className={styles.shuttleVera}>VERA: &ldquo;I have no data on this location. That is either very exciting or very bad. Historically, it has been the latter.&rdquo;</p>
           <button className={styles.shuttleBtn} onClick={() => navigate('/hntd-holomap')}>Return to Galaxy Map</button>
         </div>
         <ReturnToPortfolio />
@@ -309,16 +327,14 @@ const HNTDTravel: React.FC = () => {
 
   return (
     <div className={styles.hudWrapper}>
-      {/* Background — undimmed on landing, dims when a panel opens */}
+
+      {/* Planet background */}
       <div
         className={`${styles.hudBg} ${panelOpen ? styles.hudBgDimmed : ''}`}
         style={{ backgroundImage: `url(${planet.image})` }}
       />
 
-      {/* Sector label — always visible */}
-      <p className={styles.hudTopLabel}>// SURFACE: {planet.name.toUpperCase()}</p>
-
-      {/* HUD display image — white center becomes transparent via multiply */}
+      {/* HUD display image */}
       <img
         src="/assets/dontDie/images/HudDisplay.png"
         alt=""
@@ -326,7 +342,26 @@ const HNTDTravel: React.FC = () => {
         className={`${styles.hudDisplayImg} ${panelOpen ? styles.hudDisplayImgHidden : ''}`}
       />
 
-      {/* HUD buttons in the teal exterior of the image */}
+      {/* Top-left: sector label + sensor data */}
+      <p className={styles.hudTopLabel}>// SURFACE: {planet.name.toUpperCase()}</p>
+      <div className={styles.sensorPanel}>
+        {planet.sensors.map(s => (
+          <div key={s.label} className={styles.sensorRow}>
+            <span className={styles.sensorLabel}>{s.label}:</span>
+            <span className={s.alert ? styles.sensorValueAlert : styles.sensorValue}>{s.value}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Top-right: oxygen display */}
+      <p
+        className={`${styles.oxygenDisplay} ${oxygen <= 20 ? styles.oxygenAlert : ''}`}
+        style={{ color: oxygenColor }}
+      >
+        Oxygen: {oxygen}%
+      </p>
+
+      {/* HUD buttons */}
       {HUD_BUTTONS.map(btn => (
         <button
           key={btn.id}
@@ -339,17 +374,27 @@ const HNTDTravel: React.FC = () => {
       ))}
 
       {/* Panels */}
-      {activePanel === 'log' && (
-        <HNTDEditLogModal log={null} onSave={handleSaveLog} onClose={() => setActivePanel(null)} />
-      )}
-      {activePanel === 'vera' && (
-        <VeraChat dialogue={planet.vera} onClose={() => setActivePanel(null)} />
-      )}
-      {activePanel === 'weather' && (
-        <WeatherPanel onClose={() => setActivePanel(null)} />
-      )}
-      {activePanel === 'guide' && (
-        <PlanetSurvivalPanel planetKey={key} onClose={() => setActivePanel(null)} />
+      {activePanel === 'log'     && <HNTDEditLogModal log={null} onSave={handleSaveLog} onClose={() => setActivePanel(null)} />}
+      {activePanel === 'vera'    && <VeraChat dialogue={planet.vera} onClose={() => setActivePanel(null)} />}
+      {activePanel === 'weather' && <WeatherPanel onClose={() => setActivePanel(null)} />}
+      {activePanel === 'guide'   && <PlanetSurvivalPanel planetKey={key} onClose={() => setActivePanel(null)} />}
+
+      {/* Death screen */}
+      {isDead && (
+        <div className={styles.deathScreen}>
+          <div className={styles.deathContent}>
+            <p className={styles.deathTitle}>YOU DIED</p>
+            <p className={styles.deathVera}>
+              VERA: &ldquo;{planet.deathVera}&rdquo;
+            </p>
+            <p className={styles.deathVera} style={{ borderLeft: 'none', paddingLeft: 0, textAlign: 'center', marginTop: '-0.5rem' }}>
+              A new crew member may be assigned.
+            </p>
+            <button className={styles.deathRestartBtn} onClick={handleRestart}>
+              [ Initiate New Crew Member ]
+            </button>
+          </div>
+        </div>
       )}
 
       <ReturnToPortfolio />
