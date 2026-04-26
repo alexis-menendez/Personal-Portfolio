@@ -103,7 +103,27 @@ const EARTH_CITIES = [
 const randomCity = () => EARTH_CITIES[Math.floor(Math.random() * EARTH_CITIES.length)];
 const windDir    = (deg: number) => ['N','NE','E','SE','S','SW','W','NW'][Math.round(deg / 45) % 8];
 
-// ── Typewriter hook ────────────────────────────────────────────
+// ── Word-by-word typewriter hook ───────────────────────────────
+function useWordTypewriter(text: string, msPerWord = 180) {
+  const tokens = text.split(/(\s+)/);
+  const [count, setCount] = useState(0);
+  const [done,  setDone]  = useState(false);
+  useEffect(() => {
+    setCount(0); setDone(false);
+    if (!text) { setDone(true); return; }
+    let i = 0;
+    const id = setInterval(() => {
+      i++;
+      setCount(i);
+      if (i >= tokens.length) { clearInterval(id); setDone(true); }
+    }, msPerWord);
+    return () => clearInterval(id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [text, msPerWord]);
+  return { displayed: tokens.slice(0, count).join(''), done };
+}
+
+// ── Character typewriter hook ──────────────────────────────────
 function useTypewriter(text: string, speed = 28) {
   const [displayed, setDisplayed] = useState('');
   const [done,      setDone]      = useState(false);
@@ -466,6 +486,57 @@ const PlanetSurvivalPanel: React.FC<{ planetKey: string; onClose: () => void }> 
   );
 };
 
+// ── Incident Report (death screen) ────────────────────────────
+const IncidentReport: React.FC<{
+  planet:      PlanetData;
+  deathCause:  'oxygen' | 'battery' | null;
+  suitDamaged: boolean;
+  onRestart:   () => void;
+}> = ({ planet, deathCause, suitDamaged, onRestart }) => {
+  const refNum = useRef(7000 + Math.floor(Math.random() * 2999)).current;
+
+  const causeText = suitDamaged
+    ? `Per VERA's operational log, the explorer sustained catastrophic suit damage during surface exploration. VERA had issued navigation guidance throughout the mission. The explorer deviated from the approved path. Cause of death: suit failure following terrain incident.`
+    : deathCause === 'battery'
+    ? `Per VERA's operational log, the assigned explorer failed to manage suit power within operational parameters. Battery failure warnings were issued prior to the incident. The explorer did not respond accordingly. Cause of death: power management failure.`
+    : `Per VERA's operational log, the assigned explorer failed to return to the ship within allocated oxygen reserves. Time warnings were issued prior to the incident. The explorer did not respond accordingly. Cause of death: resource mismanagement.`;
+
+  const report =
+`// INCIDENT REPORT — REF: EX-${refNum}
+// FILED BY: Director Maren Solís
+// OFFICE OF EXPLORATION OPERATIONS
+
+Explorer casualty confirmed.
+Planet: ${planet.name}. Region: ${planet.region}.
+
+${causeText}
+
+Incident logged as explorer error.
+
+A replacement explorer has been assigned to the sector. The mission continues as scheduled.
+
+— Director Solís
+   Office of Exploration Operations
+   Sector 9 Command`;
+
+  const { displayed, done } = useWordTypewriter(report, 160);
+
+  return (
+    <div className={styles.deathScreen}>
+      <div className={styles.deathContent}>
+        <p className={styles.deathVera} style={{ whiteSpace: 'pre-line', fontStyle: 'normal', borderLeft: 'none', paddingLeft: 0 }}>
+          {displayed}
+        </p>
+        {done && (
+          <button className={styles.deathRestartBtn} onClick={onRestart}>
+            [ Accept Assignment Transfer ]
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
+
 // ── HUD button config ──────────────────────────────────────────
 type HudButton = { id: string; label: string; top: string; pos: { left: string } | { right: string }; action: string | null };
 const HUD_BUTTONS: HudButton[] = [
@@ -658,12 +729,12 @@ const HNTDTravel: React.FC = () => {
 
       {/* Death screen */}
       {isDead && (
-        <div className={styles.deathScreen}><div className={styles.deathContent}>
-          <p className={styles.deathTitle}>YOU DIED</p>
-          <p className={styles.deathVera}>VERA: &ldquo;{deathMessage}&rdquo;</p>
-          <p className={styles.deathVera} style={{ borderLeft: 'none', paddingLeft: 0, textAlign: 'center', marginTop: '-0.5rem' }}>A new crew member may be assigned.</p>
-          <button className={styles.deathRestartBtn} onClick={() => { logout(); navigate('/hntd-home'); }}>[ Initiate New Crew Member ]</button>
-        </div></div>
+        <IncidentReport
+          planet={planet}
+          deathCause={deathCause}
+          suitDamaged={suitDamaged}
+          onRestart={() => { logout(); navigate('/hntd-home'); }}
+        />
       )}
 
       <ReturnToPortfolio />
