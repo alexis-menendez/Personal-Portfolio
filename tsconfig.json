@@ -7,7 +7,7 @@
       /* Modules */
       "module": "ESNext",
       "moduleResolution": "node",
-      "ignoreDeprecations": "6.0",
+      "ignoreDeprecations": "5.0",
       "moduleDetection": "force", 
       "skipLibCheck": true,
   
