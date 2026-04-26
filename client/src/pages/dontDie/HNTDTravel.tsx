@@ -137,22 +137,20 @@ function useFluctuating(base: number, range: number, intervalMs: number, decimal
   return display;
 }
 
-// ── Compass hook (static) ──────────────────────────────────────
-function useCompass() {
-  const bearing  = useRef(Math.floor(Math.random() * 360)).current;
-  const dist     = useRef(+(Math.random() * 1.8 + 0.5).toFixed(1)).current;
-  const dirs     = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
-  const cardinal = dirs[Math.round(bearing / 22.5) % 16];
-  return { bearing, cardinal, dist };
-}
+// ── Compass (fixed per planet, never changes) ──────────────────
+const PLANET_COMPASS: Record<string, { bearing: number; dist: string }> = {
+  planetone: { bearing: 227, dist: '0.6km' }, // SW — opposite of anomaly at 047°
+  planettwo: { bearing: 132, dist: '0.4km' }, // SE — opposite of structure at 312°
+};
 
 // ── Bio Data Panel ─────────────────────────────────────────────
-const BioDataPanel: React.FC<{ hidden: boolean }> = ({ hidden }) => {
-  const heartRate = useFluctuating(73, 5, 9000);
+const BioDataPanel: React.FC<{ hidden: boolean; elevated: boolean }> = ({ hidden, elevated }) => {
+  const heartRate = useFluctuating(elevated ? 126 : 73, elevated ? 10 : 5, elevated ? 2000 : 9000);
   const coreTemp  = useFluctuating(98.5, 0.3, 13000, 1);
+  const hrAlert   = elevated || heartRate === '...';
   return (
     <div className={`${styles.bioPanel} ${hidden ? styles.bioPanelHidden : ''}`}>
-      <span className={heartRate === '...' ? styles.bioDots : ''}>HR: {heartRate} BPM</span>
+      <span className={hrAlert ? styles.bioDots : ''}>HR: {heartRate} BPM</span>
       <span>SpO2: 99%</span>
       <span className={coreTemp === '...' ? styles.bioDots : ''}>Temp: {coreTemp}°F</span>
     </div>
@@ -173,11 +171,13 @@ const BatteryDisplay: React.FC<{ battery: number; hidden: boolean }> = ({ batter
 };
 
 // ── Compass Display ────────────────────────────────────────────
-const CompassDisplay: React.FC<{ hidden: boolean }> = ({ hidden }) => {
-  const { bearing, cardinal, dist } = useCompass();
+const CompassDisplay: React.FC<{ hidden: boolean; planetKey: string }> = ({ hidden, planetKey }) => {
+  const { bearing, dist } = PLANET_COMPASS[planetKey] ?? { bearing: 180, dist: '1.0km' };
+  const dirs    = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+  const cardinal = dirs[Math.round(bearing / 22.5) % 16];
   return (
     <p className={`${styles.compassDisplay} ${hidden ? styles.compassHidden : ''}`}>
-      ◈ {cardinal} {String(bearing).padStart(3, '0')}°&nbsp;&nbsp;|&nbsp;&nbsp;SHIP: {dist}km
+      ◈ {cardinal} {String(bearing).padStart(3, '0')}°&nbsp;&nbsp;|&nbsp;&nbsp;SHIP: {dist}
     </p>
   );
 };
@@ -369,16 +369,23 @@ const WeatherPanel: React.FC<{ firstTime: boolean; onClose: () => void }> = ({ f
 };
 
 // ── Distress Signal Panel ──────────────────────────────────────
-const DistressPanel: React.FC<{ onClose: () => void }> = ({ onClose }) => (
-  <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
-    <p className={styles.weatherMalfunctionHeader}>!! DISTRESS BEACON MALFUNCTION</p>
-    <p className={styles.weatherBrokenNote}>Signal not transmitted.</p>
-    <p className={styles.weatherBrokenNote}>
-      VERA: &ldquo;The distress beacon has encountered an error. I have run a full diagnostic and found no fault on my end. The issue appears to be hardware. I will continue attempting to restore the signal. In the meantime I recommend you carry on with the expedition. Standing here will not fix it.&rdquo;
-    </p>
-    <button className={styles.weatherHudCloseBtn} onClick={onClose}>[ Acknowledge ]</button>
-  </div></div>
-);
+const DISTRESS_NORMAL  = `The distress beacon has encountered an error. I have run a full diagnostic and found no fault on my end. The issue appears to be hardware. I will continue attempting to restore the signal.`;
+const DISTRESS_DAMAGED = `I am aware of the breach. The distress beacon is not responding. I have run a diagnostic. The fault does not originate from my systems. Returning to the ship is your only viable option at this time.`;
+
+const DistressPanel: React.FC<{ suitDamaged: boolean; onClose: () => void }> = ({ suitDamaged, onClose }) => {
+  const text = suitDamaged ? DISTRESS_DAMAGED : DISTRESS_NORMAL;
+  const { displayed, done } = useTypewriter(text, 30);
+  return (
+    <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+      <p className={styles.weatherMalfunctionHeader}>!! DISTRESS BEACON MALFUNCTION</p>
+      <p className={styles.weatherBrokenNote}>Signal not transmitted.</p>
+      <p className={styles.weatherBrokenNote}>
+        VERA: &ldquo;{displayed}&rdquo;{!done && <span className={styles.veraTypingCursor} />}
+      </p>
+      {done && <button className={styles.weatherHudCloseBtn} onClick={onClose}>[ Acknowledge ]</button>}
+    </div></div>
+  );
+};
 
 // ── Terrain Scan Result Panel ──────────────────────────────────
 const ScanResultPanel: React.FC<{ result: string; onClose: () => void }> = ({ result, onClose }) => {
@@ -564,7 +571,7 @@ const HNTDTravel: React.FC = () => {
         style={{ backgroundImage: `url(${planet.image})` }} />
 
       <img src="/assets/dontDie/images/HudDisplay.png" alt="" aria-hidden="true"
-        className={`${styles.hudDisplayImg} ${systemsHidden ? styles.hudDisplayImgHidden : ''}`} />
+        className={styles.hudDisplayImg} />
 
       {/* Top-left */}
       <p className={styles.hudTopLabel}>// PLANET: {planet.name.toUpperCase()}</p>
@@ -584,10 +591,10 @@ const HNTDTravel: React.FC = () => {
         style={{ color: oxygenColor }}>
         Oxygen: {oxygen}%{suitDamaged ? ' ⚠' : ''}
       </p>
-      <BioDataPanel hidden={systemsHidden} />
+      <BioDataPanel hidden={systemsHidden} elevated={suitDamaged && !showNarrative} />
 
       {/* Bottom center */}
-      <CompassDisplay hidden={systemsHidden} />
+      <CompassDisplay hidden={systemsHidden} planetKey={key} />
 
       {/* HUD buttons */}
       {HUD_BUTTONS.map(btn => (
@@ -620,7 +627,7 @@ const HNTDTravel: React.FC = () => {
       )}
       {activePanel === 'weather'  && <WeatherPanel firstTime={scannerFirstTime} onClose={() => setActivePanel(null)} />}
       {activePanel === 'guide'    && <PlanetSurvivalPanel planetKey={key} onClose={() => setActivePanel(null)} />}
-      {activePanel === 'distress' && <DistressPanel onClose={() => setActivePanel(null)} />}
+      {activePanel === 'distress' && <DistressPanel suitDamaged={suitDamaged} onClose={() => setActivePanel(null)} />}
       {scanState   === 'result'   && <ScanResultPanel result={planet.scanResult} onClose={() => setScanState('idle')} />}
 
       {/* Suit damage narrative */}

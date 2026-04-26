@@ -251,7 +251,7 @@
 }
 
 .hudBgDimmed {
-  filter: brightness(0.25) blur(4px);
+  filter: brightness(0.45) blur(1px);
 }
 
 /* Top-left sector label */
@@ -336,7 +336,7 @@
 }
 
 .hudPanelBox {
-  background: rgba(0, 0, 0, 0.88);
+  background: rgba(0, 0, 0, 0.62);
   border: 1px solid rgba(0, 255, 200, 0.4);
   border-radius: 10px;
   padding: 1.75rem;
