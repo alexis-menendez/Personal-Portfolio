@@ -496,10 +496,10 @@
   color: #00ffe1;
 }
 
-/* ── Oxygen display (top-right) ───────────────────────────────── */
+/* ── Oxygen display (top-right, below battery) ─────────────────── */
 .oxygenDisplay {
   position: absolute;
-  top: 1.25rem;
+  top: 3.4rem;
   right: 1.5rem;
   z-index: 5;
   font-family: 'Orbitron', sans-serif;
@@ -521,7 +521,7 @@
 /* ── Bio data panel (top-right, below oxygen) ─────────────────── */
 .bioPanel {
   position: absolute;
-  top: 3.8rem;
+  top: 5.6rem;
   right: 1.5rem;
   z-index: 5;
   display: flex;
@@ -649,10 +649,10 @@
   color: #ff4d4d;
 }
 
-/* ── Battery display (right, below bio panel) ─────────────────── */
+/* ── Battery display (top-right, above oxygen) ─────────────────── */
 .batteryDisplay {
   position: absolute;
-  top: 11rem;
+  top: 1.25rem;
   right: 1.5rem;
   z-index: 5;
   font-family: 'Orbitron', sans-serif;
