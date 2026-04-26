@@ -240,13 +240,12 @@ const SuitDamageNarrative: React.FC<{ text: string; onAcknowledge: () => void }>
   return (
     <div className={styles.hudPanel}>
       <div className={styles.hudPanelBox}>
-        <p className={styles.weatherMalfunctionHeader}>!! SUIT DAMAGE DETECTED</p>
         <p className={styles.weatherBrokenNote} style={{ whiteSpace: 'pre-line' }}>
           {displayed}{!done && <span className={styles.veraTypingCursor} />}
         </p>
         {done && (
-          <button className={styles.deathRestartBtn} style={{ alignSelf: 'flex-start' }} onClick={onAcknowledge}>
-            [ Acknowledged ]
+          <button className={styles.veraCloseBtn} onClick={onAcknowledge}>
+            [ Close terminal ]
           </button>
         )}
       </div>
@@ -501,12 +500,12 @@ const HNTDTravel: React.FC = () => {
     return () => clearInterval(id);
   }, []);
 
-  // Rapid O2 drain after suit damage (10% every 3s)
+  // Rapid O2 drain — only after narrative is dismissed
   useEffect(() => {
-    if (!suitDamaged) return;
+    if (!suitDamaged || showNarrative) return;
     const id = setInterval(() => setOxygen(prev => Math.max(0, prev - 10)), 3_000);
     return () => clearInterval(id);
-  }, [suitDamaged]);
+  }, [suitDamaged, showNarrative]);
 
   useEffect(() => {
     if (oxygen  <= 0 && !deathCause) { setDeathCause('oxygen');  setIsDead(true); }
