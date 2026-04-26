@@ -29,8 +29,24 @@
 }
 
 /* Planet buttons */
-.planet {
+.planetWrapper {
   position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.planetSprite {
+  width: clamp(60px, 8vmin, 100px);
+  height: clamp(60px, 8vmin, 100px);
+  object-fit: contain;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+.planet {
   font-size: 0.95rem;
   font-family: 'Courier New', monospace;
   color: #00ffe1;
@@ -40,12 +56,12 @@
   padding: 0.5rem 1rem;
   cursor: pointer;
   transition: background-color 0.2s, transform 0.2s;
-  transform: translate(-50%, -50%);
+  white-space: nowrap;
 }
 
 .planet:hover {
   background-color: rgba(0, 255, 225, 0.2);
-  transform: translate(-50%, -50%) scale(1.05);
+  transform: scale(1.05);
 }
 
 .planetLocked {
@@ -863,7 +879,7 @@
   white-space: nowrap;
 }
 .autoRepairBtn:hover {
-  background: rgba(255, 77, 77, 0.12);
+  background: rgba(0, 0, 0, 0.92);
 }
 
 .autoRepairBtnInitiating {
@@ -896,7 +912,7 @@
   text-transform: uppercase;
   pointer-events: all;
 }
-.autoRepairManualBtn:hover { background: rgba(0,255,225,0.1); }
+.autoRepairManualBtn:hover { background: rgba(0, 0, 0, 0.9); color: #00ffe1; }
 
 @keyframes autoRepairPulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }

@@ -1,6 +1,6 @@
 // File: client/src/pages/dontDie/HNTDHolomap.tsx
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useHNTDPlanets } from '../../context/HNTDPlanetContext';
 import HNTDPlanetCard from '../../components/dontDie/HNTDPlanetCard';
@@ -18,6 +18,32 @@ const OVERRIDE_MESSAGES = [
 ];
 
 const BRUNE_GATED_MSG = `VERA: "Doubt is much closer, Commander. If we go to Brune now we will have to double back to visit Doubt. I recommend we check Doubt first."`;
+
+const PLANET_FRAMES: Record<string, string[]> = {
+  planetone:   Array.from({ length: 8 }, (_, i) => `/assets/dontDie/images/planet-one/planet/PlanOneSpin${i + 1}.png`),
+  planettwo:   Array.from({ length: 8 }, (_, i) => `/assets/dontDie/images/planet-two/planet/PlanTwoSpin${i + 1}.png`),
+  planethree:  Array.from({ length: 8 }, (_, i) => `/assets/dontDie/images/planet-three/planet/PlanThreeSpin${i + 1}.png`),
+};
+const FRAME_MS = 600;
+
+const PlanetSprite: React.FC<{ planetKey: string }> = ({ planetKey }) => {
+  const frames = PLANET_FRAMES[planetKey] ?? [];
+  const [frame, setFrame] = useState(0);
+  useEffect(() => {
+    if (!frames.length) return;
+    const id = setInterval(() => setFrame(f => (f + 1) % frames.length), FRAME_MS);
+    return () => clearInterval(id);
+  }, [frames.length]);
+  if (!frames.length) return null;
+  return (
+    <img
+      src={frames[frame]}
+      alt=""
+      aria-hidden="true"
+      className={styles.planetSprite}
+    />
+  );
+};
 
 const HNTDHolomap: React.FC = () => {
   const navigate = useNavigate();
@@ -78,23 +104,29 @@ const HNTDHolomap: React.FC = () => {
       </div>
 
       {/* Planet One — Doubt */}
-      <button className={styles.planet} style={{ top: '30%', left: '21%' }}
-        onClick={() => handlePlanetClick('planetone')}>
-        Doubt {hasVisited('planetone') && ' ✓'}
-      </button>
+      <div className={styles.planetWrapper} style={{ top: '30%', left: '21%' }}>
+        <PlanetSprite planetKey="planetone" />
+        <button className={styles.planet} onClick={() => handlePlanetClick('planetone')}>
+          Doubt{hasVisited('planetone') && ' ✓'}
+        </button>
+      </div>
 
       {/* Planet Two — Brune */}
-      <button className={styles.planet} style={{ top: '50%', left: '46%' }}
-        onClick={() => handlePlanetClick('planettwo')}>
-        Brune {hasVisited('planettwo') && ' ✓'}
-      </button>
+      <div className={styles.planetWrapper} style={{ top: '50%', left: '46%' }}>
+        <PlanetSprite planetKey="planettwo" />
+        <button className={styles.planet} onClick={() => handlePlanetClick('planettwo')}>
+          Brune{hasVisited('planettwo') && ' ✓'}
+        </button>
+      </div>
 
       {/* Planet Three — Ocean 12B (hidden until both visited AND coordinates entered) */}
       {isPlanetThreeUnlocked() && (
-        <button className={styles.planet} style={{ top: '70%', left: '76%' }}
-          onClick={() => setSelectedPlanet('planethree')}>
-          Ocean 12B {hasVisited('planethree') && ' ✓'}
-        </button>
+        <div className={styles.planetWrapper} style={{ top: '70%', left: '76%' }}>
+          <PlanetSprite planetKey="planethree" />
+          <button className={styles.planet} onClick={() => setSelectedPlanet('planethree')}>
+            Ocean 12B{hasVisited('planethree') && ' ✓'}
+          </button>
+        </div>
       )}
 
       {/* Coordinate entry — shown after visiting Brune but before coords are confirmed */}
