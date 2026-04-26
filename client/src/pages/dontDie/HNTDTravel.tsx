@@ -237,7 +237,7 @@ const SuitDamageNarrative: React.FC<{ text: string; onAcknowledge: () => void }>
   return (
     <div className={styles.hudPanel}>
       <div className={styles.hudPanelBox}>
-        <p className={styles.weatherBrokenNote} style={{ whiteSpace: 'pre-line' }}>
+        <p className={styles.weatherBrokenNote} style={{ whiteSpace: 'pre-line', fontSize: '0.9rem', lineHeight: '1.85' }}>
           {displayed}{!done && <span className={styles.veraTypingCursor} />}
         </p>
         {done && (
