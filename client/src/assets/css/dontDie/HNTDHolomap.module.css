@@ -262,7 +262,7 @@
   z-index: 5;
   font-family: 'Orbitron', sans-serif;
   font-size: clamp(1.1rem, 2.6vmin, 1.5rem);
-  color: rgba(0, 255, 200, 0.65);
+  color: #00ffe1;
   letter-spacing: 0.14em;
   text-shadow: 0 0 8px rgba(0, 255, 200, 0.3);
   pointer-events: none;
@@ -647,6 +647,62 @@
   background: rgba(255, 77, 77, 0.12);
   border-color: #ff4d4d;
   color: #ff4d4d;
+}
+
+/* ── Battery display (right, below bio panel) ─────────────────── */
+.batteryDisplay {
+  position: absolute;
+  top: 9.5rem;
+  right: 1.5rem;
+  z-index: 5;
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.9rem, 2.2vmin, 1.3rem);
+  letter-spacing: 0.05em;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* ── Compass + ship distance (bottom center) ───────────────────── */
+.compassDisplay {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.85rem, 2vmin, 1.1rem);
+  color: #00ffe1;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  text-align: center;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.compassHidden { opacity: 0; }
+
+/* ── Terrain scan overlay ──────────────────────────────────────── */
+.scanningOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.scanningText {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.2rem, 3vmin, 2rem);
+  color: #00ffe1;
+  letter-spacing: 0.3em;
+  text-shadow: 0 0 20px rgba(0, 255, 200, 0.6);
+  animation: scanPulse 0.9s ease-in-out infinite;
+}
+
+@keyframes scanPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.25; }
 }
 
 /* ── Shuttle Break ────────────────────────────────────────────── */
