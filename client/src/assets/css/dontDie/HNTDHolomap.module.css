@@ -275,7 +275,7 @@
   z-index: 5;
   font-family: 'Courier New', monospace;
   font-size: clamp(0.9rem, 2.2vmin, 1.3rem);
-  color: rgba(0, 255, 200, 0.45);
+  color: #00ffe1;
   letter-spacing: 0.08em;
   pointer-events: none;
 }
