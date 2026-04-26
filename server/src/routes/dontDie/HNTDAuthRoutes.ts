@@ -1,9 +1,9 @@
-// File: server/src/routes/hntd/authRoutes.ts
+// File: server/src/routes/dontDie/HNTDAuthRoutes.ts
 
 import { Router, Request, Response } from 'express';
 import bcrypt from 'bcrypt';
-import { HNTDUser } from '../../models/hntd/index.js';
-import { generateHNTDToken } from '../../middleware/hntdAuth.js';
+import { HNTDUser } from '../../models/dontDie/index.js';
+import { generateHNTDToken, verifyHNTDToken } from '../../middleware/HNTDAuth.js';
 
 const router = Router();
 
@@ -32,6 +32,23 @@ router.post('/login', async (req: Request, res: Response) => {
 
   const token = generateHNTDToken(user.id, user.username);
   res.json({ token, user: { id: user.id, username: user.username } });
+});
+
+router.patch('/rename', verifyHNTDToken, async (req: Request, res: Response) => {
+  const { newUsername } = req.body;
+  const userId = (req as any).user?.userId;
+  if (!newUsername || typeof newUsername !== 'string' || !newUsername.trim()) {
+    res.status(400).json({ message: 'New username required' }); return;
+  }
+  try {
+    const taken = await HNTDUser.findOne({ where: { username: newUsername.trim() } });
+    if (taken) { res.status(409).json({ message: 'Username already taken' }); return; }
+    const user = await HNTDUser.findByPk(userId);
+    if (!user) { res.status(404).json({ message: 'User not found' }); return; }
+    await user.update({ username: newUsername.trim() });
+    const token = generateHNTDToken(user.id, user.username);
+    res.json({ token, user: { id: user.id, username: user.username } });
+  } catch (err: any) { res.status(500).json({ message: err.message }); }
 });
 
 export default router;

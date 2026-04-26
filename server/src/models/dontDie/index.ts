@@ -1,10 +1,11 @@
-// File: server/src/models/hntd/index.ts
+// File: server/src/models/dontDie/index.ts
 
 import dotenv from 'dotenv';
 dotenv.config();
 
 import { Sequelize } from 'sequelize';
 import { HNTDUserFactory } from './HNTDUser.js';
+import { HNTDLogFactory  } from './HNTDLog.js';
 
 // Reuse the same Neon DB as Taskadelic — tables are prefixed hntd_*
 const hntdSequelize = process.env.TD_DB_URL
@@ -25,5 +26,9 @@ const hntdSequelize = process.env.TD_DB_URL
     );
 
 const HNTDUser = HNTDUserFactory(hntdSequelize);
+const HNTDLog  = HNTDLogFactory(hntdSequelize);
 
-export { hntdSequelize, HNTDUser };
+HNTDUser.hasMany(HNTDLog, { foreignKey: 'userId' });
+HNTDLog.belongsTo(HNTDUser, { foreignKey: 'userId' });
+
+export { hntdSequelize, HNTDUser, HNTDLog };

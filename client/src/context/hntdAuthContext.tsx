@@ -11,8 +11,9 @@ interface HNTDAuthContextType {
   user: HNTDUser | null;
   token: string | null;
   isAuthenticated: boolean;
-  login: (user: HNTDUser, token: string) => void;
-  logout: () => void;
+  login:      (user: HNTDUser, token: string) => void;
+  logout:     () => void;
+  updateUser: (user: HNTDUser, token: string) => void;
 }
 
 const HNTDAuthContext = createContext<HNTDAuthContextType | null>(null);
@@ -38,8 +39,15 @@ export const HNTDAuthProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     localStorage.removeItem(TOKEN_KEY);
   };
 
+  const updateUser = (user: HNTDUser, token: string) => {
+    setUser(user);
+    setToken(token);
+    localStorage.setItem(USER_KEY,  JSON.stringify(user));
+    localStorage.setItem(TOKEN_KEY, token);
+  };
+
   return (
-    <HNTDAuthContext.Provider value={{ user, token, isAuthenticated: !!user, login, logout }}>
+    <HNTDAuthContext.Provider value={{ user, token, isAuthenticated: !!user, login, logout, updateUser }}>
       {children}
     </HNTDAuthContext.Provider>
   );

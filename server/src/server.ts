@@ -20,11 +20,11 @@ import { connectDB } from "./config/connections.js";
 // Routes
 import contactRoutes    from './routes/portfolio/contactRoutes.js';
 import taskadelicRoutes from './routes/taskadelic/index.js';
-import hntdRoutes       from './routes/hntd/index.js';
+import hntdRoutes       from './routes/dontDie/index.js';
 
 // Databases
 import { tdSequelize }   from './models/taskadelic/index.js';
-import { hntdSequelize } from './models/hntd/index.js';
+import { hntdSequelize } from './models/dontDie/index.js';
 
 
 
@@ -78,7 +78,7 @@ async function startServer() {
 
   // Sync PostgreSQL tables
   await tdSequelize.sync({ alter: false });
-  await hntdSequelize.sync({ alter: false });
+  await hntdSequelize.sync({ alter: true }); // adds planet column to hntd_survival_tips
 
   // Middleware
   app.use(express.json());

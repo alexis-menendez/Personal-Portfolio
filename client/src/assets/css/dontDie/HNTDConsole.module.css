@@ -1,0 +1,705 @@
+/* File: client/src/assets/css/dontDie/HNTDConsole.module.css */
+
+/* ── Console background ───────────────────────────────────────── */
+.consoleBackground {
+  background-image: url('/assets/dontDie/images/ConsoleDesktop.png');
+  background-size: cover;
+  background-color: black;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 767px) {
+  .consoleBackground {
+    background-image: url('/assets/dontDie/images/ConsoleMobile.png');
+    background-position: center top;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 930px) {
+  .consoleBackground {
+    background-image: url('/assets/dontDie/images/ConsoleTablet.png');
+  }
+}
+
+/* ── Console screen overlay ───────────────────────────────────── */
+.consoleScreen {
+  position: absolute;
+  top: 22%;
+  left: 21%;
+  width: 59.5%;
+  height: 40%;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #00ffe1;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 255, 200, 0.3);
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 374px) {
+  .consoleScreen { width: 61%; top: 30%; left: 20%; height: 26%; }
+}
+@media screen and (min-width: 375px) and (max-width: 767px) {
+  .consoleScreen { width: 62%; top: 20%; left: 20%; height: 40%; }
+}
+@media screen and (min-width: 768px) and (max-width: 930px) {
+  .consoleScreen { width: 47%; top: 22%; left: 28%; height: 38%; }
+}
+@media screen and (min-width: 931px) and (max-width: 1080px) {
+  .consoleScreen { width: 59.5%; top: 21%; left: 21%; height: 40%; }
+}
+@media screen and (min-width: 1081px) and (max-width: 1440px) {
+  .consoleScreen { width: 60.5%; top: 22%; left: 20.5%; height: 40%; }
+}
+@media screen and (min-width: 1441px) {
+  .consoleScreen { width: 61%; top: 18%; left: 20%; height: 45%; }
+}
+@media screen and (min-width: 1000px) and (max-width: 4000px) {
+  .consoleScreen { width: 59.5%; top: 15%; left: 21%; height: 51%; }
+}
+
+/* ── Console content split ────────────────────────────────────── */
+.consoleContent {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.navColumn {
+  width: 30%;
+  border-right: 1px solid rgba(0, 255, 200, 0.2);
+  padding-right: 1rem;
+  overflow-y: auto;
+}
+
+.pageContent {
+  width: 70%;
+  padding-left: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ── Shared text styles ───────────────────────────────────────── */
+.cyanText  { color: #00ffe1; font-family: 'Orbitron', sans-serif; }
+.dimText   { color: rgba(0, 255, 225, 0.55); font-size: 0.8rem; }
+
+/* ── Home / Auth form ─────────────────────────────────────────── */
+.authContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 0.5rem;
+  font-family: 'Courier New', monospace;
+  color: #00ffe1;
+}
+
+.authTitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.9rem, 2vw, 1.3rem);
+  color: #00ffe1;
+  margin: 0 0 0.5rem;
+  text-align: center;
+  text-shadow: 0 0 8px rgba(0, 255, 200, 0.6);
+}
+
+.authInput {
+  width: 100%;
+  max-width: 260px;
+  background: rgba(0, 10, 8, 0.85);
+  border: 1px solid #00ffe1;
+  color: #00ffe1;
+  padding: 0.4rem 0.6rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  outline: none;
+  caret-color: #00ffe1;
+  /* Override browser autofill white background */
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  -webkit-text-fill-color: #00ffe1 !important;
+}
+
+.authInput:focus,
+.authInput:hover {
+  background: rgba(0, 10, 8, 0.95);
+  border-color: #00ffe1;
+  outline: none;
+}
+
+.authInput:-webkit-autofill,
+.authInput:-webkit-autofill:hover,
+.authInput:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  -webkit-text-fill-color: #00ffe1 !important;
+  border: 1px solid #00ffe1;
+}
+
+.authInput::placeholder { color: rgba(0, 255, 225, 0.4); }
+
+.authBtn {
+  width: 100%;
+  max-width: 260px;
+  background: transparent;
+  border: 1px solid #00ffe1;
+  color: #00ffe1;
+  padding: 0.4rem 0.6rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.authBtn:hover { background: #00ffe1; color: #000; }
+
+.authToggle {
+  background: none;
+  border: none;
+  color: rgba(0, 255, 225, 0.6);
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-top: 0.25rem;
+}
+
+.authToggle:hover { color: #00ffe1; }
+
+.authError {
+  color: #ff4d4d;
+  font-size: 0.75rem;
+  text-align: center;
+  max-width: 260px;
+}
+
+/* ── Dashboard ────────────────────────────────────────────────── */
+.dashboardContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  gap: 0.75rem;
+}
+
+.veraQuote {
+  font-family: 'Courier New', monospace;
+  font-size: clamp(0.7rem, 1.4vw, 0.9rem);
+  color: rgba(0, 255, 225, 0.8);
+  line-height: 1.6;
+  border-left: 2px solid rgba(0, 255, 200, 0.4);
+  padding-left: 0.75rem;
+}
+
+.veraLabel {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.65rem;
+  color: rgba(0, 255, 200, 0.45);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ── Navigation ───────────────────────────────────────────────── */
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.navLink {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.55rem, 1.2vw, 0.75rem);
+  color: rgba(0, 255, 225, 0.7);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.navLink:hover, .navLinkActive { color: #00ffe1; }
+
+/* ── Personal Logs ────────────────────────────────────────────── */
+.logsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  flex-shrink: 0;
+}
+
+.logsTitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.65rem, 1.3vw, 0.85rem);
+  color: #00ffe1;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+.newLogBtn {
+  background: transparent;
+  border: 1px solid #00ffe1;
+  color: #00ffe1;
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem;
+  padding: 0.25rem 0.65rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.newLogBtn:hover { background: rgba(0, 255, 225, 0.12); }
+
+.logsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.logCard {
+  border: 1px solid rgba(0, 255, 200, 0.25);
+  border-radius: 4px;
+  padding: 0.5rem 0.65rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  background: rgba(0, 0, 0, 0.3);
+}
+.logCard:hover {
+  border-color: rgba(0, 255, 200, 0.6);
+  background: rgba(0, 255, 200, 0.05);
+}
+
+.logCardTitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.55rem, 1.1vw, 0.72rem);
+  color: #00ffe1;
+  margin: 0 0 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.logCardMeta {
+  font-family: 'Courier New', monospace;
+  font-size: 0.65rem;
+  color: rgba(0, 255, 225, 0.4);
+}
+
+.logCardSnippet {
+  font-family: 'Courier New', monospace;
+  font-size: 0.68rem;
+  color: rgba(0, 255, 225, 0.65);
+  margin-top: 0.2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.emptyLogs {
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: rgba(0, 255, 225, 0.4);
+  text-align: center;
+  margin-top: 1.5rem;
+  line-height: 1.7;
+}
+
+/* ── Log Modal (Edit / Create) ────────────────────────────────── */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9000;
+}
+
+.modal {
+  background: #000;
+  border: 1px solid #00ffe1;
+  border-radius: 10px;
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 520px;
+  max-height: 80vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: 0 0 24px rgba(0, 255, 200, 0.25);
+  position: relative;
+}
+
+.modalTitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  color: #00ffe1;
+  margin: 0;
+}
+
+.modalInput {
+  width: 100%;
+  background: rgba(0, 10, 8, 0.85);
+  border: 1px solid rgba(0, 255, 200, 0.4);
+  color: #00ffe1;
+  padding: 0.45rem 0.6rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+  outline: none;
+  caret-color: #00ffe1;
+  box-sizing: border-box;
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  -webkit-text-fill-color: #00ffe1 !important;
+}
+.modalInput:focus,
+.modalInput:hover {
+  background: rgba(0, 10, 8, 0.95);
+  border-color: #00ffe1;
+  outline: none;
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  -webkit-text-fill-color: #00ffe1 !important;
+}
+.modalInput:-webkit-autofill,
+.modalInput:-webkit-autofill:hover,
+.modalInput:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  -webkit-text-fill-color: #00ffe1 !important;
+  border: 1px solid #00ffe1;
+}
+.modalInput::placeholder { color: rgba(0, 255, 225, 0.35); }
+
+.modalTextarea {
+  width: 100%;
+  min-height: 160px;
+  background: rgba(0, 10, 8, 0.85);
+  border: 1px solid rgba(0, 255, 200, 0.4);
+  color: #00ffe1;
+  padding: 0.45rem 0.6rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+  outline: none;
+  caret-color: #00ffe1;
+  resize: vertical;
+  box-sizing: border-box;
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  -webkit-text-fill-color: #00ffe1 !important;
+}
+.modalTextarea:focus,
+.modalTextarea:hover {
+  background: rgba(0, 10, 8, 0.95);
+  border-color: #00ffe1;
+  outline: none;
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  -webkit-text-fill-color: #00ffe1 !important;
+}
+.modalTextarea::placeholder { color: rgba(0, 255, 225, 0.35); }
+
+.modalActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.modalSaveBtn {
+  background: transparent;
+  border: 1px solid #00ffe1;
+  color: #00ffe1;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.modalSaveBtn:hover { background: rgba(0, 255, 225, 0.15); }
+
+.modalDeleteBtn {
+  background: transparent;
+  border: 1px solid rgba(255, 77, 77, 0.5);
+  color: rgba(255, 77, 77, 0.7);
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.modalDeleteBtn:hover { background: rgba(255, 77, 77, 0.1); border-color: #ff4d4d; color: #ff4d4d; }
+
+.modalCancelBtn {
+  background: none;
+  border: none;
+  color: rgba(0, 255, 225, 0.45);
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.modalCancelBtn:hover { color: #00ffe1; }
+
+.modalCloseX {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  color: #00ffe1;
+  font-size: 1.3rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.logsPageContent {
+  width: 70%;
+  padding-left: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ── Survival Guide ───────────────────────────────────────────── */
+.survivalPageContent {
+  width: 70%;
+  padding-left: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tipCard {
+  border: 1px solid rgba(0, 255, 200, 0.2);
+  border-radius: 4px;
+  padding: 0.55rem 0.7rem;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  transition: border-color 0.2s;
+}
+.tipCard:hover { border-color: rgba(0, 255, 200, 0.5); }
+
+.tipVote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  flex-shrink: 0;
+  min-width: 2rem;
+}
+
+.tipVoteBtn {
+  background: none;
+  border: none;
+  color: rgba(0, 255, 225, 0.45);
+  font-size: 0.9rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  transition: color 0.15s;
+}
+.tipVoteBtn:hover       { color: #00ffe1; }
+.tipVoteBtnActive       { color: #00ffe1 !important; }
+
+.tipVoteCount {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  color: rgba(0, 255, 225, 0.6);
+}
+
+.tipBody { flex: 1; min-width: 0; }
+
+.tipTitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.55rem, 1.1vw, 0.72rem);
+  color: #00ffe1;
+  margin: 0 0 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tipContent {
+  font-family: 'Courier New', monospace;
+  font-size: 0.68rem;
+  color: rgba(0, 255, 225, 0.7);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tipMeta {
+  font-family: 'Courier New', monospace;
+  font-size: 0.6rem;
+  color: rgba(0, 255, 225, 0.35);
+  margin-top: 0.25rem;
+}
+
+.tipDeleteBtn {
+  background: none;
+  border: none;
+  color: rgba(255, 77, 77, 0.4);
+  font-size: 0.7rem;
+  cursor: pointer;
+  padding: 0;
+  font-family: 'Courier New', monospace;
+  flex-shrink: 0;
+  align-self: flex-start;
+  transition: color 0.15s;
+}
+.tipDeleteBtn:hover { color: #ff4d4d; }
+
+/* ── Weather Scanner ──────────────────────────────────────────── */
+.weatherPageContent {
+  width: 70%;
+  padding-left: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.weatherSearchRow {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  flex-shrink: 0;
+}
+
+.weatherSearchInput {
+  flex: 1;
+  background: rgba(0, 10, 8, 0.85);
+  border: 1px solid rgba(0, 255, 200, 0.4);
+  color: #00ffe1;
+  padding: 0.4rem 0.6rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  outline: none;
+  caret-color: #00ffe1;
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  -webkit-text-fill-color: #00ffe1 !important;
+}
+.weatherSearchInput:focus,
+.weatherSearchInput:hover {
+  background: rgba(0, 10, 8, 0.95);
+  border-color: #00ffe1;
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  -webkit-text-fill-color: #00ffe1 !important;
+}
+.weatherSearchInput::placeholder { color: rgba(0, 255, 225, 0.35); }
+
+.weatherScanBtn {
+  background: transparent;
+  border: 1px solid #00ffe1;
+  color: #00ffe1;
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.weatherScanBtn:hover    { background: rgba(0, 255, 225, 0.12); }
+.weatherScanBtn:disabled { opacity: 0.45; cursor: default; }
+
+.weatherError {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: #ff4d4d;
+  margin-bottom: 0.5rem;
+}
+
+.weatherIdle {
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: rgba(0, 255, 225, 0.4);
+  text-align: center;
+  margin-top: 1.5rem;
+  line-height: 1.8;
+}
+
+.weatherCard {
+  border: 1px solid rgba(0, 255, 200, 0.3);
+  border-radius: 6px;
+  padding: 0.9rem 1rem;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.weatherLocation {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.7rem, 1.4vw, 0.9rem);
+  color: #00ffe1;
+  margin: 0;
+  letter-spacing: 0.08em;
+}
+
+.weatherCondition {
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem;
+  color: rgba(0, 255, 225, 0.6);
+  font-style: italic;
+  margin: 0;
+  border-left: 2px solid rgba(0, 255, 200, 0.3);
+  padding-left: 0.6rem;
+}
+
+.weatherGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem 0.8rem;
+}
+
+.weatherRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.weatherLabel {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.55rem;
+  color: rgba(0, 255, 200, 0.4);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.weatherValue {
+  font-family: 'Courier New', monospace;
+  font-size: clamp(0.7rem, 1.3vw, 0.82rem);
+  color: #00ffe1;
+}
+
+.weatherVeraLine {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  color: rgba(0, 255, 225, 0.5);
+  font-style: italic;
+  border-top: 1px solid rgba(0, 255, 200, 0.15);
+  padding-top: 0.5rem;
+  line-height: 1.5;
+}
