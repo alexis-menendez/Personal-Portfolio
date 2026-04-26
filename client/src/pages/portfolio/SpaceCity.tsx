@@ -25,20 +25,28 @@ interface Project {
 
 const PROJECTS: Project[] = [
   {
-    title: 'InnerOrbit',
-    desc: 'A cosmic wellness app where users log moods and create journal entries within a soothing visual galaxy.',
-    tags: ['MERN', 'GraphQL', 'JWT'],
-    github: 'https://github.com/alexis-menendez/Personal-Portfolio',
-    live: '/io-home',
-    route: '/innerOrbit',
-  },
-  {
     title: 'How Not To Die',
     desc: 'A narrative survival game disguised as a space console — write explorer logs, survive alien planets, and uncover deep mysteries.',
     tags: ['React', 'TypeScript', 'Node.js'],
     github: 'https://github.com/alexis-menendez/HowNotToDieDemo',
     live: null,
     route: '/dontDie',
+  },
+  {
+    title: 'InnerOrbit',
+    desc: 'A cosmic wellness app where users log moods and create journal entries within a soothing visual galaxy.',
+    tags: ['MERN', 'GraphQL', 'JWT'],
+    github: 'https://github.com/alexis-menendez/Inner-Orbit',
+    live: '/io-home',
+    route: '/innerOrbit',
+  },
+  {
+    title: 'Taskadelic',
+    desc: 'A psychedelic Kanban board blending bullet journaling with hypnotic visuals to keep tasks flowing and focus high.',
+    tags: ['React', 'Node.js', 'CSS'],
+    github: 'https://github.com/alexis-menendez/Module-14-Taskadelic',
+    live: '/taskadelic',
+    route: '/taskadelic',
   },
   {
     title: 'Lattice',
@@ -58,19 +66,11 @@ const PROJECTS: Project[] = [
   },
   {
     title: 'Runestone Evaluation',
-    desc: 'A magical quiz app that transforms personality tests into mystical spellcasting rituals for aspiring mages.',
+    desc: 'A fantasy-themed quiz app for learning programming concepts — rune-inscribed challenges guide aspiring developers through the fundamentals.',
     tags: ['JavaScript', 'MongoDB', 'Express'],
     github: 'https://github.com/alexis-menendez/Module-19-Runestone-Evaluation',
     live: null,
     route: '/runestone',
-  },
-  {
-    title: 'Taskadelic',
-    desc: 'A psychedelic Kanban board blending bullet journaling with hypnotic visuals to keep tasks flowing and focus high.',
-    tags: ['React', 'Node.js', 'CSS'],
-    github: 'https://github.com/alexis-menendez/Module-14-Taskadelic',
-    live: '/taskadelic',
-    route: '/taskadelic',
   },
 ];
 

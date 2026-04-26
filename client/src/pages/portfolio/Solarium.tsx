@@ -1,117 +1,84 @@
 // File: client/src/pages/portfolio/Solarium.tsx
 
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styles from '../../assets/css/portfolio/pageStyles/Projects.module.css';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import StarBackground from '../../components/portfolio/common/StarBackground';
+import ShootingStar from '../../components/portfolio/common/ShootingStar';
+import styles from '../../assets/css/portfolio/pageStyles/ProjectDetail.module.css';
 
-const solariumLinks = [
-  {
-    name: "Deployed App",
-    description: "Coming Soon!",
-    image: "/assets/portfolio/icons/deployed/DeployedBrown.svg",
-    link: "#",
-    isInternal: false,
-    newTab: false,
-    imageLeft: false,
-  },
-  {
-    name: "GitHub",
-    description: "View the full source code for The Solarium visual knowledge platform on GitHub.",
-    image: "/assets/portfolio/icons/git/GitBrown.svg",
-    link: "https://github.com/alexis-menendez/Module-18-The-Solarium",
-    isInternal: false,
-    newTab: true,
-    imageLeft: true,
-  },
-  {
-    name: "Documentation",
-    description: "Under development, check back soon for design documentation for The Solarium, including tech overview and feature notes!",
-    image: "/assets/portfolio/icons/documentation/DocumentationBrown.svg",
-    link: "#",
-    isInternal: false,
-    newTab: false,
-    imageLeft: false,
-  },
-  {
-    name: "Gallery",
-    description: "Coming Soon!",
-    image: "/assets/portfolio/icons/solarium/SolariumBrown.svg",
-    link: "#",
-    isInternal: false,
-    newTab: false,
-    imageLeft: true,
-  },
-];
+const TECH = ['React', 'JavaScript', 'Node.js', 'Express.js', 'MongoDB', 'Google Books API', 'JWT'];
 
 const Solarium: React.FC = () => {
+  const navigate = useNavigate();
+  const [lightbox, setLightbox] = useState<{ src: string; label: string } | null>(null);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-scrollbar', 'portfolio');
+    return () => document.documentElement.removeAttribute('data-scrollbar');
+  }, []);
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setLightbox(null); };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, []);
+
   return (
-    <>
-      <div className={styles.textSection}>
-        <h1 className={styles.heading}>The Solarium</h1>
-        <p className={styles.paragraph}>
-          The Solarium is a whimsical digital library where users can search, save, and annotate books 
-          in a sun-drenched, plant-filled sanctuary. It blends elegant interface design with full-stack 
-          logic to create an experience focused on warmth, discovery, and reflection.
+    <div className={`${styles.page} ${styles.pageSolarium}`}>
+      <div className={styles.stars}>
+        <StarBackground />
+        <ShootingStar />
+      </div>
+
+      {/* Nav */}
+      <nav className={styles.nav}>
+        <button className={styles.navBack} onClick={() => navigate('/home')}>
+          ← Back
+        </button>
+      </nav>
+
+      {/* Hero */}
+      <section className={styles.hero}>
+        <p className={styles.eyebrow}>Project</p>
+        <h1 className={`${styles.title} ${styles.titleSolarium}`}>The Solarium</h1>
+        <p className={styles.description}>
+          A whimsical digital library where users search, save, and annotate books in a sun-drenched,
+          plant-filled sanctuary. Powered by the Google Books API, The Solarium blends elegant interface
+          design with full-stack logic to create an experience centered on warmth, discovery, and reflection.
         </p>
-      </div>
 
-      <div className={styles.projectGrid}>
-        {solariumLinks.map((section, index) => {
-          const cardContent = (
-            <>
-              {section.imageLeft && (
-                <div className={styles.imageBox}>
-                  <img src={section.image} alt={`${section.name} icon`} />
-                </div>
-              )}
+        <div className={styles.tags}>
+          {TECH.map(t => <span key={t} className={`${styles.tag} ${styles.tagSolarium}`}>{t}</span>)}
+        </div>
 
-              <div className={section.imageLeft ? styles.rightText : styles.leftText}>
-                <h2>{section.name}</h2>
-                <p>{section.description}</p>
-                <button className={styles.button}>View Project</button>
-              </div>
+        <div className={styles.actions}>
+          <button
+            className={styles.btnPrimary}
+            disabled
+            style={{ cursor: 'not-allowed', opacity: 0.5 }}
+          >
+            Demo Coming Soon
+          </button>
+          <a
+            className={styles.btnGhost}
+            href="https://github.com/alexis-menendez/Module-18-The-Solarium"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub ↗
+          </a>
+        </div>
+      </section>
 
-              {!section.imageLeft && (
-                <div className={styles.imageBox}>
-                  <img src={section.image} alt={`${section.name} icon`} />
-                </div>
-              )}
-            </>
-          );
-
-          if (section.newTab) {
-            return (
-              <a
-                key={index}
-                href={section.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.card}
-              >
-                {cardContent}
-              </a>
-            );
-          }
-
-          if (section.isInternal) {
-            return (
-              <Link key={index} to={section.link} className={styles.card}>
-                {cardContent}
-              </Link>
-            );
-          }
-
-          return (
-            <a key={index} href={section.link} className={styles.card}>
-              {cardContent}
-            </a>
-          );
-        })}
-      </div>
-    </>
+      {/* Lightbox */}
+      {lightbox && (
+        <div className={styles.lightboxOverlay} onClick={() => setLightbox(null)}>
+          <img src={lightbox.src} alt={lightbox.label} className={styles.lightboxImg} />
+          <span className={styles.lightboxLabel}>{lightbox.label}</span>
+        </div>
+      )}
+    </div>
   );
 };
 
 export default Solarium;
-
-

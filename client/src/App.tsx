@@ -2,7 +2,7 @@
 
 // React
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 
 // Auth
@@ -27,7 +27,6 @@ const HNTDThankYou       = lazy(() => import('./pages/dontDie/HNTDThankYou'));
 import ProtectedRoute from './components/ProtectedRoute';
 import RetroLayout from './components/portfolio/layout/RetroLayout';
 import PortfolioLayout from './components/portfolio/layout/PortfolioLayout';
-import PsychedelicLayout from './components/portfolio/layout/PsychedelicLayout';
 import ResumeLayout from './components/portfolio/layout/ResumeLayout';
 import GalleryLayout from './components/portfolio/layout/GalleryLayout';
 
@@ -92,10 +91,13 @@ const App: React.FC = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           
-          {/* Routes using RetroLayout — no nav (under construction) */}
+          {/* Root redirect */}
+          <Route index element={<Navigate to="/home" replace />} />
+          <Route path="*" element={<Navigate to="/home" replace />} />
+
+          {/* Routes using RetroLayout — no nav */}
           <Route element={<RetroLayout showNav={false} showArch={false} />}>
-            <Route index element={<UnderConstruction />} />
-            <Route path="*" element={<UnderConstruction />} />
+            <Route path="/under-construction" element={<UnderConstruction />} />
           </Route>
 
           {/* Routes using RetroLayout — with nav */}
@@ -123,12 +125,14 @@ const App: React.FC = () => {
           <Route path="/taskadelic" element={<Taskadelic />} />
           <Route path="/dontDie" element={<DontDie />} />
 
+          {/* Standalone project detail pages */}
+          <Route path="/lattice" element={<Lattice />} />
+          <Route path="/solarium" element={<Solarium />} />
+          <Route path="/runestone" element={<Runestone />} />
+
           {/* Routes using PortfolioLayout */}
           <Route element={<PortfolioLayout />}>
             <Route path="/projects" element={<Projects />} />
-            <Route path="/lattice" element={<Lattice />} />
-            <Route path="/solarium" element={<Solarium />} />
-            <Route path="/runestone" element={<Runestone />} />
             <Route path="/contact" element={<Contact />} />
           </Route>
 

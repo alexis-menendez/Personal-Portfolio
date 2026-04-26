@@ -7,7 +7,7 @@ import { generateHNTDToken, verifyHNTDToken } from '../../middleware/HNTDAuth.js
 
 const router = Router();
 
-const userPayload = (user: HNTDUser) => ({
+const userPayload = (user: InstanceType<typeof HNTDUser>) => ({
   id:            user.id,
   username:      user.username,
   characterName: user.characterName ?? user.username,
