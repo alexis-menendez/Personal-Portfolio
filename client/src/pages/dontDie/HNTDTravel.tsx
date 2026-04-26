@@ -243,7 +243,7 @@ const EmergencyAlerts: React.FC<{ active: boolean }> = ({ active }) => {
         };
         return [...prev, item];
       });
-    }, 2000);
+    }, 800);
     return () => clearInterval(id);
   }, [active]);
 
