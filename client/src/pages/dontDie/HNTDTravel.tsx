@@ -259,9 +259,9 @@ type HudButton = { id: string; label: string; top: string; pos: { left: string }
 const HUD_BUTTONS: HudButton[] = [
   { id: 'ship',    label: '↩ Return to Ship', top: '18.3rem', pos: { left:  '1.5rem' }, action: null      },
   { id: 'log',     label: '✎ Write Log',       top: '21.7rem', pos: { left:  '1.5rem' }, action: 'log'     },
-  { id: 'vera',    label: '⬡ Chat VERA',       top: '6.2rem',  pos: { right: '1.5rem' }, action: 'vera'    },
-  { id: 'guide',   label: '⊕ Planet Guide',    top: '9.6rem',  pos: { right: '1.5rem' }, action: 'guide'   },
-  { id: 'weather', label: '⚠ Scanner',          top: '22%',    pos: { right: '1.5rem' }, action: 'weather' },
+  { id: 'guide',   label: '⊕ Planet Guide', top: '6.2rem',  pos: { right: '1.5rem' }, action: 'guide'   },
+  { id: 'vera',    label: '⬡ Chat VERA',    top: '10.1rem', pos: { right: '1.5rem' }, action: 'vera'    },
+  { id: 'weather', label: '⚠ Scanner',       top: '14.0rem', pos: { right: '1.5rem' }, action: 'weather' },
 ];
 
 // ── Main HUD ───────────────────────────────────────────────────
