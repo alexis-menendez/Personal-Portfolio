@@ -38,7 +38,7 @@ interface PlanetData {
 const PLANETS: Record<string, PlanetData> = {
   planetone: {
     name:   'Doubt',
-    region: 'The Sunscoured Basin',
+    region: 'Happy Valley, Southern Hemisphere',
     image:  '/assets/dontDie/images/planet-one/PlanetOne.png',
     sensors: [
       { label: 'Temperature',       value: '118°F / 48°C',        alert: true  },
@@ -60,7 +60,7 @@ const PLANETS: Record<string, PlanetData> = {
   },
   planettwo: {
     name:   'Brune',
-    region: 'Upper Ridge — Sector 7',
+    region: 'Cloudbreak Pass, Northern Ridge Zone',
     image:  '/assets/dontDie/images/planet-two/PlanetTwo.png',
     sensors: [
       { label: 'Temperature',       value: '-12°F / -24°C',        alert: true  },
@@ -338,8 +338,8 @@ const HUD_BUTTONS: HudButton[] = [
   { id: 'ship',    label: '↩ Return to Ship',    top: '18.3rem', pos: { left:  '1.5rem' }, action: null      },
   { id: 'log',     label: '✎ Write Log',           top: '21.7rem', pos: { left:  '1.5rem' }, action: 'log'     },
   { id: 'weather', label: '⚠ Weather Scanner',     top: '10rem',   pos: { right: '1.5rem' }, action: 'weather' },
-  { id: 'guide',   label: '⊕ Planet Guide',        top: '13.9rem', pos: { right: '1.5rem' }, action: 'guide'   },
-  { id: 'vera',    label: '⬡ Chat with VERA',      top: '17.8rem', pos: { right: '1.5rem' }, action: 'vera'    },
+  { id: 'vera',    label: '⬡ Chat with VERA',      top: '13.9rem', pos: { right: '1.5rem' }, action: 'vera'    },
+  { id: 'guide',   label: '⊕ Planet Guide',        top: '17.8rem', pos: { right: '1.5rem' }, action: 'guide'   },
 ];
 
 // ── Main HUD ───────────────────────────────────────────────────
