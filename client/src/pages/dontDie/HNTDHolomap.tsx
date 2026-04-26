@@ -7,6 +7,9 @@ import HNTDPlanetCard from '../../components/dontDie/HNTDPlanetCard';
 import ReturnToPortfolio from '../../components/innerOrbit/common/ReturnToPortfolio';
 import styles from '../../assets/css/dontDie/HNTDHolomap.module.css';
 
+// Coordinates the player finds in the dead explorer's log on Brune
+const SECRET_COORDS = 'X4.7-Y2.9-Z0.1';
+
 const OVERRIDE_MESSAGES = [
   '',
   `VERA: "I must advise against this. The anomalies surrounding Ocean 12B are unlike anything in my database. I cannot guarantee your safety — or your return."`,
@@ -14,12 +17,27 @@ const OVERRIDE_MESSAGES = [
   `VERA: "...Fine. I cannot stop you. But I want it on record that I objected. Whatever happens next — this was your choice."`,
 ];
 
+const BRUNE_GATED_MSG = `VERA: "Doubt is much closer, Commander. If we go to Brune now we will have to double back to visit Doubt. I recommend we check Doubt first."`;
+
 const HNTDHolomap: React.FC = () => {
   const navigate = useNavigate();
-  const { hasVisited, isPlanetThreeUnlocked } = useHNTDPlanets();
-  const [selectedPlanet, setSelectedPlanet]   = useState<string | null>(null);
-  const [overrideStage,  setOverrideStage]    = useState(0);
-  const [showOverride,   setShowOverride]     = useState(false);
+  const { hasVisited, isPlanetThreeUnlocked, markCoordinatesFound, coordinatesFound } = useHNTDPlanets();
+  const [selectedPlanet, setSelectedPlanet] = useState<string | null>(null);
+  const [overrideStage,  setOverrideStage]  = useState(0);
+  const [showOverride,   setShowOverride]   = useState(false);
+  const [bruneGated,     setBruneGated]     = useState(false);
+  const [coordInput,     setCoordInput]     = useState('');
+  const [coordError,     setCoordError]     = useState('');
+  const [coordSuccess,   setCoordSuccess]   = useState(false);
+
+  const handlePlanetClick = (key: string) => {
+    // Gate Brune until Doubt is visited
+    if (key === 'planettwo' && !hasVisited('planetone')) {
+      setBruneGated(true);
+      return;
+    }
+    setSelectedPlanet(key);
+  };
 
   const handleTravel = (key: string) => {
     if (key === 'planethree') {
@@ -39,6 +57,16 @@ const HNTDHolomap: React.FC = () => {
     }
   };
 
+  const handleCoordSubmit = () => {
+    if (coordInput.trim().toUpperCase() === SECRET_COORDS.toUpperCase()) {
+      markCoordinatesFound();
+      setCoordSuccess(true);
+      setCoordError('');
+    } else {
+      setCoordError('Coordinates not recognised. Check your logs.');
+    }
+  };
+
   return (
     <div
       className={styles.holomapWrapper}
@@ -51,22 +79,46 @@ const HNTDHolomap: React.FC = () => {
 
       {/* Planet One — Doubt */}
       <button className={styles.planet} style={{ top: '30%', left: '21%' }}
-        onClick={() => setSelectedPlanet('planetone')}>
+        onClick={() => handlePlanetClick('planetone')}>
         Doubt {hasVisited('planetone') && ' ✓'}
       </button>
 
       {/* Planet Two — Brune */}
       <button className={styles.planet} style={{ top: '50%', left: '46%' }}
-        onClick={() => setSelectedPlanet('planettwo')}>
+        onClick={() => handlePlanetClick('planettwo')}>
         Brune {hasVisited('planettwo') && ' ✓'}
       </button>
 
-      {/* Planet Three — Ocean 12B (hidden until both others visited) */}
+      {/* Planet Three — Ocean 12B (hidden until both visited AND coordinates entered) */}
       {isPlanetThreeUnlocked() && (
         <button className={styles.planet} style={{ top: '70%', left: '76%' }}
           onClick={() => setSelectedPlanet('planethree')}>
           Ocean 12B {hasVisited('planethree') && ' ✓'}
         </button>
+      )}
+
+      {/* Coordinate entry — shown after visiting Brune but before coords are confirmed */}
+      {hasVisited('planettwo') && !coordinatesFound && (
+        <div className={styles.coordEntry}>
+          <p className={styles.coordLabel}>// ENTER COORDINATES</p>
+          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+            <input
+              className={styles.coordInput}
+              placeholder="e.g. X4.7-Y2.9-Z0.1"
+              value={coordInput}
+              onChange={e => setCoordInput(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && handleCoordSubmit()}
+            />
+            <button className={styles.coordBtn} onClick={handleCoordSubmit}>[ Enter ]</button>
+          </div>
+          {coordError && <p className={styles.coordError}>{coordError}</p>}
+        </div>
+      )}
+
+      {coordSuccess && !coordinatesFound && (
+        <div className={styles.coordEntry}>
+          <p className={styles.coordLabel} style={{ color: '#00ffe1' }}>// COORDINATES CONFIRMED — NEW SECTOR UNLOCKED</p>
+        </div>
       )}
 
       {/* Return to console */}
@@ -81,6 +133,16 @@ const HNTDHolomap: React.FC = () => {
           onTravel={() => handleTravel(selectedPlanet)}
           onClose={() => setSelectedPlanet(null)}
         />
+      )}
+
+      {/* Brune gated modal */}
+      {bruneGated && (
+        <div className={styles.overrideModal}>
+          <div className={styles.overrideContent}>
+            <p className={styles.overrideText}>{BRUNE_GATED_MSG}</p>
+            <button onClick={() => setBruneGated(false)}>Understood</button>
+          </div>
+        </div>
       )}
 
       {/* Override modal for Planet Three */}

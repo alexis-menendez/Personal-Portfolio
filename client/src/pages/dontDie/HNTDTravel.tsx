@@ -10,8 +10,6 @@ import styles from '../../assets/css/dontDie/HNTDHolomap.module.css';
 import { createLog } from '../../api/dontDie/HNTDLogAPI';
 import { fetchWeather } from '../../api/dontDie/HNTDWeatherAPI';
 import type { HNTDWeatherData } from '../../api/dontDie/HNTDWeatherAPI';
-import { fetchTips, createTip, voteTip, deleteTip } from '../../api/dontDie/HNTDSurvivalAPI';
-import type { HNTDTip } from '../../api/dontDie/HNTDSurvivalAPI';
 
 // ── Types ──────────────────────────────────────────────────────
 interface VeraDialogue {
@@ -164,12 +162,12 @@ const PLANET_COMPASS: Record<string, { bearing: number; dist: string }> = {
 };
 
 // ── Bio Data Panel ─────────────────────────────────────────────
-const BioDataPanel: React.FC<{ hidden: boolean; elevated: boolean }> = ({ hidden, elevated }) => {
+const BioDataPanel: React.FC<{ hidden: boolean; elevated: boolean; darkText?: boolean }> = ({ hidden, elevated, darkText }) => {
   const heartRate = useFluctuating(elevated ? 126 : 73, elevated ? 10 : 5, elevated ? 2000 : 9000);
   const coreTemp  = useFluctuating(98.5, 0.3, 13000, 1);
   const hrAlert   = elevated || heartRate === '...';
   return (
-    <div className={`${styles.bioPanel} ${hidden ? styles.bioPanelHidden : ''}`}>
+    <div className={`${styles.bioPanel} ${hidden ? styles.bioPanelHidden : ''}`} style={darkText ? { color: '#000' } : undefined}>
       <span className={hrAlert ? styles.bioDots : ''}>HR: {heartRate} BPM</span>
       <span>SpO2: 99%</span>
       <span className={coreTemp === '...' ? styles.bioDots : ''}>Temp: {coreTemp}°F</span>
@@ -178,13 +176,13 @@ const BioDataPanel: React.FC<{ hidden: boolean; elevated: boolean }> = ({ hidden
 };
 
 // ── Battery Display ────────────────────────────────────────────
-const BatteryDisplay: React.FC<{ battery: number; hidden: boolean }> = ({ battery, hidden }) => {
+const BatteryDisplay: React.FC<{ battery: number; hidden: boolean; darkText?: boolean }> = ({ battery, hidden, darkText }) => {
   const color  = battery > 60 ? '#00ffe1' : battery > 20 ? '#ffdd00' : '#ff4d4d';
   const blocks = Math.round(battery / 10);
   const bar    = '█'.repeat(blocks) + '░'.repeat(10 - blocks);
   return (
     <p className={`${styles.batteryDisplay} ${battery <= 20 ? styles.oxygenAlert : ''} ${hidden ? styles.bioPanelHidden : ''}`}
-      style={{ color }}>
+      style={{ color: darkText && battery > 20 ? '#000' : color }}>
       [{bar}] {battery}%
     </p>
   );
@@ -278,6 +276,119 @@ const SuitDamageNarrative: React.FC<{ text: string; onAcknowledge: () => void }>
         )}
       </div>
     </div>
+  );
+};
+
+// ── Brune multi-stage VERA chat ────────────────────────────────
+type BruneStage = 'opening' | 'tinkered' | 'approached' | 'file' | 'done';
+
+const BRUNE_LOG = `PERSONAL LOG — EXPLORER DESIGNATION: KAEL-7
+DATE: [CORRUPTED]
+
+I don't know how long I've been here.
+
+The planet that brought me here doesn't appear on any standard chart. I first detected it three weeks out from base — it flickered on the scanner and then disappeared. I thought it was instrument error.
+
+It flickered again. And again. Each time at the same coordinates.
+
+I made a note in my log: X4.7-Y2.9-Z0.1. I shouldn't have gone to look. But I did.
+
+Autopilot malfunctioned when I dropped out of transit. Something interfered with the guidance system. I came down hard on Brune — wrong planet entirely.
+
+The ship is not repairable. I have tried the distress beacon seventeen times.
+
+If you are reading this, I need you to know: the coordinates are real. The planet is real. And something on it has been transmitting.
+
+Do not go alone.
+
+— E. Solano, Explorer Grade 3, Tö'tahli Naut Dy-in`;
+
+const BruneVeraChat: React.FC<{
+  navigate:              ReturnType<typeof useNavigate>;
+  onClose:               () => void;
+  markCoordinatesFound:  () => void;
+  history:               BruneStage;
+  setHistory:            (s: BruneStage) => void;
+}> = ({ navigate, onClose, markCoordinatesFound, history, setHistory }) => {
+  const stage = history;
+
+  const advance = (next: BruneStage) => setHistory(next);
+
+  if (stage === 'opening') {
+    return (
+      <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+        <p className={styles.hudPanelTitle}>// VERA TERMINAL</p>
+        <p className={styles.veraTypingText}>
+          VERA: &ldquo;Preliminary scans are complete. I am not detecting anything of particular scientific value in this region. The mountains are cold and structurally unstable. I recommend we return to the ship and move on. There is nothing here worth the oxygen.&rdquo;
+        </p>
+        <div className={styles.veraReplies}>
+          <button className={styles.veraReplyBtn} onClick={() => { onClose(); navigate('/hntd-holomap'); }}>&rsaquo; Return to ship</button>
+          <button className={styles.veraReplyBtn} onClick={() => advance('tinkered')}>&rsaquo; Tinker with the scanner</button>
+          <button className={styles.veraReplyBtn} onClick={onClose}>&rsaquo; Close</button>
+        </div>
+      </div></div>
+    );
+  }
+
+  if (stage === 'tinkered') {
+    return (
+      <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+        <p className={styles.hudPanelTitle}>// VERA TERMINAL</p>
+        <p className={styles.veraTypingText}>
+          VERA: &ldquo;I see you have adjusted the scanner sensitivity. I want to note that I did not recommend this. There is... a structure. Bearing 312°, approximately 0.4 kilometers. Pre-colony, most likely. Structurally compromised. I strongly advise against investigating it. Strongly.&rdquo;
+        </p>
+        <div className={styles.veraReplies}>
+          <button className={styles.veraReplyBtn} onClick={() => advance('approached')}>&rsaquo; Investigate the structure</button>
+          <button className={styles.veraReplyBtn} onClick={onClose}>&rsaquo; Leave it alone</button>
+        </div>
+      </div></div>
+    );
+  }
+
+  if (stage === 'approached') {
+    return (
+      <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+        <p className={styles.hudPanelTitle}>// VERA TERMINAL</p>
+        <p className={styles.veraTypingText} style={{ whiteSpace: 'pre-line' }}>
+          {`You find a ship. Same manufacturer as yours — same corporate markings. It came down hard. Most of the hull has buckled.\n\nInside, a seat. Strapped in. Not moving.\n\nMost of the ship's files are corrupted beyond recovery. Navigation logs: gone. Mission parameters: gone. One file has survived. A personal log, dated three months ago.`}
+        </p>
+        <div className={styles.veraReplies}>
+          <button className={styles.veraReplyBtn} onClick={() => advance('file')}>&rsaquo; Open the file</button>
+          <button className={styles.veraReplyBtn} onClick={onClose}>&rsaquo; Leave</button>
+        </div>
+      </div></div>
+    );
+  }
+
+  if (stage === 'file') {
+    return (
+      <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+        <p className={styles.hudPanelTitle}>// RECOVERED FILE — KAEL-7 PERSONAL LOG</p>
+        <p className={styles.veraTypingText} style={{ whiteSpace: 'pre-line', fontSize: '0.82rem' }}>
+          {BRUNE_LOG}
+        </p>
+        <p className={styles.hudPanelTitle} style={{ marginTop: '0.5rem', color: '#ffdd00' }}>
+          Coordinates logged: X4.7-Y2.9-Z0.1
+        </p>
+        <button className={styles.veraReplyBtn} style={{ marginTop: '0.5rem' }} onClick={() => {
+          markCoordinatesFound();
+          advance('done');
+        }}>
+          &rsaquo; Save coordinates to navigation log
+        </button>
+      </div></div>
+    );
+  }
+
+  // done
+  return (
+    <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+      <p className={styles.hudPanelTitle}>// VERA TERMINAL</p>
+      <p className={styles.veraTypingText}>
+        VERA: &ldquo;Coordinates have been added to your navigation log. I want it on record that I recommend you do not act on them. Whatever that explorer found, it cost her everything. I am simply noting that for the record.&rdquo;
+      </p>
+      <button className={styles.veraCloseBtn} onClick={onClose}>[ Close terminal ]</button>
+    </div></div>
   );
 };
 
@@ -432,57 +543,36 @@ const ScanResultPanel: React.FC<{ result: string; onClose: () => void }> = ({ re
   );
 };
 
-// ── Planet Survival Panel ──────────────────────────────────────
+// ── Planet Survival Panel (static field data, read-only) ───────
+const STATIC_PLANET_TIPS: Record<string, { title: string; content: string; author: string }[]> = {
+  planetone: [
+    { title: 'Spire Edges',          content: 'The basalt spires appear smooth on scanner but will shear suit material on contact. Mark your path before entering any narrow passage.',       author: 'Cmdr. R. Vasquez' },
+    { title: 'Thermal Venting',      content: 'Sub-surface thermal pockets can vent without warning at 12–18m depth. Do not excavate or use ground-penetrating equipment without shielding.', author: 'Survey Team 7'     },
+    { title: 'The Hum',              content: 'Multiple explorers have reported an unclassified low-frequency signal. VERA cannot source it. Log any new observations.',                    author: 'Anonymous'         },
+  ],
+  planettwo: [
+    { title: 'Avoid Eastern Scree',  content: 'The eastern slope is actively shifting. Route north or south. VERA will recommend the direct path. Do not take it.',                           author: 'Cmdr. E. Solano'   },
+    { title: 'Sub-surface Organics', content: 'Organic material detected at 2.1m depth across multiple sites. Origin unknown. Samples are unrecoverable — equipment consistently malfunctions.', author: 'Survey Team 4'     },
+  ],
+};
+
 const PlanetSurvivalPanel: React.FC<{ planetKey: string; onClose: () => void }> = ({ planetKey, onClose }) => {
-  const { token, user } = useHNTDAuth();
-  const [tips,      setTips]      = useState<HNTDTip[]>([]);
-  const [votedIds,  setVotedIds]  = useState<Set<number>>(new Set());
-  const [loading,   setLoading]   = useState(true);
-  const [modalOpen, setModalOpen] = useState(false);
-  useEffect(() => { fetchTips(planetKey).then(setTips).finally(() => setLoading(false)); }, [planetKey]);
-  const handleSaveTip = async (title: string, content: string) => {
-    if (!token) return;
-    const created = await createTip(token, title, content, planetKey);
-    setTips(prev => [created, ...prev]);
-  };
-  const handleVote = async (id: number) => {
-    if (!token) return;
-    const { upvotes, voted } = await voteTip(token, id);
-    setTips(prev => prev.map(t => t.id === id ? { ...t, upvotes } : t));
-    setVotedIds(prev => { const n = new Set(prev); voted ? n.add(id) : n.delete(id); return n; });
-  };
-  const handleDelete = async (id: number) => {
-    if (!token) return;
-    await deleteTip(token, id);
-    setTips(prev => prev.filter(t => t.id !== id));
-  };
-  const fmt = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  const tips = STATIC_PLANET_TIPS[planetKey] ?? [];
   return (
     <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <p className={styles.hudPanelTitle}>// PLANET SURVIVAL GUIDE</p>
-        <button style={{ background: 'none', border: 'none', color: 'rgba(0,255,225,0.5)', fontFamily: 'Courier New', fontSize: '0.75rem', cursor: 'pointer' }} onClick={() => setModalOpen(true)}>+ Add Tip</button>
-      </div>
-      {loading && <p className={styles.hudPanelTitle}>Loading field data...</p>}
-      {!loading && tips.length === 0 && <p className={styles.weatherBrokenNote}>No survival tips for this planet yet. Be the first.</p>}
-      {tips.map(tip => (
-        <div key={tip.id} className={styles.tipCard}>
-          <div className={styles.tipVote}>
-            <button className={`${styles.tipVoteBtn} ${votedIds.has(tip.id) ? styles.tipVoteBtnActive : ''}`} onClick={() => handleVote(tip.id)}>▲</button>
-            <span className={styles.tipVoteCount}>{tip.upvotes}</span>
+      <p className={styles.hudPanelTitle}>// PLANET SURVIVAL GUIDE</p>
+      {tips.length === 0
+        ? <p className={styles.weatherBrokenNote}>No field reports available for this sector.</p>
+        : tips.map((t, i) => (
+          <div key={i} style={{ borderLeft: '2px solid rgba(0,255,200,0.3)', paddingLeft: '0.6rem', marginBottom: '0.6rem' }}>
+            <p style={{ fontFamily: 'Orbitron', fontSize: '0.72rem', color: '#00ffe1', margin: '0 0 0.2rem' }}>{t.title}</p>
+            <p style={{ fontFamily: 'Courier New', fontSize: '0.78rem', color: '#00ffe1', lineHeight: 1.6, margin: 0 }}>{t.content}</p>
+            <p style={{ fontFamily: 'Courier New', fontSize: '0.62rem', color: 'rgba(0,255,225,0.4)', margin: '0.2rem 0 0' }}>— {t.author}</p>
           </div>
-          <div className={styles.tipBody}>
-            <p className={styles.tipTitle}>{tip.title}</p>
-            <p className={styles.tipContent}>{tip.content}</p>
-            <p className={styles.tipMeta}>{tip.username} · {fmt(tip.createdAt)}</p>
-          </div>
-          {user?.id === tip.userId && <button className={styles.tipDeleteBtn} onClick={() => handleDelete(tip.id)}>[x]</button>}
-        </div>
-      ))}
+        ))
+      }
       <button className={styles.veraCloseBtn} onClick={onClose}>[ Close ]</button>
-    </div>
-    {modalOpen && <HNTDEditLogModal log={null} onSave={handleSaveTip} onClose={() => setModalOpen(false)} />}
-    </div>
+    </div></div>
   );
 };
 
@@ -498,8 +588,8 @@ const IncidentReport: React.FC<{
   const causeText = suitDamaged
     ? `Per VERA's operational log, the explorer sustained catastrophic suit damage during surface exploration. VERA had issued navigation guidance throughout the mission. The explorer deviated from the approved path. Cause of death: suit failure following terrain incident.`
     : deathCause === 'battery'
-    ? `Per VERA's operational log, the assigned explorer failed to manage suit power within operational parameters. Battery failure warnings were issued prior to the incident. The explorer did not respond accordingly. Cause of death: power management failure.`
-    : `Per VERA's operational log, the assigned explorer failed to return to the ship within allocated oxygen reserves. Time warnings were issued prior to the incident. The explorer did not respond accordingly. Cause of death: resource mismanagement.`;
+    ? `The assigned explorer failed to monitor suit power levels during the surface mission. Battery reserves depleted to zero before the explorer returned to the ship. HUD warnings were active and visible throughout. The explorer did not respond accordingly. Cause of death: suit power failure. A new commander has already been assigned.`
+    : `The assigned explorer failed to monitor oxygen reserves during the surface mission. Oxygen depleted to zero before the explorer returned to the ship. HUD warnings were active and visible throughout. The explorer did not respond accordingly. Cause of death: oxygen depletion. A new commander has already been assigned.`;
 
   const report =
 `// INCIDENT REPORT — REF: EX-${refNum}
@@ -555,8 +645,8 @@ type Panel = 'log' | 'vera' | 'weather' | 'guide' | 'distress' | 'scan' | null;
 const HNTDTravel: React.FC = () => {
   const navigate              = useNavigate();
   const [params]              = useSearchParams();
-  const { token, logout }     = useHNTDAuth();
-  const { markPlanetVisited } = useHNTDPlanets();
+  const { token, logout }                             = useHNTDAuth();
+  const { markPlanetVisited, markCoordinatesFound }   = useHNTDPlanets();
 
   const key    = params.get('planet') ?? '';
   const planet = PLANETS[key];
@@ -566,11 +656,15 @@ const HNTDTravel: React.FC = () => {
   const [battery,           setBattery]           = useState(98);
   const [isDead,            setIsDead]            = useState(false);
   const [deathCause,        setDeathCause]        = useState<'oxygen' | 'battery' | null>(null);
+  const [overlayActive,     setOverlayActive]     = useState(false);
+  const [overlayDone,       setOverlayDone]       = useState(false);
+  const [showDeadText,      setShowDeadText]      = useState(false);
   const [veraChatHistory,   setVeraChatHistory]   = useState<VeraChatHistory | null>(null);
   const [scannerFirstTime,  setScannerFirstTime]  = useState(false);
   const [scanState,         setScanState]         = useState<'idle' | 'scanning' | 'result'>('idle');
   const [suitDamaged,       setSuitDamaged]       = useState(false);
   const [showNarrative,     setShowNarrative]     = useState(false);
+  const [bruneStage,        setBruneStage]        = useState<BruneStage>('opening');
   const scannerSeenRef = useRef(false);
 
   useEffect(() => {
@@ -593,12 +687,32 @@ const HNTDTravel: React.FC = () => {
     return () => clearInterval(id);
   }, [suitDamaged, showNarrative]);
 
+  // Suit damage overlay starts once narrative is dismissed
   useEffect(() => {
-    if (oxygen  <= 0 && !deathCause) { setDeathCause('oxygen');  setIsDead(true); }
-  }, [oxygen,  deathCause]);
+    if (suitDamaged && !showNarrative && !overlayActive) setOverlayActive(true);
+  }, [suitDamaged, showNarrative, overlayActive]);
+
+  // Regular death: start overlay when O2 or battery hits last tick (≤5%)
+  // Don't trigger during suit damage path — that has its own overlay
   useEffect(() => {
-    if (battery <= 0 && !deathCause) { setDeathCause('battery'); setIsDead(true); }
-  }, [battery, deathCause]);
+    if (oxygen <= 5 && !deathCause && !suitDamaged && !overlayActive) {
+      setDeathCause('oxygen');
+      setOverlayActive(true);
+    }
+  }, [oxygen, deathCause, suitDamaged, overlayActive]);
+  useEffect(() => {
+    if (battery <= 5 && !deathCause && !suitDamaged && !overlayActive) {
+      setDeathCause('battery');
+      setOverlayActive(true);
+    }
+  }, [battery, deathCause, suitDamaged, overlayActive]);
+
+  const handleOverlayComplete = () => {
+    setOverlayDone(true);
+    setShowDeadText(true);
+    if (!deathCause) setDeathCause('oxygen');
+    setTimeout(() => setIsDead(true), 10_000);
+  };
 
   const handleSaveLog = useCallback(async (title: string, content: string) => {
     if (!token) return;
@@ -629,8 +743,8 @@ const HNTDTravel: React.FC = () => {
   const oxygenColor  = oxygen  > 60 ? '#00ffe1' : oxygen > 20 ? '#ff8800' : '#ff4d4d';
   // Hide HUD elements when a panel is open OR narrative is showing; NOT when only alerts are active
   const systemsHidden = activePanel !== null || scanState !== 'idle' || showNarrative;
-  // Alerts fire after suit damaged and narrative dismissed
-  const alertsActive = suitDamaged && !showNarrative && !isDead;
+  // Alerts fire after suit damaged and narrative dismissed (but not after death)
+  const alertsActive = suitDamaged && !showNarrative && !isDead && !overlayDone;
 
   if (!planet) {
     return (
@@ -656,24 +770,24 @@ const HNTDTravel: React.FC = () => {
         className={styles.hudDisplayImg} />
 
       {/* Top-left */}
-      <p className={styles.hudTopLabel}>// PLANET: {planet.name.toUpperCase()}</p>
-      <p className={styles.hudRegionLabel}>{planet.region}</p>
-      <div className={styles.sensorPanel}>
+      <p className={styles.hudTopLabel} style={key === 'planettwo' ? { color: '#000' } : undefined}>// PLANET: {planet.name.toUpperCase()}</p>
+      <p className={styles.hudRegionLabel} style={key === 'planettwo' ? { color: '#000' } : undefined}>{planet.region}</p>
+      <div className={styles.sensorPanel} style={key === 'planettwo' ? { background: 'rgba(255,255,255,0.6)' } : undefined}>
         {planet.sensors.map(s => (
           <div key={s.label} className={styles.sensorRow}>
-            <span className={styles.sensorLabel}>{s.label}</span>
-            <span className={s.alert ? styles.sensorValueAlert : styles.sensorValue}>{s.value}</span>
+            <span className={styles.sensorLabel} style={key === 'planettwo' ? { color: '#000' } : undefined}>{s.label}</span>
+            <span className={s.alert ? styles.sensorValueAlert : styles.sensorValue} style={key === 'planettwo' && !s.alert ? { color: '#000' } : undefined}>{s.value}</span>
           </div>
         ))}
       </div>
 
       {/* Top-right */}
-      <BatteryDisplay battery={battery} hidden={false} />
+      <BatteryDisplay battery={battery} hidden={false} darkText={key === 'planettwo'} />
       <p className={`${styles.oxygenDisplay} ${oxygen <= 20 || suitDamaged ? styles.oxygenAlert : ''}`}
-        style={{ color: oxygenColor }}>
+        style={{ color: key === 'planettwo' && oxygen > 20 && !suitDamaged ? '#000' : oxygenColor }}>
         Oxygen: {oxygen}%{suitDamaged ? ' ⚠' : ''}
       </p>
-      <BioDataPanel hidden={false} elevated={suitDamaged && !showNarrative} />
+      <BioDataPanel hidden={false} elevated={suitDamaged && !showNarrative} darkText={key === 'planettwo'} />
 
       {/* Bottom center */}
       <CompassDisplay hidden={systemsHidden} planetKey={key} />
@@ -697,7 +811,16 @@ const HNTDTravel: React.FC = () => {
 
       {/* Panels */}
       {activePanel === 'log'      && <HNTDEditLogModal log={null} onSave={handleSaveLog} onClose={() => setActivePanel(null)} transparentOverlay />}
-      {activePanel === 'vera'     && (
+      {activePanel === 'vera' && key === 'planettwo' && (
+        <BruneVeraChat
+          navigate={navigate}
+          onClose={() => setActivePanel(null)}
+          markCoordinatesFound={markCoordinatesFound}
+          history={bruneStage}
+          setHistory={setBruneStage}
+        />
+      )}
+      {activePanel === 'vera' && key !== 'planettwo' && (
         <VeraChat
           dialogue={planet.vera}
           history={veraChatHistory}
@@ -727,7 +850,19 @@ const HNTDTravel: React.FC = () => {
         </div>
       )}
 
-      {/* Death screen */}
+      {/* Blood overlay — z-4 (behind HUD buttons/alerts), animates 0→1 opacity over 30s */}
+      {overlayActive && !overlayDone && (
+        <div className={styles.bloodOverlay} onAnimationEnd={handleOverlayComplete} />
+      )}
+
+      {/* Full-red death screen with centered "you have died" text */}
+      {showDeadText && !isDead && (
+        <div className={styles.bloodDeath}>
+          <p className={styles.bloodDeathText}>you have died</p>
+        </div>
+      )}
+
+      {/* Incident report */}
       {isDead && (
         <IncidentReport
           planet={planet}

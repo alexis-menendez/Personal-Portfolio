@@ -9,11 +9,11 @@ import styles from '../../assets/css/dontDie/HNTDConsole.module.css';
 const VERA_QUOTE = `WELCOME BACK, EXPLORER.
 
 All systems are... mostly operational.
-VERA is online. Navigation is stable.
+Life support is online. Navigation is functioning.
 The planets are waiting.
 
 Proceed with caution. Or don't.
-VERA makes no guarantees.`;
+Either way, doesn't matter to me.`;
 
 const HNTDDashboard: React.FC = () => {
   const { user } = useHNTDAuth();

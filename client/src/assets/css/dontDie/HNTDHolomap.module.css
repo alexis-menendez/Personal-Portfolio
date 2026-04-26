@@ -22,9 +22,10 @@
   font-family: 'Courier New', monospace;
   font-size: 0.8rem;
   color: rgba(0, 255, 225, 0.75);
-  max-width: 600px;
+  max-width: 560px;
+  width: 90%;
   text-align: center;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 /* Planet buttons */
@@ -229,6 +230,61 @@
 @keyframes popIn {
   from { opacity: 0; transform: scale(0.95); }
   to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Coordinate entry (bottom-left of holomap) ────────────────── */
+.coordEntry {
+  position: absolute;
+  bottom: 5rem;
+  left: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  z-index: 5;
+}
+
+.coordLabel {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.7rem;
+  color: rgba(0, 255, 200, 0.6);
+  letter-spacing: 0.12em;
+  margin: 0;
+}
+
+.coordInput {
+  background: rgba(0, 10, 8, 0.85);
+  border: 1px solid rgba(0, 255, 200, 0.5);
+  color: #00ffe1;
+  padding: 0.35rem 0.6rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  outline: none;
+  caret-color: #00ffe1;
+  width: 180px;
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  -webkit-text-fill-color: #00ffe1 !important;
+}
+.coordInput:focus { border-color: #00ffe1; }
+.coordInput::placeholder { color: rgba(0, 255, 225, 0.35); }
+
+.coordBtn {
+  background: transparent;
+  border: 1px solid #00ffe1;
+  color: #00ffe1;
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+.coordBtn:hover { background: rgba(0, 255, 225, 0.12); }
+
+.coordError {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  color: #ff4d4d;
+  margin: 0;
 }
 
 /* ── Travel HUD ───────────────────────────────────────────────── */
@@ -732,6 +788,47 @@
 @keyframes alertFlash {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0.5; }
+}
+
+/* ── Blood overlay (suit damage — behind HUD, fills over 30s) ── */
+.bloodOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  background: rgba(140, 0, 0, 0.96);
+  pointer-events: none;
+  animation: bloodFill 30s linear forwards;
+}
+
+@keyframes bloodFill {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Full death screen (appears after overlay completes) ─────── */
+.bloodDeath {
+  position: fixed;
+  inset: 0;
+  z-index: 9900;
+  background: #6b0000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bloodDeathText {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.4rem, 4vmin, 2.8rem);
+  color: #000;
+  letter-spacing: 0.35em;
+  text-transform: lowercase;
+  animation: deadTextAppear 2.5s ease-in forwards;
+}
+
+@keyframes deadTextAppear {
+  0%   { opacity: 0; }
+  40%  { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 /* ── Urgent button (Return to Ship when suit is damaged) ─────── */
