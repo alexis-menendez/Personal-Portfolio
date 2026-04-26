@@ -1,21 +1,24 @@
-# THIS IS WHAT EVERYONE NEEDS TO HAVE IN THIER .ENV
-
-I noticed on server side some files called "MONGODB_URI" and other called "MONGO_URI" and also some called "JWT_SECRET_KEY" and other called "JWT_SECRET" which was causing breaking errors and inconsistencies. I changed all instances to use "MONGODB_URI" and "JWT_SECRET_KEY". Everyone should use the same naming convention to avoid confusion and errors going forward.
-
+# Taskadelic PostgreSQL connection (Neon)
+TD_DB_URL=this is the connection string for Neon PostgreSQL clou database
+TD_JWT_SECRET=KeyGoesHereForTaskadelic
+HNTD_JWT_SECRET=KeyGoesHereForHowNotToDie
 
 # MongoDB connection
-MONGODB_URI=
+MONGODB_URI=this is the connection string for MongoDB Atlas cloud database
 
 # JWT Secret for authentication
-JWT_SECRET_KEY=
+JWT_SECRET_KEY=KeyGoesHere
 
-# Cloud Image Storage (Cloudinary) configuration
-CLOUDINARY_CLOUD_NAME=
-CLOUDINARY_API_KEY=
-CLOUDINARY_API_SECRET=
+# OpenWeatherMap
+OPENWEATHER_API_KEY=07bef351369246b122da72911dc02512
 
-# Server port
-PORT=
+# Dev Server Port
+PORT=3001
 
 # Frontend GraphQL API URL
-VITE_API_URL=
+VITE_API_URL=/graphql
+
+# Contact Form
+EMAIL_USER=menendez.alex.d@gmail.com
+EMAIL_PASS=cwaw wmhk mmvu mfxj
+EMAIL_TO=menendez.alex.d@gmail.com
