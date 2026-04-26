@@ -652,7 +652,7 @@
 /* ── Battery display (right, below bio panel) ─────────────────── */
 .batteryDisplay {
   position: absolute;
-  top: 9.5rem;
+  top: 11rem;
   right: 1.5rem;
   z-index: 5;
   font-family: 'Orbitron', sans-serif;

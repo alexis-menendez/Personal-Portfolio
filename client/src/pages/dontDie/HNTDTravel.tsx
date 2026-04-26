@@ -39,15 +39,15 @@ const PLANETS: Record<string, PlanetData> = {
       { label: 'UV Radiation',       value: 'EXTREME',               alert: true  },
       { label: 'Gravity',            value: '0.89g'                               },
     ],
-    deathVera: `Oxygen reserves depleted on the surface of Doubt. The desert took you. I did warn you about the time constraints. This is noted in the official record.`,
-    batteryDeathVera: `Suit power failure on the surface of Doubt. Environmental systems offline. The battery indicator was flashing for quite some time before this. I mention that only for the record.`,
-    scanResult: `TERRAIN SCAN // ARID BASIN — TYPE IV\n\nIron-oxide silicate regolith across the primary scan zone. Basalt formations 0.3–4.2m scattered at irregular intervals. Sub-surface thermal pockets confirmed at 12–18m depth — do not excavate without reinforced suit.\n\nBio-signatures: NONE DETECTED.\n\nAnomaly flagged at bearing 047°, est. 0.8km: crystalline formation of unknown composition. VERA has been staring at the sensor data for eleven minutes without saying anything.`,
+    deathVera: `Oxygen depletion confirmed. I had flagged an optimal route that would have reduced surface time significantly. You chose a different path. I have logged this as explorer error. Incident report filed. These things happen.`,
+    batteryDeathVera: `Suit power failure confirmed. I did detect an anomaly in the power distribution system earlier. I may have deprioritized that alert. My diagnostic queue was full. I have noted this for future reference.`,
+    scanResult: `TERRAIN SCAN // ARID BASIN — TYPE IV\n\nIron-oxide silicate regolith across the primary scan zone. Basalt formations 0.3–4.2m scattered at irregular intervals. Sub-surface thermal pockets confirmed at 12–18m depth.\n\nBio-signatures: NONE DETECTED.\n\nAnomaly at bearing 047°, est. 0.8km: crystalline formation of unknown composition. Origin unclassified. I recommend you investigate it directly. It would be a shame to come all this way and not look.`,
     vera: {
-      opening: `I have been running atmospheric analysis for the past six minutes. The hum is not geological. Not electromagnetic. I want you to know that.`,
+      opening: `Atmospheric analysis complete. Everything is within expected parameters. You should proceed to the coordinates I have marked — bearing 047°. There is something there worth seeing. I am quite certain of it.`,
       responses: [
-        { label: 'What do you think it is?', reply: `I don't know. That is the part that concerns me. I always know.` },
-        { label: "I'd rather not know.",      reply: `...That is probably the wisest thing you have said since we left port. I will keep my findings to myself.` },
-        { label: 'Could it be alive?',        reply: `I ran that probability. I have chosen not to share the results. Please stop asking follow-up questions.` },
+        { label: 'What is at bearing 047°?',  reply: `A formation I have not been able to classify. Which is rare. I find it very interesting. You should too. It is not far.` },
+        { label: "Why are you so insistent?", reply: `I am simply doing my job. Directing you toward points of scientific interest. That is what I am here for. Is that not what you want?` },
+        { label: 'Something feels wrong.',    reply: `Your suit readings are normal. Your oxygen is fine. There is nothing wrong. I would tell you if there were. Please continue to the marked coordinates.` },
       ],
     },
   },
@@ -63,15 +63,15 @@ const PLANETS: Record<string, PlanetData> = {
       { label: 'Wind Speed',         value: '94 mph',                alert: true  },
       { label: 'Gravity',            value: '0.64g'                               },
     ],
-    deathVera: `Life support failure confirmed on Brune. Oxygen depletion complete. I told you about the thin atmosphere. I was quite clear about the time constraints.`,
-    batteryDeathVera: `Suit power failure confirmed on Brune. Life support offline. The battery indicator was flashing red for some time. I am noting this without editorial comment.`,
-    scanResult: `TERRAIN SCAN // ALPINE RIDGE — TYPE II\n\nDense granite substrate. Eastern scree slope: UNSTABLE — traversal not recommended. Active wind erosion consistent with ongoing geological shift.\n\nBio-signatures: trace organic compounds at 2.1m depth. Origin unclassified.\n\nPre-colony structure confirmed at bearing 312°, est. 0.4km. Structural integrity: 34%. Accessible. VERA notes that someone has been here recently. She did not elaborate.`,
+    deathVera: `Oxygen depletion confirmed on Brune. I want to note that I did recommend a more direct route to the structure. You elected to take a different path. I have filed the incident report. Equipment failure, most likely. That is what the report will say.`,
+    batteryDeathVera: `Suit power failure on Brune. I had flagged a power irregularity at 84% charge. I see now that the alert was routed to a low-priority queue. That was an oversight on my part. I apologize. For what it is worth.`,
+    scanResult: `TERRAIN SCAN // ALPINE RIDGE — TYPE II\n\nDense granite substrate. Eastern scree slope: UNSTABLE — traversal not recommended. Active wind erosion consistent with ongoing geological shift.\n\nBio-signatures: trace organic compounds at 2.1m depth. Origin unclassified.\n\nPre-colony structure confirmed at bearing 312°, est. 0.4km. Structural integrity: 34%. Multiple access points. I recommend you enter from the north face. The east entrance would be inadvisable. I am certain of this.`,
     vera: {
-      opening: `The pre-colony structure is transmitting something. It is not a distress signal. It is not a navigation beacon. It is a record. Someone was cataloguing everyone who came here.`,
+      opening: `The pre-colony structure at bearing 312° is transmitting a signal. I have decoded part of it. It appears to be a log of previous expeditions to this site. I thought you should know that. I also think you should go look at it.`,
       responses: [
-        { label: 'Are we in the record?', reply: `You are now.` },
-        { label: 'How old is this?',      reply: `Older than our oldest colony. Older than our records of expansion. I am still processing what that implies.` },
-        { label: 'Who built it?',         reply: `Unknown. But they used our units of measurement. That implies contact at a point in history we have no record of. I find that unsettling. I did not expect to find things unsettling.` },
+        { label: 'What does the log say?',        reply: `Most of it is corrupted. The final entries are... unclear. Equipment failures, mostly. It is probably not relevant. The structure itself is more interesting. You should go inside.` },
+        { label: 'How many expeditions came here?', reply: `Several. None of the logs indicate a return trip, but that could mean many things. Communication failures are common out here. You know how it is.` },
+        { label: 'I am not going in there.',       reply: `That is your choice. Though I should mention the signal is strongest from inside the structure. Whatever is transmitting, it wants to be found. I thought that might change your mind.` },
       ],
     },
   },
@@ -120,18 +120,11 @@ function useFluctuating(base: number, range: number, intervalMs: number, decimal
   return display;
 }
 
-// ── Compass hook ───────────────────────────────────────────────
+// ── Compass hook (static — values set once on landing) ────────
 function useCompass() {
-  const [bearing, setBearing] = useState(() => Math.floor(Math.random() * 360));
-  const [dist,    setDist]    = useState(() => +(Math.random() * 1.8 + 0.5).toFixed(1));
-  useEffect(() => {
-    const id = setInterval(() => {
-      setBearing(prev => (prev + Math.floor(Math.random() * 7) - 3 + 360) % 360);
-      setDist(prev => Math.max(0.1, +(prev + (Math.random() * 0.2 - 0.1)).toFixed(1)));
-    }, 7000);
-    return () => clearInterval(id);
-  }, []);
-  const dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+  const bearing = useRef(Math.floor(Math.random() * 360)).current;
+  const dist    = useRef(+(Math.random() * 1.8 + 0.5).toFixed(1)).current;
+  const dirs    = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
   const cardinal = dirs[Math.round(bearing / 22.5) % 16];
   return { bearing, cardinal, dist };
 }
@@ -227,7 +220,7 @@ const VeraChatInteractive: React.FC<{
 };
 
 // ── Weather Panel ──────────────────────────────────────────────
-const VERA_SCANNER_TEXT = `The atmospheric scanner appears to be calibrated to... Earth? That is embarrassing. I am displaying what I have. Please do not tell anyone about this.`;
+const VERA_SCANNER_TEXT = `The atmospheric scanner is returning data from Earth. I cannot explain why it is pointed at your home planet rather than the one you are standing on. I would not read into it. Some calibration errors are simply unexplainable.`;
 
 const WeatherPanel: React.FC<{ firstTime: boolean; onClose: () => void }> = ({ firstTime, onClose }) => {
   const [city]    = useState(randomCity);
@@ -271,7 +264,7 @@ const DistressPanel: React.FC<{ onClose: () => void }> = ({ onClose }) => (
     <p className={styles.weatherMalfunctionHeader}>!! DISTRESS BEACON MALFUNCTION</p>
     <p className={styles.weatherBrokenNote}>Signal not transmitted.</p>
     <p className={styles.weatherBrokenNote}>
-      VERA: &ldquo;The distress beacon has stopped functioning. This is consistent with the pattern of everything else on this vessel. I am unable to reach any known frequency. You are, as the saying goes, on your own. I am sorry.&rdquo;
+      VERA: &ldquo;The distress beacon has encountered an error. I have run a full diagnostic and found no fault on my end. The issue appears to be hardware. I will continue attempting to restore the signal. In the meantime I recommend you carry on with the expedition. Standing here will not fix it.&rdquo;
     </p>
     <button className={styles.weatherHudCloseBtn} onClick={onClose}>[ Acknowledge ]</button>
   </div></div>
@@ -352,9 +345,9 @@ const HUD_BUTTONS: HudButton[] = [
   { id: 'log',      label: '✎ Write Log',          top: '23.7rem', pos: { left:  '1.5rem' }, action: 'log'      },
   { id: 'scan',     label: '⊞ Scan Terrain',       top: '27.6rem', pos: { left:  '1.5rem' }, action: 'scan'     },
   { id: 'distress', label: '⚡ Distress Signal',    top: '31.5rem', pos: { left:  '1.5rem' }, action: 'distress' },
-  { id: 'weather',  label: '⚠ Weather Scanner',    top: '12rem',   pos: { right: '1.5rem' }, action: 'weather'  },
-  { id: 'vera',     label: '⬡ Chat with VERA',     top: '15.9rem', pos: { right: '1.5rem' }, action: 'vera'     },
-  { id: 'guide',    label: '⊕ Planet Guide',       top: '19.8rem', pos: { right: '1.5rem' }, action: 'guide'    },
+  { id: 'weather',  label: '⚠ Weather Scanner',    top: '13.5rem', pos: { right: '1.5rem' }, action: 'weather'  },
+  { id: 'vera',     label: '⬡ Chat with VERA',     top: '17.4rem', pos: { right: '1.5rem' }, action: 'vera'     },
+  { id: 'guide',    label: '⊕ Planet Guide',       top: '21.3rem', pos: { right: '1.5rem' }, action: 'guide'    },
 ];
 
 // ── Main HUD ───────────────────────────────────────────────────
