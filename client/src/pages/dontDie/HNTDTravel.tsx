@@ -49,9 +49,7 @@ Halfway through the pass, you feel it before the suit registers it. Air. Leaving
 
 The sensor data showed those spires as smooth.
 
-They were not smooth.
-
-VERA had the full scan data before she sent you through.`,
+They were not smooth.`,
     vera: {
       opening: `Atmospheric analysis complete. Everything is within expected parameters. You should proceed to the coordinates I have marked — bearing 047°. There is something there worth seeing. I am quite certain of it.`,
       responses: [
@@ -215,8 +213,7 @@ const EmergencyAlerts: React.FC<{ active: boolean }> = ({ active }) => {
         x:       10 + Math.random() * 72,
         y:       15 + Math.random() * 65,
       };
-      setAlerts(prev => [...prev.slice(-10), item]);
-      setTimeout(() => setAlerts(prev => prev.filter(a => a.id !== item.id)), 4000);
+      setAlerts(prev => [...prev.slice(-18), item]);
     }, 550);
     return () => clearInterval(id);
   }, [active]);

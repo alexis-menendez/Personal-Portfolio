@@ -717,19 +717,16 @@
   pointer-events: none;
   white-space: nowrap;
   letter-spacing: 0.06em;
-  animation: alertPop 4s ease-in-out forwards;
+  animation: alertFlash 0.85s ease-in-out infinite;
 }
 
 .alertRed    { color: #ff4d4d; border-color: rgba(255, 77,  77,  0.7); text-shadow: 0 0 6px rgba(255,77,77,0.5); }
 .alertYellow { color: #ffdd00; border-color: rgba(255, 221, 0,   0.7); text-shadow: 0 0 6px rgba(255,221,0,0.4); }
 .alertTeal   { color: #00ffe1; border-color: rgba(0,   255, 225, 0.7); text-shadow: 0 0 6px rgba(0,255,200,0.4); }
 
-@keyframes alertPop {
-  0%   { opacity: 0; transform: scale(0.75); }
-  12%  { opacity: 1; transform: scale(1.05); }
-  20%  { transform: scale(1); }
-  65%  { opacity: 1; }
-  100% { opacity: 0; }
+@keyframes alertFlash {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.25; }
 }
 
 /* ── Urgent button (Return to Ship when suit is damaged) ─────── */
