@@ -253,12 +253,14 @@ const PlanetSurvivalPanel: React.FC<{ planetKey: string; onClose: () => void }> 
 };
 
 // ── HUD button config ──────────────────────────────────────────
+// Right-side buttons use rem so they align with the sensor panel (top: 3.2rem).
+// Button height ≈ 2.4rem; first center = 3.2 + 1.2 = 4.4rem, second = 4.4 + 2.4 + 1.0 = 7.8rem.
 const HUD_BUTTONS = [
-  { id: 'ship',    label: '↩ Return to Ship', top: '22%', left: '13%', action: null      },
-  { id: 'log',     label: '✎ Write Log',       top: '55%', left: '10%', action: 'log'    },
-  { id: 'vera',    label: '⬡ Chat VERA',       top: '45%', left: '90%', action: 'vera'   },
-  { id: 'guide',   label: '⊕ Planet Guide',    top: '62%', left: '90%', action: 'guide'  },
-  { id: 'weather', label: '⚠ Scanner',          top: '22%', left: '87%', action: 'weather'},
+  { id: 'ship',    label: '↩ Return to Ship', top: '22%',    left: '13%', action: null      },
+  { id: 'log',     label: '✎ Write Log',       top: '55%',    left: '10%', action: 'log'    },
+  { id: 'vera',    label: '⬡ Chat VERA',       top: '4.4rem', left: '90%', action: 'vera'   },
+  { id: 'guide',   label: '⊕ Planet Guide',    top: '7.8rem', left: '90%', action: 'guide'  },
+  { id: 'weather', label: '⚠ Scanner',          top: '22%',   left: '87%', action: 'weather'},
 ] as const;
 
 // ── Main HUD ───────────────────────────────────────────────────
