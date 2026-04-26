@@ -543,7 +543,7 @@
 /* ── Sensor data panel (top-left, below sector label) ─────────── */
 .sensorPanel {
   position: absolute;
-  top: 5rem;
+  top: 6.5rem;
   left: 1.5rem;
   z-index: 5;
   display: flex;

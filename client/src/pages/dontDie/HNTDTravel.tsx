@@ -335,8 +335,8 @@ const PlanetSurvivalPanel: React.FC<{ planetKey: string; onClose: () => void }> 
 // Right buttons start at 10rem; left buttons unchanged.
 type HudButton = { id: string; label: string; top: string; pos: { left: string } | { right: string }; action: string | null };
 const HUD_BUTTONS: HudButton[] = [
-  { id: 'ship',    label: '↩ Return to Ship',    top: '18.3rem', pos: { left:  '1.5rem' }, action: null      },
-  { id: 'log',     label: '✎ Write Log',           top: '21.7rem', pos: { left:  '1.5rem' }, action: 'log'     },
+  { id: 'ship',    label: '↩ Return to Ship',    top: '19.8rem', pos: { left:  '1.5rem' }, action: null      },
+  { id: 'log',     label: '✎ Write Log',           top: '23.2rem', pos: { left:  '1.5rem' }, action: 'log'     },
   { id: 'weather', label: '⚠ Weather Scanner',     top: '10rem',   pos: { right: '1.5rem' }, action: 'weather' },
   { id: 'vera',    label: '⬡ Chat with VERA',      top: '13.9rem', pos: { right: '1.5rem' }, action: 'vera'    },
   { id: 'guide',   label: '⊕ Planet Guide',        top: '17.8rem', pos: { right: '1.5rem' }, action: 'guide'   },
