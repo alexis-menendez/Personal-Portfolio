@@ -526,15 +526,16 @@
 .sensorRow {
   display: flex;
   gap: 0.5rem;
-  align-items: baseline;
+  align-items: flex-start;
   font-family: 'Courier New', monospace;
   font-size: clamp(0.82rem, 1.9vmin, 1.1rem);
 }
 
 .sensorLabel {
   color: #00ffe1;
-  white-space: nowrap;
+  white-space: pre-line;
   min-width: 6rem;
+  flex-shrink: 0;
 }
 
 .sensorValue {

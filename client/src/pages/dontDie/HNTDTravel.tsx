@@ -40,7 +40,7 @@ const PLANETS: Record<string, PlanetData> = {
     image: '/assets/dontDie/images/planet-one/PlanetOne.png',
     sensors: [
       { label: 'Temperature',       value: '118°F / 48°C',        alert: true  },
-      { label: 'Atmo. Composition', value: 'N₂ 68% | CO₂ 22% | SO₂ 10%'       },
+      { label: 'Atmo.\nComposition', value: 'N₂ 68% | CO₂ 22% | SO₂ 10%'       },
       { label: 'Breathable',        value: 'NO — toxic',           alert: true  },
       { label: 'Pressure',          value: '0.8 atm'                            },
       { label: 'Humidity',          value: '2%'                                 },
