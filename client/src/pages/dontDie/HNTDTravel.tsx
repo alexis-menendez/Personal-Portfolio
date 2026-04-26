@@ -586,12 +586,12 @@ const HNTDTravel: React.FC = () => {
       </div>
 
       {/* Top-right */}
-      <BatteryDisplay battery={battery} hidden={systemsHidden} />
+      <BatteryDisplay battery={battery} hidden={false} />
       <p className={`${styles.oxygenDisplay} ${oxygen <= 20 || suitDamaged ? styles.oxygenAlert : ''}`}
         style={{ color: oxygenColor }}>
         Oxygen: {oxygen}%{suitDamaged ? ' ⚠' : ''}
       </p>
-      <BioDataPanel hidden={systemsHidden} elevated={suitDamaged && !showNarrative} />
+      <BioDataPanel hidden={false} elevated={suitDamaged && !showNarrative} />
 
       {/* Bottom center */}
       <CompassDisplay hidden={systemsHidden} planetKey={key} />
