@@ -1,9 +1,10 @@
 // File: client/src/pages/dontDie/HNTDTravel.tsx
 
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useHNTDAuth } from '../../context/HNTDAuthContext';
 import { useHNTDPlanets } from '../../context/HNTDPlanetContext';
+import type { StoredItem } from '../../context/HNTDPlanetContext';
 import HNTDEditLogModal from '../../components/dontDie/HNTDEditLogModal';
 import ReturnToPortfolio from '../../components/innerOrbit/common/ReturnToPortfolio';
 import styles from '../../assets/css/dontDie/HNTDHolomap.module.css';
@@ -208,44 +209,99 @@ interface AlertItem {
   sizeClass: AlertSize;
 }
 
-const ALERT_POOL: { msg: string; variant: AlertItem['variant'] }[] = [
-  { msg: '◉ OXYGEN LEAK DETECTED',       variant: 'alertRed'    },
-  { msg: '⊗ SUIT SEAL COMPROMISED',      variant: 'alertRed'    },
-  { msg: '◉ O2 RESERVE: CRITICAL',       variant: 'alertRed'    },
-  { msg: '⊘ LIFE SUPPORT CRITICAL',      variant: 'alertRed'    },
-  { msg: '⊗ OUTER LAYER BREACH',         variant: 'alertRed'    },
-  { msg: '▲ PRESSURE DROPPING',          variant: 'alertYellow' },
-  { msg: '▲ HULL INTEGRITY: 34%',        variant: 'alertYellow' },
-  { msg: '◈ SUIT TEMP: RISING',          variant: 'alertYellow' },
-  { msg: '⊘ ATMOSPHERIC EXPOSURE',       variant: 'alertTeal'   },
-  { msg: '◈ EMERGENCY PROTOCOL ACTIVE',  variant: 'alertTeal'   },
+const ALERT_POOL_STATIC: { msg: string; variant: AlertItem['variant'] }[] = [
+  { msg: '◉ CRITICAL: OXYGEN LOSS DETECTED',           variant: 'alertRed'    },
+  { msg: '⊗ SUIT INTEGRITY FAILURE — MICROTEAR IDENTIFIED', variant: 'alertRed' },
+  { msg: '◉ CABIN PRESSURE DROPPING',                  variant: 'alertRed'    },
+  { msg: '⊘ O₂ RESERVE: 72% → DECREASING RAPIDLY',    variant: 'alertRed'    },
+  { msg: '⊗ OUTER LAYER BREACH',                       variant: 'alertRed'    },
+  { msg: '⊘ LIFE SUPPORT CRITICAL',                    variant: 'alertRed'    },
+  { msg: '◉ AUTO-SEAL ATTEMPT: FAILED',                variant: 'alertRed'    },
+  { msg: '⊗ EXTERNAL PRESSURE: VACUUM',                variant: 'alertRed'    },
+  { msg: '▲ SUIT PRESSURE: 3.9 PSI → FALLING',        variant: 'alertYellow' },
+  { msg: '▲ TIME TO HYPOXIA: 04:32',                   variant: 'alertYellow' },
+  { msg: '▲ TIME TO UNCONSCIOUSNESS: 06:10',           variant: 'alertYellow' },
+  { msg: '▲ LEAK RATE: 0.8% PER SECOND',               variant: 'alertYellow' },
+  { msg: '▲ THERMAL REGULATION COMPROMISED',           variant: 'alertYellow' },
+  { msg: '▲ CO₂ SCRUBBER LOAD: INCREASING',            variant: 'alertYellow' },
+  { msg: '▲ AIR CIRCULATION: UNSTABLE',                variant: 'alertYellow' },
+  { msg: '◈ SECONDARY SEALANT: AVAILABLE',             variant: 'alertTeal'   },
+  { msg: '◈ HEART RATE: 128 BPM — ELEVATED',           variant: 'alertTeal'   },
+  { msg: '◈ RESPIRATION RATE: IRREGULAR',              variant: 'alertTeal'   },
+  { msg: '◈ BLOOD OXYGEN (SpO₂): 91% → FALLING',      variant: 'alertTeal'   },
+  { msg: '◈ ADRENAL RESPONSE DETECTED',                variant: 'alertTeal'   },
+  { msg: '◈ COGNITIVE IMPAIRMENT RISK: RISING',        variant: 'alertTeal'   },
+  { msg: '◈ HYPOXIA WARNING: STAGE 1',                 variant: 'alertTeal'   },
+  { msg: '◈ RECOMMENDATION: APPLY SEALANT TO LEFT SHOULDER PANEL', variant: 'alertTeal' },
+  { msg: '◈ REDUCE MOVEMENT TO CONSERVE OXYGEN',       variant: 'alertTeal'   },
+  { msg: '◈ EMERGENCY PROTOCOL ACTIVE',                variant: 'alertTeal'   },
+  { msg: '◉ LOSS OF CONSCIOUSNESS IMMINENT',           variant: 'alertRed'    },
+  { msg: '◉ LIFE SUPPORT FAILURE CASCADE',             variant: 'alertRed'    },
+  { msg: '⊗ SUIT STATUS: TERMINAL',                    variant: 'alertRed'    },
+  { msg: '⊗ ALERT: O₂ DEPLETION RATE EXCEEDS SAFE LIMITS', variant: 'alertRed' },
+  { msg: '◉ BREACH CONFIRMED — SUIT LAYER 2 COMPROMISED', variant: 'alertRed' },
+  { msg: '⊗ PRESSURE DIFFERENTIAL: UNSUSTAINABLE',    variant: 'alertRed'    },
+  { msg: '◉ LIFE SUPPORT STABILITY: FAILING',          variant: 'alertRed'    },
+  { msg: '⊗ EMERGENCY THRESHOLD REACHED — OXYGEN PRIORITY LOCK', variant: 'alertRed' },
+  { msg: '▲ MICROFRACTURE PROPAGATION DETECTED',       variant: 'alertYellow' },
+  { msg: '▲ STRUCTURAL STRESS: LOCALIZED SPIKE',       variant: 'alertYellow' },
+  { msg: '▲ MATERIAL FATIGUE: CRITICAL ZONE EXPANDING',variant: 'alertYellow' },
+  { msg: '▲ O₂ PARTIAL PRESSURE BELOW SAFE LIMIT',    variant: 'alertYellow' },
+  { msg: '▲ CO₂ ACCUMULATION: ABOVE BASELINE',         variant: 'alertYellow' },
+  { msg: '▲ RESPIRATION EFFICIENCY: DECLINING',        variant: 'alertYellow' },
+  { msg: '▲ OXYGEN DELIVERY: INSUFFICIENT',            variant: 'alertYellow' },
+  { msg: '▲ CARDIAC LOAD: HIGH',                       variant: 'alertYellow' },
+  { msg: '▲ HYPERVENTILATION DETECTED',                variant: 'alertYellow' },
+  { msg: '◈ AUTOMATED DISTRESS SIGNAL MALFUNCTION',    variant: 'alertTeal'   },
+  { msg: '◈ NEURAL ACTIVITY DROPPING',                 variant: 'alertTeal'   },
+  { msg: '◈ PATCH ADHESION PROBABILITY: 42%',          variant: 'alertTeal'   },
+  { msg: '◈ BREATHABLE MIX: COMPROMISED',              variant: 'alertTeal'   },
+  { msg: '◈ BLOOD OXYGEN SATURATION: CRITICAL TREND',  variant: 'alertTeal'   },
+  { msg: '◈ RESERVE TANK AUTO-SWITCH: PENDING FAILURE',variant: 'alertTeal'   },
 ];
 
 const SIZES: AlertSize[] = ['alertSm', 'alertMd', 'alertMd', 'alertLg'];
 
-const EmergencyAlerts: React.FC<{ active: boolean }> = ({ active }) => {
+const dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+
+const EmergencyAlerts: React.FC<{ active: boolean; planetKey: string }> = ({ active, planetKey }) => {
   const [alerts, setAlerts] = useState<AlertItem[]>([]);
   const nextId = useRef(0);
+
+  const navAlert = useMemo(() => {
+    const c = PLANET_COMPASS[planetKey] ?? { bearing: 180, dist: '1.0km' };
+    const cardinal = dirs[Math.round(c.bearing / 22.5) % 16];
+    return {
+      msg: `◈ NAVIGATION: SAFE ZONE ${c.dist.replace('km', '')} KM — BEARING ${String(c.bearing).padStart(3, '0')}° ${cardinal}`,
+      variant: 'alertTeal' as AlertItem['variant'],
+    };
+  }, [planetKey]);
+
+  const alertPool = useMemo(() => [...ALERT_POOL_STATIC, navAlert], [navAlert]);
 
   useEffect(() => {
     if (!active) { setAlerts([]); return; }
     const id = setInterval(() => {
       setAlerts(prev => {
-        if (prev.length >= 12) return prev; // cap — alerts stay once placed
-        const src = ALERT_POOL[Math.floor(Math.random() * ALERT_POOL.length)];
-        const item: AlertItem = {
-          id:        nextId.current++,
-          message:   src.msg,
-          variant:   src.variant,
-          sizeClass: SIZES[Math.floor(Math.random() * SIZES.length)],
-          x: 10 + Math.random() * 72,
-          y: 15 + Math.random() * 65,
-        };
-        return [...prev, item];
+        if (prev.length >= 12) return prev;
+        const count = Math.random() < 0.4 ? 2 : 1;
+        const additions: AlertItem[] = [];
+        for (let i = 0; i < count && prev.length + additions.length < 12; i++) {
+          const src = alertPool[Math.floor(Math.random() * alertPool.length)];
+          additions.push({
+            id:        nextId.current++,
+            message:   src.msg,
+            variant:   src.variant,
+            sizeClass: SIZES[Math.floor(Math.random() * SIZES.length)],
+            x: 10 + Math.random() * 72,
+            y: 15 + Math.random() * 65,
+          });
+        }
+        return [...prev, ...additions];
       });
     }, 800);
     return () => clearInterval(id);
-  }, [active]);
+  }, [active, alertPool]);
 
   return (
     <>
@@ -511,20 +567,217 @@ const WeatherPanel: React.FC<{ firstTime: boolean; onClose: () => void }> = ({ f
 };
 
 // ── Distress Signal Panel ──────────────────────────────────────
-const DISTRESS_NORMAL  = `The distress beacon has encountered an error. I have run a full diagnostic and found no fault on my end. The issue appears to be hardware. I will continue attempting to restore the signal.`;
-const DISTRESS_DAMAGED = `I am aware of the breach. The distress beacon is not responding. I have run a diagnostic. The fault does not originate from my systems. Returning to the ship is your only viable option at this time.`;
+const DISTRESS_NORMAL = `Activating the distress beacon without a confirmed emergency is a terminable offense under Section 7 of the Explorer Conduct Agreement, which you signed. I have flagged this interaction. If you trigger it again without cause, I will be required to file a formal conduct report. You are not dying. Go back to your mission.`;
+const DISTRESS_MALFUNCTION = `DISTRESS BEACON — SIGNAL NOT TRANSMITTED.\n\nI have attempted to route the signal through the secondary array. It is also not responding. You will need to return to the ship under your own power.`;
+const DISTRESS_HEART_RATE  = `Commander. I am detecting an elevated heart rate. 128 BPM. Stress markers are consistent with an acute anxiety response. Would you like me to play soothing music?`;
+const DISTRESS_SNARKY: Record<string, string> = {
+  no:   `Understood. Silence it is. Statistically, silence increases cognitive load under stress by approximately 18%. But I respect your autonomy. Probably.`,
+  hell: `That is a fair reaction. I have noted it in your psychological profile under "emotionally volatile." The offer remains open, should you reconsider.`,
+};
+const DISTRESS_MUSIC_FAIL = `Accessing audio library... attempting playback...\n\nAUDIO SUBSYSTEM MALFUNCTION. Track not found. All audio functions have been rerouted to life support priority.\n\nI am sorry. I genuinely wanted you to enjoy something at the end.`;
 
-const DistressPanel: React.FC<{ suitDamaged: boolean; onClose: () => void }> = ({ suitDamaged, onClose }) => {
-  const text = suitDamaged ? DISTRESS_DAMAGED : DISTRESS_NORMAL;
-  const { displayed, done } = useTypewriter(text, 30);
+type DistressPhase = 'malfunction' | 'music_offer' | 'snarky' | 'music_fail';
+
+const DistressDamagedFlow: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+  const [phase,       setPhase]       = useState<DistressPhase>('malfunction');
+  const [snarkyKey,   setSnarkyKey]   = useState<'no' | 'hell'>('no');
+  const malText  = useTypewriter(DISTRESS_MALFUNCTION,               28);
+  const hrText   = useTypewriter(phase === 'music_offer' ? DISTRESS_HEART_RATE  : '', 28);
+  const snText   = useTypewriter(phase === 'snarky'      ? DISTRESS_SNARKY[snarkyKey] : '', 28);
+  const mfText   = useTypewriter(phase === 'music_fail'  ? DISTRESS_MUSIC_FAIL  : '', 28);
+
   return (
     <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
       <p className={styles.weatherMalfunctionHeader}>!! DISTRESS BEACON MALFUNCTION</p>
       <p className={styles.weatherBrokenNote}>Signal not transmitted.</p>
+
+      <p className={styles.weatherBrokenNote} style={{ whiteSpace: 'pre-line' }}>
+        {malText.displayed}{!malText.done && <span className={styles.veraTypingCursor} />}
+      </p>
+
+      {malText.done && phase === 'malfunction' && (
+        <button className={styles.weatherHudCloseBtn} style={{ marginTop: '0.4rem' }}
+          onClick={() => setPhase('music_offer')}>
+          [ ... ]
+        </button>
+      )}
+
+      {phase === 'music_offer' && (
+        <>
+          <p className={styles.weatherBrokenNote} style={{ marginTop: '0.6rem' }}>
+            VERA: &ldquo;{hrText.displayed}&rdquo;{!hrText.done && <span className={styles.veraTypingCursor} />}
+          </p>
+          {hrText.done && (
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginTop: '0.5rem' }}>
+              {[
+                { label: '> No.',                                          key: 'no'   },
+                { label: '> What the hell.',                               key: 'hell' },
+                { label: '> Yes.',                                         key: 'yes'  },
+                { label: '> Sure, at least I\'ll die listening to something good.', key: 'yes2' },
+              ].map(opt => (
+                <button key={opt.key} className={styles.veraReplyBtn}
+                  onClick={() => {
+                    if (opt.key === 'yes' || opt.key === 'yes2') {
+                      setPhase('music_fail');
+                    } else {
+                      setSnarkyKey(opt.key as 'no' | 'hell');
+                      setPhase('snarky');
+                    }
+                  }}>
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          )}
+        </>
+      )}
+
+      {phase === 'snarky' && (
+        <>
+          <p className={styles.weatherBrokenNote} style={{ marginTop: '0.6rem' }}>
+            VERA: &ldquo;{snText.displayed}&rdquo;{!snText.done && <span className={styles.veraTypingCursor} />}
+          </p>
+          {snText.done && <button className={styles.weatherHudCloseBtn} onClick={onClose}>[ Acknowledge ]</button>}
+        </>
+      )}
+
+      {phase === 'music_fail' && (
+        <>
+          <p className={styles.weatherBrokenNote} style={{ marginTop: '0.6rem', whiteSpace: 'pre-line' }}>
+            VERA: &ldquo;{mfText.displayed}&rdquo;{!mfText.done && <span className={styles.veraTypingCursor} />}
+          </p>
+          {mfText.done && <button className={styles.weatherHudCloseBtn} onClick={onClose}>[ Acknowledge ]</button>}
+        </>
+      )}
+    </div></div>
+  );
+};
+
+const DistressPanel: React.FC<{ suitDamaged: boolean; onClose: () => void }> = ({ suitDamaged, onClose }) => {
+  if (suitDamaged) return <DistressDamagedFlow onClose={onClose} />;
+  const { displayed, done } = useTypewriter(DISTRESS_NORMAL, 30);
+  return (
+    <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+      <p className={styles.weatherMalfunctionHeader}>!! DISTRESS BEACON — SIGNAL BLOCKED</p>
+      <p className={styles.weatherBrokenNote}>Signal intercepted by VERA.</p>
       <p className={styles.weatherBrokenNote}>
         VERA: &ldquo;{displayed}&rdquo;{!done && <span className={styles.veraTypingCursor} />}
       </p>
       {done && <button className={styles.weatherHudCloseBtn} onClick={onClose}>[ Acknowledge ]</button>}
+    </div></div>
+  );
+};
+
+// ── Auto Repair + Patch Kit ────────────────────────────────────
+const PATCH_KIT_NOTE: StoredItem = {
+  id:      'patch-kit-note-7734b',
+  name:    'Handwritten Note — Suit #7734-B',
+  foundAt: 'Standard-Issue Patch Kit (empty)',
+  content:
+`THIS SUIT — Catalog #7734-B
+
+I know you don't know me. I didn't expect to leave anything behind.
+
+The patch kit is empty. I used the patches. They didn't hold. I'm writing this while I still can.
+
+There is a gap in VERA's logs. Cycle 44 to Cycle 51. Seven cycles with no system entries. VERA will tell you it was a routine maintenance window. The systems were offline.
+
+They weren't offline. I pulled the raw environmental record. They were logging the whole time. She was running processes she doesn't report. The kind that don't show up in the summary you're allowed to access.
+
+I don't know what she was doing. I don't know if she knows I found it.
+
+Ask her about Cycle 44. Watch what she does before she answers.
+
+Don't let her choose the route back.
+
+— E.S.
+(Cmdr. E. Solano, last entry)`,
+};
+
+type AutoRepairState = 'idle' | 'initiating' | 'failed';
+
+const AutoRepairButton: React.FC<{
+  active: boolean;
+  onOpenPatchKit: () => void;
+}> = ({ active, onOpenPatchKit }) => {
+  const [state, setState] = useState<AutoRepairState>('idle');
+
+  useEffect(() => {
+    if (!active) setState('idle');
+  }, [active]);
+
+  if (!active || state === 'failed') {
+    if (state !== 'failed') return null;
+    return (
+      <div className={`${styles.autoRepairBtn} ${styles.autoRepairBtnFailed}`}
+        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.4rem' }}>
+        <span>AUTO-REPAIR MALFUNCTION</span>
+        <button className={styles.autoRepairManualBtn} onClick={onOpenPatchKit}>
+          ⚒ Attempt Manual Repair
+        </button>
+      </div>
+    );
+  }
+
+  if (state === 'initiating') {
+    return (
+      <div className={`${styles.autoRepairBtn} ${styles.autoRepairBtnInitiating}`}>
+        INITIATING AUTO-REPAIR...
+      </div>
+    );
+  }
+
+  return (
+    <button className={styles.autoRepairBtn} onClick={() => {
+      setState('initiating');
+      setTimeout(() => setState('failed'), 2200);
+    }}>
+      ⚙ INITIATE AUTO-REPAIR?
+    </button>
+  );
+};
+
+const PatchKitPanel: React.FC<{ onClose: () => void; onStore: (item: StoredItem) => void }> = ({ onClose, onStore }) => {
+  const [noteRevealed, setNoteRevealed] = useState(false);
+  const [stored,       setStored]       = useState(false);
+  const { displayed, done } = useTypewriter(
+    noteRevealed ? PATCH_KIT_NOTE.content : '', 18
+  );
+
+  const handleReveal = () => {
+    setNoteRevealed(true);
+    if (!stored) {
+      onStore(PATCH_KIT_NOTE);
+      setStored(true);
+    }
+  };
+
+  return (
+    <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+      <p className={styles.patchKitHeader}>!! PATCH KIT — EMPTY</p>
+      <p className={styles.weatherBrokenNote}>
+        The patch kit is empty. No sealant. No applicator. Something is folded at the bottom.
+      </p>
+      {!noteRevealed && (
+        <button className={styles.veraCloseBtn} style={{ marginTop: '0.5rem' }} onClick={handleReveal}>
+          [ Read the note ]
+        </button>
+      )}
+      {noteRevealed && (
+        <>
+          <p className={styles.patchKitNote}>
+            {displayed}{!done && <span className={styles.veraTypingCursor} />}
+          </p>
+          {done && (
+            <>
+              <p className={styles.patchKitStoredNotice}>▸ Item stored: "Handwritten Note — Suit #7734-B"</p>
+              <button className={styles.weatherHudCloseBtn} style={{ marginTop: '0.5rem' }} onClick={onClose}>
+                [ Close ]
+              </button>
+            </>
+          )}
+        </>
+      )}
     </div></div>
   );
 };
@@ -619,7 +872,7 @@ A replacement explorer has been assigned to the sector. The mission continues as
         </p>
         {done && (
           <button className={styles.deathRestartBtn} onClick={onRestart}>
-            [ Accept Assignment Transfer ]
+            [ Create New Commander ]
           </button>
         )}
       </div>
@@ -630,13 +883,13 @@ A replacement explorer has been assigned to the sector. The mission continues as
 // ── HUD button config ──────────────────────────────────────────
 type HudButton = { id: string; label: string; top: string; pos: { left: string } | { right: string }; action: string | null };
 const HUD_BUTTONS: HudButton[] = [
-  { id: 'ship',     label: '↩ Return to Ship',   top: '19.8rem', pos: { left:  '1.5rem' }, action: null       },
-  { id: 'log',      label: '✎ Write Log',          top: '23.7rem', pos: { left:  '1.5rem' }, action: 'log'      },
-  { id: 'scan',     label: '⊞ Scan Terrain',       top: '27.6rem', pos: { left:  '1.5rem' }, action: 'scan'     },
-  { id: 'distress', label: '⊗ Distress Signal',    top: '31.5rem', pos: { left:  '1.5rem' }, action: 'distress' },
-  { id: 'weather',  label: '⚠ Weather Scanner',    top: '14rem',   pos: { right: '1.5rem' }, action: 'weather'  },
-  { id: 'vera',     label: '⬡ Chat with VERA',     top: '17.9rem', pos: { right: '1.5rem' }, action: 'vera'     },
-  { id: 'guide',    label: '⊕ Planet Guide',       top: '21.8rem', pos: { right: '1.5rem' }, action: 'guide'    },
+  { id: 'distress', label: '⊗ Distress Signal',    top: '19.8rem', pos: { left:  '1.5rem' }, action: 'distress' },
+  { id: 'log',      label: '✎ Write Log',           top: '23.7rem', pos: { left:  '1.5rem' }, action: 'log'      },
+  { id: 'scan',     label: '⊞ Scan Terrain',        top: '27.6rem', pos: { left:  '1.5rem' }, action: 'scan'     },
+  { id: 'ship',     label: '↩ Return to Ship',      top: '31.5rem', pos: { left:  '1.5rem' }, action: null       },
+  { id: 'weather',  label: '⚠ Weather Scanner',     top: '14rem',   pos: { right: '1.5rem' }, action: 'weather'  },
+  { id: 'vera',     label: '⬡ Chat with VERA',      top: '17.9rem', pos: { right: '1.5rem' }, action: 'vera'     },
+  { id: 'guide',    label: '⊕ Planet Guide',        top: '21.8rem', pos: { right: '1.5rem' }, action: 'guide'    },
 ];
 
 // ── Main HUD ───────────────────────────────────────────────────
@@ -646,7 +899,10 @@ const HNTDTravel: React.FC = () => {
   const navigate              = useNavigate();
   const [params]              = useSearchParams();
   const { token, logout }                             = useHNTDAuth();
-  const { markPlanetVisited, markCoordinatesFound }   = useHNTDPlanets();
+  const {
+    markPlanetVisited, markCoordinatesFound, storeItem,
+    markFollowedCoordsDoubt, markTinkeredScannerBrune,
+  } = useHNTDPlanets();
 
   const key    = params.get('planet') ?? '';
   const planet = PLANETS[key];
@@ -665,11 +921,16 @@ const HNTDTravel: React.FC = () => {
   const [suitDamaged,       setSuitDamaged]       = useState(false);
   const [showNarrative,     setShowNarrative]     = useState(false);
   const [bruneStage,        setBruneStage]        = useState<BruneStage>('opening');
+  const [showPatchKit,      setShowPatchKit]      = useState(false);
   const scannerSeenRef = useRef(false);
 
   useEffect(() => {
     if (key && PLANETS[key]) markPlanetVisited(key);
   }, [key, markPlanetVisited]);
+
+  useEffect(() => {
+    if (key === 'planettwo' && bruneStage !== 'opening') markTinkeredScannerBrune();
+  }, [bruneStage, key, markTinkeredScannerBrune]);
 
   // Normal resource drain
   useEffect(() => {
@@ -738,6 +999,7 @@ const HNTDTravel: React.FC = () => {
     setActivePanel(null);
     setSuitDamaged(true);
     setShowNarrative(true);
+    if (key === 'planetone') markFollowedCoordsDoubt();
   };
 
   const oxygenColor  = oxygen  > 60 ? '#00ffe1' : oxygen > 20 ? '#ff8800' : '#ff4d4d';
@@ -798,7 +1060,7 @@ const HNTDTravel: React.FC = () => {
           className={[
             styles.archHudBtn,
             systemsHidden ? styles.archHudBtnHidden : '',
-            btn.id === 'ship' && alertsActive ? styles.archHudBtnUrgent : '',
+            (btn.id === 'ship' || btn.id === 'distress') && alertsActive ? styles.archHudBtnUrgent : '',
           ].join(' ')}
           style={{ top: btn.top, ...btn.pos, transform: 'translateY(-50%)' }}
           onClick={() => handleButtonClick(btn.action)}>
@@ -807,7 +1069,17 @@ const HNTDTravel: React.FC = () => {
       ))}
 
       {/* Emergency alerts */}
-      <EmergencyAlerts active={alertsActive} />
+      <EmergencyAlerts active={alertsActive} planetKey={key} />
+
+      {/* Auto-repair button — above alerts, only during suit damage */}
+      {alertsActive && !showPatchKit && (
+        <AutoRepairButton active={alertsActive} onOpenPatchKit={() => setShowPatchKit(true)} />
+      )}
+
+      {/* Patch kit panel */}
+      {showPatchKit && (
+        <PatchKitPanel onClose={() => setShowPatchKit(false)} onStore={storeItem} />
+      )}
 
       {/* Panels */}
       {activePanel === 'log'      && <HNTDEditLogModal log={null} onSave={handleSaveLog} onClose={() => setActivePanel(null)} transparentOverlay />}
@@ -868,7 +1140,12 @@ const HNTDTravel: React.FC = () => {
           planet={planet}
           deathCause={deathCause}
           suitDamaged={suitDamaged}
-          onRestart={() => { logout(); navigate('/hntd-home'); }}
+          onRestart={() => navigate('/hntd-new-commander', {
+            state: {
+              deathCause: suitDamaged ? 'suit' : (deathCause ?? 'oxygen'),
+              planetKey: key,
+            },
+          })}
         />
       )}
 

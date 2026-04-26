@@ -17,8 +17,9 @@ const HNTDDashboard     = lazy(() => import('./pages/dontDie/HNTDDashboard'));
 const HNTDHolomap       = lazy(() => import('./pages/dontDie/HNTDHolomap'));
 const HNTDTravel        = lazy(() => import('./pages/dontDie/HNTDTravel'));
 const HNTDShuttleBreak  = lazy(() => import('./pages/dontDie/HNTDShuttleBreak'));
-const HNTDPersonalLogs  = lazy(() => import('./pages/dontDie/HNTDPersonalLogs'));
-const HNTDSurvivalGuide = lazy(() => import('./pages/dontDie/HNTDSurvivalGuide'));
+const HNTDPersonalLogs   = lazy(() => import('./pages/dontDie/HNTDPersonalLogs'));
+const HNTDSurvivalGuide  = lazy(() => import('./pages/dontDie/HNTDSurvivalGuide'));
+const HNTDNewCommander   = lazy(() => import('./pages/dontDie/HNTDNewCommander'));
 
 // Layout
 import ProtectedRoute from './components/ProtectedRoute';
@@ -111,6 +112,7 @@ const App: React.FC = () => {
           <Route path="/hntd-shuttlebreak"   element={<HNTDPrivateRoute><HNTDShuttleBreak /></HNTDPrivateRoute>} />
           <Route path="/hntd-survival-guide" element={<HNTDPrivateRoute><HNTDSurvivalGuide /></HNTDPrivateRoute>} />
           <Route path="/hntd-personal-logs"  element={<HNTDPrivateRoute><HNTDPersonalLogs /></HNTDPrivateRoute>} />
+          <Route path="/hntd-new-commander" element={<HNTDPrivateRoute><HNTDNewCommander /></HNTDPrivateRoute>} />
 
           {/* Standalone project detail pages */}
           <Route path="/innerOrbit" element={<InnerOrbit />} />

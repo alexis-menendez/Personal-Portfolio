@@ -843,6 +843,162 @@
   50%       { box-shadow: 0 0 14px 4px rgba(255, 77, 77, 0.45); }
 }
 
+/* ── Auto-Repair Button ───────────────────────────────────────── */
+.autoRepairBtn {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9000;
+  padding: 1rem 2rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.85rem, 1.8vmin, 1.1rem);
+  letter-spacing: 0.12em;
+  color: #ff4d4d;
+  background: rgba(0, 0, 0, 0.82);
+  border: 2px solid #ff4d4d;
+  cursor: pointer;
+  text-transform: uppercase;
+  animation: autoRepairPulse 1.1s ease-in-out infinite;
+  white-space: nowrap;
+}
+.autoRepairBtn:hover {
+  background: rgba(255, 77, 77, 0.12);
+}
+
+.autoRepairBtnInitiating {
+  color: #ff8800;
+  border-color: #ff8800;
+  animation: autoRepairPulse 0.4s ease-in-out infinite;
+  cursor: default;
+  pointer-events: none;
+}
+
+.autoRepairBtnFailed {
+  color: #ffdd00;
+  border-color: #ffdd00;
+  animation: none;
+  cursor: default;
+  pointer-events: none;
+}
+
+.autoRepairManualBtn {
+  display: block;
+  margin: 0.6rem auto 0;
+  padding: 0.4rem 1rem;
+  font-family: 'Courier New', monospace;
+  font-size: clamp(0.65rem, 1.3vmin, 0.8rem);
+  letter-spacing: 0.08em;
+  color: #00ffe1;
+  background: transparent;
+  border: 1px solid #00ffe1;
+  cursor: pointer;
+  text-transform: uppercase;
+  pointer-events: all;
+}
+.autoRepairManualBtn:hover { background: rgba(0,255,225,0.1); }
+
+@keyframes autoRepairPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
+  50%       { box-shadow: 0 0 20px 6px rgba(255, 77, 77, 0.35); }
+}
+
+/* ── Patch Kit Panel ──────────────────────────────────────────── */
+.patchKitHeader {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.75rem, 1.4vmin, 0.9rem);
+  color: #ff4d4d;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.patchKitNote {
+  font-family: 'Courier New', monospace;
+  font-size: clamp(0.6rem, 1.2vmin, 0.75rem);
+  color: #00ffe1;
+  line-height: 1.7;
+  white-space: pre-line;
+  margin: 0.4rem 0 0.8rem;
+  border-left: 2px solid rgba(0,255,225,0.3);
+  padding-left: 0.6rem;
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.patchKitStoredNotice {
+  font-family: 'Courier New', monospace;
+  font-size: clamp(0.55rem, 1.1vmin, 0.7rem);
+  color: #ffdd00;
+  letter-spacing: 0.06em;
+  margin-top: 0.3rem;
+}
+
+/* ── Storage Locker Panel ─────────────────────────────────────── */
+.storageLocker {
+  margin-top: 1.5rem;
+}
+
+.storageLockBtn {
+  font-family: 'Courier New', monospace;
+  font-size: clamp(0.65rem, 1.3vmin, 0.78rem);
+  letter-spacing: 0.1em;
+  color: #00ffe1;
+  background: transparent;
+  border: 1px solid rgba(0,255,225,0.4);
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.storageLockBtn:hover { background: rgba(0,255,225,0.08); }
+
+.storageItemList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  max-height: 55vh;
+  overflow-y: auto;
+}
+
+.storageItemCard {
+  border: 1px solid rgba(0,255,225,0.25);
+  padding: 0.6rem 0.75rem;
+  background: rgba(0,255,225,0.03);
+}
+
+.storageItemName {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.6rem, 1.2vmin, 0.72rem);
+  color: #00ffe1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+
+.storageItemFound {
+  font-family: 'Courier New', monospace;
+  font-size: clamp(0.52rem, 1vmin, 0.62rem);
+  color: rgba(0,255,225,0.45);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.storageItemContent {
+  font-family: 'Courier New', monospace;
+  font-size: clamp(0.58rem, 1.1vmin, 0.7rem);
+  color: rgba(0,255,225,0.85);
+  line-height: 1.65;
+  white-space: pre-line;
+}
+
+.storageEmpty {
+  font-family: 'Courier New', monospace;
+  font-size: clamp(0.6rem, 1.2vmin, 0.72rem);
+  color: rgba(0,255,225,0.35);
+  letter-spacing: 0.08em;
+}
+
 /* ── Shuttle Break ────────────────────────────────────────────── */
 .shuttleWrapper {
   height: 100vh;
