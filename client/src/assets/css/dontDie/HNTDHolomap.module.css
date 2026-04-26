@@ -261,7 +261,7 @@
   left: 1.5rem;
   z-index: 5;
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(0.65rem, 1.5vmin, 0.9rem);
+  font-size: clamp(0.9rem, 2.2vmin, 1.3rem);
   color: rgba(0, 255, 200, 0.65);
   letter-spacing: 0.14em;
   text-shadow: 0 0 8px rgba(0, 255, 200, 0.3);
@@ -293,8 +293,8 @@
   border: 1px solid rgba(0, 255, 200, 0.6);
   color: #00ffe1;
   font-family: 'Courier New', monospace;
-  font-size: clamp(0.62rem, 1.5vmin, 0.82rem);
-  padding: 0.35rem 0.75rem;
+  font-size: clamp(0.88rem, 2vmin, 1.1rem);
+  padding: 0.5rem 1.1rem;
   border-radius: 4px;
   cursor: pointer;
   white-space: nowrap;
@@ -491,7 +491,7 @@
   right: 1.5rem;
   z-index: 5;
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(0.6rem, 1.4vmin, 0.82rem);
+  font-size: clamp(0.9rem, 2.2vmin, 1.3rem);
   letter-spacing: 0.1em;
   pointer-events: none;
   transition: color 0.6s ease;
@@ -523,13 +523,13 @@
   gap: 0.5rem;
   align-items: baseline;
   font-family: 'Courier New', monospace;
-  font-size: clamp(0.55rem, 1.2vmin, 0.72rem);
+  font-size: clamp(0.82rem, 1.9vmin, 1.1rem);
 }
 
 .sensorLabel {
   color: rgba(0, 255, 200, 0.4);
   white-space: nowrap;
-  min-width: 4.5rem;
+  min-width: 6rem;
 }
 
 .sensorValue {
