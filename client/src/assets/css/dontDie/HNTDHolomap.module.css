@@ -354,7 +354,7 @@
 .hudPanelTitle {
   font-family: 'Orbitron', sans-serif;
   font-size: 0.8rem;
-  color: rgba(0, 255, 200, 0.5);
+  color: #00ffe1;
   letter-spacing: 0.12em;
   margin: 0;
 }
@@ -363,7 +363,7 @@
 .veraTypingText {
   font-family: 'Courier New', monospace;
   font-size: 0.82rem;
-  color: rgba(0, 255, 225, 0.85);
+  color: #00ffe1;
   line-height: 1.7;
   border-left: 2px solid rgba(0, 255, 200, 0.3);
   padding-left: 0.75rem;
@@ -387,7 +387,7 @@
 .veraUserLine {
   font-family: 'Courier New', monospace;
   font-size: 0.78rem;
-  color: rgba(0, 255, 225, 0.5);
+  color: #00ffe1;
   font-style: italic;
   padding-left: 0.75rem;
 }
@@ -401,7 +401,7 @@
 .veraReplyBtn {
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(0, 255, 200, 0.3);
-  color: rgba(0, 255, 225, 0.75);
+  color: #00ffe1;
   font-family: 'Courier New', monospace;
   font-size: 0.78rem;
   padding: 0.45rem 0.85rem;
@@ -420,14 +420,13 @@
   align-self: flex-start;
   background: transparent;
   border: none;
-  color: rgba(0, 255, 225, 0.4);
+  color: #00ffe1;
   font-family: 'Courier New', monospace;
   font-size: 0.75rem;
   cursor: pointer;
   text-decoration: underline;
   padding: 0;
 }
-.veraCloseBtn:hover { color: #00ffe1; }
 
 /* ── Weather Scanner (broken) ─────────────────────────────────── */
 .weatherMalfunctionHeader {
@@ -450,7 +449,7 @@
 .weatherBrokenNote {
   font-family: 'Courier New', monospace;
   font-size: 0.72rem;
-  color: rgba(0, 255, 225, 0.45);
+  color: #00ffe1;
   font-style: italic;
   border-left: 2px solid rgba(255, 77, 77, 0.3);
   padding-left: 0.65rem;
