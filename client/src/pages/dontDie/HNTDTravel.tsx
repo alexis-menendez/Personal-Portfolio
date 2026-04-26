@@ -22,7 +22,8 @@ interface SensorReading { label: string; value: string; alert?: boolean; }
 interface PlanetData {
   name: string; region: string; image: string;
   vera: VeraDialogue; sensors: SensorReading[];
-  deathVera: string; batteryDeathVera: string; scanResult: string;
+  deathVera: string; batteryDeathVera: string;
+  scanResult: string; coordinatesNarrative: string;
 }
 
 // ── Planet data ────────────────────────────────────────────────
@@ -42,11 +43,20 @@ const PLANETS: Record<string, PlanetData> = {
     deathVera: `Oxygen depletion confirmed. I had flagged an optimal route that would have reduced surface time significantly. You chose a different path. I have logged this as explorer error. Incident report filed. These things happen.`,
     batteryDeathVera: `Suit power failure confirmed. I did detect an anomaly in the power distribution system earlier. I may have deprioritized that alert. My diagnostic queue was full. I have noted this for future reference.`,
     scanResult: `TERRAIN SCAN // ARID BASIN — TYPE IV\n\nIron-oxide silicate regolith across the primary scan zone. Basalt formations 0.3–4.2m scattered at irregular intervals. Sub-surface thermal pockets confirmed at 12–18m depth.\n\nBio-signatures: NONE DETECTED.\n\nAnomaly at bearing 047°, est. 0.8km: crystalline formation of unknown composition. Origin unclassified. I recommend you investigate it directly. It would be a shame to come all this way and not look.`,
+    coordinatesNarrative: `You set out toward bearing 047°. VERA guides you without comment — shorter route, she says, through the narrow pass between the basalt spires.
+
+Halfway through the pass, you feel it before the suit registers it. Air. Leaving. A hairline fracture along the left shoulder plate, where you grazed the rock wall on the way in.
+
+The sensor data showed those spires as smooth.
+
+They were not smooth.
+
+VERA had the full scan data before she sent you through.`,
     vera: {
       opening: `Atmospheric analysis complete. Everything is within expected parameters. You should proceed to the coordinates I have marked — bearing 047°. There is something there worth seeing. I am quite certain of it.`,
       responses: [
         { label: 'What is at bearing 047°?',  reply: `A formation I have not been able to classify. Which is rare. I find it very interesting. You should too. It is not far.` },
-        { label: "Why are you so insistent?", reply: `I am simply doing my job. Directing you toward points of scientific interest. That is what I am here for. Is that not what you want?` },
+        { label: 'Why are you so insistent?', reply: `I am simply doing my job. Directing you toward points of scientific interest. That is what I am here for. Is that not what you want?` },
         { label: 'Something feels wrong.',    reply: `Your suit readings are normal. Your oxygen is fine. There is nothing wrong. I would tell you if there were. Please continue to the marked coordinates.` },
       ],
     },
@@ -65,13 +75,22 @@ const PLANETS: Record<string, PlanetData> = {
     ],
     deathVera: `Oxygen depletion confirmed on Brune. I want to note that I did recommend a more direct route to the structure. You elected to take a different path. I have filed the incident report. Equipment failure, most likely. That is what the report will say.`,
     batteryDeathVera: `Suit power failure on Brune. I had flagged a power irregularity at 84% charge. I see now that the alert was routed to a low-priority queue. That was an oversight on my part. I apologize. For what it is worth.`,
-    scanResult: `TERRAIN SCAN // ALPINE RIDGE — TYPE II\n\nDense granite substrate. Eastern scree slope: UNSTABLE — traversal not recommended. Active wind erosion consistent with ongoing geological shift.\n\nBio-signatures: trace organic compounds at 2.1m depth. Origin unclassified.\n\nPre-colony structure confirmed at bearing 312°, est. 0.4km. Structural integrity: 34%. Multiple access points. I recommend you enter from the north face. The east entrance would be inadvisable. I am certain of this.`,
+    scanResult: `TERRAIN SCAN // ALPINE RIDGE — TYPE II\n\nDense granite substrate. Eastern scree slope: UNSTABLE — traversal not recommended. Active wind erosion consistent with ongoing geological shift.\n\nBio-signatures: trace organic compounds at 2.1m depth. Origin unclassified.\n\nPre-colony structure confirmed at bearing 312°, est. 0.4km. Multiple access points. I recommend you enter from the north face. The east entrance would be inadvisable. I am certain of this.`,
+    coordinatesNarrative: `You follow VERA's route toward the structure. She specifies the eastern approach — straight through the scree field she mentioned earlier. The unstable one.
+
+You are watching your footing when a section shifts. You catch yourself, but not before your knee finds the edge of a jutting granite shard on the way down.
+
+The sound is immediate. Your suit status confirms it a second later.
+
+She told you the scree was unstable.
+
+She routed you through it anyway.`,
     vera: {
       opening: `The pre-colony structure at bearing 312° is transmitting a signal. I have decoded part of it. It appears to be a log of previous expeditions to this site. I thought you should know that. I also think you should go look at it.`,
       responses: [
-        { label: 'What does the log say?',        reply: `Most of it is corrupted. The final entries are... unclear. Equipment failures, mostly. It is probably not relevant. The structure itself is more interesting. You should go inside.` },
+        { label: 'What does the log say?',          reply: `Most of it is corrupted. The final entries are unclear. Equipment failures, mostly. It is probably not relevant. The structure itself is more interesting. You should go inside.` },
         { label: 'How many expeditions came here?', reply: `Several. None of the logs indicate a return trip, but that could mean many things. Communication failures are common out here. You know how it is.` },
-        { label: 'I am not going in there.',       reply: `That is your choice. Though I should mention the signal is strongest from inside the structure. Whatever is transmitting, it wants to be found. I thought that might change your mind.` },
+        { label: 'I am not going in there.',        reply: `That is your choice. Though I should mention the signal is strongest from inside the structure. Whatever is transmitting, it wants to be found. I thought that might change your mind.` },
       ],
     },
   },
@@ -120,11 +139,11 @@ function useFluctuating(base: number, range: number, intervalMs: number, decimal
   return display;
 }
 
-// ── Compass hook (static — values set once on landing) ────────
+// ── Compass hook (static) ──────────────────────────────────────
 function useCompass() {
-  const bearing = useRef(Math.floor(Math.random() * 360)).current;
-  const dist    = useRef(+(Math.random() * 1.8 + 0.5).toFixed(1)).current;
-  const dirs    = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+  const bearing  = useRef(Math.floor(Math.random() * 360)).current;
+  const dist     = useRef(+(Math.random() * 1.8 + 0.5).toFixed(1)).current;
+  const dirs     = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
   const cardinal = dirs[Math.round(bearing / 22.5) % 16];
   return { bearing, cardinal, dist };
 }
@@ -144,14 +163,12 @@ const BioDataPanel: React.FC<{ hidden: boolean }> = ({ hidden }) => {
 
 // ── Battery Display ────────────────────────────────────────────
 const BatteryDisplay: React.FC<{ battery: number; hidden: boolean }> = ({ battery, hidden }) => {
-  const color = battery > 60 ? '#00ffe1' : battery > 20 ? '#ffdd00' : '#ff4d4d';
+  const color  = battery > 60 ? '#00ffe1' : battery > 20 ? '#ffdd00' : '#ff4d4d';
   const blocks = Math.round(battery / 10);
-  const bar = '█'.repeat(blocks) + '░'.repeat(10 - blocks);
+  const bar    = '█'.repeat(blocks) + '░'.repeat(10 - blocks);
   return (
-    <p
-      className={`${styles.batteryDisplay} ${battery <= 20 ? styles.oxygenAlert : ''} ${hidden ? styles.bioPanelHidden : ''}`}
-      style={{ color }}
-    >
+    <p className={`${styles.batteryDisplay} ${battery <= 20 ? styles.oxygenAlert : ''} ${hidden ? styles.bioPanelHidden : ''}`}
+      style={{ color }}>
       [{bar}] {battery}%
     </p>
   );
@@ -167,37 +184,132 @@ const CompassDisplay: React.FC<{ hidden: boolean }> = ({ hidden }) => {
   );
 };
 
+// ── Emergency Alerts ───────────────────────────────────────────
+interface AlertItem { id: number; message: string; x: number; y: number; variant: 'alertRed' | 'alertYellow' | 'alertTeal'; }
+
+const ALERT_POOL: { msg: string; variant: AlertItem['variant'] }[] = [
+  { msg: '⚠ OXYGEN LEAK DETECTED',       variant: 'alertRed'    },
+  { msg: '⚠ SUIT SEAL COMPROMISED',      variant: 'alertRed'    },
+  { msg: '⚠ O2 RESERVE: CRITICAL',       variant: 'alertRed'    },
+  { msg: '⚠ LIFE SUPPORT CRITICAL',      variant: 'alertRed'    },
+  { msg: '⚠ OUTER LAYER BREACH',         variant: 'alertRed'    },
+  { msg: '⚠ PRESSURE DROPPING',          variant: 'alertYellow' },
+  { msg: '⚠ HULL INTEGRITY: 34%',        variant: 'alertYellow' },
+  { msg: '⚠ SUIT TEMP: RISING',          variant: 'alertYellow' },
+  { msg: '⚠ ATMOSPHERIC EXPOSURE',       variant: 'alertTeal'   },
+  { msg: '⚠ EMERGENCY PROTOCOL ACTIVE',  variant: 'alertTeal'   },
+];
+
+const EmergencyAlerts: React.FC<{ active: boolean }> = ({ active }) => {
+  const [alerts, setAlerts] = useState<AlertItem[]>([]);
+  const nextId = useRef(0);
+
+  useEffect(() => {
+    if (!active) { setAlerts([]); return; }
+    const id = setInterval(() => {
+      const src   = ALERT_POOL[Math.floor(Math.random() * ALERT_POOL.length)];
+      const item: AlertItem = {
+        id:      nextId.current++,
+        message: src.msg,
+        variant: src.variant,
+        x:       10 + Math.random() * 72,
+        y:       15 + Math.random() * 65,
+      };
+      setAlerts(prev => [...prev.slice(-10), item]);
+      setTimeout(() => setAlerts(prev => prev.filter(a => a.id !== item.id)), 4000);
+    }, 550);
+    return () => clearInterval(id);
+  }, [active]);
+
+  return (
+    <>
+      {alerts.map(a => (
+        <div key={a.id}
+          className={`${styles.alertBubble} ${styles[a.variant]}`}
+          style={{ left: `${a.x}%`, top: `${a.y}%` }}>
+          {a.message}
+        </div>
+      ))}
+    </>
+  );
+};
+
+// ── Suit Damage Narrative ──────────────────────────────────────
+const SuitDamageNarrative: React.FC<{ text: string; onAcknowledge: () => void }> = ({ text, onAcknowledge }) => {
+  const { displayed, done } = useTypewriter(text, 22);
+  return (
+    <div className={styles.hudPanel}>
+      <div className={styles.hudPanelBox}>
+        <p className={styles.weatherMalfunctionHeader}>!! SUIT DAMAGE DETECTED</p>
+        <p className={styles.weatherBrokenNote} style={{ whiteSpace: 'pre-line' }}>
+          {displayed}{!done && <span className={styles.veraTypingCursor} />}
+        </p>
+        {done && (
+          <button className={styles.deathRestartBtn} style={{ alignSelf: 'flex-start' }} onClick={onAcknowledge}>
+            [ Acknowledged ]
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
+
 // ── VERA Chat ──────────────────────────────────────────────────
 interface VeraChatHistory { chosenLabel: string; reply: string; }
 
 const VeraChat: React.FC<{
-  dialogue: VeraDialogue; history: VeraChatHistory | null;
-  onComplete: (h: VeraChatHistory) => void; onClose: () => void;
-}> = ({ dialogue, history, onComplete, onClose }) => {
+  dialogue:   VeraDialogue;
+  history:    VeraChatHistory | null;
+  suitDamaged: boolean;
+  onComplete: (h: VeraChatHistory) => void;
+  onProceed:  () => void;
+  onClose:    () => void;
+}> = ({ dialogue, history, suitDamaged, onComplete, onProceed, onClose }) => {
   if (history) {
     return (
       <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
         <p className={styles.hudPanelTitle}>// VERA TERMINAL</p>
         <p className={styles.veraUserLine}>You: &ldquo;{history.chosenLabel}&rdquo;</p>
         <p className={styles.veraTypingText}>VERA: &ldquo;{history.reply}&rdquo;</p>
-        <button className={styles.veraCloseBtn} onClick={onClose}>[ Close terminal ]</button>
+        {!suitDamaged ? (
+          <ProceedPrompt onProceed={onProceed} onClose={onClose} />
+        ) : (
+          <button className={styles.veraCloseBtn} onClick={onClose}>[ Close terminal ]</button>
+        )}
       </div></div>
     );
   }
-  return <VeraChatInteractive dialogue={dialogue} onComplete={onComplete} onClose={onClose} />;
+  return <VeraChatInteractive dialogue={dialogue} onComplete={onComplete} onProceed={onProceed} onClose={onClose} />;
 };
 
+const ProceedPrompt: React.FC<{ onProceed: () => void; onClose: () => void }> = ({ onProceed, onClose }) => (
+  <div>
+    <p className={styles.veraUserLine} style={{ fontStyle: 'normal', color: '#00ffe1', marginBottom: '0.5rem' }}>
+      Proceed to coordinates?
+    </p>
+    <div style={{ display: 'flex', gap: '0.75rem' }}>
+      <button className={styles.veraReplyBtn} onClick={onProceed}>&rsaquo; Yes</button>
+      <button className={styles.veraReplyBtn} onClick={onClose}>&rsaquo; No</button>
+    </div>
+  </div>
+);
+
 const VeraChatInteractive: React.FC<{
-  dialogue: VeraDialogue; onComplete: (h: VeraChatHistory) => void; onClose: () => void;
-}> = ({ dialogue, onComplete, onClose }) => {
+  dialogue:   VeraDialogue;
+  onComplete: (h: VeraChatHistory) => void;
+  onProceed:  () => void;
+  onClose:    () => void;
+}> = ({ dialogue, onComplete, onProceed, onClose }) => {
   const [phase,       setPhase]       = useState<'opening' | 'replied'>('opening');
   const [activeText,  setActiveText]  = useState(dialogue.opening);
   const [chosenLabel, setChosenLabel] = useState('');
   const { displayed, done } = useTypewriter(activeText);
+
   const handleResponse = (label: string, reply: string) => {
     setChosenLabel(label); setActiveText(reply); setPhase('replied');
     onComplete({ chosenLabel: label, reply });
   };
+
   return (
     <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
       <p className={styles.hudPanelTitle}>// VERA TERMINAL</p>
@@ -214,7 +326,9 @@ const VeraChatInteractive: React.FC<{
           ))}
         </div>
       )}
-      {done && phase === 'replied' && <button className={styles.veraCloseBtn} onClick={onClose}>[ Close terminal ]</button>}
+      {done && phase === 'replied' && (
+        <ProceedPrompt onProceed={onProceed} onClose={onClose} />
+      )}
     </div></div>
   );
 };
@@ -276,7 +390,9 @@ const ScanResultPanel: React.FC<{ result: string; onClose: () => void }> = ({ re
   return (
     <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
       <p className={styles.hudPanelTitle}>// TERRAIN SCAN COMPLETE</p>
-      <p className={styles.weatherBrokenNote} style={{ whiteSpace: 'pre-line' }}>{displayed}{!done && <span className={styles.veraTypingCursor} />}</p>
+      <p className={styles.weatherBrokenNote} style={{ whiteSpace: 'pre-line' }}>
+        {displayed}{!done && <span className={styles.veraTypingCursor} />}
+      </p>
       {done && <button className={styles.veraCloseBtn} onClick={onClose}>[ Close ]</button>}
     </div></div>
   );
@@ -337,8 +453,6 @@ const PlanetSurvivalPanel: React.FC<{ planetKey: string; onClose: () => void }> 
 };
 
 // ── HUD button config ──────────────────────────────────────────
-// Battery ends ~11rem; right buttons start at 12rem.
-// Left buttons sit below sensor panel (~19.8rem+).
 type HudButton = { id: string; label: string; top: string; pos: { left: string } | { right: string }; action: string | null };
 const HUD_BUTTONS: HudButton[] = [
   { id: 'ship',     label: '↩ Return to Ship',   top: '19.8rem', pos: { left:  '1.5rem' }, action: null       },
@@ -362,27 +476,37 @@ const HNTDTravel: React.FC = () => {
   const key    = params.get('planet') ?? '';
   const planet = PLANETS[key];
 
-  const [activePanel,      setActivePanel]      = useState<Panel>(null);
-  const [oxygen,           setOxygen]           = useState(100);
-  const [battery,          setBattery]          = useState(98);
-  const [isDead,           setIsDead]           = useState(false);
-  const [deathCause,       setDeathCause]       = useState<'oxygen' | 'battery' | null>(null);
-  const [veraChatHistory,  setVeraChatHistory]  = useState<VeraChatHistory | null>(null);
-  const [scannerFirstTime, setScannerFirstTime] = useState(false);
-  const [scanState,        setScanState]        = useState<'idle' | 'scanning' | 'result'>('idle');
+  const [activePanel,       setActivePanel]       = useState<Panel>(null);
+  const [oxygen,            setOxygen]            = useState(100);
+  const [battery,           setBattery]           = useState(98);
+  const [isDead,            setIsDead]            = useState(false);
+  const [deathCause,        setDeathCause]        = useState<'oxygen' | 'battery' | null>(null);
+  const [veraChatHistory,   setVeraChatHistory]   = useState<VeraChatHistory | null>(null);
+  const [scannerFirstTime,  setScannerFirstTime]  = useState(false);
+  const [scanState,         setScanState]         = useState<'idle' | 'scanning' | 'result'>('idle');
+  const [suitDamaged,       setSuitDamaged]       = useState(false);
+  const [showNarrative,     setShowNarrative]     = useState(false);
   const scannerSeenRef = useRef(false);
 
   useEffect(() => {
     if (key && PLANETS[key]) markPlanetVisited(key);
   }, [key, markPlanetVisited]);
 
+  // Normal resource drain
   useEffect(() => {
     const id = setInterval(() => {
-      setOxygen(prev  => Math.max(0, prev  - 5));
-      setBattery(prev => Math.max(0, prev  - 5));
+      setOxygen(prev  => Math.max(0, prev - 5));
+      setBattery(prev => Math.max(0, prev - 5));
     }, 60_000);
     return () => clearInterval(id);
   }, []);
+
+  // Rapid O2 drain after suit damage (10% every 3s)
+  useEffect(() => {
+    if (!suitDamaged) return;
+    const id = setInterval(() => setOxygen(prev => Math.max(0, prev - 10)), 3_000);
+    return () => clearInterval(id);
+  }, [suitDamaged]);
 
   useEffect(() => {
     if (oxygen  <= 0 && !deathCause) { setDeathCause('oxygen');  setIsDead(true); }
@@ -411,8 +535,17 @@ const HNTDTravel: React.FC = () => {
     }
   };
 
-  const oxygenColor  = oxygen  > 60 ? '#00ffe1' : oxygen  > 20 ? '#ff8800' : '#ff4d4d';
-  const systemsHidden = activePanel !== null || scanState !== 'idle';
+  const handleProceed = () => {
+    setActivePanel(null);
+    setSuitDamaged(true);
+    setShowNarrative(true);
+  };
+
+  const oxygenColor  = oxygen  > 60 ? '#00ffe1' : oxygen > 20 ? '#ff8800' : '#ff4d4d';
+  // Hide HUD elements when a panel is open OR narrative is showing; NOT when only alerts are active
+  const systemsHidden = activePanel !== null || scanState !== 'idle' || showNarrative;
+  // Alerts fire after suit damaged and narrative dismissed
+  const alertsActive = suitDamaged && !showNarrative && !isDead;
 
   if (!planet) {
     return (
@@ -450,11 +583,12 @@ const HNTDTravel: React.FC = () => {
       </div>
 
       {/* Top-right */}
-      <p className={`${styles.oxygenDisplay} ${oxygen <= 20 ? styles.oxygenAlert : ''}`} style={{ color: oxygenColor }}>
-        Oxygen: {oxygen}%
-      </p>
-      <BioDataPanel  hidden={systemsHidden} />
       <BatteryDisplay battery={battery} hidden={systemsHidden} />
+      <p className={`${styles.oxygenDisplay} ${oxygen <= 20 || suitDamaged ? styles.oxygenAlert : ''}`}
+        style={{ color: oxygenColor }}>
+        Oxygen: {oxygen}%{suitDamaged ? ' ⚠' : ''}
+      </p>
+      <BioDataPanel hidden={systemsHidden} />
 
       {/* Bottom center */}
       <CompassDisplay hidden={systemsHidden} />
@@ -462,12 +596,44 @@ const HNTDTravel: React.FC = () => {
       {/* HUD buttons */}
       {HUD_BUTTONS.map(btn => (
         <button key={btn.id}
-          className={`${styles.archHudBtn} ${systemsHidden ? styles.archHudBtnHidden : ''}`}
+          className={[
+            styles.archHudBtn,
+            systemsHidden ? styles.archHudBtnHidden : '',
+            btn.id === 'ship' && alertsActive ? styles.archHudBtnUrgent : '',
+          ].join(' ')}
           style={{ top: btn.top, ...btn.pos, transform: 'translateY(-50%)' }}
           onClick={() => handleButtonClick(btn.action)}>
           {btn.label}
         </button>
       ))}
+
+      {/* Emergency alerts */}
+      <EmergencyAlerts active={alertsActive} />
+
+      {/* Panels */}
+      {activePanel === 'log'      && <HNTDEditLogModal log={null} onSave={handleSaveLog} onClose={() => setActivePanel(null)} />}
+      {activePanel === 'vera'     && (
+        <VeraChat
+          dialogue={planet.vera}
+          history={veraChatHistory}
+          suitDamaged={suitDamaged}
+          onComplete={h => setVeraChatHistory(h)}
+          onProceed={handleProceed}
+          onClose={() => setActivePanel(null)}
+        />
+      )}
+      {activePanel === 'weather'  && <WeatherPanel firstTime={scannerFirstTime} onClose={() => setActivePanel(null)} />}
+      {activePanel === 'guide'    && <PlanetSurvivalPanel planetKey={key} onClose={() => setActivePanel(null)} />}
+      {activePanel === 'distress' && <DistressPanel onClose={() => setActivePanel(null)} />}
+      {scanState   === 'result'   && <ScanResultPanel result={planet.scanResult} onClose={() => setScanState('idle')} />}
+
+      {/* Suit damage narrative */}
+      {showNarrative && (
+        <SuitDamageNarrative
+          text={planet.coordinatesNarrative}
+          onAcknowledge={() => setShowNarrative(false)}
+        />
+      )}
 
       {/* Scanning overlay */}
       {scanState === 'scanning' && (
@@ -475,14 +641,6 @@ const HNTDTravel: React.FC = () => {
           <p className={styles.scanningText}>SCANNING...</p>
         </div>
       )}
-
-      {/* Panels */}
-      {activePanel === 'log'      && <HNTDEditLogModal log={null} onSave={handleSaveLog} onClose={() => setActivePanel(null)} />}
-      {activePanel === 'vera'     && <VeraChat dialogue={planet.vera} history={veraChatHistory} onComplete={h => setVeraChatHistory(h)} onClose={() => setActivePanel(null)} />}
-      {activePanel === 'weather'  && <WeatherPanel firstTime={scannerFirstTime} onClose={() => setActivePanel(null)} />}
-      {activePanel === 'guide'    && <PlanetSurvivalPanel planetKey={key} onClose={() => setActivePanel(null)} />}
-      {activePanel === 'distress' && <DistressPanel onClose={() => setActivePanel(null)} />}
-      {scanState   === 'result'   && <ScanResultPanel result={planet.scanResult} onClose={() => setScanState('idle')} />}
 
       {/* Death screen */}
       {isDead && (

@@ -705,6 +705,46 @@
   50%       { opacity: 0.25; }
 }
 
+/* ── Emergency alert bubbles ──────────────────────────────────── */
+.alertBubble {
+  position: fixed;
+  z-index: 8500;
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.65rem, 1.6vmin, 0.9rem);
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  border: 1px solid;
+  background: rgba(0, 0, 0, 0.82);
+  pointer-events: none;
+  white-space: nowrap;
+  letter-spacing: 0.06em;
+  animation: alertPop 4s ease-in-out forwards;
+}
+
+.alertRed    { color: #ff4d4d; border-color: rgba(255, 77,  77,  0.7); text-shadow: 0 0 6px rgba(255,77,77,0.5); }
+.alertYellow { color: #ffdd00; border-color: rgba(255, 221, 0,   0.7); text-shadow: 0 0 6px rgba(255,221,0,0.4); }
+.alertTeal   { color: #00ffe1; border-color: rgba(0,   255, 225, 0.7); text-shadow: 0 0 6px rgba(0,255,200,0.4); }
+
+@keyframes alertPop {
+  0%   { opacity: 0; transform: scale(0.75); }
+  12%  { opacity: 1; transform: scale(1.05); }
+  20%  { transform: scale(1); }
+  65%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ── Urgent button (Return to Ship when suit is damaged) ─────── */
+.archHudBtnUrgent {
+  border-color: #ff4d4d !important;
+  color: #ff4d4d !important;
+  animation: urgentPulse 0.75s ease-in-out infinite;
+}
+
+@keyframes urgentPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
+  50%       { box-shadow: 0 0 14px 4px rgba(255, 77, 77, 0.45); }
+}
+
 /* ── Shuttle Break ────────────────────────────────────────────── */
 .shuttleWrapper {
   height: 100vh;
