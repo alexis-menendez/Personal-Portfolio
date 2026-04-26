@@ -261,10 +261,22 @@
   left: 1.5rem;
   z-index: 5;
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(0.9rem, 2.2vmin, 1.3rem);
+  font-size: clamp(1.1rem, 2.6vmin, 1.5rem);
   color: rgba(0, 255, 200, 0.65);
   letter-spacing: 0.14em;
   text-shadow: 0 0 8px rgba(0, 255, 200, 0.3);
+  pointer-events: none;
+}
+
+.hudRegionLabel {
+  position: absolute;
+  top: 3.6rem;
+  left: 1.5rem;
+  z-index: 5;
+  font-family: 'Courier New', monospace;
+  font-size: clamp(0.7rem, 1.5vmin, 0.9rem);
+  color: rgba(0, 255, 200, 0.45);
+  letter-spacing: 0.08em;
   pointer-events: none;
 }
 
@@ -491,7 +503,7 @@
   right: 1.5rem;
   z-index: 5;
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(0.9rem, 2.2vmin, 1.3rem);
+  font-size: clamp(1.1rem, 2.6vmin, 1.5rem);
   letter-spacing: 0.1em;
   pointer-events: none;
   transition: color 0.6s ease;
@@ -505,6 +517,28 @@
   0%, 100% { opacity: 1; }
   50%       { opacity: 0.4; }
 }
+
+/* ── Bio data panel (top-right, below oxygen) ─────────────────── */
+.bioPanel {
+  position: absolute;
+  top: 3.8rem;
+  right: 1.5rem;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  text-align: right;
+  pointer-events: none;
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.9rem, 2.2vmin, 1.3rem);
+  color: #00ffe1;
+  letter-spacing: 0.06em;
+  transition: opacity 0.3s ease;
+}
+
+.bioPanelHidden { opacity: 0; }
+
+.bioDots { color: rgba(0, 255, 225, 0.4); }
 
 /* ── Sensor data panel (top-left, below sector label) ─────────── */
 .sensorPanel {

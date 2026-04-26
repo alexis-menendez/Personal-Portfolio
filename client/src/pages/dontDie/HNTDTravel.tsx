@@ -27,6 +27,7 @@ interface SensorReading {
 
 interface PlanetData {
   name: string;
+  region: string;
   image: string;
   vera: VeraDialogue;
   sensors: SensorReading[];
@@ -36,8 +37,9 @@ interface PlanetData {
 // ── Planet data ────────────────────────────────────────────────
 const PLANETS: Record<string, PlanetData> = {
   planetone: {
-    name: 'Doubt',
-    image: '/assets/dontDie/images/planet-one/PlanetOne.png',
+    name:   'Doubt',
+    region: 'The Sunscoured Basin',
+    image:  '/assets/dontDie/images/planet-one/PlanetOne.png',
     sensors: [
       { label: 'Temperature',       value: '118°F / 48°C',        alert: true  },
       { label: 'Atmo.\nComposition', value: 'N₂ 68% | CO₂ 22% | SO₂ 10%'       },
@@ -57,11 +59,12 @@ const PLANETS: Record<string, PlanetData> = {
     },
   },
   planettwo: {
-    name: 'Brune',
-    image: '/assets/dontDie/images/planet-two/PlanetTwo.png',
+    name:   'Brune',
+    region: 'Upper Ridge — Sector 7',
+    image:  '/assets/dontDie/images/planet-two/PlanetTwo.png',
     sensors: [
       { label: 'Temperature',       value: '-12°F / -24°C',        alert: true  },
-      { label: 'Atmo. Composition', value: 'N₂ 78% | O₂ 6% | Ar 16%'           },
+      { label: 'Atmo.\nComposition', value: 'N₂ 78% | O₂ 6% | Ar 16%'           },
       { label: 'Breathable',        value: 'NO — O₂ insufficient', alert: true  },
       { label: 'Pressure',          value: '0.3 atm',              alert: true  },
       { label: 'Humidity',          value: '45%'                                },
@@ -94,7 +97,7 @@ function useTypewriter(text: string, speed = 28) {
   const [done,      setDone]      = useState(false);
   useEffect(() => {
     setDisplayed(''); setDone(false);
-    if (!text) return;
+    if (!text) { setDone(true); return; }
     let i = 0;
     const id = setInterval(() => {
       i++;
@@ -106,15 +109,79 @@ function useTypewriter(text: string, speed = 28) {
   return { displayed, done };
 }
 
+// ── Fluctuating value hook (shows ... then new number) ─────────
+function useFluctuating(base: number, range: number, intervalMs: number, decimals = 0) {
+  const [display, setDisplay] = useState(base.toFixed(decimals));
+  useEffect(() => {
+    const id = setInterval(() => {
+      setDisplay('...');
+      setTimeout(() => {
+        const next = base + (Math.random() * 2 - 1) * range;
+        setDisplay(parseFloat(next.toFixed(decimals)).toFixed(decimals));
+      }, 1000);
+    }, intervalMs);
+    return () => clearInterval(id);
+  }, [base, range, intervalMs, decimals]);
+  return display;
+}
+
+// ── Bio Data Panel ─────────────────────────────────────────────
+const BioDataPanel: React.FC<{ hidden: boolean }> = ({ hidden }) => {
+  const heartRate = useFluctuating(73, 5, 9000);
+  const coreTemp  = useFluctuating(98.5, 0.3, 13000, 1);
+
+  return (
+    <div className={`${styles.bioPanel} ${hidden ? styles.bioPanelHidden : ''}`}>
+      <span className={heartRate === '...' ? styles.bioDots : ''}>HR: {heartRate} BPM</span>
+      <span>SpO2: 99%</span>
+      <span className={coreTemp === '...' ? styles.bioDots : ''}>Temp: {coreTemp}°F</span>
+    </div>
+  );
+};
+
 // ── VERA Chat ──────────────────────────────────────────────────
-const VeraChat: React.FC<{ dialogue: VeraDialogue; onClose: () => void }> = ({ dialogue, onClose }) => {
+interface VeraChatHistory { chosenLabel: string; reply: string; }
+
+const VeraChat: React.FC<{
+  dialogue:   VeraDialogue;
+  history:    VeraChatHistory | null;
+  onComplete: (h: VeraChatHistory) => void;
+  onClose:    () => void;
+}> = ({ dialogue, history, onComplete, onClose }) => {
+
+  // If conversation already happened, just show the result
+  if (history) {
+    return (
+      <div className={styles.hudPanel}>
+        <div className={styles.hudPanelBox}>
+          <p className={styles.hudPanelTitle}>// VERA TERMINAL</p>
+          <p className={styles.veraUserLine}>You: &ldquo;{history.chosenLabel}&rdquo;</p>
+          <p className={styles.veraTypingText}>VERA: &ldquo;{history.reply}&rdquo;</p>
+          <button className={styles.veraCloseBtn} onClick={onClose}>[ Close terminal ]</button>
+        </div>
+      </div>
+    );
+  }
+
+  // First-time interactive version
+  return <VeraChatInteractive dialogue={dialogue} onComplete={onComplete} onClose={onClose} />;
+};
+
+const VeraChatInteractive: React.FC<{
+  dialogue:   VeraDialogue;
+  onComplete: (h: VeraChatHistory) => void;
+  onClose:    () => void;
+}> = ({ dialogue, onComplete, onClose }) => {
   const [phase,       setPhase]       = useState<'opening' | 'replied'>('opening');
   const [activeText,  setActiveText]  = useState(dialogue.opening);
   const [chosenLabel, setChosenLabel] = useState('');
   const { displayed, done } = useTypewriter(activeText);
 
   const handleResponse = (label: string, reply: string) => {
-    setChosenLabel(label); setActiveText(reply); setPhase('replied');
+    setChosenLabel(label);
+    setActiveText(reply);
+    setPhase('replied');
+    onComplete({ chosenLabel: label, reply });
   };
 
   return (
@@ -144,35 +211,46 @@ const VeraChat: React.FC<{ dialogue: VeraDialogue; onClose: () => void }> = ({ d
 };
 
 // ── Weather Panel ──────────────────────────────────────────────
-const WeatherPanel: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+const VERA_SCANNER_TEXT = `The atmospheric scanner appears to be calibrated to... Earth? That is embarrassing. I am displaying what I have. Please do not tell anyone about this.`;
+
+const WeatherPanel: React.FC<{ firstTime: boolean; onClose: () => void }> = ({ firstTime, onClose }) => {
   const [city]    = useState(randomCity);
   const [data,    setData]    = useState<HNTDWeatherData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error,   setError]   = useState('');
+  const { displayed, done: veraDone } = useTypewriter(firstTime ? VERA_SCANNER_TEXT : '', 25);
 
   useEffect(() => {
     fetchWeather(city).then(setData).catch(err => setError(err.message)).finally(() => setLoading(false));
   }, [city]);
+
+  const veraText  = firstTime ? displayed : VERA_SCANNER_TEXT;
+  const showData  = !firstTime || veraDone;
 
   return (
     <div className={styles.hudPanel}>
       <div className={styles.hudPanelBox}>
         <p className={styles.weatherMalfunctionHeader}>!! SCANNER MALFUNCTION — CALIBRATION ERROR</p>
         <p className={styles.weatherBrokenNote}>
-          VERA: &ldquo;The atmospheric scanner appears to be calibrated to... Earth? That is embarrassing. I am displaying what I have. Please do not tell anyone about this.&rdquo;
+          VERA: &ldquo;{veraText}&rdquo;
+          {firstTime && !veraDone && <span className={styles.veraTypingCursor} />}
         </p>
-        {loading && <p className={styles.hudPanelTitle}>Scanning...</p>}
-        {error   && <p className={styles.hudPanelTitle} style={{ color: '#ff4d4d' }}>Signal lost: {error}</p>}
-        {data && (
+        {showData && (
           <>
-            <p className={styles.hudPanelTitle}>// INTERCEPTED SIGNAL: {data.name.toUpperCase()}, {data.sys.country}</p>
-            <p className={styles.weatherBrokenNote}>Condition: {data.weather[0]?.description?.toUpperCase() ?? 'UNKNOWN'}</p>
-            <div className={styles.weatherGrid}>
-              <div className={styles.weatherRow}><span className={styles.weatherLabel}>Temp</span><span className={styles.weatherValue}>{Math.round(data.main.temp)}°F</span></div>
-              <div className={styles.weatherRow}><span className={styles.weatherLabel}>Humidity</span><span className={styles.weatherValue}>{data.main.humidity}%</span></div>
-              <div className={styles.weatherRow}><span className={styles.weatherLabel}>Wind</span><span className={styles.weatherValue}>{Math.round(data.wind.speed)} mph {windDir(data.wind.deg)}</span></div>
-              <div className={styles.weatherRow}><span className={styles.weatherLabel}>Pressure</span><span className={styles.weatherValue}>{data.main.pressure} hPa</span></div>
-            </div>
+            {loading && <p className={styles.hudPanelTitle}>Scanning...</p>}
+            {error   && <p className={styles.hudPanelTitle} style={{ color: '#ff4d4d' }}>Signal lost: {error}</p>}
+            {data && (
+              <>
+                <p className={styles.hudPanelTitle}>// INTERCEPTED SIGNAL: {data.name.toUpperCase()}, {data.sys.country}</p>
+                <p className={styles.weatherBrokenNote}>Condition: {data.weather[0]?.description?.toUpperCase() ?? 'UNKNOWN'}</p>
+                <div className={styles.weatherGrid}>
+                  <div className={styles.weatherRow}><span className={styles.weatherLabel}>Temp</span><span className={styles.weatherValue}>{Math.round(data.main.temp)}°F</span></div>
+                  <div className={styles.weatherRow}><span className={styles.weatherLabel}>Humidity</span><span className={styles.weatherValue}>{data.main.humidity}%</span></div>
+                  <div className={styles.weatherRow}><span className={styles.weatherLabel}>Wind</span><span className={styles.weatherValue}>{Math.round(data.wind.speed)} mph {windDir(data.wind.deg)}</span></div>
+                  <div className={styles.weatherRow}><span className={styles.weatherLabel}>Pressure</span><span className={styles.weatherValue}>{data.main.pressure} hPa</span></div>
+                </div>
+              </>
+            )}
           </>
         )}
         <button className={styles.weatherHudCloseBtn} onClick={onClose}>[ Close scanner ]</button>
@@ -253,60 +331,62 @@ const PlanetSurvivalPanel: React.FC<{ planetKey: string; onClose: () => void }> 
 };
 
 // ── HUD button config ──────────────────────────────────────────
-// Left buttons: left edge at 1.5rem, translateY only → stack with left edges aligned.
-// Right buttons: right edge at 1.5rem, translateY only → stack with right edges aligned.
+// Bio panel occupies ~3.8–9.5rem on right side.
+// Right buttons start at 10rem; left buttons unchanged.
 type HudButton = { id: string; label: string; top: string; pos: { left: string } | { right: string }; action: string | null };
 const HUD_BUTTONS: HudButton[] = [
-  { id: 'ship',    label: '↩ Return to Ship', top: '18.3rem', pos: { left:  '1.5rem' }, action: null      },
-  { id: 'log',     label: '✎ Write Log',       top: '21.7rem', pos: { left:  '1.5rem' }, action: 'log'     },
-  { id: 'guide',   label: '⊕ Planet Guide', top: '6.2rem',  pos: { right: '1.5rem' }, action: 'guide'   },
-  { id: 'vera',    label: '⬡ Chat VERA',    top: '10.1rem', pos: { right: '1.5rem' }, action: 'vera'    },
-  { id: 'weather', label: '⚠ Scanner',       top: '14.0rem', pos: { right: '1.5rem' }, action: 'weather' },
+  { id: 'ship',    label: '↩ Return to Ship',    top: '18.3rem', pos: { left:  '1.5rem' }, action: null      },
+  { id: 'log',     label: '✎ Write Log',           top: '21.7rem', pos: { left:  '1.5rem' }, action: 'log'     },
+  { id: 'weather', label: '⚠ Weather Scanner',     top: '10rem',   pos: { right: '1.5rem' }, action: 'weather' },
+  { id: 'guide',   label: '⊕ Planet Guide',        top: '13.9rem', pos: { right: '1.5rem' }, action: 'guide'   },
+  { id: 'vera',    label: '⬡ Chat with VERA',      top: '17.8rem', pos: { right: '1.5rem' }, action: 'vera'    },
 ];
 
 // ── Main HUD ───────────────────────────────────────────────────
 type Panel = 'log' | 'vera' | 'weather' | 'guide' | null;
 
 const HNTDTravel: React.FC = () => {
-  const navigate                = useNavigate();
-  const [params]                = useSearchParams();
-  const { token, logout }       = useHNTDAuth();
-  const { markPlanetVisited }   = useHNTDPlanets();
+  const navigate              = useNavigate();
+  const [params]              = useSearchParams();
+  const { token, logout }     = useHNTDAuth();
+  const { markPlanetVisited } = useHNTDPlanets();
 
   const key    = params.get('planet') ?? '';
   const planet = PLANETS[key];
 
-  const [activePanel, setActivePanel] = useState<Panel>(null);
-  const [oxygen,      setOxygen]      = useState(100);
-  const [isDead,      setIsDead]      = useState(false);
+  const [activePanel,     setActivePanel]     = useState<Panel>(null);
+  const [oxygen,          setOxygen]          = useState(100);
+  const [isDead,          setIsDead]          = useState(false);
+  const [veraChatHistory, setVeraChatHistory] = useState<VeraChatHistory | null>(null);
+  const [scannerFirstTime, setScannerFirstTime] = useState(false);
+  const scannerSeenRef = useRef(false);
 
-  // Mark planet visited
   useEffect(() => {
     if (key && PLANETS[key]) markPlanetVisited(key);
   }, [key, markPlanetVisited]);
 
-  // Oxygen timer — 5% per minute
   useEffect(() => {
-    const id = setInterval(() => {
-      setOxygen(prev => Math.max(0, prev - 5));
-    }, 60_000);
+    const id = setInterval(() => setOxygen(prev => Math.max(0, prev - 5)), 60_000);
     return () => clearInterval(id);
   }, []);
 
-  // Trigger death when oxygen hits 0
-  useEffect(() => {
-    if (oxygen <= 0) setIsDead(true);
-  }, [oxygen]);
+  useEffect(() => { if (oxygen <= 0) setIsDead(true); }, [oxygen]);
 
   const handleSaveLog = useCallback(async (title: string, content: string) => {
     if (!token) return;
     await createLog(token, title, content);
   }, [token]);
 
-  const handleRestart = () => {
-    logout();
-    navigate('/hntd-home');
+  const handleOpenPanel = (action: string) => {
+    if (action === 'weather') {
+      const isFirst = !scannerSeenRef.current;
+      scannerSeenRef.current = true;
+      setScannerFirstTime(isFirst);
+    }
+    setActivePanel(action as Panel);
   };
+
+  const handleRestart = () => { logout(); navigate('/hntd-home'); };
 
   const oxygenColor =
     oxygen > 60 ? '#00ffe1' :
@@ -330,66 +410,66 @@ const HNTDTravel: React.FC = () => {
 
   return (
     <div className={styles.hudWrapper}>
+      <div className={`${styles.hudBg} ${panelOpen ? styles.hudBgDimmed : ''}`}
+        style={{ backgroundImage: `url(${planet.image})` }} />
 
-      {/* Planet background */}
-      <div
-        className={`${styles.hudBg} ${panelOpen ? styles.hudBgDimmed : ''}`}
-        style={{ backgroundImage: `url(${planet.image})` }}
-      />
+      <img src="/assets/dontDie/images/HudDisplay.png" alt="" aria-hidden="true"
+        className={`${styles.hudDisplayImg} ${panelOpen ? styles.hudDisplayImgHidden : ''}`} />
 
-      {/* HUD display image */}
-      <img
-        src="/assets/dontDie/images/HudDisplay.png"
-        alt=""
-        aria-hidden="true"
-        className={`${styles.hudDisplayImg} ${panelOpen ? styles.hudDisplayImgHidden : ''}`}
-      />
-
-      {/* Top-left: sector label + sensor data */}
-      <p className={styles.hudTopLabel}>// SURFACE: {planet.name.toUpperCase()}</p>
+      {/* Top-left: planet name + region + sensor data */}
+      <p className={styles.hudTopLabel}>// PLANET: {planet.name.toUpperCase()}</p>
+      <p className={styles.hudRegionLabel}>{planet.region}</p>
       <div className={styles.sensorPanel}>
         {planet.sensors.map(s => (
           <div key={s.label} className={styles.sensorRow}>
-            <span className={styles.sensorLabel}>{s.label}:</span>
+            <span className={styles.sensorLabel}>{s.label}</span>
             <span className={s.alert ? styles.sensorValueAlert : styles.sensorValue}>{s.value}</span>
           </div>
         ))}
       </div>
 
-      {/* Top-right: oxygen display */}
-      <p
-        className={`${styles.oxygenDisplay} ${oxygen <= 20 ? styles.oxygenAlert : ''}`}
-        style={{ color: oxygenColor }}
-      >
+      {/* Top-right: oxygen + bio data */}
+      <p className={`${styles.oxygenDisplay} ${oxygen <= 20 ? styles.oxygenAlert : ''}`}
+        style={{ color: oxygenColor }}>
         Oxygen: {oxygen}%
       </p>
+      <BioDataPanel hidden={panelOpen} />
 
       {/* HUD buttons */}
       {HUD_BUTTONS.map(btn => (
-        <button
-          key={btn.id}
+        <button key={btn.id}
           className={`${styles.archHudBtn} ${panelOpen ? styles.archHudBtnHidden : ''}`}
           style={{ top: btn.top, ...btn.pos, transform: 'translateY(-50%)' }}
-          onClick={btn.action ? () => setActivePanel(btn.action as Panel) : () => navigate('/hntd-holomap')}
-        >
+          onClick={btn.action ? () => handleOpenPanel(btn.action!) : () => navigate('/hntd-holomap')}>
           {btn.label}
         </button>
       ))}
 
       {/* Panels */}
-      {activePanel === 'log'     && <HNTDEditLogModal log={null} onSave={handleSaveLog} onClose={() => setActivePanel(null)} />}
-      {activePanel === 'vera'    && <VeraChat dialogue={planet.vera} onClose={() => setActivePanel(null)} />}
-      {activePanel === 'weather' && <WeatherPanel onClose={() => setActivePanel(null)} />}
-      {activePanel === 'guide'   && <PlanetSurvivalPanel planetKey={key} onClose={() => setActivePanel(null)} />}
+      {activePanel === 'log' && (
+        <HNTDEditLogModal log={null} onSave={handleSaveLog} onClose={() => setActivePanel(null)} />
+      )}
+      {activePanel === 'vera' && (
+        <VeraChat
+          dialogue={planet.vera}
+          history={veraChatHistory}
+          onComplete={h => setVeraChatHistory(h)}
+          onClose={() => setActivePanel(null)}
+        />
+      )}
+      {activePanel === 'weather' && (
+        <WeatherPanel firstTime={scannerFirstTime} onClose={() => setActivePanel(null)} />
+      )}
+      {activePanel === 'guide' && (
+        <PlanetSurvivalPanel planetKey={key} onClose={() => setActivePanel(null)} />
+      )}
 
       {/* Death screen */}
       {isDead && (
         <div className={styles.deathScreen}>
           <div className={styles.deathContent}>
             <p className={styles.deathTitle}>YOU DIED</p>
-            <p className={styles.deathVera}>
-              VERA: &ldquo;{planet.deathVera}&rdquo;
-            </p>
+            <p className={styles.deathVera}>VERA: &ldquo;{planet.deathVera}&rdquo;</p>
             <p className={styles.deathVera} style={{ borderLeft: 'none', paddingLeft: 0, textAlign: 'center', marginTop: '-0.5rem' }}>
               A new crew member may be assigned.
             </p>
