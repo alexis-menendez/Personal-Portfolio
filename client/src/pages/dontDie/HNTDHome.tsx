@@ -19,11 +19,12 @@ So strap in, Commander. The galaxy awaits!`;
 const HNTDHome: React.FC = () => {
   const { login, isAuthenticated } = useHNTDAuth();
   const navigate = useNavigate();
-  const [mode,         setMode]         = useState<'login' | 'register'>('login');
-  const [username,     setUsername]     = useState('');
-  const [password,     setPassword]     = useState('');
-  const [confirm,      setConfirm]      = useState('');
-  const [error,        setError]        = useState('');
+  const [mode,          setMode]          = useState<'login' | 'register'>('login');
+  const [username,      setUsername]      = useState('');
+  const [password,      setPassword]      = useState('');
+  const [confirm,       setConfirm]       = useState('');
+  const [characterName, setCharacterName] = useState('');
+  const [error,         setError]         = useState('');
   const [showWelcome,  setShowWelcome]  = useState(false);
   const [pendingUser,  setPendingUser]  = useState<{ user: any; token: string } | null>(null);
 
@@ -35,7 +36,8 @@ const HNTDHome: React.FC = () => {
     try {
       if (mode === 'register') {
         if (password !== confirm) { setError('Passwords do not match.'); return; }
-        const data = await registerHNTD(username, password);
+        if (!characterName.trim()) { setError('Character name is required.'); return; }
+        const data = await registerHNTD(username, password, characterName.trim());
         setPendingUser({ user: data.user, token: data.token });
         setShowWelcome(true);
       } else {
@@ -90,7 +92,10 @@ const HNTDHome: React.FC = () => {
             <input className={styles.authInput} type="text" placeholder="USERNAME" value={username} onChange={e => setUsername(e.target.value)} required />
             <input className={styles.authInput} type="password" placeholder="PASSWORD" value={password} onChange={e => setPassword(e.target.value)} required />
             {mode === 'register' && (
-              <input className={styles.authInput} type="password" placeholder="CONFIRM PASSWORD" value={confirm} onChange={e => setConfirm(e.target.value)} required />
+              <>
+                <input className={styles.authInput} type="password" placeholder="CONFIRM PASSWORD" value={confirm} onChange={e => setConfirm(e.target.value)} required />
+                <input className={styles.authInput} type="text" placeholder="CHARACTER NAME" value={characterName} onChange={e => setCharacterName(e.target.value)} required />
+              </>
             )}
             {error && <p className={styles.authError}>{error}</p>}
             <button className={styles.authBtn} type="submit">

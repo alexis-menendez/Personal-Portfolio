@@ -100,6 +100,8 @@ const HNTDNewCommander: React.FC = () => {
       const data = await renameHNTD(token, newName.trim());
       updateUser(data.user, data.token);
       markNewCharacter();
+      // Reset the dashboard first-visit flag so the "first time here" VERA dialogue fires again
+      localStorage.removeItem(`hntd_first_visit_${data.user.username}`);
       setPhase('letter');
     } catch (err: any) {
       setError(err.message || 'Failed to register new commander.');
@@ -117,7 +119,7 @@ const HNTDNewCommander: React.FC = () => {
           <div className={styles.authContainer}>
             <p className={styles.authTitle}>// NEW COMMANDER REGISTRATION</p>
             <p style={{ fontFamily: 'Courier New', fontSize: 'clamp(0.6rem, 1.2vmin, 0.75rem)', color: 'rgba(0,255,225,0.55)', marginBottom: '0.8rem', textAlign: 'center', maxWidth: '300px' }}>
-              A replacement explorer has been assigned. Please register your new commander designation to proceed.
+              A replacement explorer has been assigned. Enter a character name for your new commander. Your login credentials remain unchanged.
             </p>
             <form onSubmit={handleRename} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', width: '100%' }}>
               <input

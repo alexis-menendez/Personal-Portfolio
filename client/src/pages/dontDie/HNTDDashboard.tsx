@@ -37,7 +37,7 @@ interface DashVariant {
 }
 
 const FIRST_OPENING =
-`WELCOME, EXPLORER.
+`WELCOME BACK, EXPLORER.
 
 All systems are... mostly operational. Life support is online. Navigation is functioning. The planets are waiting.
 
@@ -158,7 +158,7 @@ function pickVariant(): string {
 // ── VERA Chat Component ────────────────────────────────────────
 type DashPhase = 'vera_opening' | 'vera_first_reply' | 'vera_followup_reply' | 'done';
 
-const DashboardVeraChat: React.FC<{ username: string }> = ({ username }) => {
+const DashboardVeraChat: React.FC<{ username: string; characterName: string }> = ({ username, characterName }) => {
   const [isFirstTime] = useState<boolean>(() => {
     const key = `hntd_first_visit_${username}`;
     if (!localStorage.getItem(key)) {
@@ -255,6 +255,7 @@ const DashboardVeraChat: React.FC<{ username: string }> = ({ username }) => {
     <>
       <p className={styles.veraLabel}>// VERA — SHIP AI v2.4.1</p>
       <p className={styles.veraQuote} style={{ whiteSpace: 'pre-line' }}>
+        <span style={{ opacity: 0.6 }}>Commander {characterName.toUpperCase()}.</span>{'\n\n'}
         {displayed}{!done && <span className={hudStyles.veraTypingCursor} />}
       </p>
       {renderPlayerButtons()}
@@ -285,7 +286,7 @@ const HNTDDashboard: React.FC = () => {
           <div className={styles.pageContent}>
             <div className={styles.dashboardContent}>
 
-              {user && <DashboardVeraChat username={user.username} />}
+              {user && <DashboardVeraChat username={user.username} characterName={user.characterName} />}
 
               <div className={hudStyles.storageLocker}>
                 <button className={hudStyles.storageLockBtn}
@@ -307,7 +308,7 @@ const HNTDDashboard: React.FC = () => {
                     color: 'rgba(0,255,225,0.6)', fontStyle: 'italic',
                     margin: '0.3rem 0 0.5rem', letterSpacing: '0.04em',
                   }}>
-                    VERA: &ldquo;The previous commander's items are still in storage. I would say they left in a hurry, but that is not quite accurate either.&rdquo;
+                    VERA: &ldquo;This is the old commander&rsquo;s junk. I guess the cleanup crew missed some things.&rdquo;
                   </p>
                 )}
 

@@ -7,8 +7,14 @@ import { generateHNTDToken, verifyHNTDToken } from '../../middleware/HNTDAuth.js
 
 const router = Router();
 
+const userPayload = (user: HNTDUser) => ({
+  id:            user.id,
+  username:      user.username,
+  characterName: user.characterName ?? user.username,
+});
+
 router.post('/register', async (req: Request, res: Response) => {
-  const { username, password } = req.body;
+  const { username, password, characterName } = req.body;
   if (!username || !password) {
     res.status(400).json({ message: 'Username and password required' }); return;
   }
@@ -16,9 +22,13 @@ router.post('/register', async (req: Request, res: Response) => {
     const existing = await HNTDUser.findOne({ where: { username } });
     if (existing) { res.status(409).json({ message: 'Username already taken' }); return; }
 
-    const user = await HNTDUser.create({ username, password });
+    const user = await HNTDUser.create({
+      username,
+      password,
+      characterName: characterName?.trim() || username,
+    });
     const token = generateHNTDToken(user.id, user.username);
-    res.status(201).json({ token, user: { id: user.id, username: user.username } });
+    res.status(201).json({ token, user: userPayload(user) });
   } catch (err: any) { res.status(500).json({ message: err.message }); }
 });
 
@@ -31,23 +41,22 @@ router.post('/login', async (req: Request, res: Response) => {
   if (!valid) { res.status(401).json({ message: 'Authentication failed' }); return; }
 
   const token = generateHNTDToken(user.id, user.username);
-  res.json({ token, user: { id: user.id, username: user.username } });
+  res.json({ token, user: userPayload(user) });
 });
 
+// Updates characterName only — username and password never change
 router.patch('/rename', verifyHNTDToken, async (req: Request, res: Response) => {
-  const { newUsername } = req.body;
+  const { characterName } = req.body;
   const userId = (req as any).user?.userId;
-  if (!newUsername || typeof newUsername !== 'string' || !newUsername.trim()) {
-    res.status(400).json({ message: 'New username required' }); return;
+  if (!characterName || typeof characterName !== 'string' || !characterName.trim()) {
+    res.status(400).json({ message: 'Character name required' }); return;
   }
   try {
-    const taken = await HNTDUser.findOne({ where: { username: newUsername.trim() } });
-    if (taken) { res.status(409).json({ message: 'Username already taken' }); return; }
     const user = await HNTDUser.findByPk(userId);
     if (!user) { res.status(404).json({ message: 'User not found' }); return; }
-    await user.update({ username: newUsername.trim() });
+    await user.update({ characterName: characterName.trim() });
     const token = generateHNTDToken(user.id, user.username);
-    res.json({ token, user: { id: user.id, username: user.username } });
+    res.json({ token, user: userPayload(user) });
   } catch (err: any) { res.status(500).json({ message: err.message }); }
 });
 

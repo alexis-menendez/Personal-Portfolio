@@ -1088,7 +1088,7 @@
 
 .noteImageWrapper {
   position: relative;
-  width: clamp(280px, 40vmin, 480px);
+  width: clamp(360px, 55vmin, 640px);
   cursor: default;
 }
 
@@ -1107,7 +1107,7 @@
   padding: 18% 14%;
   text-align: center;
   font-family: 'La Belle Aurore', cursive;
-  font-size: clamp(0.75rem, 2vmin, 1rem);
+  font-size: clamp(0.9rem, 2.4vmin, 1.25rem);
   color: rgba(0, 0, 0, 0.95);
   line-height: 1.8;
   pointer-events: none;

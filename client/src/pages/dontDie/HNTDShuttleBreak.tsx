@@ -72,8 +72,8 @@ const HNTDShuttleBreak: React.FC = () => {
           <p style={{ fontFamily: 'Courier New', fontSize: '0.72rem', color: 'rgba(0,255,225,0.5)', marginTop: '1rem' }}>
             VERA: &ldquo;Life support is running on backup reserves. I do not know how long they will hold.&rdquo;
           </p>
-          <button className={styles.shuttleBtn} style={{ marginTop: '1rem' }} onClick={() => navigate('/hntd-holomap')}>
-            [ Return to Galaxy Map ]
+          <button className={styles.shuttleBtn} style={{ marginTop: '1rem' }} onClick={() => navigate('/hntd-epilog')}>
+            [ Continue ]
           </button>
         </div>
       )}

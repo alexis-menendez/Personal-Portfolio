@@ -20,6 +20,8 @@ const HNTDShuttleBreak  = lazy(() => import('./pages/dontDie/HNTDShuttleBreak'))
 const HNTDPersonalLogs   = lazy(() => import('./pages/dontDie/HNTDPersonalLogs'));
 const HNTDSurvivalGuide  = lazy(() => import('./pages/dontDie/HNTDSurvivalGuide'));
 const HNTDNewCommander   = lazy(() => import('./pages/dontDie/HNTDNewCommander'));
+const HNTDEpilog         = lazy(() => import('./pages/dontDie/HNTDEpilog'));
+const HNTDThankYou       = lazy(() => import('./pages/dontDie/HNTDThankYou'));
 
 // Layout
 import ProtectedRoute from './components/ProtectedRoute';
@@ -113,6 +115,8 @@ const App: React.FC = () => {
           <Route path="/hntd-survival-guide" element={<HNTDPrivateRoute><HNTDSurvivalGuide /></HNTDPrivateRoute>} />
           <Route path="/hntd-personal-logs"  element={<HNTDPrivateRoute><HNTDPersonalLogs /></HNTDPrivateRoute>} />
           <Route path="/hntd-new-commander" element={<HNTDPrivateRoute><HNTDNewCommander /></HNTDPrivateRoute>} />
+          <Route path="/hntd-epilog"        element={<HNTDPrivateRoute><HNTDEpilog /></HNTDPrivateRoute>} />
+          <Route path="/hntd-thankyou"     element={<HNTDThankYou />} />
 
           {/* Standalone project detail pages */}
           <Route path="/innerOrbit" element={<InnerOrbit />} />

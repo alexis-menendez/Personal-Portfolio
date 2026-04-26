@@ -27,16 +27,22 @@ interface PlanetContextType {
   followedCoordsDoubt:   boolean;
   tinkeredScannerBrune:  boolean;
   deathEntries:          SurvivalEntry[];
-  isNewCharacter:        boolean;
-  lockerFirstOpened:     boolean;
+  isNewCharacter:           boolean;
+  lockerFirstOpened:        boolean;
+  logsFirstOpened:          boolean;
+  doubtVeraComplete:        boolean;
+  bruneCoordinatesObtained: boolean;
   markPlanetVisited:         (key: string) => void;
   markCoordinatesFound:      () => void;
   markFollowedCoordsDoubt:   () => void;
   markTinkeredScannerBrune:  () => void;
   storeItem:                 (item: StoredItem) => void;
   addDeathEntry:             (entry: SurvivalEntry) => void;
-  markNewCharacter:          () => void;
-  markLockerOpened:          () => void;
+  markNewCharacter:              () => void;
+  markLockerOpened:              () => void;
+  markLogsOpened:                () => void;
+  markDoubtVeraComplete:         () => void;
+  markBruneCoordinatesObtained:  () => void;
   hasVisited:                (key: string) => boolean;
   isPlanetThreeUnlocked:     () => boolean;
 }
@@ -50,8 +56,11 @@ export const HNTDPlanetProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const [followedCoordsDoubt,  setFollowedCoordsDoubt]  = useState(false);
   const [tinkeredScannerBrune, setTinkeredScannerBrune] = useState(false);
   const [deathEntries,         setDeathEntries]         = useState<SurvivalEntry[]>([]);
-  const [isNewCharacter,       setIsNewCharacter]       = useState(false);
-  const [lockerFirstOpened,    setLockerFirstOpened]    = useState(false);
+  const [isNewCharacter,            setIsNewCharacter]            = useState(false);
+  const [lockerFirstOpened,         setLockerFirstOpened]         = useState(false);
+  const [logsFirstOpened,           setLogsFirstOpened]           = useState(false);
+  const [doubtVeraComplete,         setDoubtVeraComplete]         = useState(false);
+  const [bruneCoordinatesObtained,  setBruneCoordinatesObtained]  = useState(false);
 
   const markPlanetVisited        = (key: string) =>
     setVisitedPlanets(prev => prev.includes(key) ? prev : [...prev, key]);
@@ -62,8 +71,11 @@ export const HNTDPlanetProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     setStoredItems(prev => prev.find(i => i.id === item.id) ? prev : [...prev, item]);
   const addDeathEntry            = (entry: SurvivalEntry) =>
     setDeathEntries(prev => prev.find(e => e.title === entry.title) ? prev : [...prev, entry]);
-  const markNewCharacter         = () => setIsNewCharacter(true);
-  const markLockerOpened         = () => setLockerFirstOpened(true);
+  const markNewCharacter             = () => setIsNewCharacter(true);
+  const markLockerOpened             = () => setLockerFirstOpened(true);
+  const markLogsOpened               = () => setLogsFirstOpened(true);
+  const markDoubtVeraComplete        = () => setDoubtVeraComplete(true);
+  const markBruneCoordinatesObtained = () => setBruneCoordinatesObtained(true);
 
   const hasVisited = (key: string) => visitedPlanets.includes(key);
 
@@ -76,10 +88,12 @@ export const HNTDPlanetProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     <HNTDPlanetContext.Provider value={{
       visitedPlanets, coordinatesFound, storedItems,
       followedCoordsDoubt, tinkeredScannerBrune,
-      deathEntries, isNewCharacter, lockerFirstOpened,
+      deathEntries, isNewCharacter, lockerFirstOpened, logsFirstOpened,
+      doubtVeraComplete, bruneCoordinatesObtained,
       markPlanetVisited, markCoordinatesFound,
       markFollowedCoordsDoubt, markTinkeredScannerBrune,
-      storeItem, addDeathEntry, markNewCharacter, markLockerOpened,
+      storeItem, addDeathEntry, markNewCharacter, markLockerOpened, markLogsOpened,
+      markDoubtVeraComplete, markBruneCoordinatesObtained,
       hasVisited, isPlanetThreeUnlocked,
     }}>
       {children}

@@ -5,7 +5,7 @@ import React, { createContext, useContext, useState } from 'react';
 const TOKEN_KEY = 'hntd_token';
 const USER_KEY  = 'hntd_user';
 
-interface HNTDUser { id: number; username: string; }
+interface HNTDUser { id: number; username: string; characterName: string; }
 
 interface HNTDAuthContextType {
   user: HNTDUser | null;

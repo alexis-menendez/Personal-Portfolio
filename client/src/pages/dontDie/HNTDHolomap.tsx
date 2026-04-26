@@ -47,7 +47,7 @@ const PlanetSprite: React.FC<{ planetKey: string }> = ({ planetKey }) => {
 
 const HNTDHolomap: React.FC = () => {
   const navigate = useNavigate();
-  const { hasVisited, isPlanetThreeUnlocked, markCoordinatesFound, coordinatesFound } = useHNTDPlanets();
+  const { hasVisited, isPlanetThreeUnlocked, markCoordinatesFound, coordinatesFound, doubtVeraComplete, bruneCoordinatesObtained } = useHNTDPlanets();
   const [selectedPlanet, setSelectedPlanet] = useState<string | null>(null);
   const [overrideStage,  setOverrideStage]  = useState(0);
   const [showOverride,   setShowOverride]   = useState(false);
@@ -107,7 +107,7 @@ const HNTDHolomap: React.FC = () => {
       <div className={styles.planetWrapper} style={{ top: '30%', left: '21%' }}>
         <PlanetSprite planetKey="planetone" />
         <button className={styles.planet} onClick={() => handlePlanetClick('planetone')}>
-          Doubt{hasVisited('planetone') && ' ✓'}
+          Doubt{doubtVeraComplete && ' ✓'}
         </button>
       </div>
 
@@ -115,7 +115,7 @@ const HNTDHolomap: React.FC = () => {
       <div className={styles.planetWrapper} style={{ top: '50%', left: '46%' }}>
         <PlanetSprite planetKey="planettwo" />
         <button className={styles.planet} onClick={() => handlePlanetClick('planettwo')}>
-          Brune{hasVisited('planettwo') && ' ✓'}
+          Brune{bruneCoordinatesObtained && ' ✓'}
         </button>
       </div>
 
@@ -129,8 +129,8 @@ const HNTDHolomap: React.FC = () => {
         </div>
       )}
 
-      {/* Coordinate entry — shown after visiting Brune but before coords are confirmed */}
-      {hasVisited('planettwo') && !coordinatesFound && (
+      {/* Coordinate entry — shown after scanner fix (coordinates obtained) but before coords confirmed */}
+      {bruneCoordinatesObtained && !coordinatesFound && (
         <div className={styles.coordEntry}>
           <p className={styles.coordLabel}>// ENTER COORDINATES</p>
           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>

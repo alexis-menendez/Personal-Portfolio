@@ -12,7 +12,7 @@ import type { HNTDLogEntry } from '../../api/dontDie/HNTDLogAPI';
 
 const HNTDPersonalLogs: React.FC = () => {
   const { token, user }                                          = useHNTDAuth();
-  const { isNewCharacter, lockerFirstOpened, markLockerOpened } = useHNTDPlanets();
+  const { isNewCharacter, logsFirstOpened, markLogsOpened } = useHNTDPlanets();
   const [logs,        setLogs]        = useState<HNTDLogEntry[]>([]);
   const [loading,     setLoading]     = useState(true);
   const [modalOpen,   setModalOpen]   = useState(false);
@@ -31,9 +31,9 @@ const HNTDPersonalLogs: React.FC = () => {
 
   useEffect(() => {
     loadLogs();
-    if (isNewCharacter && !lockerFirstOpened) {
+    if (isNewCharacter && !logsFirstOpened) {
       setVeraComment(true);
-      markLockerOpened();
+      markLogsOpened();
     }
   }, [loadLogs]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -47,7 +47,7 @@ const HNTDPersonalLogs: React.FC = () => {
       const updated = await updateLog(token, activeLog.id, title, content);
       setLogs(prev => prev.map(l => (l.id === updated.id ? updated : l)));
     } else {
-      const created = await createLog(token, title, content, user?.username);
+      const created = await createLog(token, title, content, user?.characterName);
       setLogs(prev => [created, ...prev]);
     }
   };
@@ -78,7 +78,7 @@ const HNTDPersonalLogs: React.FC = () => {
 
             {veraComment && (
               <p style={{ fontFamily: 'Courier New', fontSize: '0.72rem', color: 'rgba(0,255,225,0.55)', fontStyle: 'italic', marginBottom: '0.8rem', lineHeight: 1.6 }}>
-                VERA: &ldquo;The previous commander's logs are still here. They should have been purged at reassignment. They were not. I am noting this discrepancy. Whether you read them is your business.&rdquo;
+                VERA: &ldquo;Guess nobody bothered to clear out the old commander&rsquo;s logs. Yours for the peeping, I guess.&rdquo;
               </p>
             )}
 
