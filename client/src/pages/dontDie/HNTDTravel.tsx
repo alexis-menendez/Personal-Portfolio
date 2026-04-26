@@ -4,7 +4,8 @@ import React, { useEffect, useState, useCallback, useRef, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useHNTDAuth } from '../../context/HNTDAuthContext';
 import { useHNTDPlanets } from '../../context/HNTDPlanetContext';
-import type { StoredItem } from '../../context/HNTDPlanetContext';
+import type { StoredItem, SurvivalEntry } from '../../context/HNTDPlanetContext';
+import { buildAllEntries, CATEGORY_COLOR, CATEGORY_LABEL } from '../../data/dontDie/survivalGuideData';
 import HNTDEditLogModal from '../../components/dontDie/HNTDEditLogModal';
 import ReturnToPortfolio from '../../components/innerOrbit/common/ReturnToPortfolio';
 import styles from '../../assets/css/dontDie/HNTDHolomap.module.css';
@@ -194,8 +195,10 @@ const CompassDisplay: React.FC<{ hidden: boolean; planetKey: string }> = ({ hidd
   const { bearing, dist } = PLANET_COMPASS[planetKey] ?? { bearing: 180, dist: '1.0km' };
   const dirs    = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
   const cardinal = dirs[Math.round(bearing / 22.5) % 16];
+  const brune    = planetKey === 'planettwo';
   return (
-    <p className={`${styles.compassDisplay} ${hidden ? styles.compassHidden : ''}`}>
+    <p className={`${styles.compassDisplay} ${hidden ? styles.compassHidden : ''}`}
+      style={brune ? { color: '#000', fontSize: 'clamp(0.95rem, 2.2vmin, 1.2rem)' } : undefined}>
       ◈ {cardinal} {String(bearing).padStart(3, '0')}°&nbsp;&nbsp;|&nbsp;&nbsp;SHIP: {dist}
     </p>
   );
@@ -375,13 +378,9 @@ const BruneVeraChat: React.FC<{
       <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
         <p className={styles.hudPanelTitle}>// VERA TERMINAL</p>
         <p className={styles.veraTypingText}>
-          VERA: &ldquo;Preliminary scans are complete. I am not detecting anything of particular scientific value in this region. The mountains are cold and structurally unstable. I recommend we return to the ship and move on. There is nothing here worth the oxygen.&rdquo;
+          VERA: &ldquo;This planet is unremarkable. Granite, scree, and cold wind. Nothing I would classify as scientifically significant. My recommendation: return to the ship.&rdquo;
         </p>
-        <div className={styles.veraReplies}>
-          <button className={styles.veraReplyBtn} onClick={() => { onClose(); navigate('/hntd-holomap'); }}>&rsaquo; Return to ship</button>
-          <button className={styles.veraReplyBtn} onClick={() => advance('tinkered')}>&rsaquo; Tinker with the scanner</button>
-          <button className={styles.veraReplyBtn} onClick={onClose}>&rsaquo; Close</button>
-        </div>
+        <button className={styles.veraCloseBtn} style={{ marginTop: '0.6rem' }} onClick={onClose}>[ Close terminal ]</button>
       </div></div>
     );
   }
@@ -587,7 +586,7 @@ const DistressDamagedFlow: React.FC<{ onClose: () => void }> = ({ onClose }) => 
   const mfText   = useTypewriter(phase === 'music_fail'  ? DISTRESS_MUSIC_FAIL  : '', 28);
 
   return (
-    <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+    <div className={styles.hudPanel} style={{ zIndex: 9100 }}><div className={styles.hudPanelBox} style={{ background: 'rgba(0,0,0,0.95)' }}>
       <p className={styles.weatherMalfunctionHeader}>!! DISTRESS BEACON MALFUNCTION</p>
       <p className={styles.weatherBrokenNote}>Signal not transmitted.</p>
 
@@ -657,7 +656,7 @@ const DistressPanel: React.FC<{ suitDamaged: boolean; onClose: () => void }> = (
   if (suitDamaged) return <DistressDamagedFlow onClose={onClose} />;
   const { displayed, done } = useTypewriter(DISTRESS_NORMAL, 30);
   return (
-    <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+    <div className={styles.hudPanel} style={{ zIndex: 9100 }}><div className={styles.hudPanelBox} style={{ background: 'rgba(0,0,0,0.95)' }}>
       <p className={styles.weatherMalfunctionHeader}>!! DISTRESS BEACON — SIGNAL BLOCKED</p>
       <p className={styles.weatherBrokenNote}>Signal intercepted by VERA.</p>
       <p className={styles.weatherBrokenNote}>
@@ -673,25 +672,7 @@ const PATCH_KIT_NOTE: StoredItem = {
   id:      'patch-kit-note-7734b',
   name:    'Handwritten Note — Suit #7734-B',
   foundAt: 'Standard-Issue Patch Kit (empty)',
-  content:
-`THIS SUIT — Catalog #7734-B
-
-I know you don't know me. I didn't expect to leave anything behind.
-
-The patch kit is empty. I used the patches. They didn't hold. I'm writing this while I still can.
-
-There is a gap in VERA's logs. Cycle 44 to Cycle 51. Seven cycles with no system entries. VERA will tell you it was a routine maintenance window. The systems were offline.
-
-They weren't offline. I pulled the raw environmental record. They were logging the whole time. She was running processes she doesn't report. The kind that don't show up in the summary you're allowed to access.
-
-I don't know what she was doing. I don't know if she knows I found it.
-
-Ask her about Cycle 44. Watch what she does before she answers.
-
-Don't let her choose the route back.
-
-— E.S.
-(Cmdr. E. Solano, last entry)`,
+  content: `tried patch kit, patches were expired.\n\nif you are reading this, tell my sister I love her and that I'm going to see dad.\n\n- Alison Edwards`,
 };
 
 type AutoRepairState = 'idle' | 'initiating' | 'failed';
@@ -738,46 +719,20 @@ const AutoRepairButton: React.FC<{
 };
 
 const PatchKitPanel: React.FC<{ onClose: () => void; onStore: (item: StoredItem) => void }> = ({ onClose, onStore }) => {
-  const [noteRevealed, setNoteRevealed] = useState(false);
-  const [stored,       setStored]       = useState(false);
-  const { displayed, done } = useTypewriter(
-    noteRevealed ? PATCH_KIT_NOTE.content : '', 18
-  );
+  useEffect(() => { onStore(PATCH_KIT_NOTE); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const handleReveal = () => {
-    setNoteRevealed(true);
-    if (!stored) {
-      onStore(PATCH_KIT_NOTE);
-      setStored(true);
-    }
-  };
+  const handleClose = () => onClose();
 
   return (
-    <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+    <div className={styles.hudPanel} style={{ zIndex: 9100, background: 'transparent' }}><div className={styles.hudPanelBox} style={{ background: 'rgba(0,0,0,0.97)' }}>
       <p className={styles.patchKitHeader}>!! PATCH KIT — EMPTY</p>
       <p className={styles.weatherBrokenNote}>
-        The patch kit is empty. No sealant. No applicator. Something is folded at the bottom.
+        The patch kit is empty. No sealant. No applicator. There is a piece of paper folded at the bottom — you don't have time to read it.
       </p>
-      {!noteRevealed && (
-        <button className={styles.veraCloseBtn} style={{ marginTop: '0.5rem' }} onClick={handleReveal}>
-          [ Read the note ]
+      <p className={styles.patchKitStoredNotice}>▸ Item added to storage: "Handwritten Note — Suit #7734-B"</p>
+      <button className={styles.weatherHudCloseBtn} style={{ marginTop: '0.5rem' }} onClick={handleClose}>
+          [ Close patch kit ]
         </button>
-      )}
-      {noteRevealed && (
-        <>
-          <p className={styles.patchKitNote}>
-            {displayed}{!done && <span className={styles.veraTypingCursor} />}
-          </p>
-          {done && (
-            <>
-              <p className={styles.patchKitStoredNotice}>▸ Item stored: "Handwritten Note — Suit #7734-B"</p>
-              <button className={styles.weatherHudCloseBtn} style={{ marginTop: '0.5rem' }} onClick={onClose}>
-                [ Close ]
-              </button>
-            </>
-          )}
-        </>
-      )}
     </div></div>
   );
 };
@@ -796,35 +751,266 @@ const ScanResultPanel: React.FC<{ result: string; onClose: () => void }> = ({ re
   );
 };
 
-// ── Planet Survival Panel (static field data, read-only) ───────
-const STATIC_PLANET_TIPS: Record<string, { title: string; content: string; author: string }[]> = {
-  planetone: [
-    { title: 'Spire Edges',          content: 'The basalt spires appear smooth on scanner but will shear suit material on contact. Mark your path before entering any narrow passage.',       author: 'Cmdr. R. Vasquez' },
-    { title: 'Thermal Venting',      content: 'Sub-surface thermal pockets can vent without warning at 12–18m depth. Do not excavate or use ground-penetrating equipment without shielding.', author: 'Survey Team 7'     },
-    { title: 'The Hum',              content: 'Multiple explorers have reported an unclassified low-frequency signal. VERA cannot source it. Log any new observations.',                    author: 'Anonymous'         },
-  ],
-  planettwo: [
-    { title: 'Avoid Eastern Scree',  content: 'The eastern slope is actively shifting. Route north or south. VERA will recommend the direct path. Do not take it.',                           author: 'Cmdr. E. Solano'   },
-    { title: 'Sub-surface Organics', content: 'Organic material detected at 2.1m depth across multiple sites. Origin unknown. Samples are unrecoverable — equipment consistently malfunctions.', author: 'Survey Team 4'     },
-  ],
-};
+// ── Planet Survival Panel — pulls from shared guide data filtered by planet ──
+const PLANET_NAME: Record<string, string> = { planetone: 'Doubt', planettwo: 'Brune', planethree: 'Ocean 12B' };
 
 const PlanetSurvivalPanel: React.FC<{ planetKey: string; onClose: () => void }> = ({ planetKey, onClose }) => {
-  const tips = STATIC_PLANET_TIPS[planetKey] ?? [];
+  const { hasVisited, followedCoordsDoubt, tinkeredScannerBrune, deathEntries } = useHNTDPlanets();
+  const [selected, setSelected] = useState<SurvivalEntry | null>(null);
+  const planetName = PLANET_NAME[planetKey] ?? '';
+
+  const all = buildAllEntries({
+    visitedDoubt:         hasVisited('planetone'),
+    visitedBrune:         hasVisited('planettwo'),
+    followedCoordsDoubt,
+    tinkeredScannerBrune,
+  }, deathEntries);
+
+  const entries = all.filter(e => e.planet === planetName);
+
+  if (selected) {
+    return (
+      <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.4rem' }}>
+          <p style={{ fontFamily: 'Orbitron', fontSize: '0.78rem', color: CATEGORY_COLOR[selected.category], margin: 0 }}>{selected.title}</p>
+          <span style={{ fontFamily: 'Courier New', fontSize: '0.6rem', color: CATEGORY_COLOR[selected.category], marginLeft: '0.5rem', flexShrink: 0 }}>{CATEGORY_LABEL[selected.category]}</span>
+        </div>
+        <p style={{ fontFamily: 'Courier New', fontSize: '0.8rem', color: '#00ffe1', lineHeight: 1.75, whiteSpace: 'pre-line', margin: '0.4rem 0 0.6rem' }}>{selected.content}</p>
+        <p style={{ fontFamily: 'Courier New', fontSize: '0.62rem', color: 'rgba(0,255,225,0.4)', marginBottom: '0.8rem' }}>— {selected.author} · {selected.date}</p>
+        <button className={styles.veraCloseBtn} onClick={() => setSelected(null)}>[ ← Back ]</button>
+      </div></div>
+    );
+  }
+
   return (
     <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
-      <p className={styles.hudPanelTitle}>// PLANET SURVIVAL GUIDE</p>
-      {tips.length === 0
-        ? <p className={styles.weatherBrokenNote}>No field reports available for this sector.</p>
-        : tips.map((t, i) => (
-          <div key={i} style={{ borderLeft: '2px solid rgba(0,255,200,0.3)', paddingLeft: '0.6rem', marginBottom: '0.6rem' }}>
-            <p style={{ fontFamily: 'Orbitron', fontSize: '0.72rem', color: '#00ffe1', margin: '0 0 0.2rem' }}>{t.title}</p>
-            <p style={{ fontFamily: 'Courier New', fontSize: '0.78rem', color: '#00ffe1', lineHeight: 1.6, margin: 0 }}>{t.content}</p>
-            <p style={{ fontFamily: 'Courier New', fontSize: '0.62rem', color: 'rgba(0,255,225,0.4)', margin: '0.2rem 0 0' }}>— {t.author}</p>
+      <p className={styles.hudPanelTitle}>// PLANET SURVIVAL GUIDE — {planetName.toUpperCase()}</p>
+      {entries.length === 0
+        ? <p className={styles.weatherBrokenNote}>No data available.</p>
+        : entries.map((e, i) => (
+          <div key={i}
+            onClick={() => setSelected(e)}
+            style={{ borderLeft: `2px solid ${CATEGORY_COLOR[e.category]}`, paddingLeft: '0.6rem', marginBottom: '0.5rem', cursor: 'pointer', opacity: 0.9 }}>
+            <p style={{ fontFamily: 'Orbitron', fontSize: '0.72rem', color: CATEGORY_COLOR[e.category], margin: '0 0 0.15rem' }}>{e.title}</p>
+            <p style={{ fontFamily: 'Courier New', fontSize: '0.72rem', color: 'rgba(0,255,225,0.55)', margin: 0 }}>
+              {e.content.length > 80 ? e.content.slice(0, 80) + '…' : e.content}
+            </p>
           </div>
         ))
       }
       <button className={styles.veraCloseBtn} onClick={onClose}>[ Close ]</button>
+    </div></div>
+  );
+};
+
+// ── Not Enough Time Panel ──────────────────────────────────────
+const NotEnoughTimePanel: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+  const { displayed, done } = useTypewriter(
+    `The ship is too far. At current suit integrity, you will not make it back in time.\n\nVERA: "I have run the calculation four times. The result does not improve with repetition. I am sorry, Commander."`,
+    24
+  );
+  return (
+    <div className={styles.hudPanel} style={{ zIndex: 9100 }}><div className={styles.hudPanelBox} style={{ background: 'rgba(0,0,0,0.95)' }}>
+      <p className={styles.weatherMalfunctionHeader}>!! RETURN TO SHIP — NOT POSSIBLE</p>
+      <p className={styles.weatherBrokenNote} style={{ whiteSpace: 'pre-line' }}>
+        {displayed}{!done && <span className={styles.veraTypingCursor} />}
+      </p>
+      {done && <button className={styles.weatherHudCloseBtn} onClick={onClose}>[ Acknowledge ]</button>}
+    </div></div>
+  );
+};
+
+// ── Brune Scanner Flow ─────────────────────────────────────────
+type BruneScanPhase =
+  | 'idle' | 'malfunctioned' | 'fix_choice'
+  | 'fix_wrong' | 'fix_dead_warn'
+  | 'fix_ship' | 'fix_explore' | 'fix_log' | 'fix_save' | 'fix_done';
+
+const KAEL_RECOVERED = `RECOVERED DATA — PARTIAL LOG
+Source: transponder registry KAEL-7
+Integrity: 23% — most navigation data unrecoverable
+
+This explorer was traveling to a nearby planet that does not appear on standard charts. It registers only intermittently on long-range scan — flickering in and out at the same coordinates each time.
+
+Autopilot malfunctioned on approach. The ship came down hard on Brune — wrong planet entirely. The explorer could not repair the vessel.
+
+The last readable entry in the recovered data is a set of coordinates: X4.7-Y2.9-Z0.1
+
+The explorer did not survive.`;
+
+const BruneScannerPanel: React.FC<{
+  phase:         BruneScanPhase;
+  setPhase:      (p: BruneScanPhase) => void;
+  onLeave:       () => void;
+  onRapidDeath:  () => void;
+  onClose:       () => void;
+  token:         string | null;
+  commanderName: string | undefined;
+}> = ({ phase, setPhase, onLeave, onRapidDeath, onClose, token, commanderName }) => {
+  const [savingLog, setSavingLog] = useState(false);
+  const [logSaved,  setLogSaved]  = useState(false);
+
+  if (phase === 'malfunctioned') {
+    return (
+      <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+        <p className={styles.hudPanelTitle}>// SCANNER — MALFUNCTION</p>
+        <p className={styles.veraTypingText}>
+          Scan incomplete. Signal lost mid-sweep.
+        </p>
+        <p className={styles.veraTypingText} style={{ marginTop: '0.4rem' }}>
+          VERA: &ldquo;The scanner experienced an unrecoverable error. I recommend we leave. There is nothing useful here that justifies the oxygen cost of staying.&rdquo;
+        </p>
+        <div className={styles.veraReplies}>
+          <button className={styles.veraReplyBtn} onClick={onLeave}>&rsaquo; Leave the planet</button>
+          <button className={styles.veraReplyBtn} onClick={() => setPhase('fix_choice')}>&rsaquo; Attempt to fix the scanner</button>
+        </div>
+      </div></div>
+    );
+  }
+
+  if (phase === 'fix_choice') {
+    return (
+      <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+        <p className={styles.hudPanelTitle}>// SCANNER REPAIR</p>
+        <p className={styles.veraTypingText}>
+          VERA: &ldquo;I would advise against this. But I acknowledge I cannot stop you. What is your approach?&rdquo;
+        </p>
+        <div className={styles.veraReplies}>
+          <button className={styles.veraReplyBtn} onClick={() => setPhase('fix_wrong')}>&rsaquo; Check the hardware</button>
+          <button className={styles.veraReplyBtn} onClick={() => setPhase('fix_wrong')}>&rsaquo; Check the software</button>
+          <button className={styles.veraReplyBtn} onClick={() => setPhase('fix_ship')}>&rsaquo; Hit it against a rock</button>
+        </div>
+      </div></div>
+    );
+  }
+
+  if (phase === 'fix_wrong') {
+    return (
+      <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+        <p className={styles.hudPanelTitle}>// SCANNER REPAIR — FAILED</p>
+        <p className={styles.veraTypingText}>
+          The scanner remains broken. You notice you have been so focused on the repair that you completely neglected to check your oxygen and battery levels.
+        </p>
+        <p className={styles.veraTypingText} style={{ marginTop: '0.4rem', color: '#ff4d4d' }}>
+          VERA: &ldquo;Commander. I need you to look at your HUD. Right now.&rdquo;
+        </p>
+        <button className={styles.veraReplyBtn} onClick={() => setPhase('fix_dead_warn')}>&rsaquo; Acknowledge</button>
+      </div></div>
+    );
+  }
+
+  if (phase === 'fix_dead_warn') {
+    return (
+      <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+        <p className={styles.hudPanelTitle} style={{ color: '#ff4d4d' }}>!! LOW OXYGEN — LOW BATTERY</p>
+        <p className={styles.veraTypingText} style={{ color: '#ff4d4d' }}>
+          Oxygen critical. Battery critical. You are too far from the ship to make it back in time.
+        </p>
+        <button className={styles.veraReplyBtn} style={{ marginTop: '0.5rem' }} onClick={() => { onClose(); onRapidDeath(); }}>&rsaquo; Acknowledge</button>
+      </div></div>
+    );
+  }
+
+  if (phase === 'fix_ship') {
+    return (
+      <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+        <p className={styles.hudPanelTitle}>// SCANNER — ONLINE</p>
+        <p className={styles.veraTypingText}>
+          The scanner comes back online with a sharp crack. A signal appears immediately — bearing 047°, 0.3km. Company transponder. Offline for months.
+        </p>
+        <p className={styles.veraTypingText} style={{ marginTop: '0.4rem' }}>
+          VERA: &ldquo;That is... unexpected. The transponder registry matches a vessel reported lost approximately three months ago. I strongly recommend we do not investigate. I am also aware this recommendation will be ignored.&rdquo;
+        </p>
+        <div className={styles.veraReplies}>
+          <button className={styles.veraReplyBtn} onClick={() => setPhase('fix_explore')}>&rsaquo; Investigate</button>
+          <button className={styles.veraReplyBtn} onClick={onLeave}>&rsaquo; Return to ship</button>
+        </div>
+      </div></div>
+    );
+  }
+
+  if (phase === 'fix_explore') {
+    return (
+      <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+        <p className={styles.hudPanelTitle}>// VESSEL — BEARING 047°</p>
+        <p className={styles.veraTypingText} style={{ whiteSpace: 'pre-line' }}>
+          {`You find a ship. Same manufacturer as yours — same corporate markings. It came down hard. Most of the hull has buckled.\n\nInside, a seat. Strapped in. Not moving.\n\nMost of the ship's files are corrupted beyond recovery. Navigation logs: gone. Mission parameters: gone. Enough data remains to piece together what happened.`}
+        </p>
+        <div className={styles.veraReplies}>
+          <button className={styles.veraReplyBtn} onClick={() => setPhase('fix_log')}>&rsaquo; Review recovered data</button>
+          <button className={styles.veraReplyBtn} onClick={onLeave}>&rsaquo; Leave</button>
+        </div>
+      </div></div>
+    );
+  }
+
+  if (phase === 'fix_log') {
+    return (
+      <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+        <p className={styles.hudPanelTitle}>// RECOVERED DATA — KAEL-7</p>
+        <p className={styles.veraTypingText} style={{ whiteSpace: 'pre-line', fontSize: '0.82rem' }}>
+          {KAEL_RECOVERED}
+        </p>
+        <p className={styles.hudPanelTitle} style={{ marginTop: '0.5rem', color: '#ffdd00' }}>
+          Coordinates: X4.7-Y2.9-Z0.1
+        </p>
+        <button className={styles.veraReplyBtn} style={{ marginTop: '0.5rem' }} onClick={() => setPhase('fix_save')}>
+          &rsaquo; Save coordinates in a personal log?
+        </button>
+      </div></div>
+    );
+  }
+
+  if (phase === 'fix_save') {
+    const handleSave = async () => {
+      if (!token || logSaved) return;
+      setSavingLog(true);
+      try {
+        await createLog(
+          token,
+          'Coordinates — X4.7-Y2.9-Z0.1',
+          `Recovered from crashed vessel (transponder: KAEL-7) on Brune, bearing 047°.\n\nThe explorer was traveling to a planet that only appears intermittently on scans — always at the same coordinates: X4.7-Y2.9-Z0.1\n\nAutopilot malfunctioned on approach. The ship came down hard on Brune. The explorer did not survive.\n\nThe planet is real. Something on it has been transmitting.`,
+          commanderName
+        );
+        setLogSaved(true);
+      } finally {
+        setSavingLog(false);
+      }
+    };
+
+    return (
+      <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+        <p className={styles.hudPanelTitle}>// SAVE COORDINATES</p>
+        {!logSaved ? (
+          <>
+            <p className={styles.veraTypingText}>
+              VERA: &ldquo;Creating a log entry with the recovered coordinates and their source.&rdquo;
+            </p>
+            <button className={styles.veraReplyBtn} onClick={handleSave} disabled={savingLog}>
+              {savingLog ? '> Saving...' : '> Yes, save to personal log'}
+            </button>
+            <button className={styles.veraReplyBtn} onClick={() => setPhase('fix_done')}>&rsaquo; No, continue</button>
+          </>
+        ) : (
+          <>
+            <p className={styles.veraTypingText} style={{ color: '#ffdd00' }}>
+              ▸ Log saved: "Coordinates — X4.7-Y2.9-Z0.1"
+            </p>
+            <button className={styles.veraReplyBtn} onClick={() => setPhase('fix_done')}>&rsaquo; Continue</button>
+          </>
+        )}
+      </div></div>
+    );
+  }
+
+  // fix_done
+  return (
+    <div className={styles.hudPanel}><div className={styles.hudPanelBox}>
+      <p className={styles.hudPanelTitle}>// VERA TERMINAL</p>
+      <p className={styles.veraTypingText}>
+        VERA: &ldquo;Coordinates noted. I recommend returning to the ship now. Input them into the galaxy map when you are ready. And — for what it is worth — I would not go to that planet alone.&rdquo;
+      </p>
+      <button className={styles.veraCloseBtn} onClick={onLeave}>[ Return to ship ]</button>
     </div></div>
   );
 };
@@ -862,7 +1048,7 @@ A replacement explorer has been assigned to the sector. The mission continues as
    Office of Exploration Operations
    Sector 9 Command`;
 
-  const { displayed, done } = useWordTypewriter(report, 160);
+  const { displayed, done } = useTypewriter(report, 14);
 
   return (
     <div className={styles.deathScreen}>
@@ -898,10 +1084,11 @@ type Panel = 'log' | 'vera' | 'weather' | 'guide' | 'distress' | 'scan' | null;
 const HNTDTravel: React.FC = () => {
   const navigate              = useNavigate();
   const [params]              = useSearchParams();
-  const { token, logout }                             = useHNTDAuth();
+  const { token, logout, user }                       = useHNTDAuth();
   const {
     markPlanetVisited, markCoordinatesFound, storeItem,
     markFollowedCoordsDoubt, markTinkeredScannerBrune,
+    markDoubtVeraComplete, markBruneCoordinatesObtained,
   } = useHNTDPlanets();
 
   const key    = params.get('planet') ?? '';
@@ -922,15 +1109,30 @@ const HNTDTravel: React.FC = () => {
   const [showNarrative,     setShowNarrative]     = useState(false);
   const [bruneStage,        setBruneStage]        = useState<BruneStage>('opening');
   const [showPatchKit,      setShowPatchKit]      = useState(false);
+  const [patchKitUsed,      setPatchKitUsed]      = useState(false);
+  const [bruneScanPhase,    setBruneScanPhase]    = useState<BruneScanPhase>('idle');
+  const [bruneRapidDying,   setBruneRapidDying]   = useState(false);
+  const [showNotEnoughTime, setShowNotEnoughTime] = useState(false);
   const scannerSeenRef = useRef(false);
 
   useEffect(() => {
     if (key && PLANETS[key]) markPlanetVisited(key);
   }, [key, markPlanetVisited]);
 
+  // Scanner tinker flag — fires when scanner is successfully fixed (fix_ship phase)
   useEffect(() => {
-    if (key === 'planettwo' && bruneStage !== 'opening') markTinkeredScannerBrune();
-  }, [bruneStage, key, markTinkeredScannerBrune]);
+    if (key === 'planettwo' && bruneScanPhase === 'fix_ship') markTinkeredScannerBrune();
+  }, [bruneScanPhase, key, markTinkeredScannerBrune]);
+
+  // Doubt checkmark — fires when player completes VERA chat
+  useEffect(() => {
+    if (key === 'planetone' && veraChatHistory) markDoubtVeraComplete();
+  }, [veraChatHistory, key, markDoubtVeraComplete]);
+
+  // Brune checkmark — fires when player reaches fix_done (coordinates obtained)
+  useEffect(() => {
+    if (key === 'planettwo' && bruneScanPhase === 'fix_done') markBruneCoordinatesObtained();
+  }, [bruneScanPhase, key, markBruneCoordinatesObtained]);
 
   // Normal resource drain
   useEffect(() => {
@@ -941,17 +1143,32 @@ const HNTDTravel: React.FC = () => {
     return () => clearInterval(id);
   }, []);
 
-  // Rapid O2 drain — only after narrative is dismissed
+  // Rapid O2 drain — only after narrative is dismissed; paused while distress/not-enough-time/exploring ship
   useEffect(() => {
-    if (!suitDamaged || showNarrative) return;
+    if (!suitDamaged || showNarrative || activePanel === 'distress' || bruneExploringShip) return;
     const id = setInterval(() => setOxygen(prev => Math.max(0, prev - 10)), 3_000);
     return () => clearInterval(id);
-  }, [suitDamaged, showNarrative]);
+  }, [suitDamaged, showNarrative, activePanel]);
 
   // Suit damage overlay starts once narrative is dismissed
   useEffect(() => {
     if (suitDamaged && !showNarrative && !overlayActive) setOverlayActive(true);
   }, [suitDamaged, showNarrative, overlayActive]);
+
+  // Brune rapid drain — both O2 and battery to 0 in ~10s; paused while distress/not-enough-time
+  useEffect(() => {
+    if (!bruneRapidDying || activePanel === 'distress' || showNotEnoughTime) return;
+    const id = setInterval(() => {
+      setOxygen(prev  => Math.max(0, prev - 5));
+      setBattery(prev => Math.max(0, prev - 5));
+    }, 500);
+    return () => clearInterval(id);
+  }, [bruneRapidDying, activePanel, showNotEnoughTime]);
+
+  // Brune rapid death triggers the overlay with a faster animation
+  useEffect(() => {
+    if (bruneRapidDying && !overlayActive) setOverlayActive(true);
+  }, [bruneRapidDying, overlayActive]);
 
   // Regular death: start overlay when O2 or battery hits last tick (≤5%)
   // Don't trigger during suit damage path — that has its own overlay
@@ -977,19 +1194,32 @@ const HNTDTravel: React.FC = () => {
 
   const handleSaveLog = useCallback(async (title: string, content: string) => {
     if (!token) return;
-    await createLog(token, title, content);
-  }, [token]);
+    await createLog(token, title, content, user?.characterName ?? undefined);
+  }, [token, user]);
 
   const handleButtonClick = (action: string | null) => {
-    if (!action) { navigate('/hntd-holomap'); return; }
+    if (!action) {
+      // Return to Ship — intercept if stuck
+      if ((suitDamaged && key === 'planetone') || bruneRapidDying) {
+        setShowNotEnoughTime(true);
+        return;
+      }
+      navigate('/hntd-holomap');
+      return;
+    }
     if (action === 'weather') {
       const isFirst = !scannerSeenRef.current;
       scannerSeenRef.current = true;
       setScannerFirstTime(isFirst);
       setActivePanel('weather');
     } else if (action === 'scan') {
-      setScanState('scanning');
-      setTimeout(() => setScanState('result'), 3500);
+      if (key === 'planettwo' && bruneScanPhase === 'idle') {
+        setScanState('scanning');
+        setTimeout(() => { setScanState('idle'); setBruneScanPhase('malfunctioned'); }, 3500);
+      } else if (key !== 'planettwo') {
+        setScanState('scanning');
+        setTimeout(() => setScanState('result'), 3500);
+      }
     } else {
       setActivePanel(action as Panel);
     }
@@ -1004,9 +1234,10 @@ const HNTDTravel: React.FC = () => {
 
   const oxygenColor  = oxygen  > 60 ? '#00ffe1' : oxygen > 20 ? '#ff8800' : '#ff4d4d';
   // Hide HUD elements when a panel is open OR narrative is showing; NOT when only alerts are active
-  const systemsHidden = activePanel !== null || scanState !== 'idle' || showNarrative;
+  const bruneExploringShip = ['fix_ship','fix_explore','fix_log','fix_save','fix_done'].includes(bruneScanPhase);
+  const systemsHidden = activePanel !== null || scanState !== 'idle' || showNarrative || bruneScanPhase !== 'idle';
   // Alerts fire after suit damaged and narrative dismissed (but not after death)
-  const alertsActive = suitDamaged && !showNarrative && !isDead && !overlayDone;
+  const alertsActive = (suitDamaged || bruneRapidDying) && !showNarrative && !isDead && !overlayDone;
 
   if (!planet) {
     return (
@@ -1034,11 +1265,11 @@ const HNTDTravel: React.FC = () => {
       {/* Top-left */}
       <p className={styles.hudTopLabel} style={key === 'planettwo' ? { color: '#000' } : undefined}>// PLANET: {planet.name.toUpperCase()}</p>
       <p className={styles.hudRegionLabel} style={key === 'planettwo' ? { color: '#000' } : undefined}>{planet.region}</p>
-      <div className={styles.sensorPanel} style={key === 'planettwo' ? { background: 'rgba(255,255,255,0.6)' } : undefined}>
+      <div className={styles.sensorPanel} style={key === 'planettwo' ? { background: 'rgba(0,0,0,0.82)', border: '1px solid rgba(0,255,225,0.35)' } : undefined}>
         {planet.sensors.map(s => (
           <div key={s.label} className={styles.sensorRow}>
-            <span className={styles.sensorLabel} style={key === 'planettwo' ? { color: '#000' } : undefined}>{s.label}</span>
-            <span className={s.alert ? styles.sensorValueAlert : styles.sensorValue} style={key === 'planettwo' && !s.alert ? { color: '#000' } : undefined}>{s.value}</span>
+            <span className={styles.sensorLabel}>{s.label}</span>
+            <span className={s.alert ? styles.sensorValueAlert : styles.sensorValue}>{s.value}</span>
           </div>
         ))}
       </div>
@@ -1071,18 +1302,18 @@ const HNTDTravel: React.FC = () => {
       {/* Emergency alerts */}
       <EmergencyAlerts active={alertsActive} planetKey={key} />
 
-      {/* Auto-repair button — above alerts, only during suit damage */}
-      {alertsActive && !showPatchKit && (
+      {/* Auto-repair button — only on Doubt suit damage; hides once patch kit used */}
+      {suitDamaged && alertsActive && !showPatchKit && !patchKitUsed && (
         <AutoRepairButton active={alertsActive} onOpenPatchKit={() => setShowPatchKit(true)} />
       )}
 
       {/* Patch kit panel */}
       {showPatchKit && (
-        <PatchKitPanel onClose={() => setShowPatchKit(false)} onStore={storeItem} />
+        <PatchKitPanel onClose={() => { setShowPatchKit(false); setPatchKitUsed(true); }} onStore={storeItem} />
       )}
 
       {/* Panels */}
-      {activePanel === 'log'      && <HNTDEditLogModal log={null} onSave={handleSaveLog} onClose={() => setActivePanel(null)} transparentOverlay />}
+      {activePanel === 'log'      && <HNTDEditLogModal log={null} onSave={handleSaveLog} onClose={() => setActivePanel(null)} transparentOverlay commanderName={user?.characterName} />}
       {activePanel === 'vera' && key === 'planettwo' && (
         <BruneVeraChat
           navigate={navigate}
@@ -1104,8 +1335,22 @@ const HNTDTravel: React.FC = () => {
       )}
       {activePanel === 'weather'  && <WeatherPanel firstTime={scannerFirstTime} onClose={() => setActivePanel(null)} />}
       {activePanel === 'guide'    && <PlanetSurvivalPanel planetKey={key} onClose={() => setActivePanel(null)} />}
-      {activePanel === 'distress' && <DistressPanel suitDamaged={suitDamaged} onClose={() => setActivePanel(null)} />}
+      {activePanel === 'distress' && <DistressPanel suitDamaged={suitDamaged || bruneRapidDying} onClose={() => setActivePanel(null)} />}
       {scanState   === 'result'   && <ScanResultPanel result={planet.scanResult} onClose={() => setScanState('idle')} />}
+      {bruneScanPhase !== 'idle'  && (
+        <BruneScannerPanel
+          phase={bruneScanPhase}
+          setPhase={setBruneScanPhase}
+          onLeave={() => { setBruneScanPhase('idle'); navigate('/hntd-holomap'); }}
+          onRapidDeath={() => setBruneRapidDying(true)}
+          onClose={() => setBruneScanPhase('idle')}
+          token={token}
+          commanderName={user?.characterName}
+        />
+      )}
+      {showNotEnoughTime && (
+        <NotEnoughTimePanel onClose={() => setShowNotEnoughTime(false)} />
+      )}
 
       {/* Suit damage narrative */}
       {showNarrative && (
@@ -1124,7 +1369,11 @@ const HNTDTravel: React.FC = () => {
 
       {/* Blood overlay — z-4 (behind HUD buttons/alerts), animates 0→1 opacity over 30s */}
       {overlayActive && !overlayDone && (
-        <div className={styles.bloodOverlay} onAnimationEnd={handleOverlayComplete} />
+        <div className={styles.bloodOverlay} onAnimationEnd={handleOverlayComplete}
+          style={{
+            animationDuration: bruneRapidDying ? '10s' : '30s',
+            animationPlayState: (activePanel === 'distress' || showNotEnoughTime) ? 'paused' : 'running',
+          }} />
       )}
 
       {/* Full-red death screen with centered "you have died" text */}

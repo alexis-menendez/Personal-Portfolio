@@ -57,8 +57,8 @@ const DontDie: React.FC = () => {
         </div>
 
         <div className={styles.actions}>
-          <button className={`${styles.btnPrimary} ${styles.btnPrimaryDontDie}`} disabled style={{ cursor: 'not-allowed', opacity: 0.5 }}>
-            Demo Coming Soon
+          <button className={`${styles.btnPrimary} ${styles.btnPrimaryDontDie}`} onClick={() => navigate('/hntd-home')}>
+            Launch Demo
           </button>
           <a
             className={styles.btnGhost}

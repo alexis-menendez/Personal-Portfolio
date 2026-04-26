@@ -343,6 +343,96 @@
   color: rgba(200, 230, 255, 0.6);
 }
 
+/* ── Lattice page ─────────────────────────────────────────────── */
+.pageLattice {
+  background:
+    radial-gradient(ellipse at 20% 0%,   rgba(200, 24, 74, 0.28)  0%, transparent 55%),
+    radial-gradient(ellipse at 80% 90%,  rgba(140, 10, 40, 0.18)  0%, transparent 50%),
+    #0d0205;
+}
+
+.titleLattice {
+  background: linear-gradient(90deg, #ff4d6d 0%, #c9184a 35%, #ff6b6b 70%, #ffa07a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tagLattice {
+  background: rgba(200, 24, 74, 0.1);
+  border: 1px solid rgba(200, 24, 74, 0.35);
+  color: rgba(255, 100, 120, 0.9);
+}
+
+.btnPrimaryLattice {
+  background: #ff4d6d;
+  color: #ffffff;
+}
+
+.btnPrimaryLattice:hover {
+  box-shadow: 0 8px 30px rgba(200, 24, 74, 0.45);
+}
+
+/* ── Solarium page ────────────────────────────────────────────── */
+.pageSolarium {
+  background:
+    radial-gradient(ellipse at 20% 0%,   rgba(244, 162, 97, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 90%,  rgba(180, 100, 30, 0.16) 0%, transparent 50%),
+    #0d0803;
+}
+
+.titleSolarium {
+  background: linear-gradient(90deg, #f4a261 0%, #e76f51 35%, #ffba08 70%, #ffd700 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tagSolarium {
+  background: rgba(244, 162, 97, 0.1);
+  border: 1px solid rgba(244, 162, 97, 0.35);
+  color: rgba(244, 180, 110, 0.9);
+}
+
+.btnPrimarySolarium {
+  background: #f4a261;
+  color: #ffffff;
+}
+
+.btnPrimarySolarium:hover {
+  box-shadow: 0 8px 30px rgba(244, 162, 97, 0.45);
+}
+
+/* ── Runestone page ───────────────────────────────────────────── */
+.pageRunestone {
+  background:
+    radial-gradient(ellipse at 20% 0%,   rgba(123, 47, 247, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 90%,  rgba(80, 20, 180, 0.15)  0%, transparent 50%),
+    #060310;
+}
+
+.titleRunestone {
+  background: linear-gradient(90deg, #7b2ff7 0%, #c77dff 35%, #e0aaff 70%, #bf5fff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tagRunestone {
+  background: rgba(123, 47, 247, 0.1);
+  border: 1px solid rgba(123, 47, 247, 0.35);
+  color: rgba(199, 125, 255, 0.9);
+}
+
+.btnPrimaryRunestone {
+  background: #7b2ff7;
+  color: #ffffff;
+}
+
+.btnPrimaryRunestone:hover {
+  box-shadow: 0 8px 30px rgba(123, 47, 247, 0.45);
+}
+
 /* ── Responsive ───────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .screenshotGrid {

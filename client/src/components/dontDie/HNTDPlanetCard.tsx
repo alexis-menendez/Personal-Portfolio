@@ -1,6 +1,6 @@
 // File: client/src/components/dontDie/HNTDPlanetCard.tsx
 
-import React, { useState } from 'react';
+import React from 'react';
 import styles from '../../assets/css/dontDie/HNTDHolomap.module.css';
 
 const PLANETS: Record<string, { name: string; image: string; vera: string; description: string }> = {
@@ -22,9 +22,7 @@ const PLANETS: Record<string, { name: string; image: string; vera: string; descr
     vera: `VERA: "I... do not recommend this. I am registering something in the signal. Something that should not be there. Please. Do not go."`,
     description: `No data exists for Ocean 12B save its name. It was not listed in any star charts, and our scanners failed to detect it upon initial entry into the sector. When it finally registered, the results were baffling: an unbroken bioluminescent ocean with no landmass, no atmospheric anomalies, and no signs of civilization.
 
-And yet — there is wreckage. A ship long thought lost drifts in the current, half-submerged and broken open like a shell. Its distress beacon still transmits, pulsing weakly through the static:
-
-"We thought it was... beautiful. It called to us in the water. We... we answered. We came. They're still here."`,
+And yet — there is wreckage. A ship long thought lost drifts in the current, half-submerged and broken open like a shell.`,
   },
 };
 
@@ -35,7 +33,6 @@ interface Props {
 }
 
 const HNTDPlanetCard: React.FC<Props> = ({ planetKey, onTravel, onClose }) => {
-  const [showVideo, setShowVideo] = useState(false);
   const planet = PLANETS[planetKey];
   if (!planet) return null;
 
@@ -49,23 +46,6 @@ const HNTDPlanetCard: React.FC<Props> = ({ planetKey, onTravel, onClose }) => {
         {planet.description.split('\n\n').map((para, i) => (
           <p key={i} className={styles.cardText}>{para}</p>
         ))}
-
-        {planetKey === 'planethree' && (
-          <>
-            <p className={styles.cardText}><em>A recording accompanied the distress beacon.</em></p>
-            <button className={styles.travelBtn} onClick={() => setShowVideo(v => !v)}>
-              {showVideo ? 'Hide Recording' : 'Play Recording'}
-            </button>
-            {showVideo && (
-              <video
-                className={styles.videoPlayer}
-                src="/assets/dontDie/videos/distress-recording.mp4"
-                controls
-                autoPlay
-              />
-            )}
-          </>
-        )}
 
         <div className={styles.btnGroup}>
           <button className={styles.travelBtn} onClick={onTravel}>
