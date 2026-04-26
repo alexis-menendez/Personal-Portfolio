@@ -52,25 +52,21 @@ const HNTDHolomap: React.FC = () => {
       {/* Planet One — Doubt */}
       <button className={styles.planet} style={{ top: '30%', left: '21%' }}
         onClick={() => setSelectedPlanet('planetone')}>
-        Doubt {hasVisited('planetone') && '✅'}
+        Doubt {hasVisited('planetone') && ' ✓'}
       </button>
 
       {/* Planet Two — Brune */}
       <button className={styles.planet} style={{ top: '50%', left: '46%' }}
         onClick={() => setSelectedPlanet('planettwo')}>
-        Brune {hasVisited('planettwo') && '✅'}
+        Brune {hasVisited('planettwo') && ' ✓'}
       </button>
 
-      {/* Planet Three — Ocean 12B (locked) */}
-      {isPlanetThreeUnlocked() ? (
+      {/* Planet Three — Ocean 12B (hidden until both others visited) */}
+      {isPlanetThreeUnlocked() && (
         <button className={styles.planet} style={{ top: '70%', left: '76%' }}
           onClick={() => setSelectedPlanet('planethree')}>
-          Ocean 12B {hasVisited('planethree') && '✅'}
+          Ocean 12B {hasVisited('planethree') && ' ✓'}
         </button>
-      ) : (
-        <div className={styles.planetLocked} style={{ top: '70%', left: '76%' }}>
-          ??? [LOCKED]
-        </div>
       )}
 
       {/* Return to console */}

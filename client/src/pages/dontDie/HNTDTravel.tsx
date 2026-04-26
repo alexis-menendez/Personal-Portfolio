@@ -454,7 +454,7 @@ const HUD_BUTTONS: HudButton[] = [
   { id: 'ship',     label: '↩ Return to Ship',   top: '19.8rem', pos: { left:  '1.5rem' }, action: null       },
   { id: 'log',      label: '✎ Write Log',          top: '23.7rem', pos: { left:  '1.5rem' }, action: 'log'      },
   { id: 'scan',     label: '⊞ Scan Terrain',       top: '27.6rem', pos: { left:  '1.5rem' }, action: 'scan'     },
-  { id: 'distress', label: '⚡ Distress Signal',    top: '31.5rem', pos: { left:  '1.5rem' }, action: 'distress' },
+  { id: 'distress', label: '⊗ Distress Signal',    top: '31.5rem', pos: { left:  '1.5rem' }, action: 'distress' },
   { id: 'weather',  label: '⚠ Weather Scanner',    top: '14rem',   pos: { right: '1.5rem' }, action: 'weather'  },
   { id: 'vera',     label: '⬡ Chat with VERA',     top: '17.9rem', pos: { right: '1.5rem' }, action: 'vera'     },
   { id: 'guide',    label: '⊕ Planet Guide',       top: '21.8rem', pos: { right: '1.5rem' }, action: 'guide'    },
