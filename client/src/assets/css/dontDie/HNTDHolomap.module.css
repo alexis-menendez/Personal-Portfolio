@@ -521,7 +521,7 @@
 /* ── Bio data panel (top-right, below oxygen) ─────────────────── */
 .bioPanel {
   position: absolute;
-  top: 5.6rem;
+  top: 6.4rem;
   right: 1.5rem;
   z-index: 5;
   display: flex;

@@ -345,9 +345,9 @@ const HUD_BUTTONS: HudButton[] = [
   { id: 'log',      label: '✎ Write Log',          top: '23.7rem', pos: { left:  '1.5rem' }, action: 'log'      },
   { id: 'scan',     label: '⊞ Scan Terrain',       top: '27.6rem', pos: { left:  '1.5rem' }, action: 'scan'     },
   { id: 'distress', label: '⚡ Distress Signal',    top: '31.5rem', pos: { left:  '1.5rem' }, action: 'distress' },
-  { id: 'weather',  label: '⚠ Weather Scanner',    top: '13rem',   pos: { right: '1.5rem' }, action: 'weather'  },
-  { id: 'vera',     label: '⬡ Chat with VERA',     top: '16.9rem', pos: { right: '1.5rem' }, action: 'vera'     },
-  { id: 'guide',    label: '⊕ Planet Guide',       top: '20.8rem', pos: { right: '1.5rem' }, action: 'guide'    },
+  { id: 'weather',  label: '⚠ Weather Scanner',    top: '14rem',   pos: { right: '1.5rem' }, action: 'weather'  },
+  { id: 'vera',     label: '⬡ Chat with VERA',     top: '17.9rem', pos: { right: '1.5rem' }, action: 'vera'     },
+  { id: 'guide',    label: '⊕ Planet Guide',       top: '21.8rem', pos: { right: '1.5rem' }, action: 'guide'    },
 ];
 
 // ── Main HUD ───────────────────────────────────────────────────
