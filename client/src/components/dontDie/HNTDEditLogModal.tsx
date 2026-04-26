@@ -9,9 +9,10 @@ interface Props {
   onSave: (title: string, content: string) => Promise<void>;
   onDelete?: () => Promise<void>;
   onClose: () => void;
+  transparentOverlay?: boolean;
 }
 
-const HNTDEditLogModal: React.FC<Props> = ({ log, onSave, onDelete, onClose }) => {
+const HNTDEditLogModal: React.FC<Props> = ({ log, onSave, onDelete, onClose, transparentOverlay }) => {
   const [title,   setTitle]   = useState(log?.title   ?? '');
   const [content, setContent] = useState(log?.content ?? '');
   const [saving,  setSaving]  = useState(false);
@@ -50,7 +51,7 @@ const HNTDEditLogModal: React.FC<Props> = ({ log, onSave, onDelete, onClose }) =
   };
 
   return (
-    <div className={styles.modalOverlay} onClick={onClose}>
+    <div className={styles.modalOverlay} style={transparentOverlay ? { background: 'transparent' } : undefined} onClick={onClose}>
       <div className={styles.modal} onClick={e => e.stopPropagation()}>
         <button className={styles.modalCloseX} onClick={onClose} aria-label="Close">×</button>
 

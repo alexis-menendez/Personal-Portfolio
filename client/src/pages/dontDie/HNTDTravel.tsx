@@ -614,7 +614,7 @@ const HNTDTravel: React.FC = () => {
       <EmergencyAlerts active={alertsActive} />
 
       {/* Panels */}
-      {activePanel === 'log'      && <HNTDEditLogModal log={null} onSave={handleSaveLog} onClose={() => setActivePanel(null)} />}
+      {activePanel === 'log'      && <HNTDEditLogModal log={null} onSave={handleSaveLog} onClose={() => setActivePanel(null)} transparentOverlay />}
       {activePanel === 'vera'     && (
         <VeraChat
           dialogue={planet.vera}
