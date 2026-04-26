@@ -36,13 +36,13 @@ function buildDeathEntry(cause: DeathCause, planetKey: string): SurvivalEntry {
 }
 
 // ── Modified welcome letter ─────────────────────────────────────
-function buildWelcomeLetter(cause: DeathCause, planetKey: string, prevName: string): string {
+function buildWelcomeLetter(cause: DeathCause, _planetKey: string): string {
   const causeNote =
     cause === 'suit'
-      ? `As you may be aware, your predecessor — Commander ${prevName} — was recently lost on Doubt following an unrecoverable suit breach. The incident occurred in a crystalline terrain zone. The prior commander was in possession of the standard-issue patch kit at the time. The kit was empty. This has been logged as explorer error.`
+      ? `As you may be aware, your predecessor was recently lost on Doubt following an unrecoverable suit breach. The incident occurred in a crystalline terrain zone. The prior commander failed to follow protocol and did not maintain their suit — specifically, they failed to ensure the standard-issue patch kit was stocked and ready for use. The kit was found empty. This has been logged as explorer error.`
     : cause === 'battery'
-      ? `As you may be aware, your predecessor — Commander ${prevName} — was recently lost during a surface mission. Cause of death: suit power failure. HUD telemetry confirms that battery warnings were active and visible throughout the final 22 minutes of the mission. The prior commander did not return to the ship. This has been logged as explorer error.`
-      : `As you may be aware, your predecessor — Commander ${prevName} — was recently lost during a surface mission. Cause of death: oxygen depletion. Telemetry confirms that O2 warnings were active and visible throughout the final minutes. The prior commander did not respond accordingly. This has been logged as explorer error.`;
+      ? `As you may be aware, your predecessor was recently lost during a surface mission. Cause of death: suit power failure. The prior commander failed to follow protocol by neglecting to monitor battery reserves and return to the ship before power depleted. HUD warnings were active and visible throughout the final 22 minutes of the mission. This has been logged as explorer error.`
+      : `As you may be aware, your predecessor was recently lost during a surface mission. Cause of death: oxygen depletion. The prior commander failed to follow protocol by neglecting to monitor oxygen reserves and return to the ship before depletion. O2 warnings were active and visible throughout the final minutes. This has been logged as explorer error.`;
 
   return `Greetings, Explorer!
 
@@ -62,7 +62,7 @@ So strap in, Commander. The galaxy awaits!
 
 DISCLAIMER & WAIVER OF LIABILITY
 
-By proceeding, you acknowledge and agree that Tö'tahli Naut Dy-in™ (hereinafter "the Company") is not liable for any and all harm, injury, loss of life, suit breach, oxygen depletion, battery failure, gravitational anomaly, pre-colony structure interaction, glowing thing contact, VERA-related incident, patch kit inadequacy, or outcomes of any nature and from any cause, including but not limited to causes not yet classified. You accept full and sole responsibility for your own survival and the survival of anyone you encounter (should they exist). You also accept responsibility for the survival of anyone you do not encounter, where applicable.
+By proceeding, you acknowledge and agree that Tö'tahli Naut Dy-in™ (hereinafter "the Company") is not liable for any and all harm, injury, loss of life, suit breach, oxygen depletion, battery failure, gravitational anomaly, pre-colony structure interaction, glowing thing contact, VERA-related incident, patch kit inadequacy, or outcomes of any nature and from any cause, including but not limited to causes not yet classified. You accept full and sole responsibility for your own survival.
 
 The Company wishes you every success.`;
 }
@@ -79,7 +79,6 @@ const HNTDNewCommander: React.FC = () => {
   const state      = (location.state as { deathCause?: DeathCause; planetKey?: string } | null) ?? {};
   const deathCause: DeathCause = state.deathCause ?? 'oxygen';
   const planetKey               = state.planetKey  ?? '';
-  const prevName                = user?.username    ?? 'Unknown';
 
   const [phase,     setPhase]     = useState<Phase>('rename');
   const [newName,   setNewName]   = useState('');
@@ -109,7 +108,7 @@ const HNTDNewCommander: React.FC = () => {
     }
   };
 
-  const welcomeLetter = buildWelcomeLetter(deathCause, planetKey, prevName);
+  const welcomeLetter = buildWelcomeLetter(deathCause, planetKey);
 
   if (phase === 'rename') {
     return (

@@ -1073,3 +1073,43 @@
   align-self: center;
 }
 .shuttleBtn:hover { background: rgba(0, 255, 225, 0.1); color: #00ffe1; }
+
+/* ── Crumpled Note Overlay ────────────────────────────────────── */
+.noteOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
+.noteImageWrapper {
+  position: relative;
+  width: clamp(280px, 40vmin, 480px);
+  cursor: default;
+}
+
+.noteImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.noteText {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18% 14%;
+  text-align: center;
+  font-family: 'La Belle Aurore', cursive;
+  font-size: clamp(0.75rem, 2vmin, 1rem);
+  color: rgba(0, 0, 0, 0.95);
+  line-height: 1.8;
+  pointer-events: none;
+  white-space: pre-line;
+}

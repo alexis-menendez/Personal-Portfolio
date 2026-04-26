@@ -7,6 +7,7 @@ interface HNTDLogAttributes {
   userId: number;
   title: string;
   content: string;
+  commanderName?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -18,6 +19,7 @@ export class HNTDLog extends Model<HNTDLogAttributes, HNTDLogCreationAttributes>
   public userId!: number;
   public title!: string;
   public content!: string;
+  public commanderName?: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -25,10 +27,11 @@ export class HNTDLog extends Model<HNTDLogAttributes, HNTDLogCreationAttributes>
 export function HNTDLogFactory(sequelize: Sequelize): typeof HNTDLog {
   HNTDLog.init(
     {
-      id:      { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-      userId:  { type: DataTypes.INTEGER, allowNull: false },
-      title:   { type: DataTypes.STRING,  allowNull: false },
-      content: { type: DataTypes.TEXT,    allowNull: false },
+      id:            { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+      userId:        { type: DataTypes.INTEGER, allowNull: false },
+      title:         { type: DataTypes.STRING,  allowNull: false },
+      content:       { type: DataTypes.TEXT,    allowNull: false },
+      commanderName: { type: DataTypes.STRING,  allowNull: true  },
     },
     { tableName: 'hntd_logs', sequelize, timestamps: true }
   );

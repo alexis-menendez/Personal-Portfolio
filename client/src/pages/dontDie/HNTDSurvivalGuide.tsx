@@ -135,11 +135,8 @@ const HNTDSurvivalGuide: React.FC = () => {
               <p className={styles.logsTitle}>// SURVIVAL GUIDE</p>
             </div>
 
-            <p className={styles.dimText} style={{ marginBottom: '0.2rem', fontSize: '0.7rem' }}>
-              Field reports compiled from explorer missions.
-            </p>
-            <p className={styles.dimText} style={{ marginBottom: '0.7rem', fontSize: '0.65rem', color: 'rgba(0,255,225,0.3)', fontStyle: 'italic' }}>
-              Additional sections unlock as you explore. Access to new field data is restricted on a need-to-know basis in order to protect the company's proprietary operational data. See Explorer Conduct Agreement, Appendix D.
+            <p className={styles.dimText} style={{ marginBottom: '0.7rem', fontSize: '0.68rem', color: 'rgba(0,255,225,0.6)', letterSpacing: '0.04em' }}>
+              Additional sections unlock as you explore. Access to new field data is restricted on a need-to-know basis to protect the company's proprietary operational data. See Explorer Conduct Agreement, Appendix D.
             </p>
 
             <div className={styles.logsList}>

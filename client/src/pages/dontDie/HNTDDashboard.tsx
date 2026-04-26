@@ -263,11 +263,15 @@ const DashboardVeraChat: React.FC<{ username: string }> = ({ username }) => {
 };
 
 // ── Dashboard ─────────────────────────────────────────────────
+const NOTE_ID    = 'patch-kit-note-7734b';
+const NOTE_TEXT  = `tried patch kit, patches were expired.\n\nif you are reading this, tell my sister I love her and that I'm going to see dad.\n\n- Alison Edwards`;
+
 const HNTDDashboard: React.FC = () => {
   const { user }        = useHNTDAuth();
   const { storedItems, isNewCharacter, lockerFirstOpened, markLockerOpened } = useHNTDPlanets();
   const [showLocker,      setShowLocker]      = useState(false);
   const [showLockerVera,  setShowLockerVera]  = useState(false);
+  const [showNote,        setShowNote]        = useState(false);
 
   return (
     <div className={styles.consoleBackground}>
@@ -313,12 +317,33 @@ const HNTDDashboard: React.FC = () => {
                     : <div className={hudStyles.storageItemList}>
                         {storedItems.map(item => (
                           <div key={item.id} className={hudStyles.storageItemCard}>
-                            <p className={hudStyles.storageItemName}>{item.name}</p>
+                            {item.id === NOTE_ID ? (
+                              <p className={hudStyles.storageItemName}
+                                style={{ cursor: 'pointer', textDecoration: 'underline dotted' }}
+                                onClick={() => setShowNote(true)}>
+                                {item.name} ↗
+                              </p>
+                            ) : (
+                              <p className={hudStyles.storageItemName}>{item.name}</p>
+                            )}
                             <p className={hudStyles.storageItemFound}>Found: {item.foundAt}</p>
-                            <p className={hudStyles.storageItemContent}>{item.content}</p>
+                            {item.id !== NOTE_ID && (
+                              <p className={hudStyles.storageItemContent}>{item.content}</p>
+                            )}
                           </div>
                         ))}
                       </div>
+                )}
+
+                {/* Crumpled note overlay */}
+                {showNote && (
+                  <div className={hudStyles.noteOverlay} onClick={() => setShowNote(false)}>
+                    <div className={hudStyles.noteImageWrapper} onClick={e => e.stopPropagation()}>
+                      <img src="/assets/dontDie/images/storage-locker/crumpledNote.png"
+                        alt="Handwritten note" className={hudStyles.noteImage} />
+                      <p className={hudStyles.noteText}>{NOTE_TEXT}</p>
+                    </div>
+                  </div>
                 )}
               </div>
 

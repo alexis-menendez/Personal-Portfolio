@@ -12,6 +12,7 @@ export interface HNTDLogEntry {
   userId: number;
   title: string;
   content: string;
+  commanderName?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -22,11 +23,11 @@ export const fetchLogs = async (token: string): Promise<HNTDLogEntry[]> => {
   return res.json();
 };
 
-export const createLog = async (token: string, title: string, content: string): Promise<HNTDLogEntry> => {
+export const createLog = async (token: string, title: string, content: string, commanderName?: string): Promise<HNTDLogEntry> => {
   const res = await fetch(BASE, {
     method: 'POST',
     headers: authHeaders(token),
-    body: JSON.stringify({ title, content }),
+    body: JSON.stringify({ title, content, commanderName }),
   });
   if (!res.ok) { const err = await res.json(); throw new Error(err.message); }
   return res.json();

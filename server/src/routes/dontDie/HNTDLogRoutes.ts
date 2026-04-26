@@ -17,11 +17,11 @@ router.get('/', async (req: Request, res: Response): Promise<void> => {
 });
 
 router.post('/', async (req: Request, res: Response): Promise<void> => {
-  const { title, content } = req.body;
+  const { title, content, commanderName } = req.body;
   if (!title || !content) { res.status(400).json({ message: 'Title and content required' }); return; }
   try {
     const userId = (req.user as any).userId;
-    const log = await HNTDLog.create({ userId, title, content });
+    const log = await HNTDLog.create({ userId, title, content, commanderName });
     res.status(201).json(log);
   } catch (err: any) { res.status(500).json({ message: err.message }); }
 });
