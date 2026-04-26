@@ -39,12 +39,12 @@ const PLANETS: Record<string, PlanetData> = {
     name: 'Doubt',
     image: '/assets/dontDie/images/planet-one/PlanetOne.png',
     sensors: [
-      { label: 'Temperature',  value: '118°F / 48°C',        alert: true  },
-      { label: 'Composition',  value: 'N₂ 68% | CO₂ 22% | SO₂ 10%'       },
-      { label: 'Breathable',   value: 'NO — toxic',           alert: true  },
-      { label: 'Pressure',     value: '0.8 atm'                            },
-      { label: 'Humidity',     value: '2%'                                 },
-      { label: 'UV Radiation', value: 'EXTREME',              alert: true  },
+      { label: 'Temperature',       value: '118°F / 48°C',        alert: true  },
+      { label: 'Atmo. Composition', value: 'N₂ 68% | CO₂ 22% | SO₂ 10%'       },
+      { label: 'Breathable',        value: 'NO — toxic',           alert: true  },
+      { label: 'Pressure',          value: '0.8 atm'                            },
+      { label: 'Humidity',          value: '2%'                                 },
+      { label: 'UV Radiation',      value: 'EXTREME',              alert: true  },
     ],
     deathVera: `Oxygen reserves depleted on the surface of Doubt. The desert took you before I could do anything about it. I want you to know I did attempt to warn you about the time constraints. This is noted in the official record.`,
     vera: {
@@ -60,12 +60,12 @@ const PLANETS: Record<string, PlanetData> = {
     name: 'Brune',
     image: '/assets/dontDie/images/planet-two/PlanetTwo.png',
     sensors: [
-      { label: 'Temperature',  value: '-12°F / -24°C',        alert: true  },
-      { label: 'Composition',  value: 'N₂ 78% | O₂ 6% | Ar 16%'           },
-      { label: 'Breathable',   value: 'NO — O₂ insufficient', alert: true  },
-      { label: 'Pressure',     value: '0.3 atm',              alert: true  },
-      { label: 'Humidity',     value: '45%'                                },
-      { label: 'Wind Speed',   value: '94 mph',               alert: true  },
+      { label: 'Temperature',       value: '-12°F / -24°C',        alert: true  },
+      { label: 'Atmo. Composition', value: 'N₂ 78% | O₂ 6% | Ar 16%'           },
+      { label: 'Breathable',        value: 'NO — O₂ insufficient', alert: true  },
+      { label: 'Pressure',          value: '0.3 atm',              alert: true  },
+      { label: 'Humidity',          value: '45%'                                },
+      { label: 'Wind Speed',        value: '94 mph',               alert: true  },
     ],
     deathVera: `Life support failure confirmed on Brune. Oxygen depletion complete. I told you about the thin atmosphere. I believe I was quite clear about the time constraints. I will note your coordinates in the expedition log.`,
     vera: {
@@ -253,18 +253,16 @@ const PlanetSurvivalPanel: React.FC<{ planetKey: string; onClose: () => void }> 
 };
 
 // ── HUD button config ──────────────────────────────────────────
-// Left buttons: left edge flush with sensor panel (left: 1.5rem), only translateY(-50%).
-// Right buttons: centered on their left% point, translate(-50%, -50%).
-// Sensor panel: top 5rem, height ≈ 11.6rem → bottom ≈ 16.6rem.
-// Left button centers: 16.6 + 0.5 + 1.2 = 18.3rem, then + 2.4 + 0.5 = 21.2rem.
-// Right button centers aligned with sensor panel top: 5 + 1.2 = 6.2rem, then + 3.4 = 9.6rem.
-const HUD_BUTTONS = [
-  { id: 'ship',    label: '↩ Return to Ship', top: '18.3rem', left: '1.5rem', transform: 'translateY(-50%)',       action: null      },
-  { id: 'log',     label: '✎ Write Log',       top: '21.7rem', left: '1.5rem', transform: 'translateY(-50%)',       action: 'log'     },
-  { id: 'vera',    label: '⬡ Chat VERA',       top: '6.2rem',  left: '90%',   transform: 'translate(-50%, -50%)',  action: 'vera'    },
-  { id: 'guide',   label: '⊕ Planet Guide',    top: '9.6rem',  left: '90%',   transform: 'translate(-50%, -50%)',  action: 'guide'   },
-  { id: 'weather', label: '⚠ Scanner',          top: '22%',    left: '87%',   transform: 'translate(-50%, -50%)',  action: 'weather' },
-] as const;
+// Left buttons: left edge at 1.5rem, translateY only → stack with left edges aligned.
+// Right buttons: right edge at 1.5rem, translateY only → stack with right edges aligned.
+type HudButton = { id: string; label: string; top: string; pos: { left: string } | { right: string }; action: string | null };
+const HUD_BUTTONS: HudButton[] = [
+  { id: 'ship',    label: '↩ Return to Ship', top: '18.3rem', pos: { left:  '1.5rem' }, action: null      },
+  { id: 'log',     label: '✎ Write Log',       top: '21.7rem', pos: { left:  '1.5rem' }, action: 'log'     },
+  { id: 'vera',    label: '⬡ Chat VERA',       top: '6.2rem',  pos: { right: '1.5rem' }, action: 'vera'    },
+  { id: 'guide',   label: '⊕ Planet Guide',    top: '9.6rem',  pos: { right: '1.5rem' }, action: 'guide'   },
+  { id: 'weather', label: '⚠ Scanner',          top: '22%',    pos: { right: '1.5rem' }, action: 'weather' },
+];
 
 // ── Main HUD ───────────────────────────────────────────────────
 type Panel = 'log' | 'vera' | 'weather' | 'guide' | null;
@@ -371,7 +369,7 @@ const HNTDTravel: React.FC = () => {
         <button
           key={btn.id}
           className={`${styles.archHudBtn} ${panelOpen ? styles.archHudBtnHidden : ''}`}
-          style={{ top: btn.top, left: btn.left, transform: btn.transform }}
+          style={{ top: btn.top, ...btn.pos, transform: 'translateY(-50%)' }}
           onClick={btn.action ? () => setActivePanel(btn.action as Panel) : () => navigate('/hntd-holomap')}
         >
           {btn.label}
