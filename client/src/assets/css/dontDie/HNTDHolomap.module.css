@@ -709,7 +709,6 @@
   position: fixed;
   z-index: 8500;
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(0.65rem, 1.6vmin, 0.9rem);
   padding: 0.35rem 0.75rem;
   border-radius: 4px;
   border: 1px solid;
@@ -720,14 +719,19 @@
   animation: alertFlash ease-in-out infinite;
 }
 
-/* Each color flashes at a different speed — red fastest, teal slowest */
-.alertRed    { color: #ff4d4d; border-color: rgba(255, 77,  77,  0.7); text-shadow: 0 0 6px rgba(255,77,77,0.5);   animation-duration: 0.6s;  }
-.alertYellow { color: #ffdd00; border-color: rgba(255, 221, 0,   0.7); text-shadow: 0 0 6px rgba(255,221,0,0.4);   animation-duration: 1.3s;  }
-.alertTeal   { color: #00ffe1; border-color: rgba(0,   255, 225, 0.7); text-shadow: 0 0 6px rgba(0,255,200,0.4);   animation-duration: 2.1s;  }
+/* Size variants */
+.alertSm { font-size: clamp(0.52rem, 1.1vmin, 0.68rem); }
+.alertMd { font-size: clamp(0.72rem, 1.6vmin, 0.95rem); }
+.alertLg { font-size: clamp(0.9rem,  2.1vmin, 1.25rem); }
+
+/* Color + speed — red slowest-of-fast, teal slowest overall */
+.alertRed    { color: #ff4d4d; border-color: rgba(255, 77,  77,  0.7); text-shadow: 0 0 6px rgba(255,77,77,0.5);  animation-duration: 1.4s; }
+.alertYellow { color: #ffdd00; border-color: rgba(255, 221, 0,   0.7); text-shadow: 0 0 6px rgba(255,221,0,0.4);  animation-duration: 2.4s; }
+.alertTeal   { color: #00ffe1; border-color: rgba(0,   255, 225, 0.7); text-shadow: 0 0 6px rgba(0,255,200,0.4);  animation-duration: 3.6s; }
 
 @keyframes alertFlash {
   0%, 100% { opacity: 1; }
-  50%       { opacity: 0.45; }
+  50%       { opacity: 0.5; }
 }
 
 /* ── Urgent button (Return to Ship when suit is damaged) ─────── */

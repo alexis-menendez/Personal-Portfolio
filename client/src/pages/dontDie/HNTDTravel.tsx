@@ -183,20 +183,27 @@ const CompassDisplay: React.FC<{ hidden: boolean; planetKey: string }> = ({ hidd
 };
 
 // ── Emergency Alerts ───────────────────────────────────────────
-interface AlertItem { id: number; message: string; x: number; y: number; variant: 'alertRed' | 'alertYellow' | 'alertTeal'; }
+type AlertSize = 'alertSm' | 'alertMd' | 'alertLg';
+interface AlertItem {
+  id: number; message: string; x: number; y: number;
+  variant: 'alertRed' | 'alertYellow' | 'alertTeal';
+  sizeClass: AlertSize;
+}
 
 const ALERT_POOL: { msg: string; variant: AlertItem['variant'] }[] = [
-  { msg: '⚠ OXYGEN LEAK DETECTED',       variant: 'alertRed'    },
-  { msg: '⚠ SUIT SEAL COMPROMISED',      variant: 'alertRed'    },
-  { msg: '⚠ O2 RESERVE: CRITICAL',       variant: 'alertRed'    },
-  { msg: '⚠ LIFE SUPPORT CRITICAL',      variant: 'alertRed'    },
-  { msg: '⚠ OUTER LAYER BREACH',         variant: 'alertRed'    },
-  { msg: '⚠ PRESSURE DROPPING',          variant: 'alertYellow' },
-  { msg: '⚠ HULL INTEGRITY: 34%',        variant: 'alertYellow' },
-  { msg: '⚠ SUIT TEMP: RISING',          variant: 'alertYellow' },
-  { msg: '⚠ ATMOSPHERIC EXPOSURE',       variant: 'alertTeal'   },
-  { msg: '⚠ EMERGENCY PROTOCOL ACTIVE',  variant: 'alertTeal'   },
+  { msg: '◉ OXYGEN LEAK DETECTED',       variant: 'alertRed'    },
+  { msg: '⊗ SUIT SEAL COMPROMISED',      variant: 'alertRed'    },
+  { msg: '◉ O2 RESERVE: CRITICAL',       variant: 'alertRed'    },
+  { msg: '⊘ LIFE SUPPORT CRITICAL',      variant: 'alertRed'    },
+  { msg: '⊗ OUTER LAYER BREACH',         variant: 'alertRed'    },
+  { msg: '▲ PRESSURE DROPPING',          variant: 'alertYellow' },
+  { msg: '▲ HULL INTEGRITY: 34%',        variant: 'alertYellow' },
+  { msg: '◈ SUIT TEMP: RISING',          variant: 'alertYellow' },
+  { msg: '⊘ ATMOSPHERIC EXPOSURE',       variant: 'alertTeal'   },
+  { msg: '◈ EMERGENCY PROTOCOL ACTIVE',  variant: 'alertTeal'   },
 ];
+
+const SIZES: AlertSize[] = ['alertSm', 'alertMd', 'alertMd', 'alertLg'];
 
 const EmergencyAlerts: React.FC<{ active: boolean }> = ({ active }) => {
   const [alerts, setAlerts] = useState<AlertItem[]>([]);
@@ -205,16 +212,20 @@ const EmergencyAlerts: React.FC<{ active: boolean }> = ({ active }) => {
   useEffect(() => {
     if (!active) { setAlerts([]); return; }
     const id = setInterval(() => {
-      const src   = ALERT_POOL[Math.floor(Math.random() * ALERT_POOL.length)];
-      const item: AlertItem = {
-        id:      nextId.current++,
-        message: src.msg,
-        variant: src.variant,
-        x:       10 + Math.random() * 72,
-        y:       15 + Math.random() * 65,
-      };
-      setAlerts(prev => [...prev.slice(-18), item]);
-    }, 550);
+      setAlerts(prev => {
+        if (prev.length >= 12) return prev; // cap — alerts stay once placed
+        const src = ALERT_POOL[Math.floor(Math.random() * ALERT_POOL.length)];
+        const item: AlertItem = {
+          id:        nextId.current++,
+          message:   src.msg,
+          variant:   src.variant,
+          sizeClass: SIZES[Math.floor(Math.random() * SIZES.length)],
+          x: 10 + Math.random() * 72,
+          y: 15 + Math.random() * 65,
+        };
+        return [...prev, item];
+      });
+    }, 2000);
     return () => clearInterval(id);
   }, [active]);
 
@@ -222,7 +233,7 @@ const EmergencyAlerts: React.FC<{ active: boolean }> = ({ active }) => {
     <>
       {alerts.map(a => (
         <div key={a.id}
-          className={`${styles.alertBubble} ${styles[a.variant]}`}
+          className={`${styles.alertBubble} ${styles[a.variant]} ${styles[a.sizeClass]}`}
           style={{ left: `${a.x}%`, top: `${a.y}%` }}>
           {a.message}
         </div>
