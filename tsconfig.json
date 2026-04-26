@@ -5,8 +5,9 @@
       "lib": ["ES2020", "DOM"],
   
       /* Modules */
-      "module": "Node16",
-      "moduleResolution": "node16",
+      "module": "ESNext",
+      "moduleResolution": "node",
+      "ignoreDeprecations": "6.0",
       "moduleDetection": "force", 
       "skipLibCheck": true,
   
