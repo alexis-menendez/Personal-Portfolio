@@ -29,7 +29,7 @@ const PROJECTS: Project[] = [
     desc: 'A narrative survival game disguised as a space console — write explorer logs, survive alien planets, and uncover deep mysteries.',
     tags: ['React', 'TypeScript', 'Node.js'],
     github: 'https://github.com/alexis-menendez/HowNotToDieDemo',
-    live: null,
+    live: '/hntd-home',
     route: '/dontDie',
   },
   {
@@ -45,7 +45,7 @@ const PROJECTS: Project[] = [
     desc: 'A psychedelic Kanban board blending bullet journaling with hypnotic visuals to keep tasks flowing and focus high.',
     tags: ['React', 'Node.js', 'CSS'],
     github: 'https://github.com/alexis-menendez/Module-14-Taskadelic',
-    live: '/taskadelic',
+    live: '/td-home',
     route: '/taskadelic',
   },
   {
