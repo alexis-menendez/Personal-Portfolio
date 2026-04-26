@@ -253,16 +253,17 @@ const PlanetSurvivalPanel: React.FC<{ planetKey: string; onClose: () => void }> 
 };
 
 // ── HUD button config ──────────────────────────────────────────
-// All left/right buttons use rem so they align with the sensor panel (top: 5rem).
-// Sensor panel height ≈ 11.6rem → bottom ≈ 16.6rem.
-// Button height ≈ 2.4rem; first left center = 16.6 + 0.5gap + 1.2half = 18.3rem.
-// Right buttons start at same top as sensor panel: 5 + 1.2 = 6.2rem.
+// Left buttons: left edge flush with sensor panel (left: 1.5rem), only translateY(-50%).
+// Right buttons: centered on their left% point, translate(-50%, -50%).
+// Sensor panel: top 5rem, height ≈ 11.6rem → bottom ≈ 16.6rem.
+// Left button centers: 16.6 + 0.5 + 1.2 = 18.3rem, then + 2.4 + 0.5 = 21.2rem.
+// Right button centers aligned with sensor panel top: 5 + 1.2 = 6.2rem, then + 3.4 = 9.6rem.
 const HUD_BUTTONS = [
-  { id: 'ship',    label: '↩ Return to Ship', top: '18.3rem', left: '10%', action: null      },
-  { id: 'log',     label: '✎ Write Log',       top: '21.7rem', left: '10%', action: 'log'    },
-  { id: 'vera',    label: '⬡ Chat VERA',       top: '6.2rem',  left: '90%', action: 'vera'   },
-  { id: 'guide',   label: '⊕ Planet Guide',    top: '9.6rem',  left: '90%', action: 'guide'  },
-  { id: 'weather', label: '⚠ Scanner',          top: '22%',    left: '87%', action: 'weather'},
+  { id: 'ship',    label: '↩ Return to Ship', top: '18.3rem', left: '1.5rem', transform: 'translateY(-50%)',       action: null      },
+  { id: 'log',     label: '✎ Write Log',       top: '21.7rem', left: '1.5rem', transform: 'translateY(-50%)',       action: 'log'     },
+  { id: 'vera',    label: '⬡ Chat VERA',       top: '6.2rem',  left: '90%',   transform: 'translate(-50%, -50%)',  action: 'vera'    },
+  { id: 'guide',   label: '⊕ Planet Guide',    top: '9.6rem',  left: '90%',   transform: 'translate(-50%, -50%)',  action: 'guide'   },
+  { id: 'weather', label: '⚠ Scanner',          top: '22%',    left: '87%',   transform: 'translate(-50%, -50%)',  action: 'weather' },
 ] as const;
 
 // ── Main HUD ───────────────────────────────────────────────────
@@ -370,7 +371,7 @@ const HNTDTravel: React.FC = () => {
         <button
           key={btn.id}
           className={`${styles.archHudBtn} ${panelOpen ? styles.archHudBtnHidden : ''}`}
-          style={{ top: btn.top, left: btn.left }}
+          style={{ top: btn.top, left: btn.left, transform: btn.transform }}
           onClick={btn.action ? () => setActivePanel(btn.action as Panel) : () => navigate('/hntd-holomap')}
         >
           {btn.label}

@@ -286,6 +286,7 @@
 }
 
 /* Individual HUD button — positioned in the teal exterior of the image */
+/* transform is set per-button via inline style so left/right buttons can align differently */
 .archHudBtn {
   position: absolute;
   z-index: 5;
@@ -302,7 +303,6 @@
   text-align: center;
   transition: background 0.2s, border-color 0.2s, opacity 0.3s;
   pointer-events: auto;
-  transform: translate(-50%, -50%);
 }
 .archHudBtn:hover {
   background: rgba(0, 255, 200, 0.18);
