@@ -22,3 +22,7 @@ VITE_API_URL=/graphql
 EMAIL_USER=menendez.alex.d@gmail.com
 EMAIL_PASS=cwaw wmhk mmvu mfxj
 EMAIL_TO=menendez.alex.d@gmail.com
+
+# AWS Access Keys
+AWS_ACCESS_KEY_ID=AWS_ACCESS_KEY_ID_GOES_HERE
+AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY_GOES_HERE
