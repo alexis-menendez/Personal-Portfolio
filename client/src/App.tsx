@@ -6,7 +6,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 
 // Auth
-import { AuthProvider } from './context/authContext';
+import { AuthProvider } from './context/IOAuthContext';
 import { HNTDAuthProvider } from './context/HNTDAuthContext';
 import { HNTDPlanetProvider } from './context/HNTDPlanetContext';
 import HNTDPrivateRoute from './components/dontDie/HNTDPrivateRoute';
@@ -24,7 +24,7 @@ const HNTDEpilog         = lazy(() => import('./pages/dontDie/HNTDEpilog'));
 const HNTDThankYou       = lazy(() => import('./pages/dontDie/HNTDThankYou'));
 
 // Layout
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './components/innerOrbit/ProtectedRoute';
 import RetroLayout from './components/portfolio/layout/RetroLayout';
 import PortfolioLayout from './components/portfolio/layout/PortfolioLayout';
 import ResumeLayout from './components/portfolio/layout/ResumeLayout';

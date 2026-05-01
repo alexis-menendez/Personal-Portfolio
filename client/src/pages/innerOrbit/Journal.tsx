@@ -8,13 +8,12 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 
 // Auth
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '../../context/IOAuthContext';
 
 // GraphQL
 import { GET_JOURNAL_ENTRIES } from '../../graphql/queries';
 import { CREATE_JOURNAL } from '../../graphql/mutations';
 import {
-  getConstellationForEntryCount,
   CONSTELLATIONS,
   StarPoint,
   Constellation,
@@ -63,7 +62,6 @@ const Journal: React.FC = () => {
           remaining -= totalStars;
         } else if (remaining > 0) {
           const visibleStars = constellation.stars.slice(0, remaining);
-          const visibleIndexes = new Set(visibleStars.map((_, i) => i));
           const filteredConnections = constellation.connections.filter(
             ([a, b]) => a < remaining && b < remaining
           );

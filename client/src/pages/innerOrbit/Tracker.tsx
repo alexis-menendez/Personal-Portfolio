@@ -5,7 +5,7 @@ import React, { useState, useMemo } from 'react';
 import { useQuery } from '@apollo/client';
 
 // Auth
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '../../context/IOAuthContext';
 
 // GraphQL
 import { GET_MOOD_ENTRIES } from '../../graphql/queries';
@@ -28,7 +28,7 @@ const Tracker: React.FC = () => {
   const [selectedEntries, setSelectedEntries] = useState<MoodEntry[]>([]);
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  const { data, loading, error, refetch } = useQuery(GET_MOOD_ENTRIES, {
+  const { data, loading, refetch } = useQuery(GET_MOOD_ENTRIES, {
     variables: { userId: user?.id },
     skip: !user?.id,
   });

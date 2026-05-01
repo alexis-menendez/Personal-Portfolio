@@ -8,7 +8,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 // Auth
-import { useAuth } from '../../../../context/authContext';
+import { useAuth } from '../../../../context/IOAuthContext';
 
 // GraphQL
 import { GET_JOURNAL_ENTRIES } from '../../../../graphql/queries';

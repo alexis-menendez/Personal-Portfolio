@@ -278,6 +278,7 @@
   caret-color: #00ffe1;
   width: 180px;
   -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
   -webkit-text-fill-color: #00ffe1 !important;
 }
 .coordInput:focus { border-color: #00ffe1; }

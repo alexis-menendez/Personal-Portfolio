@@ -8,7 +8,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
 // Auth
-import { AuthContext } from '../../../../context/authContext';
+import { AuthContext } from '../../../../context/IOAuthContext';
 
 // GraphQL
 import { REGISTER_USER } from '../../../../graphql/mutations';

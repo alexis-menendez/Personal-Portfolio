@@ -1,4 +1,4 @@
-// File: client/src/context/authContext.tsx
+// File: client/src/context/IOAuthContext.tsx
 
 import React, { createContext, useState, ReactNode, useContext } from 'react';
 

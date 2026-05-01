@@ -1,11 +1,11 @@
-// File: client/src/components/ProtectedRoute.tsx
+// File: client/src/components/innerOrbit/ProtectedRoute.tsx
 
 // React
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 // Auth
-import { useAuth } from '../context/authContext';
+import { useAuth } from '../../context/IOAuthContext';
 
 interface Props {
   children: React.ReactNode;

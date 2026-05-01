@@ -128,6 +128,7 @@
   caret-color: #00ffe1;
   /* Override browser autofill white background */
   -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
   -webkit-text-fill-color: #00ffe1 !important;
 }
 
@@ -142,6 +143,7 @@
 .authInput:-webkit-autofill:hover,
 .authInput:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
   -webkit-text-fill-color: #00ffe1 !important;
   border: 1px solid #00ffe1;
 }
@@ -308,6 +310,7 @@
   margin-top: 0.2rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -367,6 +370,7 @@
   caret-color: #00ffe1;
   box-sizing: border-box;
   -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
   -webkit-text-fill-color: #00ffe1 !important;
 }
 .modalInput:focus,
@@ -375,12 +379,14 @@
   border-color: #00ffe1;
   outline: none;
   -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
   -webkit-text-fill-color: #00ffe1 !important;
 }
 .modalInput:-webkit-autofill,
 .modalInput:-webkit-autofill:hover,
 .modalInput:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
   -webkit-text-fill-color: #00ffe1 !important;
   border: 1px solid #00ffe1;
 }
@@ -400,6 +406,7 @@
   resize: vertical;
   box-sizing: border-box;
   -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
   -webkit-text-fill-color: #00ffe1 !important;
 }
 .modalTextarea:focus,
@@ -408,6 +415,7 @@
   border-color: #00ffe1;
   outline: none;
   -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
   -webkit-text-fill-color: #00ffe1 !important;
 }
 .modalTextarea::placeholder { color: rgba(0, 255, 225, 0.35); }
@@ -545,6 +553,7 @@
   line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -598,6 +607,7 @@
   outline: none;
   caret-color: #00ffe1;
   -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
   -webkit-text-fill-color: #00ffe1 !important;
 }
 .weatherSearchInput:focus,
@@ -605,6 +615,7 @@
   background: rgba(0, 10, 8, 0.95);
   border-color: #00ffe1;
   -webkit-box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
+  box-shadow: 0 0 0 30px rgba(0, 10, 8, 0.95) inset !important;
   -webkit-text-fill-color: #00ffe1 !important;
 }
 .weatherSearchInput::placeholder { color: rgba(0, 255, 225, 0.35); }

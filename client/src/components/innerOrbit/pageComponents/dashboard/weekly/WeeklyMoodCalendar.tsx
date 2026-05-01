@@ -7,7 +7,7 @@ import React, { useMemo, useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 
 // Auth
-import { useAuth } from '../../../../../context/authContext';
+import { useAuth } from '../../../../../context/IOAuthContext';
 
 // GraphQL
 import { UPDATE_MOOD_NOTE } from '../../../../../graphql/mutations';
@@ -17,10 +17,7 @@ import { GET_MOOD_ENTRIES } from '../../../../../graphql/queries';
 import MoodNotes from './MoodNotes';
 
 // Styles
-import trackerStyles from '../../../../../assets/css/innerOrbit/pageStyles/tracker/Tracker.module.css';
 import dashboardStyles from '../../../../../assets/css/innerOrbit/pageStyles/dashboard/IODashboard.module.css';
-import formStyles from '../../../../../assets/css/innerOrbit/common/IOForm.module.css';
-import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
 
 interface MoodEntry {
   _id: string;
@@ -37,7 +34,7 @@ interface WeeklyMoodReviewProps {
   horizontal?: boolean; 
 }
 
-const WeeklyMoodReview: React.FC<WeeklyMoodReviewProps> = ({ onMoodSubmit, horizontal }) => {
+const WeeklyMoodReview: React.FC<WeeklyMoodReviewProps> = ({ horizontal }) => {
   const { user } = useAuth();
   const userId = user?.id;
   const [selectedNote, setSelectedNote] = useState<string>('');

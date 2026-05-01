@@ -3,15 +3,10 @@
 // React
 import React from 'react';
 
-// Auth
-import { useAuth } from '../../../../context/authContext';
-
 // Styles
 import styles from '../../../../assets/css/innerOrbit/layout/IONavBar.module.css';
 
 const Footer: React.FC = () => {
-  const { logout } = useAuth();
-
   return (
     <footer className={styles.footer}>
       <p>
