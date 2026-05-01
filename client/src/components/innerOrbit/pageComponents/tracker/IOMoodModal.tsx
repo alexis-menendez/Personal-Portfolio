@@ -9,15 +9,15 @@ import { useAuth } from '../../../../context/IOAuthContext';
 
 // GraphQL
 import { ADD_MOOD_ENTRY, UPDATE_MOOD_ENTRY, DELETE_MOOD_ENTRY } from '../../../../graphql/mutations';
-import { moodList } from '../../../../models/innerOrbit/Mood';
+import { moodList } from '../../../../models/innerOrbit/IOMood';
 
 // Subcomponents
-import MoodComboBox from './MoodComboBox';
+import MoodComboBox from './IOMoodComboBox';
 
 // Styles
 import formStyles from '../../../../assets/css/innerOrbit/common/IOForm.module.css';
 import buttonStyles from '../../../../assets/css/innerOrbit/common/IOButton.module.css';
-import trackerStyles from '../../../../assets/css/innerOrbit/pageStyles/tracker/Tracker.module.css';
+import trackerStyles from '../../../../assets/css/innerOrbit/pageStyles/tracker/IOTracker.module.css';
 
 
 interface MoodModalProps {

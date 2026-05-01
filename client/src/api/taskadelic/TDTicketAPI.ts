@@ -1,8 +1,8 @@
 // File: client/src/api/taskadelic/ticketAPI.ts
 
-import { TicketData } from '../../interfaces/taskadelic/TicketData';
-import { ApiMessage } from '../../interfaces/taskadelic/ApiMessage';
-import Auth from '../../utils/taskadelic/auth';
+import { TicketData } from '../../interfaces/taskadelic/TDTicketData';
+import { ApiMessage } from '../../interfaces/taskadelic/TDApiMessage';
+import Auth from '../../utils/taskadelic/TDAuth';
 
 const BASE = '/taskadelic/api/tickets';
 const headers = () => ({

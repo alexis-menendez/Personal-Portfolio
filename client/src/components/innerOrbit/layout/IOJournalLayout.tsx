@@ -5,9 +5,9 @@ import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 
 // Subcomponents
-import StarBackground from '../common/StarBackground';
+import StarBackground from '../common/IOStarBackground';
 import NavBar from './nav/IONavBar';
-import ReturnToPortfolio from '../common/ReturnToPortfolio';
+import ReturnToPortfolio from '../common/IOReturnToPortfolio';
 
 const IOJournalLayout: React.FC = () => {
   useEffect(() => {

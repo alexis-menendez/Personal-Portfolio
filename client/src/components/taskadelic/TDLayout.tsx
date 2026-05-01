@@ -3,9 +3,9 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import TDNavbar from './TDNavbar';
-import ReturnToPortfolio from '../innerOrbit/common/ReturnToPortfolio';
+import ReturnToPortfolio from '../innerOrbit/common/IOReturnToPortfolio';
 import TDInfoTab from './TDInfoTab';
-import tdStyles from '../../assets/css/taskadelic/Taskadelic.module.css';
+import tdStyles from '../../assets/css/taskadelic/TDTaskadelic.module.css';
 
 const TaskadelicLayout = () => {
   const { pathname } = useLocation();

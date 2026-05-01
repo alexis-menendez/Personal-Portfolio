@@ -1,4 +1,4 @@
-// File: client/src/data/dontDie/survivalGuideData.ts
+// File: client/src/data/dontDie/HNTDSurvivalGuideData.ts
 // Single source of truth for all HNTD survival guide entries.
 // Used by both the console Survival Guide page and the in-planet Planet Guide panel.
 

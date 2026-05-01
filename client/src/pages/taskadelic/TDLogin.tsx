@@ -1,9 +1,9 @@
 // File: client/src/pages/taskadelic/TDLogin.tsx
 
 import { useState, FormEvent, ChangeEvent, useRef } from 'react';
-import Auth from '../../utils/taskadelic/auth';
-import { login } from '../../api/taskadelic/authAPI';
-import tdStyles from '../../assets/css/taskadelic/Taskadelic.module.css';
+import Auth from '../../utils/taskadelic/TDAuth';
+import { login } from '../../api/taskadelic/TDAuthAPI';
+import tdStyles from '../../assets/css/taskadelic/TDTaskadelic.module.css';
 
 const TDLogin = () => {
   const [loginData, setLoginData] = useState({ username: '', password: '' });

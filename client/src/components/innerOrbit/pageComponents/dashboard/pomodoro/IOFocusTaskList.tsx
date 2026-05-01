@@ -1,13 +1,13 @@
-// File: client/src/components/innerOrbit/pageComponents/dashboard/pomodoro/FocusTaskList.tsx
+// File: client/src/components/innerOrbit/pageComponents/dashboard/pomodoro/IOFocusTaskList.tsx
 
 //React
 import React, { useState } from 'react';
 
 // Hooks
-import { Task, useTaskStore } from '../../../../../hooks/innerOrbit/useTaskStore';
+import { useIOTaskStore } from '../../../../../hooks/innerOrbit/useIOTaskStore';
 
 // Styles
-import styles from '../../../../../assets/css/innerOrbit/pageStyles/dashboard/PomodoroTimer.module.css';
+import styles from '../../../../../assets/css/innerOrbit/pageStyles/dashboard/IOPomodoroTimer.module.css';
 import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
 
 interface FocusTaskListProps {
@@ -22,7 +22,7 @@ const FocusTaskList: React.FC<FocusTaskListProps> = ({ onTaskAdd }) => {
     deleteTask,
     selectedTaskId,
     selectTask,
-  } = useTaskStore();
+  } = useIOTaskStore();
 
   const [newTask, setNewTask] = useState('');
 

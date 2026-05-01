@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 
 // Styles
-import styles from '../../../../../assets/css/innerOrbit/pageStyles/tracker/Tracker.module.css';
+import styles from '../../../../../assets/css/innerOrbit/pageStyles/tracker/IOTracker.module.css';
 import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
 import formStyles from '../../../../../assets/css/innerOrbit/common/IOForm.module.css';
 

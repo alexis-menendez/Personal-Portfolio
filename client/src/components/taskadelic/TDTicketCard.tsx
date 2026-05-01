@@ -2,10 +2,10 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { TicketData } from '../../interfaces/taskadelic/TicketData';
-import { ApiMessage } from '../../interfaces/taskadelic/ApiMessage';
+import { TicketData } from '../../interfaces/taskadelic/TDTicketData';
+import { ApiMessage } from '../../interfaces/taskadelic/TDApiMessage';
 import { MouseEventHandler } from 'react';
-import tdStyles from '../../assets/css/taskadelic/Taskadelic.module.css';
+import tdStyles from '../../assets/css/taskadelic/TDTaskadelic.module.css';
 
 const ALL_LANES = ['Todo', 'In Progress', 'Done'];
 

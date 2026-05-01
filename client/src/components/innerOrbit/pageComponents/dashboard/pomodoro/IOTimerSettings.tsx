@@ -6,7 +6,7 @@ import React from 'react';
 // Styles
 import formStyles from '../../../../../assets/css/innerOrbit/common/IOForm.module.css';
 import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
-import styles from '../../../../../assets/css/innerOrbit/pageStyles/dashboard/PomodoroTimer.module.css';
+import styles from '../../../../../assets/css/innerOrbit/pageStyles/dashboard/IOPomodoroTimer.module.css';
 
 interface TimerSettingsProps {
   currentVolume: number;

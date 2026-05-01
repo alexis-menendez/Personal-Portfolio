@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useHNTDPlanets } from '../../context/HNTDPlanetContext';
-import ReturnToPortfolio from '../../components/innerOrbit/common/ReturnToPortfolio';
+import ReturnToPortfolio from '../../components/innerOrbit/common/IOReturnToPortfolio';
 import styles from '../../assets/css/dontDie/HNTDHolomap.module.css';
 
 // ── Ship diagnostics data — shown after the player checks systems ─

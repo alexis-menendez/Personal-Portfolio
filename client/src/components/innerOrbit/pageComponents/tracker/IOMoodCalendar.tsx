@@ -4,7 +4,7 @@
 import React from 'react';
 
 // Styles
-import styles from '../../../../assets/css/innerOrbit/pageStyles/tracker/Tracker.module.css';
+import styles from '../../../../assets/css/innerOrbit/pageStyles/tracker/IOTracker.module.css';
 
 
 type CalendarMoodEntry = {

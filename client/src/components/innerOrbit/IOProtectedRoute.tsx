@@ -1,4 +1,4 @@
-// File: client/src/components/innerOrbit/ProtectedRoute.tsx
+// File: client/src/components/innerOrbit/IOProtectedRoute.tsx
 
 // React
 import React from 'react';

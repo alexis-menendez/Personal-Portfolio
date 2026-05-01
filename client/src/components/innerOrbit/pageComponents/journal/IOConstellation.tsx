@@ -14,11 +14,11 @@ import { useAuth } from '../../../../context/IOAuthContext';
 import { GET_JOURNAL_ENTRIES } from '../../../../graphql/queries';
 
 // Subcomponents
-import { CONSTELLATIONS } from './ConstellationLogic';
-import StarBackground from '../../common/StarBackground';
+import { CONSTELLATIONS } from './IOConstellationLogic';
+import StarBackground from '../../common/IOStarBackground';
 
 // Styles
-import styles from '../../../../assets/css/innerOrbit/common/Stars.module.css';
+import styles from '../../../../assets/css/innerOrbit/common/IOStars.module.css';
 import buttonStyles from '../../../../assets/css/innerOrbit/common/IOButton.module.css';
 
 const Constellation: React.FC = () => {

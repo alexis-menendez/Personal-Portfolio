@@ -8,10 +8,10 @@ import { useMutation } from '@apollo/client';
 
 // GraphQL
 import { ADD_MOOD_ENTRY } from '../../../../graphql/mutations';
-import { moodList } from '../../../../models/innerOrbit/Mood';
+import { moodList } from '../../../../models/innerOrbit/IOMood';
 
 // Subcomponents
-import MoodComboBox from './MoodComboBox';
+import MoodComboBox from './IOMoodComboBox';
 
 // Styles
 import formStyles from '../../../../assets/css/innerOrbit/common/IOForm.module.css';

@@ -9,15 +9,15 @@ import { useAuth } from '../../context/IOAuthContext';
 
 // GraphQL
 import { GET_MOOD_ENTRIES } from '../../graphql/queries';
-import { MoodEntry } from '../../models/innerOrbit/Mood';
+import { MoodEntry } from '../../models/innerOrbit/IOMood';
 
 // Subcomponents
-import MoodCalendar from '../../components/innerOrbit/pageComponents/tracker/MoodCalendar';
-import MoodModal from '../../components/innerOrbit/pageComponents/tracker/MoodModal';
-import CreateMood from '../../components/innerOrbit/pageComponents/tracker/CreateMood';
+import MoodCalendar from '../../components/innerOrbit/pageComponents/tracker/IOMoodCalendar';
+import MoodModal from '../../components/innerOrbit/pageComponents/tracker/IOMoodModal';
+import CreateMood from '../../components/innerOrbit/pageComponents/tracker/IOCreateMood';
 
 // Styles
-import styles from '../../assets/css/innerOrbit/pageStyles/tracker/Tracker.module.css';
+import styles from '../../assets/css/innerOrbit/pageStyles/tracker/IOTracker.module.css';
 import buttonStyles from '../../assets/css/innerOrbit/common/IOButton.module.css';
 
 

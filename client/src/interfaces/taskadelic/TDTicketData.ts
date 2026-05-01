@@ -1,4 +1,4 @@
-import { UserData } from './UserData';
+import { UserData } from './TDUserData';
 
 export interface TicketData {
   id: number | null;

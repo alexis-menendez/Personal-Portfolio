@@ -14,7 +14,7 @@ import { UPDATE_MOOD_NOTE } from '../../../../../graphql/mutations';
 import { GET_MOOD_ENTRIES } from '../../../../../graphql/queries';
 
 // Components
-import MoodNotes from './MoodNotes';
+import MoodNotes from './IOMoodNotes';
 
 // Styles
 import dashboardStyles from '../../../../../assets/css/innerOrbit/pageStyles/dashboard/IODashboard.module.css';

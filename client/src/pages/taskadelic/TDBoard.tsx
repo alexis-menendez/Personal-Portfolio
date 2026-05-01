@@ -2,12 +2,12 @@
 
 import { useEffect, useState, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { retrieveTickets, deleteTicket, updateTicket } from '../../api/taskadelic/ticketAPI';
+import { retrieveTickets, deleteTicket, updateTicket } from '../../api/taskadelic/TDTicketAPI';
 import TDSwimlane from '../../components/taskadelic/TDSwimlane';
-import { TicketData } from '../../interfaces/taskadelic/TicketData';
-import { ApiMessage } from '../../interfaces/taskadelic/ApiMessage';
-import auth from '../../utils/taskadelic/auth';
-import tdStyles from '../../assets/css/taskadelic/Taskadelic.module.css';
+import { TicketData } from '../../interfaces/taskadelic/TDTicketData';
+import { ApiMessage } from '../../interfaces/taskadelic/TDApiMessage';
+import auth from '../../utils/taskadelic/TDAuth';
+import tdStyles from '../../assets/css/taskadelic/TDTaskadelic.module.css';
 
 const LANES = ['Todo', 'In Progress', 'Done'];
 

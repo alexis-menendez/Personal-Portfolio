@@ -4,7 +4,7 @@
 import React from 'react';
 
 // Subcomponents
-import ShootingStar from '../../../common/ShootingStar';
+import ShootingStar from '../../../common/IOShootingStar';
 
 const DevelopStars: React.FC = () => {
   return (

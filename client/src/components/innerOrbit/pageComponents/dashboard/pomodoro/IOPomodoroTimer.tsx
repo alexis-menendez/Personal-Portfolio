@@ -4,13 +4,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 //Hooks
-import { useTaskStore } from '../../../../../hooks/innerOrbit/useTaskStore';
+import { useIOTaskStore } from '../../../../../hooks/innerOrbit/useIOTaskStore';
 
 // Subcomponents
-import TimerSettings from './TimerSettings';
+import TimerSettings from './IOTimerSettings';
 
 // Styles
-import styles from '../../../../../assets/css/innerOrbit/pageStyles/dashboard/PomodoroTimer.module.css';
+import styles from '../../../../../assets/css/innerOrbit/pageStyles/dashboard/IOPomodoroTimer.module.css';
 import buttonStyles from '../../../../../assets/css/innerOrbit/common/IOButton.module.css';
 
 interface PomodoroTimerProps {
@@ -24,7 +24,7 @@ const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
   onPomodoroEnd,
   onBreakStart
 }) => {
-  const { getSelectedTask } = useTaskStore();
+  const { getSelectedTask } = useIOTaskStore();
   getSelectedTask();
 
   const TASK_5_MIN = 5 * 60;

@@ -3,11 +3,11 @@
 // ── Imports ────────────────────────────────────────────────────
 import React, { useState } from 'react';
 import HNTDNavigation from '../../components/dontDie/HNTDNavigation';
-import ReturnToPortfolio from '../../components/innerOrbit/common/ReturnToPortfolio';
+import ReturnToPortfolio from '../../components/innerOrbit/common/IOReturnToPortfolio';
 import styles from '../../assets/css/dontDie/HNTDConsole.module.css';
 import { useHNTDPlanets } from '../../context/HNTDPlanetContext';
 import type { SurvivalEntry } from '../../context/HNTDPlanetContext';
-import { buildAllEntries, CATEGORY_COLOR, CATEGORY_LABEL } from '../../data/dontDie/survivalGuideData';
+import { buildAllEntries, CATEGORY_COLOR, CATEGORY_LABEL } from '../../data/dontDie/HNTDSurvivalGuideData';
 
 // ── Entry overlay — full-screen modal for reading a single entry ─
 const EntryOverlay: React.FC<{ entry: SurvivalEntry; onClose: () => void }> = ({ entry, onClose }) => (

@@ -1,11 +1,11 @@
-// File: client/src/components/innerOrbit/common/StarBackground.tsx
+// File: client/src/components/innerOrbit/common/IOStarBackground.tsx
 
 // React
 import React, { useEffect, useState, ReactElement } from 'react';
 
 // Styles
-import styles from '../../../assets/css/innerOrbit/common/Stars.module.css'; // For twinkling stars
-import shootingStyles from '../../../assets/css/innerOrbit/common/ShootingStar.module.css'; // For shooting stars
+import styles from '../../../assets/css/innerOrbit/common/IOStars.module.css'; // For twinkling stars
+import shootingStyles from '../../../assets/css/innerOrbit/common/IOShootingStar.module.css'; // For shooting stars
 
 interface Star {
   id: number;

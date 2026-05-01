@@ -8,7 +8,7 @@ import { Outlet } from 'react-router-dom';
 import styles from '../../../assets/css/innerOrbit/layout/IOCosmicBackground.module.css';
 
 // Subcomponents
-import StarBackground from '../common/StarBackground';
+import StarBackground from '../common/IOStarBackground';
 
 const IOLoginLayout: React.FC = () => {
   return (

@@ -17,14 +17,14 @@ import {
   CONSTELLATIONS,
   StarPoint,
   Constellation,
-} from '../../components/innerOrbit/pageComponents/journal/ConstellationLogic';
+} from '../../components/innerOrbit/pageComponents/journal/IOConstellationLogic';
 
 // Subomponents
-import StarBackground from '../../components/innerOrbit/common/StarBackground';
-import CreateJournal from '../../components/innerOrbit/pageComponents/journal/CreateJournal';
+import StarBackground from '../../components/innerOrbit/common/IOStarBackground';
+import CreateJournal from '../../components/innerOrbit/pageComponents/journal/IOCreateJournal';
 
 // Styles
-import styles from '../../assets/css/innerOrbit/common/Stars.module.css';
+import styles from '../../assets/css/innerOrbit/common/IOStars.module.css';
 import buttonStyles from '../../assets/css/innerOrbit/common/IOButton.module.css';
 
 

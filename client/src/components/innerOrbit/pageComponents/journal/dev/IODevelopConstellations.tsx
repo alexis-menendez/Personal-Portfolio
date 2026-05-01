@@ -4,11 +4,11 @@
 import React, { useState } from 'react';
 
 // Subcomponents
-import { CONSTELLATIONS, StarPoint, Constellation } from '../ConstellationLogic';
-import ShootingStar from '../../../common/ShootingStar';
+import { CONSTELLATIONS, StarPoint, Constellation } from '../IOConstellationLogic';
+import ShootingStar from '../../../common/IOShootingStar';
 
 // Styles
-import styles from '../../../../../assets/css/innerOrbit/common/Stars.module.css';
+import styles from '../../../../../assets/css/innerOrbit/common/IOStars.module.css';
 
 const DevelopConstellations: React.FC = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);

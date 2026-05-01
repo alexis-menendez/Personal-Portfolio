@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import auth from '../../utils/taskadelic/auth';
-import tdStyles from '../../assets/css/taskadelic/Taskadelic.module.css';
+import auth from '../../utils/taskadelic/TDAuth';
+import tdStyles from '../../assets/css/taskadelic/TDTaskadelic.module.css';
 
 const TDNavbar = ({ narrow = false, hideLogin = false }: { narrow?: boolean; hideLogin?: boolean }) => {
   const [loggedIn, setLoggedIn] = useState(false);

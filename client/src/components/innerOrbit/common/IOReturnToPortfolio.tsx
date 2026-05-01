@@ -1,4 +1,4 @@
-// File: client/src/components/innerOrbit/common/ReturnToPortfolio.tsx
+// File: client/src/components/innerOrbit/common/IOReturnToPortfolio.tsx
 
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';

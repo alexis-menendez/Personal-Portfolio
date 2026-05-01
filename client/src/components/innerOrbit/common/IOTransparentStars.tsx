@@ -1,10 +1,10 @@
-// File: client/src/components/innerOrbit/common/TransparentStars.tsx
+// File: client/src/components/innerOrbit/common/IOTransparentStars.tsx
 
 // React
 import React, { useEffect, useState } from 'react';
 
 // Styles
-import styles from '../../../assets/css/innerOrbit/common/TransparentStars.module.css';
+import styles from '../../../assets/css/innerOrbit/common/IOTransparentStars.module.css';
 
 interface Star {
   id: number;

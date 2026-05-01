@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { useHNTDAuth } from '../../context/HNTDAuthContext';
 import { useHNTDPlanets } from '../../context/HNTDPlanetContext';
 import HNTDNavigation from '../../components/dontDie/HNTDNavigation';
-import ReturnToPortfolio from '../../components/innerOrbit/common/ReturnToPortfolio';
+import ReturnToPortfolio from '../../components/innerOrbit/common/IOReturnToPortfolio';
 import styles from '../../assets/css/dontDie/HNTDConsole.module.css';
 import hudStyles from '../../assets/css/dontDie/HNTDHolomap.module.css';
 

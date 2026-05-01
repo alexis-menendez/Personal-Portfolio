@@ -5,8 +5,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Subcomponents
-import TransparentStars from '../../common/TransparentStars';
-import ShootingStar from '../../common/ShootingStar';
+import TransparentStars from '../../common/IOTransparentStars';
+import ShootingStar from '../../common/IOShootingStar';
 
 // Styles
 import styles from '../../../../assets/css/innerOrbit/pageStyles/login/IOPrivacyPolicy.module.css';

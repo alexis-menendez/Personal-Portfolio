@@ -1,6 +1,6 @@
 // File: client/src/api/taskadelic/authAPI.ts
 
-import { UserLogin } from '../../interfaces/taskadelic/UserLogin';
+import { UserLogin } from '../../interfaces/taskadelic/TDUserLogin';
 
 export const login = async (userInfo: UserLogin) => {
   const response = await fetch('/taskadelic/auth/login', {

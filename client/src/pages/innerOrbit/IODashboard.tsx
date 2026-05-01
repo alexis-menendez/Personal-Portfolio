@@ -4,9 +4,9 @@
 import React, { useState } from "react";
 
 // Subcomponents
-import WeeklyMoodReview from "../../components/innerOrbit/pageComponents/dashboard/weekly/WeeklyMoodCalendar";
-import PomodoroTimer from "../../components/innerOrbit/pageComponents/dashboard/pomodoro/PomodoroTimer";
-import FocusTaskList from "../../components/innerOrbit/pageComponents/dashboard/pomodoro/FocusTaskList";
+import WeeklyMoodReview from "../../components/innerOrbit/pageComponents/dashboard/weekly/IOWeeklyMoodCalendar";
+import PomodoroTimer from "../../components/innerOrbit/pageComponents/dashboard/pomodoro/IOPomodoroTimer";
+import FocusTaskList from "../../components/innerOrbit/pageComponents/dashboard/pomodoro/IOFocusTaskList";
 
 // Styles
 import pageStyles from "../../assets/css/innerOrbit/pageStyles/dashboard/IODashboard.module.css";

@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useHNTDPlanets } from '../../context/HNTDPlanetContext';
 import HNTDPlanetCard from '../../components/dontDie/HNTDPlanetCard';
-import ReturnToPortfolio from '../../components/innerOrbit/common/ReturnToPortfolio';
+import ReturnToPortfolio from '../../components/innerOrbit/common/IOReturnToPortfolio';
 import styles from '../../assets/css/dontDie/HNTDHolomap.module.css';
 
 // Coordinates the player finds in the dead explorer's log on Brune

@@ -3,7 +3,7 @@
 // ── Imports ────────────────────────────────────────────────────
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ReturnToPortfolio from '../../components/innerOrbit/common/ReturnToPortfolio';
+import ReturnToPortfolio from '../../components/innerOrbit/common/IOReturnToPortfolio';
 import styles from '../../assets/css/dontDie/HNTDHolomap.module.css';
 
 // ── Epilog text — displayed after Ocean 12B strands the explorer ─

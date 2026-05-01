@@ -15,14 +15,14 @@ import { GET_JOURNAL_ENTRIES } from '../../../../graphql/queries';
 import { UPDATE_JOURNAL_ENTRY } from '../../../../graphql/mutations';
 
 // Subcomponents
-import StarBackground from '../../common/StarBackground';
-import { CONSTELLATIONS } from './ConstellationLogic';
+import StarBackground from '../../common/IOStarBackground';
+import { CONSTELLATIONS } from './IOConstellationLogic';
 
 // Styles
-import styles from '../../../../assets/css/innerOrbit/common/Stars.module.css';
+import styles from '../../../../assets/css/innerOrbit/common/IOStars.module.css';
 import buttonStyles from '../../../../assets/css/innerOrbit/common/IOButton.module.css';
 import formStyles from '../../../../assets/css/innerOrbit/common/IOForm.module.css';
-import notebookStyles from '../../../../assets/css/innerOrbit/pageStyles/journal/Notebook.module.css';
+import notebookStyles from '../../../../assets/css/innerOrbit/pageStyles/journal/IONotebook.module.css';
 
 
 const ViewJournal: React.FC = () => {

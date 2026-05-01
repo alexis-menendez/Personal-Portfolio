@@ -24,7 +24,7 @@ const HNTDEpilog         = lazy(() => import('./pages/dontDie/HNTDEpilog'));
 const HNTDThankYou       = lazy(() => import('./pages/dontDie/HNTDThankYou'));
 
 // Layout
-import ProtectedRoute from './components/innerOrbit/ProtectedRoute';
+import ProtectedRoute from './components/innerOrbit/IOProtectedRoute';
 import RetroLayout from './components/portfolio/layout/RetroLayout';
 import PortfolioLayout from './components/portfolio/layout/PortfolioLayout';
 import ResumeLayout from './components/portfolio/layout/ResumeLayout';
@@ -36,7 +36,7 @@ import GalleryLayout from './components/portfolio/layout/GalleryLayout';
     const IOJournalLayout = lazy(() => import('./components/innerOrbit/layout/IOJournalLayout'));
 
     // Taskadelic Layout + Pages
-    const TaskadelicLayout  = lazy(() => import('./components/taskadelic/TaskadelicLayout'));
+    const TaskadelicLayout  = lazy(() => import('./components/taskadelic/TDLayout'));
     const TDLogin           = lazy(() => import('./pages/taskadelic/TDLogin'));
     const TDBoard           = lazy(() => import('./pages/taskadelic/TDBoard'));
     const TDCreateTicket    = lazy(() => import('./pages/taskadelic/TDCreateTicket'));
@@ -60,8 +60,8 @@ import Contact from './pages/portfolio/Contact';
     // innerOrbit Pages
     const IOHome = lazy(() => import('./pages/innerOrbit/IOHome'));
     const Dashboard = lazy(() => import('./pages/innerOrbit/IODashboard'));
-    const Journal = lazy(() => import('./pages/innerOrbit/Journal'));
-    const Tracker = lazy(() => import('./pages/innerOrbit/Tracker'));
+    const Journal = lazy(() => import('./pages/innerOrbit/IOJournal'));
+    const Tracker = lazy(() => import('./pages/innerOrbit/IOTracker'));
     const UserProfile = lazy(() => import('./pages/innerOrbit/IOUserProfile'));
 
 // Components
@@ -74,13 +74,13 @@ import Contact from './pages/portfolio/Contact';
     const IORegister = lazy(() => import('./components/innerOrbit/pageComponents/login/IORegisterForm'));
     const IOTerms = lazy(() => import('./components/innerOrbit/pageComponents/login/IOTerms'));
     const IOPrivacy = lazy(() => import('./components/innerOrbit/pageComponents/login/IOPrivacy'));
-    const Constellation = lazy(() => import('./components/innerOrbit/pageComponents/journal/Constellation'));
-    const ViewJournal = lazy(() => import('./components/innerOrbit/pageComponents/journal/ViewJournal'));
+    const Constellation = lazy(() => import('./components/innerOrbit/pageComponents/journal/IOConstellation'));
+    const ViewJournal = lazy(() => import('./components/innerOrbit/pageComponents/journal/IOViewJournal'));
 
 // Development components (for internal use)
     // innerOrbit Development Components (for internal use)
-    const DevelopConstellations = lazy(() => import('./components/innerOrbit/pageComponents/journal/dev/DevelopConstellations'));
-    const DevStars = lazy(() => import('./components/innerOrbit/pageComponents/journal/dev/DevStars'));
+    const DevelopConstellations = lazy(() => import('./components/innerOrbit/pageComponents/journal/dev/IODevelopConstellations'));
+    const DevStars = lazy(() => import('./components/innerOrbit/pageComponents/journal/dev/IODevStars'));
 
 
 const App: React.FC = () => {

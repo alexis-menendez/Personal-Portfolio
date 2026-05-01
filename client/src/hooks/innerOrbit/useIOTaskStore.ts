@@ -1,4 +1,4 @@
-// File: client/src/hooks/innerOrbit/useTaskStore.ts
+// File: client/src/hooks/innerOrbit/useIOTaskStore.ts
 
 import { useState, useEffect } from 'react';
 
@@ -8,7 +8,7 @@ export interface Task {
   done: boolean;
 }
 
-export const useTaskStore = () => {
+export const useIOTaskStore = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [selectedTaskId, setSelectedTaskId] = useState<number | null>(null);
 

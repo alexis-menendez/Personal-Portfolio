@@ -2,11 +2,11 @@
 
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createTicket } from '../../api/taskadelic/ticketAPI';
-import { retrieveUsers } from '../../api/taskadelic/userAPI';
-import { TicketData } from '../../interfaces/taskadelic/TicketData';
-import { UserData } from '../../interfaces/taskadelic/UserData';
-import tdStyles from '../../assets/css/taskadelic/Taskadelic.module.css';
+import { createTicket } from '../../api/taskadelic/TDTicketAPI';
+import { retrieveUsers } from '../../api/taskadelic/TDUserAPI';
+import { TicketData } from '../../interfaces/taskadelic/TDTicketData';
+import { UserData } from '../../interfaces/taskadelic/TDUserData';
+import tdStyles from '../../assets/css/taskadelic/TDTaskadelic.module.css';
 
 const TDCreateTicket = () => {
   const navigate = useNavigate();

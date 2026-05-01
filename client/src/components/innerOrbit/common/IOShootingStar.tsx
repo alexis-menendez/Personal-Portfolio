@@ -1,10 +1,10 @@
-// File: cliient/src/components/innerOrbit/common/ShootingStar.tsx
+// File: client/src/components/innerOrbit/common/IOShootingStar.tsx
 
 // React
 import React, { useEffect, useState, ReactElement } from 'react';
 
 // Styles
-import styles from '../../../assets/css/innerOrbit/common/ShootingStar.module.css';
+import styles from '../../../assets/css/innerOrbit/common/IOShootingStar.module.css';
 
 // Subcomponents
 interface ShootingStarProps {

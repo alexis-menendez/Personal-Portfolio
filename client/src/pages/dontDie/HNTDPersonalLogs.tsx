@@ -6,7 +6,7 @@ import { useHNTDAuth } from '../../context/HNTDAuthContext';
 import { useHNTDPlanets } from '../../context/HNTDPlanetContext';
 import HNTDNavigation from '../../components/dontDie/HNTDNavigation';
 import HNTDEditLogModal from '../../components/dontDie/HNTDEditLogModal';
-import ReturnToPortfolio from '../../components/innerOrbit/common/ReturnToPortfolio';
+import ReturnToPortfolio from '../../components/innerOrbit/common/IOReturnToPortfolio';
 import styles from '../../assets/css/dontDie/HNTDConsole.module.css';
 import { fetchLogs, createLog, updateLog, deleteLog } from '../../api/dontDie/HNTDLogAPI';
 import type { HNTDLogEntry } from '../../api/dontDie/HNTDLogAPI';
