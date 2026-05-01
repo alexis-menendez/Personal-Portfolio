@@ -1,5 +1,6 @@
 // File: client/src/pages/dontDie/HNTDDashboard.tsx
 
+// ── Imports ────────────────────────────────────────────────────
 import React, { useState, useEffect } from 'react';
 import { useHNTDAuth } from '../../context/HNTDAuthContext';
 import { useHNTDPlanets } from '../../context/HNTDPlanetContext';
@@ -263,13 +264,16 @@ const DashboardVeraChat: React.FC<{ username: string; characterName: string }> =
   );
 };
 
-// ── Dashboard ─────────────────────────────────────────────────
+// ── Dashboard constants — note ID links the crumpled note to the storage locker ──
 const NOTE_ID    = 'patch-kit-note-7734b';
 const NOTE_TEXT  = `tried patch kit, patches were expired.\n\nif you are reading this, tell my sister I love her and that I'm going to see dad.\n\n- Alison Edwards`;
 
+// ── Component ──────────────────────────────────────────────────
 const HNTDDashboard: React.FC = () => {
   const { user }        = useHNTDAuth();
   const { storedItems, isNewCharacter, lockerFirstOpened, markLockerOpened } = useHNTDPlanets();
+
+  // ── Local state ────────────────────────────────────────────────
   const [showLocker,      setShowLocker]      = useState(false);
   const [showLockerVera,  setShowLockerVera]  = useState(false);
   const [showNote,        setShowNote]        = useState(false);

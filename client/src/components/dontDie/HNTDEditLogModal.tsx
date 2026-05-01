@@ -1,9 +1,11 @@
 // File: client/src/components/dontDie/HNTDEditLogModal.tsx
 
+// ── Imports ────────────────────────────────────────────────────
 import React, { useState, useEffect } from 'react';
 import styles from '../../assets/css/dontDie/HNTDConsole.module.css';
 import type { HNTDLogEntry } from '../../api/dontDie/HNTDLogAPI';
 
+// ── Props ──────────────────────────────────────────────────────
 interface Props {
   log: HNTDLogEntry | null;
   onSave: (title: string, content: string) => Promise<void>;
@@ -13,18 +15,22 @@ interface Props {
   commanderName?: string;
 }
 
+// ── Component ──────────────────────────────────────────────────
 const HNTDEditLogModal: React.FC<Props> = ({ log, onSave, onDelete, onClose, transparentOverlay, commanderName }) => {
+  // ── Local state ────────────────────────────────────────────────
   const [title,   setTitle]   = useState(log?.title   ?? '');
   const [content, setContent] = useState(log?.content ?? '');
   const [saving,  setSaving]  = useState(false);
   const [error,   setError]   = useState('');
 
+  // ── Sync fields when the active log changes ────────────────────
   useEffect(() => {
     setTitle(log?.title ?? '');
     setContent(log?.content ?? '');
     setError('');
   }, [log]);
 
+  // ── Save handler — validates then calls parent onSave ──────────
   const handleSave = async () => {
     if (!title.trim() || !content.trim()) { setError('Title and content are required.'); return; }
     setSaving(true);
@@ -38,6 +44,7 @@ const HNTDEditLogModal: React.FC<Props> = ({ log, onSave, onDelete, onClose, tra
     }
   };
 
+  // ── Delete handler — calls parent onDelete then closes ─────────
   const handleDelete = async () => {
     if (!onDelete) return;
     setSaving(true);
@@ -51,11 +58,13 @@ const HNTDEditLogModal: React.FC<Props> = ({ log, onSave, onDelete, onClose, tra
     }
   };
 
+  // ── Display values — fall back gracefully if log not yet saved ─
   const displayedCommander = log?.commanderName ?? commanderName ?? '—';
   const displayedDate = log
     ? new Date(log.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
     : new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
+  // ── Render ─────────────────────────────────────────────────────
   return (
     <div className={styles.modalOverlay} style={transparentOverlay ? { background: 'transparent' } : undefined} onClick={onClose}>
       <div className={styles.modal} onClick={e => e.stopPropagation()}>

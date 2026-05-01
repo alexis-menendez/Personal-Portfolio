@@ -1,5 +1,6 @@
 // File: client/src/pages/dontDie/HNTDSurvivalGuide.tsx
 
+// ── Imports ────────────────────────────────────────────────────
 import React, { useState } from 'react';
 import HNTDNavigation from '../../components/dontDie/HNTDNavigation';
 import ReturnToPortfolio from '../../components/innerOrbit/common/ReturnToPortfolio';
@@ -8,6 +9,7 @@ import { useHNTDPlanets } from '../../context/HNTDPlanetContext';
 import type { SurvivalEntry } from '../../context/HNTDPlanetContext';
 import { buildAllEntries, CATEGORY_COLOR, CATEGORY_LABEL } from '../../data/dontDie/survivalGuideData';
 
+// ── Entry overlay — full-screen modal for reading a single entry ─
 const EntryOverlay: React.FC<{ entry: SurvivalEntry; onClose: () => void }> = ({ entry, onClose }) => (
   <div
     style={{
@@ -53,13 +55,16 @@ const EntryOverlay: React.FC<{ entry: SurvivalEntry; onClose: () => void }> = ({
   </div>
 );
 
+// ── Component ──────────────────────────────────────────────────
 const HNTDSurvivalGuide: React.FC = () => {
   const {
     hasVisited, followedCoordsDoubt, tinkeredScannerBrune, deathEntries,
   } = useHNTDPlanets();
 
+  // ── Local state — tracks which entry is open in the overlay ───
   const [selected, setSelected] = useState<SurvivalEntry | null>(null);
 
+  // ── Build visible entries based on gameplay progress ──────────
   const entries = buildAllEntries({
     visitedDoubt:         hasVisited('planetone'),
     visitedBrune:         hasVisited('planettwo'),
@@ -67,6 +72,7 @@ const HNTDSurvivalGuide: React.FC = () => {
     tinkeredScannerBrune,
   }, deathEntries);
 
+  // ── Render ─────────────────────────────────────────────────────
   return (
     <div className={styles.consoleBackground}>
       <div className={styles.consoleScreen}>

@@ -1,8 +1,10 @@
 // File: client/src/components/dontDie/HNTDPlanetCard.tsx
 
+// ── Imports ────────────────────────────────────────────────────
 import React from 'react';
 import styles from '../../assets/css/dontDie/HNTDHolomap.module.css';
 
+// ── Planet content data ────────────────────────────────────────
 const PLANETS: Record<string, { name: string; image: string; vera: string; description: string }> = {
   planetone: {
     name: 'Doubt',
@@ -26,16 +28,19 @@ And yet — there is wreckage. A ship long thought lost drifts in the current, h
   },
 };
 
+// ── Props ──────────────────────────────────────────────────────
 interface Props {
   planetKey: string;
   onTravel: () => void;
   onClose: () => void;
 }
 
+// ── Component ──────────────────────────────────────────────────
 const HNTDPlanetCard: React.FC<Props> = ({ planetKey, onTravel, onClose }) => {
   const planet = PLANETS[planetKey];
   if (!planet) return null;
 
+  // ── Render ─────────────────────────────────────────────────────
   return (
     <div className={styles.cardOverlay}>
       <div className={styles.card}>

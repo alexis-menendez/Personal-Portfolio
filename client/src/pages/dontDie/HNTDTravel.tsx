@@ -1,5 +1,6 @@
 // File: client/src/pages/dontDie/HNTDTravel.tsx
 
+// ── Imports ────────────────────────────────────────────────────
 import React, { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useHNTDAuth } from '../../context/HNTDAuthContext';

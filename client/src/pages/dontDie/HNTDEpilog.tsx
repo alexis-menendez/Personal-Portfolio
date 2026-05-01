@@ -1,10 +1,12 @@
 // File: client/src/pages/dontDie/HNTDEpilog.tsx
 
+// ── Imports ────────────────────────────────────────────────────
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReturnToPortfolio from '../../components/innerOrbit/common/ReturnToPortfolio';
 import styles from '../../assets/css/dontDie/HNTDHolomap.module.css';
 
+// ── Epilog text — displayed after Ocean 12B strands the explorer ─
 const EPILOG_TEXT =
 `You spend the next several hours attempting to repair the ship.
 
@@ -16,6 +18,7 @@ You sit in the crew compartment, watching the stars through the viewport. They d
 
 Your journey has ended here. For now.`;
 
+// ── Typewriter hook — reveals text character by character ──────
 function useTypewriter(text: string, speed = 28) {
   const [idx, setIdx] = useState(0);
   useEffect(() => { setIdx(0); }, [text]);
@@ -27,10 +30,12 @@ function useTypewriter(text: string, speed = 28) {
   return { displayed: text.slice(0, idx), done: idx >= text.length };
 }
 
+// ── Component ──────────────────────────────────────────────────
 const HNTDEpilog: React.FC = () => {
   const navigate = useNavigate();
   const { displayed, done } = useTypewriter(EPILOG_TEXT, 28);
 
+  // ── Render — shows epilog text then a continue button ─────────
   return (
     <div className={styles.shuttleWrapper}>
       <div className={styles.shuttleContent} style={{ maxWidth: '560px' }}>

@@ -1,11 +1,13 @@
 // File: client/src/pages/dontDie/HNTDHome.tsx
 
+// ── Imports ────────────────────────────────────────────────────
 import React, { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useHNTDAuth } from '../../context/HNTDAuthContext';
 import { loginHNTD, registerHNTD } from '../../api/dontDie/HNTDAuthAPI';
 import styles from '../../assets/css/dontDie/HNTDConsole.module.css';
 
+// ── Welcome letter — shown to new explorers after registration ─
 const WELCOME_LETTER = `Greetings, Explorer!
 
 Welcome to Tö'tahli Naut Dy-in™ — where we aim, shoot, and occasionally hit the stars! If you're reading this message, congratulations: you've been enthusiastically selected to join our long-standing, definitely-regulated planetary exploration initiative.
@@ -16,9 +18,12 @@ To aid you on your mission you've been equipped with a refurbished shuttle, the 
 
 So strap in, Commander. The galaxy awaits!`;
 
+// ── Component ──────────────────────────────────────────────────
 const HNTDHome: React.FC = () => {
   const { login, isAuthenticated } = useHNTDAuth();
   const navigate = useNavigate();
+
+  // ── Local state ────────────────────────────────────────────────
   const [mode,          setMode]          = useState<'login' | 'register'>('login');
   const [username,      setUsername]      = useState('');
   const [password,      setPassword]      = useState('');
@@ -28,8 +33,10 @@ const HNTDHome: React.FC = () => {
   const [showWelcome,  setShowWelcome]  = useState(false);
   const [pendingUser,  setPendingUser]  = useState<{ user: any; token: string } | null>(null);
 
+  // Redirect already-authenticated explorers straight to dashboard
   if (isAuthenticated) navigate('/hntd-dashboard');
 
+  // ── Form submit — handles both login and registration ──────────
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError('');
@@ -50,6 +57,7 @@ const HNTDHome: React.FC = () => {
     }
   };
 
+  // ── Welcome continue — finalises login after reading the letter ─
   const handleWelcomeContinue = () => {
     if (pendingUser) {
       login(pendingUser.user, pendingUser.token);
@@ -57,6 +65,7 @@ const HNTDHome: React.FC = () => {
     }
   };
 
+  // ── Welcome screen — shown once after new registration ────────
   if (showWelcome) {
     return (
       <div className={styles.consoleBackground}>
@@ -80,6 +89,7 @@ const HNTDHome: React.FC = () => {
     );
   }
 
+  // ── Main login / register form ────────────────────────────────
   return (
     <div className={styles.consoleBackground}>
       <div className={styles.consoleScreen}>

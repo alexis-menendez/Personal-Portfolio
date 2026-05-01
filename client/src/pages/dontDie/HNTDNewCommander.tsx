@@ -1,5 +1,6 @@
 // File: client/src/pages/dontDie/HNTDNewCommander.tsx
 
+// ── Imports ────────────────────────────────────────────────────
 import React, { useState, FormEvent, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useHNTDAuth } from '../../context/HNTDAuthContext';
@@ -68,6 +69,7 @@ The Company wishes you every success.`;
 }
 
 // ── Component ──────────────────────────────────────────────────
+// Phase flow: rename → letter → done (done falls through to null render)
 type Phase = 'rename' | 'letter' | 'done';
 
 const HNTDNewCommander: React.FC = () => {
@@ -76,10 +78,12 @@ const HNTDNewCommander: React.FC = () => {
   const { user, token, updateUser } = useHNTDAuth();
   const { addDeathEntry, markNewCharacter } = useHNTDPlanets();
 
+  // ── Read death context passed via router state ─────────────────
   const state      = (location.state as { deathCause?: DeathCause; planetKey?: string } | null) ?? {};
   const deathCause: DeathCause = state.deathCause ?? 'oxygen';
   const planetKey               = state.planetKey  ?? '';
 
+  // ── Local state ────────────────────────────────────────────────
   const [phase,     setPhase]     = useState<Phase>('rename');
   const [newName,   setNewName]   = useState('');
   const [error,     setError]     = useState('');
@@ -90,6 +94,7 @@ const HNTDNewCommander: React.FC = () => {
     addDeathEntry(buildDeathEntry(deathCause, planetKey));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // ── Rename handler — calls API, resets first-visit flag so VERA intro replays ──
   const handleRename = async (e: FormEvent) => {
     e.preventDefault();
     if (!newName.trim()) { setError('Please enter a commander name.'); return; }

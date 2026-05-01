@@ -1,5 +1,6 @@
 // File: client/src/pages/dontDie/HNTDPersonalLogs.tsx
 
+// ── Imports ────────────────────────────────────────────────────
 import React, { useEffect, useState, useCallback } from 'react';
 import { useHNTDAuth } from '../../context/HNTDAuthContext';
 import { useHNTDPlanets } from '../../context/HNTDPlanetContext';
@@ -10,15 +11,19 @@ import styles from '../../assets/css/dontDie/HNTDConsole.module.css';
 import { fetchLogs, createLog, updateLog, deleteLog } from '../../api/dontDie/HNTDLogAPI';
 import type { HNTDLogEntry } from '../../api/dontDie/HNTDLogAPI';
 
+// ── Component ──────────────────────────────────────────────────
 const HNTDPersonalLogs: React.FC = () => {
   const { token, user }                                          = useHNTDAuth();
   const { isNewCharacter, logsFirstOpened, markLogsOpened } = useHNTDPlanets();
+
+  // ── Local state ────────────────────────────────────────────────
   const [logs,        setLogs]        = useState<HNTDLogEntry[]>([]);
   const [loading,     setLoading]     = useState(true);
   const [modalOpen,   setModalOpen]   = useState(false);
   const [activeLog,   setActiveLog]   = useState<HNTDLogEntry | null>(null);
   const [veraComment, setVeraComment] = useState(false);
 
+  // ── Load logs — fetches all logs from the API ──────────────────
   const loadLogs = useCallback(async () => {
     if (!token) return;
     try {
@@ -29,6 +34,7 @@ const HNTDPersonalLogs: React.FC = () => {
     }
   }, [token]);
 
+  // ── On mount — load logs and trigger VERA comment for new commanders ──
   useEffect(() => {
     loadLogs();
     if (isNewCharacter && !logsFirstOpened) {
@@ -37,10 +43,12 @@ const HNTDPersonalLogs: React.FC = () => {
     }
   }, [loadLogs]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // ── Modal helpers — open/close for new and existing logs ──────
   const openNew  = () => { setActiveLog(null); setModalOpen(true); };
   const openEdit = (log: HNTDLogEntry) => { setActiveLog(log); setModalOpen(true); };
   const closeModal = () => setModalOpen(false);
 
+  // ── Save handler — creates a new log or updates an existing one ─
   const handleSave = async (title: string, content: string) => {
     if (!token) return;
     if (activeLog) {
@@ -52,15 +60,18 @@ const HNTDPersonalLogs: React.FC = () => {
     }
   };
 
+  // ── Delete handler — removes the active log from the list ──────
   const handleDelete = async () => {
     if (!token || !activeLog) return;
     await deleteLog(token, activeLog.id);
     setLogs(prev => prev.filter(l => l.id !== activeLog.id));
   };
 
+  // ── Date formatter ─────────────────────────────────────────────
   const formatDate = (iso: string) =>
     new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
+  // ── Render ─────────────────────────────────────────────────────
   return (
     <div className={styles.consoleBackground}>
       <div className={styles.consoleScreen}>

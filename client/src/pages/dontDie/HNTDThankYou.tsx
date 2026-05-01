@@ -1,9 +1,11 @@
 // File: client/src/pages/dontDie/HNTDThankYou.tsx
 
+// ── Imports ────────────────────────────────────────────────────
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useHNTDAuth } from '../../context/HNTDAuthContext';
 
+// ── Shared input style — used for all feedback form fields ─────
 const inputStyle: React.CSSProperties = {
   width: '100%',
   boxSizing: 'border-box',
@@ -17,10 +19,12 @@ const inputStyle: React.CSSProperties = {
   outline: 'none',
 };
 
+// ── Component ──────────────────────────────────────────────────
 const HNTDThankYou: React.FC = () => {
   const navigate = useNavigate();
   const { logout } = useHNTDAuth();
 
+  // ── Local state ────────────────────────────────────────────────
   const [name,     setName]     = useState('');
   const [email,    setEmail]    = useState('');
   const [feedback, setFeedback] = useState('');
@@ -28,6 +32,7 @@ const HNTDThankYou: React.FC = () => {
 
   const canSubmit = name.trim() && email.trim() && feedback.trim() && status === 'idle';
 
+  // ── Send handler — POSTs feedback to the backend ──────────────
   const handleSend = async () => {
     if (!canSubmit) return;
     setStatus('sending');
@@ -43,11 +48,13 @@ const HNTDThankYou: React.FC = () => {
     }
   };
 
+  // ── Return handler — logs the explorer out and returns to portfolio ──
   const handleReturn = () => {
     logout();
     navigate('/home');
   };
 
+  // ── Render ─────────────────────────────────────────────────────
   return (
     <div style={{
       minHeight: '100vh', width: '100vw',

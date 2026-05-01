@@ -1,5 +1,6 @@
 // File: client/src/api/dontDie/HNTDWeatherAPI.ts
 
+// Shape of the weather response proxied through the HNTD backend (sourced from OpenWeatherMap)
 export interface HNTDWeatherData {
   name: string;
   sys: { country: string };
@@ -17,6 +18,7 @@ export interface HNTDWeatherData {
   clouds: { all: number };
 }
 
+// Fetches current real-world weather for a city, displayed in-game as a "scanner malfunction"
 export const fetchWeather = async (city: string): Promise<HNTDWeatherData> => {
   const res = await fetch(`/hntd/api/weather?city=${encodeURIComponent(city)}`);
   if (!res.ok) { const err = await res.json(); throw new Error(err.message); }

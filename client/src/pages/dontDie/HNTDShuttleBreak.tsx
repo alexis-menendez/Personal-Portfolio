@@ -1,11 +1,13 @@
 // File: client/src/pages/dontDie/HNTDShuttleBreak.tsx
 
+// ── Imports ────────────────────────────────────────────────────
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useHNTDPlanets } from '../../context/HNTDPlanetContext';
 import ReturnToPortfolio from '../../components/innerOrbit/common/ReturnToPortfolio';
 import styles from '../../assets/css/dontDie/HNTDHolomap.module.css';
 
+// ── Ship diagnostics data — shown after the player checks systems ─
 const SYSTEMS = [
   { name: 'Life Support',          status: 'CRITICAL',    ok: false },
   { name: 'Propulsion Drive',      status: 'OFFLINE',     ok: false },
@@ -21,18 +23,23 @@ const SYSTEMS = [
   { name: 'Crew Compartment Seal', status: 'NOMINAL',     ok: true  },
 ];
 
+// ── Component ──────────────────────────────────────────────────
 const HNTDShuttleBreak: React.FC = () => {
   const navigate = useNavigate();
   const { markPlanetVisited } = useHNTDPlanets();
+
+  // ── Local state ────────────────────────────────────────────────
   const [showDiagnostics, setShowDiagnostics] = useState(false);
   const [alarmOn, setAlarmOn] = useState(true);
 
+  // ── On mount — mark planet three visited and start alarm flash ─
   useEffect(() => {
     markPlanetVisited('planethree');
     const id = setInterval(() => setAlarmOn(prev => !prev), 600);
     return () => clearInterval(id);
   }, [markPlanetVisited]);
 
+  // ── Render — two stages: alert screen then full diagnostics ───
   return (
     <div className={styles.shuttleWrapper}>
       {!showDiagnostics ? (

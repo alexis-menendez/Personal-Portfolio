@@ -1,5 +1,6 @@
 // File: client/src/pages/dontDie/HNTDHolomap.tsx
 
+// ── Imports ────────────────────────────────────────────────────
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useHNTDPlanets } from '../../context/HNTDPlanetContext';
@@ -10,6 +11,7 @@ import styles from '../../assets/css/dontDie/HNTDHolomap.module.css';
 // Coordinates the player finds in the dead explorer's log on Brune
 const SECRET_COORDS = 'X4.7-Y2.9-Z0.1';
 
+// ── VERA override dialogue — escalates each time the player ignores her ──
 const OVERRIDE_MESSAGES = [
   '',
   `VERA: "I must advise against this. The anomalies surrounding Ocean 12B are unlike anything in my database. I cannot guarantee your safety — or your return."`,
@@ -17,8 +19,10 @@ const OVERRIDE_MESSAGES = [
   `VERA: "...Fine. I cannot stop you. But I want it on record that I objected. Whatever happens next — this was your choice."`,
 ];
 
+// ── Gate message — blocks Brune until Doubt is visited ────────
 const BRUNE_GATED_MSG = `VERA: "Doubt is much closer, Commander. If we go to Brune now we will have to double back to visit Doubt. I recommend we check Doubt first."`;
 
+// ── Animated sprite frames — each planet has 8 rotation frames ─
 const PLANET_FRAMES: Record<string, string[]> = {
   planetone:   Array.from({ length: 8 }, (_, i) => `/assets/dontDie/images/planet-one/planet/PlanOneSpin${i + 1}.png`),
   planettwo:   Array.from({ length: 8 }, (_, i) => `/assets/dontDie/images/planet-two/planet/PlanTwoSpin${i + 1}.png`),
@@ -45,9 +49,12 @@ const PlanetSprite: React.FC<{ planetKey: string }> = ({ planetKey }) => {
   );
 };
 
+// ── Component ──────────────────────────────────────────────────
 const HNTDHolomap: React.FC = () => {
   const navigate = useNavigate();
   const { hasVisited, isPlanetThreeUnlocked, markCoordinatesFound, coordinatesFound, doubtVeraComplete, bruneCoordinatesObtained } = useHNTDPlanets();
+
+  // ── Local state ────────────────────────────────────────────────
   const [selectedPlanet, setSelectedPlanet] = useState<string | null>(null);
   const [overrideStage,  setOverrideStage]  = useState(0);
   const [showOverride,   setShowOverride]   = useState(false);
@@ -56,6 +63,7 @@ const HNTDHolomap: React.FC = () => {
   const [coordError,     setCoordError]     = useState('');
   const [coordSuccess,   setCoordSuccess]   = useState(false);
 
+  // ── Planet click — gates Brune until Doubt is visited ─────────
   const handlePlanetClick = (key: string) => {
     // Gate Brune until Doubt is visited
     if (key === 'planettwo' && !hasVisited('planetone')) {
@@ -65,6 +73,7 @@ const HNTDHolomap: React.FC = () => {
     setSelectedPlanet(key);
   };
 
+  // ── Travel — Planet Three triggers the VERA override flow ─────
   const handleTravel = (key: string) => {
     if (key === 'planethree') {
       setShowOverride(true);
@@ -83,6 +92,7 @@ const HNTDHolomap: React.FC = () => {
     }
   };
 
+  // ── Coordinate entry — validates the secret coords from Brune to unlock Planet Three ──
   const handleCoordSubmit = () => {
     if (coordInput.trim().toUpperCase() === SECRET_COORDS.toUpperCase()) {
       markCoordinatesFound();

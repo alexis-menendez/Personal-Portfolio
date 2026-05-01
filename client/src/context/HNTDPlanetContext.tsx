@@ -1,7 +1,11 @@
 // File: client/src/context/HNTDPlanetContext.tsx
 
+// ── Imports ────────────────────────────────────────────────────
 import React, { createContext, useContext, useState } from 'react';
 
+// ── Types ──────────────────────────────────────────────────────
+
+// An item the explorer picks up and stores in the personal locker
 export interface StoredItem {
   id:      string;
   name:    string;
@@ -9,8 +13,10 @@ export interface StoredItem {
   foundAt: string;
 }
 
+// How the explorer died — determines the death message and new-commander letter
 export type DeathCause = 'suit' | 'oxygen' | 'battery';
 
+// An entry added to the Survival Guide (either static data or unlocked via gameplay)
 export interface SurvivalEntry {
   planet:   string;
   title:    string;
@@ -20,6 +26,7 @@ export interface SurvivalEntry {
   category: 'flora' | 'fauna' | 'hazard' | 'observation';
 }
 
+// ── Context type ───────────────────────────────────────────────
 interface PlanetContextType {
   visitedPlanets:        string[];
   coordinatesFound:      boolean;
@@ -47,9 +54,12 @@ interface PlanetContextType {
   isPlanetThreeUnlocked:     () => boolean;
 }
 
+// ── Context creation ───────────────────────────────────────────
 const HNTDPlanetContext = createContext<PlanetContextType | null>(null);
 
+// ── Provider — tracks all in-session game state ────────────────
 export const HNTDPlanetProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // ── State — all game flags live here for the session ──────────
   const [visitedPlanets,       setVisitedPlanets]       = useState<string[]>([]);
   const [coordinatesFound,     setCoordinatesFound]     = useState(false);
   const [storedItems,          setStoredItems]          = useState<StoredItem[]>([]);
@@ -62,6 +72,7 @@ export const HNTDPlanetProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const [doubtVeraComplete,         setDoubtVeraComplete]         = useState(false);
   const [bruneCoordinatesObtained,  setBruneCoordinatesObtained]  = useState(false);
 
+  // ── State mutation helpers — idempotent setters ────────────────
   const markPlanetVisited        = (key: string) =>
     setVisitedPlanets(prev => prev.includes(key) ? prev : [...prev, key]);
   const markCoordinatesFound     = () => setCoordinatesFound(true);
@@ -77,8 +88,10 @@ export const HNTDPlanetProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const markDoubtVeraComplete        = () => setDoubtVeraComplete(true);
   const markBruneCoordinatesObtained = () => setBruneCoordinatesObtained(true);
 
+  // ── Derived checks ──────────────────────────────���──────────────
   const hasVisited = (key: string) => visitedPlanets.includes(key);
 
+  // Planet Three unlocks only after both Doubt and Brune are visited AND coordinates are entered
   const isPlanetThreeUnlocked = () =>
     visitedPlanets.includes('planetone') &&
     visitedPlanets.includes('planettwo') &&
@@ -101,6 +114,7 @@ export const HNTDPlanetProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   );
 };
 
+// ── Hook — throws if used outside of HNTDPlanetProvider ───────
 export const useHNTDPlanets = () => {
   const ctx = useContext(HNTDPlanetContext);
   if (!ctx) throw new Error('useHNTDPlanets must be used within HNTDPlanetProvider');
